@@ -6,9 +6,9 @@ import { Button } from "@/app/button";
 const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
 
     const listing = items.filter(item=>item.permalink==permalink)[0]
-    console.log(listing.permalink);
+    console.log(listing);
 
-    return (
+    return listing ? (
         <main className="flex flex-wrap border-4 border-white justify-evenly">
             <div className=" w-[300px]">
 
@@ -21,7 +21,7 @@ const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
                 </Link>
                <div className="flex flex-col justify-between flex-wrap">
                     <p className="my-4 min-h-[50px]  text-4xl text-white font-light">
-                        {listing.name}aaaaa
+                        {listing.name}
                     </p>
                     <div>
                         <span className="
@@ -38,11 +38,11 @@ const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
 
             </div>
 
-
             
 
         </main>
-    )
+    ):
+    (<div>Item not found component</div>)
 }
 
 export default ItemPage;
