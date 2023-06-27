@@ -15,10 +15,28 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-stone-900">
+      <body className="bg-stone-900  flex flex-col items-center mt-5 ">
+        <div className='md:max-w-3xl text-center max-w-xl'>
+
+        <header>
+
+          <span className="
+            text-4xl
+            bg-gradient-to-b from-blue-300 to-green-50 bg-clip-text text-transparent
+            drop-shadow-[1px_1px_2px_rgba(100,200,100,1)]
+            ">
+            HELLO WORLD AND WELCOME TO MY WEBSTORE
+          </span>
+
+          <div className="h-[100px] items-center justify-center flex text-white">Empty box</div>
+
+        </header>
+        
         {children}
 
         <footer className='h-[200px] mt-20 flex justify-center items-center text-white'> This is a footer</footer>  
+        
+        </div>
       </body>
     </html>
   )
