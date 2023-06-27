@@ -1,49 +1,52 @@
-import { createClient } from "next-sanity"
 import Image from "next/image";
-
-const client = createClient({
-  projectId:"ivcdtgt3",
-  dataset: "production",
-  apiVersion: "2023-06-27",
-  useCdn: true //higher costs if false but faster content
-});
-
+import {commerce} from "@/lib/commerce"
+import Link from "next/link";
+import { Button } from "./button";
 
 export default async function Home() {
   
-  const items = await client.fetch(`*[_type == "item"]`);
+  
+  const items = await commerce.products.list().then(result=> result.data); 
+  console.log(items.map(item=>item)); 
 
 
   return (
-    <main className=" flex flex-col items-center ">
-      <div className=" max-w-md text-center">
-      HELLO WORLD AND WELCOME TO MY WEBSTORE
+    <main className=" flex flex-col items-center mt-5 ">
+      <div className=" max-w-lg text-center ">
 
+        <span className="
+          text-4xl
+          bg-gradient-to-b from-blue-300 to-green-50 bg-clip-text text-transparent
+           drop-shadow-[1px_1px_2px_rgba(100,200,100,1)]
+          ">
+          HELLO WORLD AND WELCOME TO MY WEBSTORE
+        </span>
 
-      {items.map(
-        (item:any)=>(
-          
-          <div key={item._id} className="max-w-[200px]">
+        <div className="h-[100px] items-center justify-center flex text-white">Empty box</div>
 
-            <Image src={item.image} 
-            alt={item.alt} width={200} height={200}
-            className="rounded-md" />
-            
-            <div className="my-4 ">
+        <div className="flex gap-20 flex-wrap">
+          {items.map(
+            (item)=>(
+              
+              <div key={item.id} className="max-w-[200px] ">
 
-              <p className="font-normal text-xl">
-                {item.name} ${Math.round(item.price*0.8*100)/100}
-                <span className="text-xs"> (χωρίς ΦΠΑ)</span>
-              </p>
-
-              <button className="w-full bg-slate-300 mx-2 p-2 rounded-md">
-                BUY
-              </button> 
-            </div>
-          </div>
-        )
-      )}
-
+                <Image src={item.image?item.image["url"]:""} 
+                alt={'aa'/*a*/}  height={200} width={200}
+                className="rounded-md h-[200px]" />
+                
+                  <p className="my-4 h-[50px]  text-xl text-white font-light">
+                    {item.name} 
+                  </p>
+                <div className=" bg-gradient-to-r from-red-400 to-yellow-300 bg-clip-text text-transparent ">
+                      {item.price["formatted_with_symbol"]} 
+                      <span className="text-xs">&nbsp;(χωρίς ΦΠΑ)</span>
+                  </div>
+                <Button link={item.checkout_url.checkout}/>
+                  
+              </div>
+            )
+          )}
+        </div>
 
       </div>
     </main>

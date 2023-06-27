@@ -15,7 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className="bg-stone-900">
+        {children}
+
+        <footer className='h-[200px] mt-20 flex justify-center items-center text-white'> This is a footer</footer>  
+      </body>
     </html>
   )
 }

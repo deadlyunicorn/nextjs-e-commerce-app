@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images:{
-        domains:["www.market-in.gr"]
+        domains:["cdn.chec.io"]
     }
 }
 
