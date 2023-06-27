@@ -17,7 +17,7 @@ export default async function Home() {
               
               <div key={item.id} className="max-w-[200px] ">
 
-                <Link href={`/product/${item.id}`}>
+                <Link href={`/product/${item.permalink}`}>
                 <Image src={item.image?item.image["url"]:""} 
                 alt={'aa'}  height={200} width={200}
                 className="rounded-md h-[200px]" />
