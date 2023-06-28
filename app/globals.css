@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.loading-300{
+    background-repeat: no-repeat;
+    animation: loader-300 3s infinite;
+    animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+@keyframes loader-300 {
+    0%{
+        background-position: 0px;
+    }
+    50%{
+        background-position: 300px;
+    }
+    100%{
+        background-position: 0px;
+    }
+}
