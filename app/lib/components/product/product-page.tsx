@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/app/lib/components/button";
 import { Recommendation, Recommendation_Fallback } from "@/app/lib/components/product/recommendations";
+import { Suspense } from "react";
 
 const ProductPage = ({listing,similar}:{listing:Product,similar:Product[]}) =>{
 
@@ -29,8 +30,11 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:Product[]}) =>{
                         href={`/product/${listing.permalink}`}>
 
                         <Image 
-                            src={listing.image?listing.image["url"]:""} 
+                            src={listing.image?listing.image["url"]:"/image.png"} 
                         alt={listing.name}  height={300} width={300}
+                        placeholder="blur"
+                        blurDataURL="/image.png"
+
                         className="rounded-md h-[300px]" />
                         
                         
@@ -48,12 +52,18 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:Product[]}) =>{
                                 {listing.name}
                         </p>
 
-                        <div>
-                            <span className="
+                        <div className="flex flex-col-reverse">
+                            
+                            {/* peer should be before sibling */}
+                            <div className="peer">
+                                <Button link={listing.checkout_url.checkout}/>
+                            </div>
+
+                            <div className="
                                 text-2xl
                                 bg-gradient-to-r 
                                 from-red-400 to-yellow-300 
-                                hover:from-red-300 hover:to-yellow-200
+                                peer-hover:from-red-300 peer-hover:to-yellow-200
                                 bg-clip-text text-transparent">
 
                                 {listing.price["formatted_with_symbol"]}
@@ -62,8 +72,8 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:Product[]}) =>{
                                     &nbsp;(χωρίς ΦΠΑ)
                                 </span>
                             
-                            </span>
-                            <Button link={listing.checkout_url.checkout}/>
+                            </div>
+                            
                         </div>
                     </div>
 
@@ -90,11 +100,16 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:Product[]}) =>{
                 overflow-x-scroll 
                 border-4 border-red-700">
 
-                {similar.map((item)=>
-                    <Recommendation listing={item} key={item.id}/>
-                )}
+                <Suspense fallback={<Recommendation_Fallback/>}>
 
-                <Recommendation_Fallback/>
+                    {similar.map((item)=>
+                        <Recommendation listing={item} key={item.id}/>
+                    )}
+
+                </Suspense>
+
+
+                
 
             </aside>
             
