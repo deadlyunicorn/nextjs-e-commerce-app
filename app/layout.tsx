@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -27,6 +28,7 @@ export default function RootLayout({
             ">
             HELLO WORLD AND WELCOME TO MY WEBSTORE
           </span>
+          <Link href={'/'}>Homepage</Link>
 
           <div className="h-[100px] items-center justify-center flex text-white">Empty box</div>
 
