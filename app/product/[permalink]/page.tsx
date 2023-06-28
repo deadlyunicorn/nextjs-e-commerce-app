@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/app/button";
 import { Fragment } from "react";
+import { Recommendation } from "./recommendations";
 
 const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
 
@@ -46,7 +47,7 @@ const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
     return listing ? (
         <main className=" border-4 border-white ">
             
-            <div className="flex flex-wrap justify-evenly border-4 border-red-200">
+            <div className="flex flex-wrap justify-evenly border-4 border-red-700">
             
                 <div 
                 // dangerous css?
@@ -64,7 +65,7 @@ const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
                         
                         
                     </Link>
-                <div className="flex flex-col justify-between flex-wrap">
+                     <div className="flex flex-col justify-between flex-wrap">
                         <p className="my-4 min-h-[50px]  text-4xl text-white font-light">
                             {listing.name}
                         </p>
@@ -84,7 +85,7 @@ const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
                     
                 </div>
                 
-                <div className="text-white text-xl font-light max-w-[300px] pt-10">
+                <div className="text-white text-xl font-light w-[300px] pt-10 ">
                 {
                     listing.description?
                         <div dangerouslySetInnerHTML={{__html:listing.description}}/>
@@ -96,9 +97,13 @@ const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
                 
                 
             </div>
-            <div>
-                {similar.map(item=>item.name)}
+            <div className="flex gap-x-5 mt-10 border-4 border-red-700">
+                {similar.map(item=>
+                    <Recommendation listing={item} key={item.id}/>
+                )}
             </div>
+
+            
 
 
             
