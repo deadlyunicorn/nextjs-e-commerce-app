@@ -2,11 +2,39 @@ import { items } from "@/lib/commerce";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/app/button";
+import { Fragment } from "react";
 
 const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
 
     const listing = items.filter(item=>item.permalink==permalink)[0]
-    console.log(listing);
+    
+
+    const categories = listing.categories
+        .map( object=> object.slug );
+
+    // console.log(categories);
+
+    
+    const similar = items.filter(
+
+        (product)=>(
+            //getting the [slugs] of the current product
+            product.categories.map( object => (
+                object.slug
+            )) 
+            //checking if our current listing
+            //contains any of the current product
+            //slugs - thus making it relevant
+            .filter(
+                (category)=>(
+                    categories.includes(category)
+                )
+            )
+        )
+        
+    );
+
+    // console.log(listing);
 
     return listing ? (
         <main className="flex flex-wrap border-4 border-white justify-evenly">
@@ -32,8 +60,10 @@ const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
                         </span>
                         <Button link={listing.checkout_url.checkout}/>
                     </div>
+                    {}
                </div>
-            
+
+                <div dangerouslySetInnerHTML={{__html:listing.description}}/>
             
 
             </div>
