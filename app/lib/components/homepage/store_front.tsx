@@ -8,7 +8,9 @@ const Store_Front = ({item} : {item:Product}) => (
     <div className="w-[200px] ">
 
                 <Link href={`/product/${item.permalink}`}>
-                <Image src={item.image?item.image["url"]:""} 
+                <Image src={item.image?item.image["url"]:"/image.png"} 
+                placeholder="blur"
+                blurDataURL="/image.png"
                 alt={item.name}  height={200} width={200}
                 className="rounded-md h-[200px]"/>
                 
