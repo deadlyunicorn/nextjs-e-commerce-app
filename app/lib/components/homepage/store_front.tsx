@@ -2,7 +2,7 @@ import { Product } from "@chec/commerce.js/types/product"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/app/lib/components/button"
-import "./mock.scss"
+import "@/app/lib/components/mock.scss"
 
 const Store_Front = ({item} : {item:Product}) => (
     <div className="w-[200px] ">
@@ -42,7 +42,7 @@ export const Store_Front_Fallback = () => {
     const Template = ()=>(
         <div className="relative w-[200px]" >
 
-            <div  id="mock_product">
+            <div  className="mock_product">
 
                 <div>
                     
