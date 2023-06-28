@@ -19,7 +19,9 @@ export function Recommendation({listing}:{listing:Product}){
     group
     ">
 
-            <Image src={listing.image?listing.image["url"]:""} 
+            <Image src={listing.image?listing.image["url"]:"/image.png"}
+            placeholder="blur"
+            blurDataURL="/image.png"
             alt={listing.name}  height={100} width={100}
             className="rounded-md min-h-[100px] min-w-[100px]" />
             
