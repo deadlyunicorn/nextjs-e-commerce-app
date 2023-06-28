@@ -38,7 +38,14 @@ const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
 
     return listing ? (
         <main className="flex flex-wrap border-4 border-white justify-evenly">
-            <div className=" w-[300px]">
+            
+            
+            <div className=" 
+            max-w-[200px]
+            min-w-[300px] 
+            flex flex-wrap
+            justify-center
+            ">
 
                 <Link href={`/product/${listing.permalink}`}>
                     <Image src={listing.image?listing.image["url"]:""} 
@@ -60,13 +67,24 @@ const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
                         </span>
                         <Button link={listing.checkout_url.checkout}/>
                     </div>
-                    {}
-               </div>
+                </div>
 
-                <div dangerouslySetInnerHTML={{__html:listing.description}}/>
+          
+                    
+                
+            </div>
+            
+            <div className="text-white text-xl font-light max-w-[300px] pt-10">
+            {
+                listing.description?
+                    <p dangerouslySetInnerHTML={{__html:listing.description}}/>
+                    :
+                    <p>No description found</p>
+            }
+            </div>
+              
             
 
-            </div>
 
             
 
