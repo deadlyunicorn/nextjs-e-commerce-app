@@ -14,12 +14,16 @@ export default async function Home() {
      
 
 
-        <div className="flex gap-20 flex-wrap">
+        <div className="
+          flex flex-wrap
+          justify-center
+          gap-20">
 
           <Suspense fallback={<Store_Front_Fallback/>}>
            
             {items.map(
-                (item)=>(
+                (item,index)=>(
+                  // <Store_Front_Fallback key={index}/>
                   <Store_Front item={item} key={item.id}/>
                 )
               )}
