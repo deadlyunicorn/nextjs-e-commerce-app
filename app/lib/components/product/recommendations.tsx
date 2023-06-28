@@ -79,7 +79,7 @@ export const Recommendation_Fallback = () => {
                 <div className="
                     rounded-md 
                     h-[100px] w-[100px]
-                    bg-white
+                    bg-slate-200
                 " />
             </div>
 
@@ -92,7 +92,7 @@ export const Recommendation_Fallback = () => {
                         mt-2 min-h-[50px]
                         text-lg text-white
                         font-light">
-                        Test this cool Listing
+                        Listing are loading..
                     </p>
                 </div>
             </div>
@@ -109,7 +109,7 @@ export const Recommendation_Fallback = () => {
                     from-red-400 to-yellow-300 
                     group-hover:from-red-300 group-hover:to-yellow-200
                     bg-clip-text text-transparent">
-                    Test Price
+                    Price is loading..
 
                     <p className="text-xs">&nbsp;
                         (χωρίς ΦΠΑ)
