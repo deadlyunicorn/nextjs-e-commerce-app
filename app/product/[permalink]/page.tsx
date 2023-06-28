@@ -37,7 +37,7 @@ const ItemPage = ({params:{permalink}}:{params:{permalink:string}}) =>{
 
     }
     else{
-        return  (<div>Item not found component</div>)
+        return  (<main>Item not found component</main>)
 
     }
     
