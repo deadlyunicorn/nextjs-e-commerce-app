@@ -1,0 +1,54 @@
+
+.mock_product >div{
+    position: relative;
+}
+
+.mock_product >div >div:first-child{
+    width: 3px;
+    
+    position: absolute;
+    height: 90%;
+    top: 5%;
+
+    background-color: rgb(65, 223, 255);
+
+    animation: loading 2s infinite;
+    animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.mock_product_100 >div{
+    position: relative;
+}
+.mock_product_100 >div >div:first-child{
+    width: 1px;
+    
+    position: absolute;
+    height: 90%;
+    top: 5%;
+
+    background-color: rgb(210, 248, 255);
+
+    animation: loading_100 2s infinite;
+    animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+@keyframes loading_100 {
+    0% {transform: translateX(0px);}
+    25% {transform: translateX(50px);}
+    50% {transform: translateX(100px);}
+    75% {transform: translateX(50px);}
+    100% {transform: translateX(0px);}
+}
+
+
+
+
+@keyframes loading {
+    0% {transform: translateX(20px);}
+    25% {transform: translateX(100px);}
+    50% {transform: translateX(180px);}
+    75% {transform: translateX(100px);}
+    100% {transform: translateX(20px);}
+}
+
+
