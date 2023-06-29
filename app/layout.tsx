@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import './globals.css'
 import Footer from '@/app/(lib)/components/footer'
 import Header from '@/app/(lib)/header'
@@ -25,7 +24,10 @@ export default function RootLayout(
           <Header/>
         
           {children}
-          <Categories/>
+          <section id='categories'>
+
+            <Categories/>
+          </section>
 
           <Footer/>
         
