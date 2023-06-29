@@ -1,0 +1,27 @@
+
+@for $i from 1 through 3{
+    .animation-loader :nth-child(#{$i}){
+        animation: movingDots #{$i + 2}s infinite;
+        animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+        animation-direction: reverse;
+        animation-delay: #{$i - 1}s;
+    }
+}
+
+@keyframes movingDots{
+    0%{
+        transform: translateY(0px);
+    }
+    25%{
+        transform: translateY(50px);
+    }
+    50%{
+        transform: translateY(0px);
+    }
+    75%{
+        transform: translateY(-50px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
