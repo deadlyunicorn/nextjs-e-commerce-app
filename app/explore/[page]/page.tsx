@@ -1,18 +1,31 @@
 import {commerce} from "@/app/(lib)/commerce"
 import { Suspense } from "react";
 import Store_Front, { Store_Front_Fallback } from "@/app/(lib)/components/homepage/store_front";
+import NextPage from "@/app/(lib)/components/browsing/nextPage";
 
 export default async function Explore({params:{page}}:{params:{page:number}}) {
 
-  const items = await commerce.products.list({
-    limit:20,
-    page:page
-  })
-  .then(result=> result.data)
 
+    const limit = 20; 
+
+
+    const items = await commerce.products.list({
+        limit:limit,
+        page:page
+    })
+    .then(result=> result.data)
+
+    const nextPageExists = await commerce.products.list({
+        limit:limit,
+        page:Number(page)+1
+    })
+    .then(result=> result.data != undefined);
+
+    
     if (items){
 
         return (
+            <>
             <main>
             <div>
 
@@ -39,6 +52,9 @@ export default async function Explore({params:{page}}:{params:{page:number}}) {
 
             </div>
             </main>
+
+            <NextPage currentPage={Number(page)} nextPageExists={nextPageExists}/>
+            </>
 
         )
     }

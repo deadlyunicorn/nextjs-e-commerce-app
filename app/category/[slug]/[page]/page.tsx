@@ -1,23 +1,33 @@
 import {commerce} from "@/app/(lib)/commerce"
 import { Suspense } from "react";
 import Store_Front, { Store_Front_Fallback } from "@/app/(lib)/components/homepage/store_front";
+import Link from "next/link";
+import NextPage from "@/app/(lib)/components/browsing/nextPage";
 
-export default async function CategoryProducts({params:{slug,page}}:{params:{slug:string,page:number}}) {
+export default async function CategoryProducts({params:{slug,page},params}:{params:{slug:string,page:number}}) {
 
-  const items = await commerce.products.list({
-    category_slug:slug,
-    limit:20,
-    page:page,
-  })
-  .then(result=> result.data)
+    const limit = 20; 
+
+    const items = await commerce.products.list({
+        category_slug:slug,
+        limit:limit,
+        page:page,
+    })
+    .then(result=> result.data);
+
+    const nextPageExists= await commerce.products.list({
+        category_slug:slug,
+        limit:limit,
+        page:Number(page)+1,
+    })
+    .then(result=> result.data != null);
 
     if (items){
 
         return (
+            <>
             <main>
             <div>
-
-            
                 <p>Page number {page}</p>
 
 
@@ -40,6 +50,9 @@ export default async function CategoryProducts({params:{slug,page}}:{params:{slu
 
             </div>
             </main>
+            
+            <NextPage currentPage={Number(page)} nextPageExists={nextPageExists}/>
+            </>
 
         )
     }
