@@ -7,11 +7,16 @@ h3{
     line-height: 2rem/* 32px */;
 }
 
+main{
+    min-height: 400px;
+}
+
 .loading-300{
     background-repeat: no-repeat;
     animation: loader-300 3s infinite;
     animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
+
 
 
 
@@ -26,3 +31,22 @@ h3{
         background-position: 0px;
     }
 }
+
+.loading-100{
+    background-repeat: no-repeat;
+    animation: loader-100 3s infinite;
+    animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+@keyframes loader-100 {
+    0%{
+        background-position: 0px;
+    }
+    50%{
+        background-position: 100px;
+    }
+    100%{
+        background-position: 0px;
+    }
+}
+
