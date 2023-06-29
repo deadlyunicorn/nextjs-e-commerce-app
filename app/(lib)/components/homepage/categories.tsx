@@ -1,4 +1,4 @@
-import { commerce } from "@/app/(lib)/commerce";
+import { commerce } from "@/app/(lib)/api/commerce";
 import Link from "next/link";
 
 const Categories = async() => {

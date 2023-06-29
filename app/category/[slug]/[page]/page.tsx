@@ -1,7 +1,6 @@
-import {commerce} from "@/app/(lib)/commerce"
+import {commerce} from "@/app/(lib)/api/commerce"
 import { Suspense } from "react";
 import Store_Front, { Store_Front_Fallback } from "@/app/(lib)/components/homepage/store_front";
-import Link from "next/link";
 import NextPage from "@/app/(lib)/components/browsing/nextPage";
 
 export default async function CategoryProducts({params:{slug,page},params}:{params:{slug:string,page:number}}) {
