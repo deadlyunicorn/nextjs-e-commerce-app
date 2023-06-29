@@ -1,6 +1,6 @@
 import '@/app/(lib)/animations.scss'
 
-export default function Loader(){
+export default function LoadingScreen(){
     return(
         <div className="
           flex flex-wrap
