@@ -1,4 +1,4 @@
-import { commerce } from "@/app/(lib)/commerce";
+import { commerce } from "@/app/(lib)/api/commerce";
 import ProductPage from "@/app/(lib)/components/product/product-page";
 
 const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
@@ -13,26 +13,7 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
         const categories = listing.categories
         .map( object=> object.slug );
 
-        /*
-        const similar = items.filter(
-
-            product=>(
-                //getting the [slugs] of the current product
-                product.categories.map( object => (
-                    object.slug
-                ))
-                //checking if our current listing
-                //contains any of the current product
-                //slugs - thus making it relevant
-                .filter(
-                    category=>(
-                        categories.includes(category)
-                    )
-                )
-                .toString()
-            )
-
-        )*/
+    
         const similar = await commerce.products.list({
             category_slug: categories,
             limit:20
