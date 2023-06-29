@@ -93,7 +93,7 @@ export const Recommendation_Fallback = () => {
                 <div>
                     <p className="
                         mt-2 min-h-[50px]
-                        text-lg text-slate-100
+                        text-lg text-white
                         font-light text-transparent
                         loading-100
                         bg-gradient-to-r
@@ -114,7 +114,7 @@ export const Recommendation_Fallback = () => {
             <div/>
 
                 <div className="
-                    text-lg text-red-400
+                    text-lg text-white
                     bg-gradient-to-r 
                     from-red-400 to-yellow-300 
                     group-hover:from-red-300 group-hover:to-yellow-200
