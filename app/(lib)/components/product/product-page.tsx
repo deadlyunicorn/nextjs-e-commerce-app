@@ -1,7 +1,7 @@
 import { Product } from "@chec/commerce.js/types/product";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/app/(lib)/components/button";
+import { AddToCart } from "@/app/(lib)/components/add_Cart";
 import { Recommendation, Recommendation_Fallback } from "@/app/(lib)/components/product/recommendations";
 import { Suspense } from "react";
 import { ProductCollection } from "@chec/commerce.js/features/products";
@@ -58,73 +58,91 @@ const ProductInfo = ({listing}:{listing:Product}) => (
                 justify-center
                 ">
 
-                    <Link 
-                        href={`/product/${listing.permalink}`}>
+            <Link 
+                href={`/product/${listing.permalink}`}>
 
-                        <Image 
-                            src={listing.image?listing.image["url"]:"/image.png"} 
-                        alt={listing.name}  height={300} width={300}
-                        placeholder="blur"
-                        blurDataURL="/image.png"
+                <figure>
+                    <Image 
+                    src={listing.image?listing.image["url"]:"/image.png"} 
+                    alt={listing.name}  height={300} width={300}
+                    placeholder="blur"
+                    blurDataURL="/image.png"
+                    className="rounded-md h-[300px] peer" />
 
-                        className="rounded-md h-[300px]" />
-                        
-                        
-                    </Link>
-                     <div className="
-                        flex flex-col 
-                        justify-between flex-wrap">
-                        
-                        <p className="
-                            my-4 min-h-[50px]
-                            text-4xl
-                            text-slate-200 hover:text-white
-                            font-light">
+                    <figcaption className="
+                        my-4 min-h-[50px]
+                        text-4xl
+                        text-slate-200 
+                        peer-hover:text-white hover:text-white
+                        font-light">
 
-                                {listing.name}
-                        </p>
+                        {listing.name}
+                    </figcaption>
+                </figure>
+                
+                
+            </Link>
+            <div className="
+                flex flex-col 
+                justify-between ">
+                
+              
 
-                        <div className="flex flex-col-reverse">
-                            
-                            {/* peer should be before sibling */}
-                            <div className="peer">
-                                <Button link={listing.checkout_url.checkout}/>
-                            </div>
+               
 
-                            <div className="
-                                text-2xl
-                                bg-gradient-to-r 
-                                from-red-400 to-yellow-300 
-                                peer-hover:from-red-300 peer-hover:to-yellow-200
-                                bg-clip-text text-transparent">
+            </div>
+                    
+        </div>
+        
+        <div className="
+            justify-between 
+            flex-wrap
+            flex flex-col
+            text-white 
+            text-xl font-light 
+            w-[300px] min-h-[150px] pt-10 ">
+            {
+            listing.description?
+                <div dangerouslySetInnerHTML={{__html:listing.description}}/>
+                :
+                <p>No description found</p>
+            }
 
-                                {listing.price["formatted_with_symbol"]}
+            <div className="
+                pb-2
+                gap-y-5
+                flex flex-col
+                ">
 
-                                <span className="text-xs">
-                                    &nbsp;(χωρίς ΦΠΑ)
-                                </span>
-                            
-                            </div>
-                            
-                        </div>
-                    </div>
+                
+
+                <div className="
+                    gap-y-5
+                    flex flex-col">
+                    <AddToCart item={listing.id} />
+                </div>
+
+                <div className="
+                    text-4xl
+                    bg-gradient-to-r 
+                    from-red-400 to-yellow-300 
+                    peer-hover:from-red-300 peer-hover:to-yellow-200
+                    bg-clip-text text-transparent">
+
+                    {listing.price["formatted_with_symbol"]}
+
+
+                    <span className="text-xs">
+                        &nbsp;(χωρίς ΦΠΑ)
+                    </span>
+
+                </div>
+
+            </div>
 
             
-                        
-                    
-                </div>
-                
-                <div className="
-                    text-white 
-                    text-xl font-light 
-                    w-[300px] min-h-[150px] pt-10 ">
-                {
-                    listing.description?
-                        <div dangerouslySetInnerHTML={{__html:listing.description}}/>
-                        :
-                        <p>No description found</p>
-                }
-                </div>
+        </div>
+
     </>
 )
 
@@ -155,6 +173,8 @@ export const ProductFallback = () => (
                         justify-between flex-wrap">
                         
                         <p className="
+                            blur-md
+                            text-white
                             my-4 min-h-[50px]
                             text-4xl
                             text-transparent
