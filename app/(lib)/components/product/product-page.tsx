@@ -1,8 +1,8 @@
 import { Product } from "@chec/commerce.js/types/product";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/app/lib/components/button";
-import { Recommendation, Recommendation_Fallback } from "@/app/lib/components/product/recommendations";
+import { Button } from "@/app/(lib)/components/button";
+import { Recommendation, Recommendation_Fallback } from "@/app/(lib)/components/product/recommendations";
 import { Suspense } from "react";
 
 const ProductPage = ({listing,similar}:{listing:Product,similar:Product[]}) =>{
@@ -30,7 +30,8 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:Product[]}) =>{
 
                 <Suspense fallback={<Recommendation_Fallback/>}>
 
-                    {similar.map((item)=>
+                    {similar.splice(0,20) //get only the first 20
+                    .map((item)=>
                         <Recommendation listing={item} key={item.id}/>
                     )}
 

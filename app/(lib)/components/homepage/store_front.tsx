@@ -1,7 +1,7 @@
 import { Product } from "@chec/commerce.js/types/product"
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/app/lib/components/button"
+import { Button } from "@/app/(lib)/components/button"
 import "@/app/lib/components/mock.scss"
 
 const Store_Front = ({item} : {item:Product}) => (
