@@ -5,7 +5,6 @@ const Categories = async() => {
     const categories = await commerce.categories.list()
     .then(category=> category.data)
       
-    // console.log(categories);
     
     return(
         <aside className="

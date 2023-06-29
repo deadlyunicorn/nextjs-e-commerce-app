@@ -38,7 +38,6 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
             limit:20
         })
         .then(data=>(data.data))
-        console.log(similar.map(item=>item.name))
 
 
         return (
