@@ -1,7 +1,7 @@
 import { Product } from "@chec/commerce.js/types/product"
 import Image from "next/image"
 import Link from "next/link"
-import "@/app/lib/components/mock.scss"
+import "@/app/(lib)/components/mock.scss"
 
 
 export function Recommendation({listing}:{listing:Product}){
