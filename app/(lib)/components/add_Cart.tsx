@@ -1,18 +1,17 @@
 'use client'
 
 import { useState } from "react";
-import { cart } from "../commerce";
-import Commerce from "@chec/commerce.js";
+import { Cart } from "../api/commerce";
 
-export const AddToCart=({item}:{item:string})=>{
+export const AddToCart=({item: item_id}:{item:string})=>{
     
-    const handle_Click=()=>{
-        cart.refresh();
-        alert(item +"aaa___" +quantity);
+
+
+    const handle_Click=async()=>{
+        await Cart.add(item_id, quantity)
+
     }
 
-
-    const commerce = new Commerce('pk_test_530304959aba3f191ed92e60373ec97da4de0981b5798'); 
 
     const handle_Change=(event: React.FormEvent<HTMLInputElement>)=>{
         
@@ -32,7 +31,12 @@ export const AddToCart=({item}:{item:string})=>{
     return(
 
         <>
-        <div className="flex gap-x-5">
+        <div className="
+        py-2 
+        text-lg
+        flex 
+        justify-between
+        gap-x-5">
             <span className="text-white">
                 Quantity:
             </span>
