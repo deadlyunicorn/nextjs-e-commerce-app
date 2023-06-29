@@ -5,7 +5,7 @@ const Categories = async() => {
     const categories = await commerce.categories.list()
     .then(category=> category.data)
       
-    console.log(categories);
+    // console.log(categories);
     
     return(
         <aside className="
@@ -20,7 +20,7 @@ const Categories = async() => {
                 <ul className="grid-cols-2 grid">
                     {categories.map(category=>(
                         <li key={category.id}>
-                            <Link href={`/category/${category.name}`}>{category.name}</Link>
+                            <Link href={`/category/${category.slug}/1`}>{category.name}</Link>
                         </li>
                     ))}
                 </ul>
