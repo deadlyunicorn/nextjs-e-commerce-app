@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CartElement from "./Cart";
 
 export default function Header(){
 
@@ -16,6 +17,7 @@ export default function Header(){
                 HELLO WORLD AND WELCOME TO MY WEBSTORE
             </span>
 
+            <CartElement/>
             <Link href={'/'}>Homepage</Link>
 
             <div className="
