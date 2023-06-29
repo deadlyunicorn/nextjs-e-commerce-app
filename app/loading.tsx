@@ -1,13 +1,7 @@
-import { Store_Front_Fallback } from "./(lib)/components/homepage/store_front";
+import LoadingScreen from "./loader/page";
 
 export default function Loader(){
     return(
-        <div className="
-          flex flex-wrap
-          justify-center
-          gap-20">
-
-              <Store_Front_Fallback/>
-        </div>
+        <LoadingScreen/>
     )
 }
