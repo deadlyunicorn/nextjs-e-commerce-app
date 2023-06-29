@@ -1,6 +1,15 @@
-import '@/app/(lib)/animations.scss'
+import "@/app/(lib)/styles/animations.scss"
 
 export default function LoadingScreen(){
+    
+    const Dot = ()=>(
+        <div className="
+            h-2 w-2 
+            bg-white 
+            rounded-md 
+            drop-shadow-[0px_0px_4px_rgba(100,100,200,1)]"/>
+    )
+    
     return(
         <div className="
           flex flex-wrap
@@ -9,10 +18,9 @@ export default function LoadingScreen(){
           animation-loader
           ">
 
-            <div className="h-2 w-2 bg-white rounded-md"/>
-            <div className="h-2 w-2 bg-white rounded-md"/>
-            <div className="h-2 w-2 bg-white rounded-md"/>  
-
+            <Dot/>
+            <Dot/>
+            <Dot/>
         </div>
     )
 }
