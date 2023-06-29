@@ -9,26 +9,10 @@ export const AddToCart=({item}:{item:string})=>{
     const handle_Click=()=>{
         cart.refresh();
         alert(item +"aaa___" +quantity);
-        say();
-
     }
 
-    console.log("hello")
 
     const commerce = new Commerce('pk_test_530304959aba3f191ed92e60373ec97da4de0981b5798'); 
-    
-    const say=async()=>{
-        let time=0;
-        const timer=setInterval(()=>{
-            time++;
-        },1);
-        await commerce.cart.retrieve().then(cart => console.log(cart));
-        console.log("Time was:",time);
-        return timer;
-
-    }
-
-    say();
 
     const handle_Change=(event: React.FormEvent<HTMLInputElement>)=>{
         
