@@ -2,7 +2,8 @@ import { Product } from "@chec/commerce.js/types/product"
 import Link from "next/link"
 import Image from "next/image"
 import { AddToCart } from "@/app/(lib)/components/add_Cart"
-import "@/app/(lib)/components/mock.scss"
+import "@/app/(lib)/styles/mock.scss"
+
 
 const Store_Front = ({item} : {item:Product}) => (
     <div className="w-[200px] ">
@@ -20,6 +21,7 @@ const Store_Front = ({item} : {item:Product}) => (
                 </Link>
 
                 <div className="
+                    text-2xl
                      bg-gradient-to-r 
                      from-red-400 to-yellow-300
                      hover:from-red-300 hover:to-yellow-200
@@ -30,7 +32,7 @@ const Store_Front = ({item} : {item:Product}) => (
 
                   </div>
 
-                <AddToCart item={item.checkout_url.checkout}/>
+                <AddToCart item={item.id}/>
                   
               </div>
 )
