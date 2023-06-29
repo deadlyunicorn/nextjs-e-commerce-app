@@ -1,7 +1,7 @@
 import { Product } from "@chec/commerce.js/types/product"
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/app/(lib)/components/button"
+import { AddToCart } from "@/app/(lib)/components/add_Cart"
 import "@/app/(lib)/components/mock.scss"
 
 const Store_Front = ({item} : {item:Product}) => (
@@ -30,7 +30,7 @@ const Store_Front = ({item} : {item:Product}) => (
 
                   </div>
 
-                <Button link={item.checkout_url.checkout}/>
+                <AddToCart item={item.checkout_url.checkout}/>
                   
               </div>
 )
