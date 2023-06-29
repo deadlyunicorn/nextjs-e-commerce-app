@@ -1,19 +1,17 @@
 'use client'
 
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Cart } from "../api/commerce";
 
 export const AddToCart=({item: item_id}:{item:string})=>{
     
+    const [quantity,setQuantity]=useState(1);
+    const arr10= [...Array(10).keys()];
 
 
-    const handle_Click=async()=>{
-        await Cart.add(item_id, quantity)
-
-    }
 
 
-    const handle_Change=(event: React.FormEvent<HTMLInputElement>)=>{
+    const handle_Change=(event: React.FormEvent<HTMLSelectElement>)=>{
         
         const quantity = Number(event.currentTarget.value);
         if ( quantity < 11 ){
@@ -26,8 +24,47 @@ export const AddToCart=({item: item_id}:{item:string})=>{
         }
     }
 
-    const [quantity,setQuantity]=useState(1);
+    const handle_CartButton=async()=>{
+        await Cart.add(item_id, quantity)
 
+    }
+
+    const QuantityButton = ({children}:{children:ReactNode}) =>{
+
+        const handle_QuantityButton = () => {
+            if (children=="+"){
+                if (quantity<10){
+                    setQuantity(quantity+1);
+                }
+            }
+            else if (children == "-"){
+                if (quantity>1){
+                    setQuantity(quantity-1);
+                }
+                
+
+            }
+        }
+
+        return(
+            <button
+                className="
+                    w-5
+                    rounded-md 
+                    bg-blue-500 hover:bg-sky-600 
+                    bg-opacity-50
+                    text-slate-200 hover:text-white
+                    text-center
+                    font-extrabold
+                    "
+                onClick={handle_QuantityButton}>
+            
+                {children}
+                
+            </button>
+        )
+
+    }
     return(
 
         <>
@@ -41,26 +78,41 @@ export const AddToCart=({item: item_id}:{item:string})=>{
                 Quantity:
             </span>
                     
-            <input 
-                type="number"
-                className="
-                    w-10 
-                    rounded-md 
-                    bg-white bg-opacity-[50%]
-                    text-black text-center"
-                max={10}
-                min={1}
-                onChange={handle_Change}
-                value={quantity}
-                name="quantity"
-            />
+            <div className="flex gap-x-2">
+
+                <QuantityButton>
+                    -
+                </QuantityButton>
+
+                <select 
+                    value={quantity}
+                    onChange={handle_Change}
+                    className="w-10
+                        rounded-md 
+                        bg-white bg-opacity-[50%]
+                        text-black text-center">
+
+                    {arr10.map((item)=>(
+                        <option key={item}>{item+1}</option>
+                    ))}
+                    
+                </select>
+                <QuantityButton>
+                    +
+                </QuantityButton>
+
+            </div>
+
+            
+           
+         
 
         </div>
 
                  {/* peer should be before sibling */}
      
         <button 
-            onClick={handle_Click}
+            onClick={handle_CartButton}
             className="
                 text-black
                 w-full h-10 
