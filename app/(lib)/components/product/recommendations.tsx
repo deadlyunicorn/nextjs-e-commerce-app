@@ -64,7 +64,7 @@ export const Recommendation_Fallback = () => {
         <div
             className=" 
             w-[110px] 
-            bg-white bg-opacity-10
+            bg-white bg-opacity-10 blur-sm
             hover:bg-opacity-20 rounded-lg
             cursor-default
             group 
@@ -75,14 +75,14 @@ export const Recommendation_Fallback = () => {
                 <div/>
 
                 <div className="
-                    rounded-md 
+                    rounded-md
                     h-[100px] w-[100px]
                     bg-slate-300
                     loading-100
                     bg-gradient-to-r
                     from-white  to-transparent
                     to-20%
-                    blur-md 
+                    blur-md
                 " />
             </div>
 
@@ -100,7 +100,7 @@ export const Recommendation_Fallback = () => {
                         bg-clip-text
                         from-white  to-transparent
                         to-20%
-                        blur-sm
+                        blur-md
                         ">
                         Listing are loading..
                     </p>
@@ -121,7 +121,7 @@ export const Recommendation_Fallback = () => {
                     bg-clip-text text-transparent
                     loading-100
                     to-20%
-                    blur-sm
+                    blur-md
                     ">
                     Price is loading..
 
