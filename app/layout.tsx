@@ -19,7 +19,7 @@ export default function RootLayout(
 
       <body className="bg-stone-900  flex flex-col items-center mt-5 ">
         
-        <div className='md:max-w-3xl text-center max-w-xl'>
+        <div className='xl:max-w-4xl text-center md:max-w-xl'>
 
           <Header/>
         
