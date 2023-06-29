@@ -31,9 +31,7 @@ export default async function CategoryProducts({params:{slug,page},params}:{para
 
 
                 <div className="
-                flex flex-wrap
-                justify-center
-                gap-20">
+                product-list-div">
 
                 <Suspense fallback={<Store_Front_Fallback/>}>
                 

@@ -22,9 +22,7 @@ export default async function Home() {
 
 
         <div className="
-          flex flex-wrap
-          justify-center
-          gap-20">
+          product-list-div">
 
           <Suspense fallback={<Store_Front_Fallback/>}>
            
