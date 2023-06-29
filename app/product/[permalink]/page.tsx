@@ -13,6 +13,7 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
         const categories = listing.categories
         .map( object=> object.slug );
 
+        /*
         const similar = items.filter(
 
             product=>(
@@ -31,7 +32,13 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
                 .toString()
             )
 
-        )
+        )*/
+        const similar = await commerce.products.list({
+            category_slug: categories,
+            limit:20
+        })
+        .then(data=>(data.data))
+        console.log(similar.map(item=>item.name))
 
 
         return (

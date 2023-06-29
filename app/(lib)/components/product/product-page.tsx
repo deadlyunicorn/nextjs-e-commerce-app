@@ -4,8 +4,9 @@ import Link from "next/link";
 import { Button } from "@/app/(lib)/components/button";
 import { Recommendation, Recommendation_Fallback } from "@/app/(lib)/components/product/recommendations";
 import { Suspense } from "react";
+import { ProductCollection } from "@chec/commerce.js/features/products";
 
-const ProductPage = ({listing,similar}:{listing:Product,similar:Product[]}) =>{
+const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollection["data"]}) =>{
 
     const arr6 = [... new Array(6)];
 
@@ -30,7 +31,7 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:Product[]}) =>{
 
                 <Suspense fallback={<Recommendation_Fallback/>}>
 
-                    {similar.splice(0,20) //get only the first 20
+                    {similar //we could splice, but api provides limit..
                     .map((item)=>
                         <Recommendation listing={item} key={item.id}/>
                     )}
