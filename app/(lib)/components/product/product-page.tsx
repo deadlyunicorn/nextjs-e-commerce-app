@@ -102,10 +102,10 @@ const ProductInfo = ({listing}:{listing:Product}) => (
             text-xl font-light 
             w-[300px] min-h-[150px] pt-10 ">
             {
-            listing.description?
-                <div dangerouslySetInnerHTML={{__html:listing.description}}/>
-                :
-                <p>No description found</p>
+            listing.description
+                ?<div dangerouslySetInnerHTML={{__html:listing.description}}/>
+                
+                :<p>No description found</p>
             }
 
             <div className="
