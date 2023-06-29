@@ -17,7 +17,7 @@ export default function Header(){
                 HELLO WORLD AND WELCOME TO MY WEBSTORE
             </span>
 
-            <CartElement/>
+            {/* <CartElement/> */}
             <Link href={'/'}>Homepage</Link>
 
             <div className="
