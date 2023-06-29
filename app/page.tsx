@@ -1,14 +1,17 @@
-import {commerce} from "@/app/(lib)/commerce"
+import {cart, commerce} from "@/app/(lib)/commerce"
 import { Suspense } from "react";
 import Store_Front, { Store_Front_Fallback } from "./(lib)/components/homepage/store_front";
 
 export default async function Home() {
 
+  const limit = 20;
+
   const items = await commerce.products.list({
-    limit:20,
+    limit:limit,
   })
   .then(result=> result.data)
 
+  console.log(JSON.stringify(cart.id));
   
 
   return (
