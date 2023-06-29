@@ -1,4 +1,4 @@
-import {cart, commerce} from "@/app/(lib)/commerce"
+import {commerce} from "@/app/(lib)/api/commerce"
 import { Suspense } from "react";
 import Store_Front, { Store_Front_Fallback } from "./(lib)/components/homepage/store_front";
 
@@ -11,7 +11,6 @@ export default async function Home() {
   })
   .then(result=> result.data)
 
-  console.log(JSON.stringify(cart.id));
   
 
   return (
