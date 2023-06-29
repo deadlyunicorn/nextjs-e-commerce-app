@@ -2,11 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+h3{
+    font-size: 1.5rem/* 24px */;
+    line-height: 2rem/* 32px */;
+}
+
 .loading-300{
     background-repeat: no-repeat;
     animation: loader-300 3s infinite;
     animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
+
+
 
 @keyframes loader-300 {
     0%{
