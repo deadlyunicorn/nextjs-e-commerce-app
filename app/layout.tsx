@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import './globals.css'
-import Footer from '@/app/lib/components/footer'
-import Header from '@/app/lib/header'
+import Footer from '@/app/(lib)/components/footer'
+import Header from '@/app/(lib)/header'
+import Categories from './(lib)/components/homepage/categories'
 
 
 export const metadata = {
@@ -24,6 +25,7 @@ export default function RootLayout(
           <Header/>
         
           {children}
+          <Categories/>
 
           <Footer/>
         
