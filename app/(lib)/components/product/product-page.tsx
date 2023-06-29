@@ -128,7 +128,7 @@ const ProductInfo = ({listing}:{listing:Product}) => (
     </>
 )
 
-const ProductFallback = () => (
+export const ProductFallback = () => (
     <>
         <div 
             // dangerous css?
