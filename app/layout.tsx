@@ -1,6 +1,6 @@
 import './globals.css'
 import Footer from '@/app/(lib)/components/footer'
-import Header from '@/app/(lib)/header'
+import Header from '@/app/(lib)/components/header'
 import Categories from './(lib)/components/homepage/categories'
 
 
