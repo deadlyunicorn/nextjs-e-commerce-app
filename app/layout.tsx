@@ -2,6 +2,7 @@ import './globals.css'
 import Footer from '@/app/(lib)/components/footer'
 import Header from '@/app/(lib)/components/header'
 import Categories from './(lib)/components/homepage/categories'
+import CartComponent from './(lib)/context/cart'
 
 
 export const metadata = {
@@ -28,6 +29,7 @@ export default function RootLayout(
           max-w-[100%]'>
 
           <Header/>
+          <CartComponent/>
         
           {children}
           <section id='categories'>
