@@ -102,7 +102,7 @@ export const Recommendation_Fallback = () => {
                         to-20%
                         blur-md
                         ">
-                        Listing are loading..
+                        Listing is loading..
                     </p>
                 </div>
             </div>
