@@ -7,7 +7,7 @@ import PriceTag from "../product/priceTag"
 
 
 const Store_Front = ({item} : {item:Product}) => (
-    <div className="sm:min-w-[200px]  max-w-[40vw]">
+    <div className="sm:w-[200px]  max-w-[40vw]">
 
                 <Link href={`/product/${item.permalink}`}>
                 <Image src={item.image?item.image["url"]:"/image.png"} 

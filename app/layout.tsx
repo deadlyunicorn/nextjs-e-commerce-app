@@ -25,6 +25,7 @@ export default function RootLayout(
         
         <div className='
           xl:max-w-4xl 
+          md:max-w-3xl
           text-center xs:px-5
           max-w-[100%]'>
 
