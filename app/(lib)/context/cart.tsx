@@ -1,7 +1,7 @@
 import { commerce } from "../api/commerce";
 
-const CartComponent = async() =>{
 
+const getCart = async()=>{
     const url = new URL(
         "https://api.chec.io/v1/carts"
     )
@@ -12,14 +12,22 @@ const CartComponent = async() =>{
         "Content-Type": "application/json",
     };
 
-    const cart = await fetch(url, {
+    const res=await fetch(url, {
         method: "GET",
         headers: headers,
     })
-    .then(response => {
-        return response.json();
-    })
+    
+    if (!res.ok){
+        throw new Error(`Fetch failed`);
+    }
 
+    return res.json();
+}
+
+const CartComponent = async() =>{
+
+    
+    const cart = await getCart();
 
 
     return (
@@ -30,6 +38,8 @@ const CartComponent = async() =>{
         </>
     )
 }
+
+
 
 
 export default CartComponent;
