@@ -35,11 +35,12 @@ export function Recommendation({listing}:{listing:Product}){
             </p>
             <div>
                 <div className="
-                    text-lg 
                     bg-gradient-to-r  bg-clip-text
                     from-red-400 to-yellow-300 
                     group-hover:from-red-300 group-hover:to-yellow-200
-                    text-transparent">
+                    text-transparent
+                    price-tag-multiple
+                    ">
                     {listing.price["formatted_with_symbol"]}
                     <p className="text-xs">&nbsp;(χωρίς ΦΠΑ)</p>
 
@@ -57,13 +58,12 @@ export function Recommendation({listing}:{listing:Product}){
 
 export const Recommendation_Fallback = () => {
 
-    const arr6 = [... new Array(6)];
+    const arr6 = [... new Array(12)];
     
     const MockRecommendations = () =>(
 
         <div
             className=" 
-            w-[110px] 
             bg-white bg-opacity-10 blur-sm
             hover:bg-opacity-20 rounded-lg
             cursor-default
@@ -76,7 +76,7 @@ export const Recommendation_Fallback = () => {
 
                 <div className="
                     rounded-md
-                    h-[100px] w-[100px]
+                    aspect-square
                     bg-slate-300
                     loading-100
                     bg-gradient-to-r
@@ -114,7 +114,7 @@ export const Recommendation_Fallback = () => {
             <div/>
 
                 <div className="
-                    text-lg text-white
+                    text-white
                     bg-gradient-to-r 
                     from-red-400 to-yellow-300 
                     group-hover:from-red-300 group-hover:to-yellow-200
@@ -122,6 +122,8 @@ export const Recommendation_Fallback = () => {
                     loading-100
                     to-20%
                     blur-md
+                    price-tag-multiple
+
                     ">
                     Price is loading..
 
