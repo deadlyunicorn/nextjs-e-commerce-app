@@ -5,6 +5,7 @@ import { AddToCart } from "@/app/(lib)/components/add_Cart";
 import { Recommendation, Recommendation_Fallback } from "@/app/(lib)/components/product/recommendations";
 import { Suspense } from "react";
 import { ProductCollection } from "@chec/commerce.js/features/products";
+import PriceTag from "./priceTag";
 
 const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollection["data"]}) =>{
 
@@ -124,24 +125,15 @@ const ProductInfo = ({listing}:{listing:Product}) => (
                 <div className="
                     gap-y-5
                     flex flex-col">
-                    <AddToCart item={listing.id} />
+                    <AddToCart price={listing.price.raw} />
                 </div>
 
-                <div className="
-                    text-4xl
-                    bg-gradient-to-r 
-                    from-red-400 to-yellow-300 
-                    peer-hover:from-red-300 peer-hover:to-yellow-200
-                    bg-clip-text text-transparent">
-
-                    {listing.price["formatted_with_symbol"]} 
-
-
-                    <span className="text-xs">
-                        (χωρίς&nbsp;ΦΠΑ)
+                <PriceTag>
+                    <span className="text-4xl">
+                        {listing.price["formatted_with_symbol"]}
                     </span>
-
-                </div>
+                    
+                </PriceTag>
 
             </div>
 

@@ -3,7 +3,7 @@
 import { ReactNode, useState } from "react";
 // import { Cart } from "../api/commerce";
 
-export const AddToCart=({item: item_id}:{item:string})=>{
+export const AddToCart=({price: price}:{price:number})=>{
     
     const [quantity,setQuantity]=useState(1);
     const arr10= [...Array(10).keys()];
@@ -69,7 +69,7 @@ export const AddToCart=({item: item_id}:{item:string})=>{
 
         <>
         <div className="
-        py-2
+        pt-2
         text-lg
         flex flex-wrap
         sm:justify-between
@@ -103,6 +103,7 @@ export const AddToCart=({item: item_id}:{item:string})=>{
                     +
                 </QuantityButton>
 
+
             </div>
 
             
@@ -110,6 +111,10 @@ export const AddToCart=({item: item_id}:{item:string})=>{
          
 
         </div>
+        <p className="text-white text-right">
+            {price*quantity} €
+        </p>
+
 
                  {/* peer should be before sibling */}
      

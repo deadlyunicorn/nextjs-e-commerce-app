@@ -3,6 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { AddToCart } from "@/app/(lib)/components/add_Cart"
 import "@/app/(lib)/styles/mock.scss"
+import PriceTag from "../product/priceTag"
 
 
 const Store_Front = ({item} : {item:Product}) => (
@@ -20,20 +21,14 @@ const Store_Front = ({item} : {item:Product}) => (
                   </p>
                 </Link>
 
-                <div className="
-                     bg-gradient-to-r 
-                     from-red-400 to-yellow-300
-                     hover:from-red-300 hover:to-yellow-200
-                     bg-clip-text text-transparent
-                     price-tag-multiple
-                     ">
+                <div className="price-tag-multiple">
 
-                      <span>{item.price["formatted_with_symbol"]}</span>
-                      <span className="text-xs"> (χωρίς&nbsp;ΦΠΑ)</span>
+                <PriceTag>
+                        {item.price["formatted_with_symbol"]}&emsp;
+                </PriceTag>
+                </div>
 
-                  </div>
-
-                <AddToCart item={item.id}/>
+                <AddToCart price={item.price.raw}/>
                   
               </div>
 )
