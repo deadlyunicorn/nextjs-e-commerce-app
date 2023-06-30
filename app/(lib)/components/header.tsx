@@ -1,5 +1,4 @@
 import Link from "next/link";
-import CartElement from "./Cart";
 
 export default function Header(){
 
