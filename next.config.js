@@ -20,7 +20,6 @@ const nextConfig = {
     },
     experimental: {
         serverActions: true,
-        serverActionsBodySizeLimit: '2mb',
       },
     
 }
