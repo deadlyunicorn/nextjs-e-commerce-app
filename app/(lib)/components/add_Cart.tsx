@@ -69,16 +69,18 @@ export const AddToCart=({item: item_id}:{item:string})=>{
 
         <>
         <div className="
-        py-2 
+        py-2
         text-lg
-        flex 
-        justify-between
+        flex flex-wrap
+        sm:justify-between
+        justify-center
         gap-x-5">
             <span className="text-white">
                 Quantity:
             </span>
                     
-            <div className="flex gap-x-2">
+            <div className="
+                flex gap-x-2">
 
                 <QuantityButton>
                     -
@@ -87,7 +89,7 @@ export const AddToCart=({item: item_id}:{item:string})=>{
                 <select 
                     value={quantity}
                     onChange={handle_Change}
-                    className="w-10
+                    className="w-10 
                         rounded-md 
                         bg-white bg-opacity-[50%]
                         text-black text-center">
@@ -115,7 +117,7 @@ export const AddToCart=({item: item_id}:{item:string})=>{
             onClick={handle_CartButton}
             className="
                 text-black
-                w-full h-10 
+                w-full min-h-[10mm] 
                 px-2
                 bg-slate-300 rounded-md ">
                     ADD TO <b className="font-bold">CART</b>
