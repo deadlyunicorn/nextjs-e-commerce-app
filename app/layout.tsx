@@ -2,8 +2,8 @@ import './globals.css'
 import Footer from '@/app/(lib)/components/footer'
 import Header from '@/app/(lib)/components/header'
 import Categories from './(lib)/components/homepage/categories'
-import CartComponent from './(lib)/api/Cart'
-import CookiesElement from './(lib)/api/Cookies'
+import CartComponent from './(lib)/components/Cart'
+import CookiesElement from './(lib)/components/Cookies'
 
 
 export const metadata = {
