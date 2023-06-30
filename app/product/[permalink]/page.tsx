@@ -1,4 +1,3 @@
-import { commerce } from "@/app/(lib)/api/commerce";
 import { fetchItems } from "@/app/(lib)/api/items";
 import ProductPage from "@/app/(lib)/components/product/product-page";
 

@@ -1,9 +1,16 @@
-import { commerce } from "@/app/(lib)/api/commerce";
 import Link from "next/link";
+import { CategoryCollection } from "@chec/commerce.js/features/categories";
+
+import { fetchItems } from "../../api/items";
+import { fetchCategories as fetchCategories } from "../../api/categories";
 
 const Categories = async() => {
-    const categories = await commerce.categories.list()
-    .then(category=> category.data)
+
+
+
+    const items = await fetchItems({});
+
+    const categories:CategoryCollection["data"] = await fetchCategories();
       
     
     return(

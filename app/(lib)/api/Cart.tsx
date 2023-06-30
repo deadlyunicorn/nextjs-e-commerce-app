@@ -1,6 +1,3 @@
-import { commerce } from "../api/commerce";
-
-
 const getCart = async()=>{
     const url = new URL(
         "https://api.chec.io/v1/carts"
@@ -38,6 +35,7 @@ const CartComponent = async() =>{
         </>
     )
 }
+
 
 
 

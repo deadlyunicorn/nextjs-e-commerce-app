@@ -1,4 +1,3 @@
-import {commerce} from "@/app/(lib)/api/commerce"
 import { Suspense } from "react";
 import Store_Front, { Store_Front_Fallback } from "./(lib)/components/homepage/store_front";
 import { ProductCollection } from "@chec/commerce.js/features/products";
