@@ -2,7 +2,8 @@ import './globals.css'
 import Footer from '@/app/(lib)/components/footer'
 import Header from '@/app/(lib)/components/header'
 import Categories from './(lib)/components/homepage/categories'
-import CartComponent from './(lib)/context/cart'
+import CartComponent from './(lib)/api/Cart'
+import CookiesElement from './(lib)/api/Cookies'
 
 
 export const metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout(
 
           <Header/>
           <CartComponent/>
+          <CookiesElement/>
         
           {children}
           <section id='categories'>

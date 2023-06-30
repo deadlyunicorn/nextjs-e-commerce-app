@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 const getCart = async()=>{
     const url = new URL(
         "https://api.chec.io/v1/carts"
@@ -21,10 +22,16 @@ const getCart = async()=>{
     return res.json();
 }
 
+
+
+
 const CartComponent = async() =>{
 
-    
+    console.log(cookies());
     const cart = await getCart();
+
+
+
 
 
     return (
