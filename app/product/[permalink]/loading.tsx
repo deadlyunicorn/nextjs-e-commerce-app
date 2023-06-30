@@ -16,6 +16,8 @@ export default function ProductLoader(){
             </main>
 
             <aside className="
+                rounded-md
+                blur-md
                 flex gap-x-5 mt-10 
                 overflow-x-scroll">
 
