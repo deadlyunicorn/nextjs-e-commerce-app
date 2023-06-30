@@ -8,8 +8,7 @@ export default function ProductLoader(){
         <main 
             className="
             flex flex-wrap 
-            justify-evenly 
-            border-4 border-red-700">
+            justify-evenly">
             
                 <ProductFallback/>
               
@@ -18,8 +17,7 @@ export default function ProductLoader(){
 
             <aside className="
                 flex gap-x-5 mt-10 
-                overflow-x-scroll 
-                border-4 border-red-700">
+                overflow-x-scroll">
 
                 <Recommendation_Fallback/>
 
