@@ -16,7 +16,7 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
             className="
             flex flex-wrap 
             justify-evenly 
-            border-4 border-red-700">
+            border border-red-700">
             
                 <Suspense fallback={<ProductFallback/>}>
                     <ProductInfo listing={listing}/>
@@ -50,10 +50,7 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
 const ProductInfo = ({listing}:{listing:Product}) => (
     <>
         <div 
-                // dangerous css?
                 className=" 
-                max-w-[200px] 
-                min-w-[300px] 
                 flex flex-wrap
                 justify-center
                 ">
@@ -61,13 +58,21 @@ const ProductInfo = ({listing}:{listing:Product}) => (
             <Link 
                 href={`/product/${listing.permalink}`}>
 
-                <figure>
+                <figure
+                    className="
+                        flex 
+                        flex-col 
+                        items-center"
+                    >
                     <Image 
                     src={listing.image?listing.image["url"]:"/image.png"} 
                     alt={listing.name}  height={300} width={300}
                     placeholder="blur"
                     blurDataURL="/image.png"
-                    className="rounded-md h-[300px] peer" />
+                    className="
+                        rounded-md aspect-square 
+                        peer 
+                        max-w-[100%]" />
 
                     <figcaption className="
                         my-4 min-h-[50px]
@@ -129,11 +134,11 @@ const ProductInfo = ({listing}:{listing:Product}) => (
                     peer-hover:from-red-300 peer-hover:to-yellow-200
                     bg-clip-text text-transparent">
 
-                    {listing.price["formatted_with_symbol"]}
+                    {listing.price["formatted_with_symbol"]} 
 
 
                     <span className="text-xs">
-                        &nbsp;(χωρίς ΦΠΑ)
+                        (χωρίς&nbsp;ΦΠΑ)
                     </span>
 
                 </div>
@@ -151,11 +156,8 @@ export const ProductFallback = () => (
         <div 
             // dangerous css?
             className=" 
-            max-w-[200px] 
-            min-w-[300px] 
-            flex flex-wrap
-            justify-center
-            ">
+            product-list-div
+        ">
 
 
             
@@ -165,7 +167,7 @@ export const ProductFallback = () => (
                         loading-300
                         bg-gradient-to-r
                         from-slate-200  to-transparent
-                        h-[300px] w-[300px]"/>
+                        h-[300px] aspect-square"/>
                     
                     
                      <div className="
