@@ -5,7 +5,7 @@ export default function Header(){
 
     return (
 
-        <header>
+        <header className="flex flex-col">
 
             <span className="
                 text-4xl
@@ -18,6 +18,7 @@ export default function Header(){
             </span>
 
             {/* <CartElement/> */}
+            <br/>
             <Link href={'/'}>Homepage</Link>
 
             <div className="
