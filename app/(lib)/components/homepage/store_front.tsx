@@ -6,14 +6,14 @@ import "@/app/(lib)/styles/mock.scss"
 
 
 const Store_Front = ({item} : {item:Product}) => (
-    <div className="w-[200px] ">
+    <div className="sm:min-w-[200px]  max-w-[40vw]">
 
                 <Link href={`/product/${item.permalink}`}>
                 <Image src={item.image?item.image["url"]:"/image.png"} 
                 placeholder="blur"
                 blurDataURL="/image.png"
                 alt={item.name}  height={200} width={200}
-                className="rounded-md h-[200px]"/>
+                className="rounded-md aspect-square"/>
                 
                   <p className="my-4 h-[50px] text-xl text-white font-light">
                     {item.name} 
@@ -21,14 +21,15 @@ const Store_Front = ({item} : {item:Product}) => (
                 </Link>
 
                 <div className="
-                    text-2xl
                      bg-gradient-to-r 
                      from-red-400 to-yellow-300
                      hover:from-red-300 hover:to-yellow-200
-                     bg-clip-text text-transparent ">
+                     bg-clip-text text-transparent
+                     price-tag-multiple
+                     ">
 
-                      {item.price["formatted_with_symbol"]} 
-                      <span className="text-xs">&nbsp;(χωρίς ΦΠΑ)</span>
+                      <span>{item.price["formatted_with_symbol"]}</span>
+                      <span className="text-xs"> (χωρίς&nbsp;ΦΠΑ)</span>
 
                   </div>
 
@@ -84,7 +85,8 @@ export const Store_Front_Fallback = () => {
                              bg-clip-text text-transparent 
                              backdrop-blur-sm blur-sm">
                             For a great price
-                            <span className="text-xs">&nbsp;(χωρίς ΦΠΑ)</span>
+                            <span className="text-xs"> (χωρίς&nbsp;ΦΠΑ)</span>
+                            
                     </div>
                 </div>
                 
