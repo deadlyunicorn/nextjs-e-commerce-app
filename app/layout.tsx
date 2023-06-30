@@ -17,9 +17,15 @@ export default function RootLayout(
   return (
     <html lang="en">
 
-      <body className="bg-stone-900  flex flex-col items-center mt-5 ">
+      <body className="
+        bg-stone-900
+        flex flex-col
+        items-center mt-5">
         
-        <div className='xl:max-w-4xl text-center md:max-w-xl'>
+        <div className='
+          xl:max-w-4xl 
+          text-center xs:px-5
+          max-w-[100%]'>
 
           <Header/>
         
