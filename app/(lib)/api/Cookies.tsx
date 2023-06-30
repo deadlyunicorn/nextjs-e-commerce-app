@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { getCart } from "./Cart";
 
 export default async function CookiesElement(){
 
@@ -10,13 +11,11 @@ export default async function CookiesElement(){
 
 
     // cookieStore.set('cart_id',cart_id);
-    cookies().set('test_cookie',"123123");
-    console.log('success!!!')
-    console.log('success!!!')
-    console.log('success!!!')
+    cookies().set('test_cookie',`${JSON.stringify(cart_id)}`);
 
 }
-
+const cart = await getCart();
+console.log(cart.id);
 
     return(
         <div>
@@ -25,7 +24,7 @@ export default async function CookiesElement(){
             )}
 
             <form action={setCookie}>
-                <button type="submit">
+                <button type="submit" value={cart.id}>
                     setCookie
                 </button>
             </form>

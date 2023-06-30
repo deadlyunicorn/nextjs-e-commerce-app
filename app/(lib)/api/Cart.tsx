@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-const getCart = async()=>{
+export const getCart = async()=>{
     const url = new URL(
         "https://api.chec.io/v1/carts"
     )
@@ -36,7 +36,7 @@ const CartComponent = async() =>{
 
     return (
         <>
-            <div>
+            <div className="text-white"> 
                 Your cart is {JSON.stringify(cart.id)}
             </div>
         </>
