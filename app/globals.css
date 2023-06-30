@@ -44,13 +44,6 @@ main{
    
 }
 
-@media (min-width: 410px) {
-    .price-tag-multiple {
-        align-items: flex-end;
-        flex-direction: row;
-    }
-}
-
 .loading-300{
     background-repeat: no-repeat;
     animation: loader-300 3s infinite;
