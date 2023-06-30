@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode, useState } from "react";
-import { Cart } from "../api/commerce";
+// import { Cart } from "../api/commerce";
 
 export const AddToCart=({item: item_id}:{item:string})=>{
     
@@ -25,7 +25,7 @@ export const AddToCart=({item: item_id}:{item:string})=>{
     }
 
     const handle_CartButton=async()=>{
-        await Cart.add(item_id, quantity)
+        // await Cart.add(item_id, quantity)
 
     }
 

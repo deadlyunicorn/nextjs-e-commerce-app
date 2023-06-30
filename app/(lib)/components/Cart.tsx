@@ -1,10 +1,8 @@
-"use client"
-
-import { Cart, commerce } from "../api/commerce";
+import { commerce } from "../api/commerce";
 
 export default async function CartElement(){
 
-    const cart = await Cart.retrieve();
+    const cart = await commerce.cart.retrieve();
 
     console.log("Your cart is:"+cart.id);
 
