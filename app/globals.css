@@ -23,8 +23,32 @@ main{
 
 @media (min-width: 410px) {
     .product-list-div{
-            gap: 5rem/* 80px */;
+            gap: 2rem;
         }
+}
+@media (min-width: 1280px) {
+    .product-list-div{
+            gap: 5rem;
+        }
+}
+
+.price-tag-multiple{
+    font-size: 1.5rem/* 24px */;
+    line-height: 2rem/* 32px */;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0.5rem/* 8px */;
+    flex-direction: column;
+   
+}
+
+@media (min-width: 410px) {
+    .price-tag-multiple {
+        align-items: flex-end;
+        flex-direction: row;
+    }
 }
 
 .loading-300{
