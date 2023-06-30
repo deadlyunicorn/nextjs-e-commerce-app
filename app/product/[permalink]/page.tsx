@@ -1,10 +1,14 @@
 import { commerce } from "@/app/(lib)/api/commerce";
+import { fetchItems } from "@/app/(lib)/api/items";
 import ProductPage from "@/app/(lib)/components/product/product-page";
 
 const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
 
-    const items = await commerce.products.list()
-    .then(result=> result.data);
+    const limit = 20;
+
+    const items = await fetchItems({
+        "limit":`${limit}`
+    });
 
     const listing = items.filter(item=>item.permalink==permalink)[0]
     
@@ -13,12 +17,11 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
         const categories = listing.categories
         .map( object=> object.slug );
 
-    
-        const similar = await commerce.products.list({
-            category_slug: categories,
-            limit:20
-        })
-        .then(data=>(data.data))
+        const similar = await fetchItems({
+            "category_slug":`${categories}`,
+            "limit":`${limit}`,
+        });
+
 
 
         return (

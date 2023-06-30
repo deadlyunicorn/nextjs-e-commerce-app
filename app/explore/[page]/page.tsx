@@ -2,24 +2,25 @@ import {commerce} from "@/app/(lib)/api/commerce"
 import { Suspense } from "react";
 import Store_Front, { Store_Front_Fallback } from "@/app/(lib)/components/homepage/store_front";
 import NextPage from "@/app/(lib)/components/browsing/nextPage";
+import { fetchItems } from "@/app/(lib)/api/items";
 
 export default async function Explore({params:{page}}:{params:{page:number}}) {
 
 
-    const limit = 20; 
+    const limit = 1; 
 
 
-    const items = await commerce.products.list({
-        limit:limit,
-        page:page
+    const items = await fetchItems({
+        "limit":`${limit}`,
+        "page":`${Number(page)}`
+
+    });
+
+    const nextPageExists = await fetchItems({
+        "limit":`${limit}`,
+        "page":`${Number(page)+1}`
     })
-    .then(result=> result.data)
-
-    const nextPageExists = await commerce.products.list({
-        limit:limit,
-        page:Number(page)+1
-    })
-    .then(result=> result.data != undefined);
+    .then(result=> result != undefined);
 
     
     if (items){

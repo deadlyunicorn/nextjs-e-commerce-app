@@ -2,24 +2,27 @@ import {commerce} from "@/app/(lib)/api/commerce"
 import { Suspense } from "react";
 import Store_Front, { Store_Front_Fallback } from "@/app/(lib)/components/homepage/store_front";
 import NextPage from "@/app/(lib)/components/browsing/nextPage";
+import { fetchItems } from "@/app/(lib)/api/items";
 
 export default async function CategoryProducts({params:{slug,page},params}:{params:{slug:string,page:number}}) {
 
     const limit = 20; 
 
-    const items = await commerce.products.list({
-        category_slug:slug,
-        limit:limit,
-        page:page,
-    })
-    .then(result=> result.data);
+    const items = await fetchItems({
+        "category_slug":`${slug}`,
+        "limit":`${limit}`,
+        "page":`${Number(page)}`
 
-    const nextPageExists= await commerce.products.list({
-        category_slug:slug,
-        limit:limit,
-        page:Number(page)+1,
+    });
+
+
+    const nextPageExists = await fetchItems({
+        "category_slug":`${slug}`,
+        "limit":`${limit}`,
+        "page":`${Number(page)+1}`
     })
-    .then(result=> result.data != null);
+    .then(result=> result != undefined);
+ 
 
     if (items){
 
