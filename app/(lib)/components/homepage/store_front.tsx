@@ -1,7 +1,7 @@
 import { Product } from "@chec/commerce.js/types/product"
 import Link from "next/link"
 import Image from "next/image"
-import { AddToCart } from "@/app/(lib)/components/add_Cart"
+import { AddToCart } from "@/app/(lib)/components/cart/add_Cart"
 import "@/app/(lib)/styles/mock.scss"
 import PriceTag from "../product/priceTag"
 

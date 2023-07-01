@@ -1,7 +1,7 @@
 import { Product } from "@chec/commerce.js/types/product";
 import Image from "next/image";
 import Link from "next/link";
-import { AddToCart } from "@/app/(lib)/components/add_Cart";
+import { AddToCart } from "@/app/(lib)/components/cart/add_Cart";
 import { Recommendation, Recommendation_Fallback } from "@/app/(lib)/components/product/recommendations";
 import { Suspense } from "react";
 import { ProductCollection } from "@chec/commerce.js/features/products";
