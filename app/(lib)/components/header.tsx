@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CartComponent from "./cart/Cart";
 
 export default function Header(){
 
@@ -22,10 +23,14 @@ export default function Header(){
 
             <div className="
                 h-[100px] 
-                items-center justify-center 
-                flex text-white
+                items-center 
+                flex justify-between 
+                text-white
             ">
                 Empty box
+
+                <CartComponent/>
+
             </div>
 
         </header>
