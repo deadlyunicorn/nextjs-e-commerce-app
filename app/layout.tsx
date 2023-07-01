@@ -2,8 +2,7 @@ import './globals.css'
 import Footer from '@/app/(lib)/components/footer'
 import Header from '@/app/(lib)/components/header'
 import Categories from './(lib)/components/homepage/categories'
-import CartComponent from './(lib)/components/Cart'
-import CookiesElement from './(lib)/components/Cookies'
+import CookiesElement from './(lib)/components/cart/Cookies'
 
 
 export const metadata = {
@@ -23,7 +22,7 @@ export default function RootLayout(
         bg-stone-900
         flex flex-col
         items-center mt-5">
-        
+
         <div className='
           xl:max-w-4xl 
           md:max-w-3xl
@@ -31,7 +30,6 @@ export default function RootLayout(
           max-w-[100%]'>
 
           <Header/>
-          <CartComponent/>
           <CookiesElement/>
         
           {children}
