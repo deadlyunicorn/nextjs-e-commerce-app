@@ -43,8 +43,7 @@ export const getCart = async () =>{
     const res = await fetch(url, {
         method: "GET",
         headers: headers,
-        next: {revalidate: 60 * 60 * 24 * 10}
-
+        cache: 'no-store'
     })
 
     if (!res.ok) {
