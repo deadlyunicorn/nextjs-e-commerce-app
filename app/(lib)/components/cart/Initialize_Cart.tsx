@@ -2,16 +2,14 @@
 
 
 import { useEffect, useState, useTransition } from "react"
-import {  deleteCookie, getCartCookie, getCookies, setCookie } from "./Cookies"
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-import { Cart } from "@chec/commerce.js/types/cart";
+import {  deleteCookie, getCartCookie, getCookies, setCookie } from "../../api/cookies"
 import { getCart } from "../../api/cart";
 
-export const NewForm = () => {
+//No async() on client components..
+export const CookieVerify = () => {
 
     const [cart,setCart] = useState<undefined|string> (undefined);
 
-    let [isPending, startTransition] = useTransition();
     //need this to set the cookie.
     //check those:
 
@@ -29,25 +27,29 @@ export const NewForm = () => {
     useEffect(()=>{
 
         (async()=>{
+
+
             const cartCookieArray = [...await getCookies()]
-            .filter(cookie=>cookie.name=="cart_id")
+            .filter(cookie=>{
+                if(cookie.name=="cart_id"){
+                    setCart(cookie.value);
+                    return true;
+                }})
 
             //get the value => cartCookieArray[0].value
             // await deleteCookie("cart_id");
 
-            const tempCart = await getCart().then(
-                cart=>cart.id
-            )
-
-
             if (cartCookieArray.length == 0){
-                cartCookieArray.length
-                await setCookie(tempCart);
+                
+                await getCart().then(
+                    async(cart)=>{
+                        await setCookie(cart.id)
+                    }
+                )
+                
             }
+            
 
-            if (!cart){
-                setCart(await getCartCookie());
-            }
         })()
 
     },[cart])
