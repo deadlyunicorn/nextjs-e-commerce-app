@@ -2,7 +2,7 @@ import './globals.css'
 import Footer from '@/app/(lib)/components/footer'
 import Header from '@/app/(lib)/components/header'
 import Categories from './(lib)/components/homepage/categories'
-import CookiesElement from './(lib)/components/cart/Cookies'
+import { CookieVerify } from './(lib)/components/cart/Initialize_Cart'
 
 
 export const metadata = {
@@ -30,7 +30,7 @@ export default function RootLayout(
           max-w-[100%]'>
 
           <Header/>
-          <CookiesElement/>
+          <CookieVerify/>
         
           {children}
           <section id='categories'>
