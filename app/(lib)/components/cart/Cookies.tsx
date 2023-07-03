@@ -32,7 +32,13 @@ export default async function CookiesElement() {
 export const setCookie = async (cart_id: string) => {
     'use server'
     // cookieStore.set('cart_id',cart_id);
-    cookies().set('cart_id', cart_id, { path: "/" });
+    cookies().set(
+    { 
+        name:'cart_id',
+        value: cart_id,
+        maxAge: 60 * 60 * 24 * 30,
+        path: "/" 
+    });
 
 }
 

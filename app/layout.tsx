@@ -4,7 +4,6 @@ import Header from '@/app/(lib)/components/header'
 import Categories from './(lib)/components/homepage/categories'
 import CookiesElement from './(lib)/components/cart/Cookies'
 
-export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'My Webstore',

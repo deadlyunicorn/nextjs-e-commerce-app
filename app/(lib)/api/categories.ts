@@ -14,6 +14,7 @@ export const fetchCategories = async () => {
     const res = await fetch(url, {
         method: "GET",
         headers: headers,
+        next: {revalidate: 60 * 60 * 24 * 3}
     })
 
     if (!res.ok) {

@@ -25,6 +25,7 @@ export const fetchItems = async (params: { [key: string]: string }): Promise<Pro
   const res = await fetch(url, {
     method: "GET",
     headers: headers,
+    next: {revalidate: 60 * 3}
   })
 
   if (!res.ok) {
