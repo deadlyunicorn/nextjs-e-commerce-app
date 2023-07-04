@@ -10,6 +10,7 @@ const CartComponent = async () => {
         <>
             <div className="text-white">
                 You have {cart.total_items||0} items in cart.
+                {/* Added: show 0 when cart hasn't loaded yet */}
             </div>
         </>
     )
