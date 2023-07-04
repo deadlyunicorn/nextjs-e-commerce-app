@@ -3,6 +3,7 @@ import Footer from '@/app/(lib)/components/footer'
 import Header from '@/app/(lib)/components/header'
 import Categories from './(lib)/components/homepage/categories'
 import { CookieVerify } from './(lib)/components/cart/Initialize_Cart'
+import CartProvider from './(lib)/components/redux/Provider'
 
 
 export const metadata = {
@@ -29,16 +30,22 @@ export default function RootLayout(
           text-center xs:px-5
           max-w-[100%]'>
 
-          <Header/>
-          <CookieVerify/>
-        
-          {children}
-          <section id='categories'>
+            <CartProvider>
+              <Header/>
+            
+              <CookieVerify/>
+            
+              {children}
 
-            <Categories/>
-          </section>
+            </CartProvider>
 
-          <Footer/>
+
+            <section id='categories'>
+
+              <Categories/>
+            </section>
+
+            <Footer/>
         
         </div>
     
