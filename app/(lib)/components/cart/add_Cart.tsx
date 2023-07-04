@@ -1,11 +1,18 @@
 'use client'
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useTransition } from "react";
+import { addCart } from "../../api/cart";
+import { useRouter } from "next/navigation";
 
-export const AddToCart = ({ price: price }: { price: number }) => {
+export const AddToCart = ({ price, item_id }: { price: number,item_id : string }) => {
 
+    const [pending, startTransition] = useTransition();
+    //Used for loading when submitting. I tried using useFormStatus() instead ? It didn't work tho. 
     const [quantity, setQuantity] = useState(1);
     const arr10 = [...Array(10).keys()];
+    
+    const router = useRouter();
+    //used to refresh the page after adding to cart.
 
 
 
@@ -23,9 +30,13 @@ export const AddToCart = ({ price: price }: { price: number }) => {
         }
     }
 
-    const handle_CartButton = async () => {
-        // await Cart.add(item_id, quantity)
-
+    const handle_CartButton = async(item_id:string,quantity:string) => {
+                    startTransition(async()=>{
+                        //For the loading effect
+                        await addCart(item_id, quantity)
+                        .then(()=>{router.refresh()})
+                    })
+                    
     }
 
     const QuantityButton = ({ children }: { children: ReactNode }) => {
@@ -116,17 +127,24 @@ export const AddToCart = ({ price: price }: { price: number }) => {
 
 
             {/* peer should be before sibling */}
-
             <button
-                onClick={handle_CartButton}
+                onClick={async()=>{
+                    await handle_CartButton(item_id,JSON.stringify(quantity))
+                }}
+                // form is not needed.
+                disabled={pending}
+                type="submit"
                 className="
                 text-black
                 w-full min-h-[10mm] 
                 px-2
                 bg-slate-300 rounded-md ">
-                ADD TO <b className="font-bold">CART</b>
-            </button>
 
+                {pending 
+                ?"Adding to cart..."
+                :<>ADD TO <b className="font-bold">CART</b></>
+                }
+            </button>
         </>
     )
 
