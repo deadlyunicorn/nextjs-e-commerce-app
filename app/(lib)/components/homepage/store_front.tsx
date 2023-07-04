@@ -28,7 +28,8 @@ const Store_Front = ({item} : {item:Product}) => (
                 </PriceTag>
                 </div>
 
-                <AddToCart price={item.price.raw}/>
+                <AddToCart item_id={item.id} price={item.price.raw} />
+
                   
               </div>
 )

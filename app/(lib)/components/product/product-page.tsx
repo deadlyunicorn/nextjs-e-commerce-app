@@ -125,7 +125,7 @@ const ProductInfo = ({listing}:{listing:Product}) => (
                 <div className="
                     gap-y-5
                     flex flex-col">
-                    <AddToCart price={listing.price.raw} />
+                    <AddToCart item_id={listing.id} price={listing.price.raw} />
                 </div>
 
                 <PriceTag>
