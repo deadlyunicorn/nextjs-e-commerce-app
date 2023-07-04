@@ -9,7 +9,7 @@ const CartComponent = async () => {
     return (
         <>
             <div className="text-white">
-                Your cart is {JSON.stringify(cart.id)}
+                You have {cart.total_items} items in cart.
             </div>
         </>
     )
