@@ -29,28 +29,38 @@ export const createCart = async () : Promise<Cart> => {
 }
 
 export const getCart = async () =>{
-    const url = new URL(
-        `https://api.chec.io/v1/carts/${await getCartCookie()}`
-    )
+    try{
+        const cartCookie = await getCartCookie();
+        if ( cartCookie == null ){
+            throw new Error('No cookie');
+        }
 
-    const headers = {
-        "X-Authorization": `${process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY}`,
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
-    };
+        const url = new URL(
+            `https://api.chec.io/v1/carts/${cartCookie}`
+        )
 
-    const res = await fetch(url, {
-        method: "GET",
-        headers: headers,
-        next: {revalidate:0}
-    })
+        const headers = {
+            "X-Authorization": `${process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY}`,
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        };
 
-    if (!res.ok) {
-        throw new Error(`Fetch failed`);
+        const res = await fetch(url, {
+            method: "GET",
+            headers: headers,
+            next: {revalidate:0}
+        })
+
+        if (!res.ok) {
+            throw new Error(`Fetch failed`);
+        }
+
+        return res.json();
     }
-
-    return res.json();
+    catch(error){
+        return 0;
+    }
 
 }
 
