@@ -9,7 +9,7 @@ const CartComponent = async () => {
     return (
         <>
             <div className="text-white">
-                You have {cart.total_items} items in cart.
+                You have {cart.total_items||0} items in cart.
             </div>
         </>
     )
