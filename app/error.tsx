@@ -11,6 +11,11 @@ export default function Error () {
             </h1>
             <button onClick={()=>{
                 router.replace("/");
+                //we may also need to trigger a refresh..
+                //but not on the current path.
+                //Link might be okay?
+                //idk i think i had an error..
+
             }}>
                 Reload
             </button>
