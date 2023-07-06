@@ -16,7 +16,7 @@ const Store_Front = ({item} : {item:Product}) => (
                 alt={item.name}  height={200} width={200}
                 className="rounded-md aspect-square"/>
                 
-                  <p className="my-4 h-[50px] text-xl text-white font-light">
+                  <p className="my-4 h-[80px] text-xl text-white font-light break-words">
                     {item.name} 
                   </p>
                 </Link>
