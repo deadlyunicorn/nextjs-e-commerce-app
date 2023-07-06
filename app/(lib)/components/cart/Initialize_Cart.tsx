@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 //No async() on client components..!!!
 export const CookieVerify = () => {
 
+    //I might not need Redux in the end...
     const cart = useSelector((state:RootState)=> state.cart.value);
     const dispatch = useDispatch();
     const router = useRouter();
