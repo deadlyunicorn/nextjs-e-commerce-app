@@ -25,3 +25,28 @@
         transform: translateY(0px);
     }
 }
+
+.disappear{
+    animation: disappear-animation;
+    animation-duration: 5s;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    opacity: 0%;
+}
+
+@keyframes disappear-animation {
+    0%{
+        display: block;
+        opacity: 0%;
+    }
+    50%{
+        display: block;
+        opacity: 100%;
+    }
+    99%{
+        opacity: 0%;
+    }
+    100%{
+        display: none;
+    }
+}

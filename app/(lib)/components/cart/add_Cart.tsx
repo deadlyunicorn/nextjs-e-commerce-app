@@ -1,8 +1,9 @@
 'use client'
 
-import { ReactNode, useState, useTransition } from "react";
+import { ReactNode, useEffect, useState, useTransition } from "react";
 import { addCart } from "../../api/cart";
 import { useRouter } from "next/navigation";
+import "@/app/(lib)/styles/animations.scss"
 
 export const AddToCart = ({ price, item_id }: { price: number,item_id : string }) => {
 
@@ -13,6 +14,10 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
     
     const router = useRouter();
     //used to refresh the page after adding to cart.
+    const [success,setSuccess] = useState(false);
+    const [failure,setFailure] = useState(false);
+    const [error,setError] = useState (' ');
+
 
 
 
@@ -30,11 +35,28 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
         }
     }
 
-    const handle_CartButton = async(item_id:string,quantity:string) => {
+    const handle_CartButton = (item_id:string,quantity:string) => {
                     startTransition(async()=>{
                         //For the loading effect
-                        await addCart(item_id, quantity)
-                        .then(()=>{router.refresh()})
+                        try{
+                            await addCart(item_id, quantity);
+                            router.refresh();
+                            setSuccess(true);
+                            setQuantity(1);
+                            setTimeout(()=>{
+                                setSuccess(false);
+                            },5000)
+                        }
+                        catch(error){
+                            router.refresh();
+                            setError(JSON.stringify(error));
+                            setFailure(true);
+                            setQuantity(1);
+                            setTimeout(()=>{
+                                setFailure(false);
+                            },5000)
+                        }
+                        
                     })
                     
     }
@@ -78,6 +100,11 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
     return (
 
         <>
+            {success&&
+            <Cart_Success/>}
+
+            {failure&&
+            <Cart_Failure error={error}/>} 
             <div className="
         pt-2
         text-lg
@@ -149,3 +176,40 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
     )
 
 }  
+
+
+const Cart_Success = () => {
+
+    return (
+        <CasualSpan>
+            <div className="bg-blue-200">
+                Successfully added to cart
+            </div>
+        </CasualSpan>
+    )
+}
+
+const Cart_Failure = ({error}:{error:string}) => {
+
+    return (
+        <CasualSpan>
+            <div className="bg-red-200">
+                Failed: {error}
+            </div>
+        </CasualSpan>
+        
+    )
+}
+
+const CasualSpan = ({children}:{children:ReactNode}) => (
+
+    <div className="relative">
+        <div className="
+            absolute w-full
+            -translate-y-20
+            text-black
+            disappear"> 
+            {children}
+        </div>
+    </div>
+)
