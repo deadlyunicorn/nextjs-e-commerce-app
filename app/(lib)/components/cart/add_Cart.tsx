@@ -99,7 +99,7 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
     }
     return (
 
-        <>
+        <div className="relative">
             {success&&
             <Cart_Success/>}
 
@@ -172,7 +172,7 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
                 :<>ADD TO <b className="font-bold">CART</b></>
                 }
             </button>
-        </>
+        </div>
     )
 
 }  
@@ -203,7 +203,6 @@ const Cart_Failure = ({error}:{error:string}) => {
 
 const CasualSpan = ({children}:{children:ReactNode}) => (
 
-    <div className="relative">
         <div className="
             absolute w-full
             -translate-y-20
@@ -211,5 +210,4 @@ const CasualSpan = ({children}:{children:ReactNode}) => (
             disappear"> 
             {children}
         </div>
-    </div>
 )
