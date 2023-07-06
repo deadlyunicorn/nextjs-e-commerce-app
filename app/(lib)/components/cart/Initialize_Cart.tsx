@@ -1,5 +1,5 @@
 'use client'
-import { useEffect  } from "react"
+import { useEffect, useState  } from "react"
 import { getCookies, setCookie } from "../../api/cookies"
 import { createCart, getCart } from "../../api/cart";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,11 +11,10 @@ import { useRouter } from "next/navigation";
 //No async() on client components..!!!
 export const CookieVerify = () => {
 
-    //I might not need Redux in the end...
-    const cart = useSelector((state:RootState)=> state.cart.value);
-    const dispatch = useDispatch();
+
     const router = useRouter();
 
+    const [cart_id,setCart_id] = useState<undefined|string> (undefined);
     
     //check those:
     //https://nextjs.org/docs/app/api-reference/functions/cookies#cookiessetname-value-options
@@ -50,18 +49,18 @@ export const CookieVerify = () => {
                 
             }
             else{
-                dispatch(setCart( cartCookieArray[0].value ) )
+                setCart_id(cartCookieArray[0].value); 
             }
             
 
         })()
 
-    },[cart,dispatch,router])
+    },[cart_id,router])
 
 
     return(
           <>
-            {cart}
+            {cart_id}
           </>
     )
 }
