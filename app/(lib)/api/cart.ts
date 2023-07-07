@@ -19,6 +19,8 @@ export const createCart = async () : Promise<Cart> => {
     const res = await fetch(url, {
         method: "GET",
         headers: headers,
+        next: {revalidate:0}
+
     })
 
     if (!res.ok) {
@@ -86,6 +88,7 @@ export const addCart = async (id:string,quantity:string) =>{
     const res = await fetch(url, {
         method: "POST",
         headers: headers,
+        next: {revalidate:0},
         body: JSON.stringify(body)
     })
 
@@ -120,6 +123,7 @@ export const updateCart = async (cart_id:string,quantity:string,item_id:string) 
     const res = await fetch(url, {
         method: "PUT",
         headers: headers,
+        next: {revalidate:0},
         body: JSON.stringify(body)
     })
 
