@@ -28,7 +28,7 @@ export const createCart = async () : Promise<Cart> => {
     return res.json();
 }
 
-export const getCart = async () =>{
+export const getCart = async():Promise<Cart|null> =>{
     try{
         const cartCookie = await getCartCookie();
         if ( cartCookie == null ){
@@ -58,9 +58,10 @@ export const getCart = async () =>{
 
         return res.json();
     }
-    catch(error){
-        return 0;
-    }
+   catch (error){
+        console.error(error);
+        return null;
+   }
 
 }
 
@@ -88,11 +89,45 @@ export const addCart = async (id:string,quantity:string) =>{
         body: JSON.stringify(body)
     })
 
-    console.log(JSON.stringify(body))
 
     if (!res.ok) {
         throw new Error(`Fetch failed ${res.status}`);
     }
+
+    return res.json();
+
+}
+
+
+export const updateCart = async (cart_id:string,quantity:string,item_id:string) =>{
+    "use server"
+    const url = new URL(
+        `https://api.chec.io/v1/carts/${cart_id}/items/${item_id}`
+    )
+
+    const headers = {
+        "X-Authorization": `${process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY}`,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+    };
+
+    const body = {
+        line_item_id: item_id,
+        quantity: quantity,
+    }
+
+    const res = await fetch(url, {
+        method: "PUT",
+        headers: headers,
+        body: JSON.stringify(body)
+    })
+
+
+    if (!res.ok) {
+        throw new Error(`Fetch failed ${res.status}`);
+    }
+
 
     return res.json();
 
