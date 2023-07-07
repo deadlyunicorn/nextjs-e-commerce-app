@@ -38,7 +38,7 @@ export default function Error ({error}:{error:ErrorType}) {
                 bg-blue-600 rounded-md px-1"
                 onClick={()=>{
                     router.replace("/");
-                    // router.refresh();
+                    router.refresh();
                     //we may also need to trigger a refresh..
                     //but not on the current path.
                     //Link might be okay?
