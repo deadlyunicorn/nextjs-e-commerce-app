@@ -28,7 +28,7 @@ export const createCart = async () : Promise<Cart> => {
     return res.json();
 }
 
-export const getCart = async():Promise<Cart|null> =>{
+export const getCart = async():Promise<Cart|undefined> =>{
     try{
         const cartCookie = await getCartCookie();
         if ( cartCookie == null ){
@@ -60,7 +60,7 @@ export const getCart = async():Promise<Cart|null> =>{
     }
    catch (error){
         console.error(error);
-        return null;
+        return undefined;
    }
 
 }
