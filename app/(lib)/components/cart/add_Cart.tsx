@@ -40,17 +40,17 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
                         //For the loading effect
                         try{
                             await addCart(item_id, quantity);
-                            router.refresh();
                             setSuccess(true);
+                            router.refresh();
                             setQuantity(1);
                             setTimeout(()=>{
                                 setSuccess(false);
                             },5000)
                         }
                         catch(error){
+                            setFailure(true);
                             router.refresh();
                             setError(JSON.stringify(error));
-                            setFailure(true);
                             setQuantity(1);
                             setTimeout(()=>{
                                 setFailure(false);
@@ -178,18 +178,18 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
 }  
 
 
-const Cart_Success = () => {
+export const Cart_Success = () => {
 
     return (
         <CasualSpan>
             <div className="bg-blue-200">
-                Successfully added to cart
+                Successfully updated cart
             </div>
         </CasualSpan>
     )
 }
 
-const Cart_Failure = ({error}:{error:string}) => {
+export const Cart_Failure = ({error}:{error:string}) => {
 
     return (
         <CasualSpan>
