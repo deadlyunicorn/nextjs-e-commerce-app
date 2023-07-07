@@ -36,11 +36,11 @@ const CartPage = async() => {
                         Cart Total: 
                         <span 
                             className="bg-slate-400 px-1 rounded-md">
-                            {cart.subtotal.formatted_with_symbol}
+                            {cart?.subtotal.formatted_with_symbol}
                         </span>
                     </span>
                     <div className="py-2">
-                        <Checkout url={cart.hosted_checkout_url}/>
+                        <Checkout url={cart!.hosted_checkout_url}/>
                     </div>
                 </div>
             </div>
