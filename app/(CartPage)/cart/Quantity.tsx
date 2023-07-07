@@ -61,7 +61,6 @@ const QuantityBox = ({item}:{item:LineItem}) => {
                                 try{
                                     await updateCart(cart_id!,e.target.value,item.id);
                                     setSuccess(true);
-                                    router.refresh();
                                     setTimeout(()=>{
                                         setSuccess(false);
                                     },10000)
@@ -69,11 +68,13 @@ const QuantityBox = ({item}:{item:LineItem}) => {
                                  }
                                  catch(error){
                                     setFailure(true);
-                                    router.refresh();
                                     setError(JSON.stringify(error));
                                     setTimeout(()=>{
                                         setFailure(false);
                                     },10000)
+                                }
+                                finally{
+                                    router.refresh();
                                 }
                     
                             })

@@ -41,7 +41,6 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
                         try{
                             await addCart(item_id, quantity);
                             setSuccess(true);
-                            router.refresh();
                             setQuantity(1);
                             setTimeout(()=>{
                                 setSuccess(false);
@@ -49,12 +48,14 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
                         }
                         catch(error){
                             setFailure(true);
-                            router.refresh();
                             setError(JSON.stringify(error));
                             setQuantity(1);
                             setTimeout(()=>{
                                 setFailure(false);
                             },5000)
+                        }
+                        finally{
+                            router.refresh();
                         }
                         
                     })
