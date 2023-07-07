@@ -5,13 +5,13 @@ import Link from "next/link";
 
 const CartComponent = async () => {
 
-    const cart:Cart = await getCart();
+    const cart:Cart|undefined = await getCart();
 
     return (
         <>
             <div className="text-white">
                 <Link href="/cart">
-                    You have {cart.total_items||0} items in cart.
+                    You have {cart?.total_items||0} items in cart.
                 </Link>
                 {/* Added: show 0 when cart hasn't loaded yet */}
             </div>
