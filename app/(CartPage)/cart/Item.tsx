@@ -1,14 +1,11 @@
 import Image from "next/image";
 import { LineItem } from "@chec/commerce.js/types/line-item";
 import Link from "next/link";
+import QuantityBox from "./Quantity";
 
 
 const CartItem = ({item}:{item:LineItem}) => {
 
-    const quantity = item.quantity;
-    let maxQuantity;
-    // if (quantity < 10 )
-    const mockArray = [...new Array(quantity+5)];
 
     return(
     <div 
@@ -64,15 +61,7 @@ const CartItem = ({item}:{item:LineItem}) => {
                 </div>
             </div>
 
-            <div>
-                <span>Quantity</span>
-                <select>
-                    {mockArray.map(
-                        option=>
-                        <option key={option}>{option}</option>
-                    )}    
-                </select> 
-            </div>
+            <QuantityBox item={item}/>
             
     </div>
     )
