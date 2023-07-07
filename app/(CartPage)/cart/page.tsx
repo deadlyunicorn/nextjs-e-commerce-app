@@ -5,9 +5,9 @@ import CartItem from "./Item";
 
 const CartPage = async() => {
 
-    const cart:Cart = await getCart();
+    const cart:Cart|undefined = await getCart();
 
-    const items = cart.line_items;
+    const items = cart?.line_items;
 
     
     return(
