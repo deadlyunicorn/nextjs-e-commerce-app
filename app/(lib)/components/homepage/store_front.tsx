@@ -4,10 +4,16 @@ import Image from "next/image"
 import { AddToCart } from "@/app/(lib)/components/cart/add_Cart"
 import "@/app/(lib)/styles/mock.scss"
 import PriceTag from "../product/priceTag"
+import { getCart } from "../../api/cart"
 
 
-const Store_Front = ({item} : {item:Product}) => (
-    <div className="sm:w-[200px]  max-w-[40vw]">
+const Store_Front = async({item} : {item:Product}) => {
+
+    const cart = await getCart();
+
+    return(
+
+        <div className="sm:w-[200px]  max-w-[40vw]">
 
                 <Link href={`/product/${item.permalink}`}>
                 <Image src={item.image?item.image["url"]:"/image.png"} 
@@ -28,11 +34,12 @@ const Store_Front = ({item} : {item:Product}) => (
                 </PriceTag>
                 </div>
 
-                <AddToCart item_id={item.id} price={item.price.raw} />
+                <AddToCart item_id={item.id} price={item.price.raw} cart={cart} />
 
                   
-              </div>
-)
+        </div>
+    )
+}
 
 export default Store_Front;
 

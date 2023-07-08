@@ -6,10 +6,9 @@ import { Recommendation, Recommendation_Fallback } from "@/app/(lib)/components/
 import { Suspense } from "react";
 import { ProductCollection } from "@chec/commerce.js/features/products";
 import PriceTag from "./priceTag";
+import { getCart } from "../../api/cart";
 
 const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollection["data"]}) =>{
-
-    const arr6 = [... new Array(6)];
 
     return(
     <>
@@ -48,8 +47,12 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
     )
 }
 
-const ProductInfo = ({listing}:{listing:Product}) => (
-    <>
+const ProductInfo = async({listing}:{listing:Product}) => {
+    const cart = await getCart();
+
+    return(
+
+        <>
         <div 
                 className=" 
                 flex flex-wrap
@@ -125,7 +128,7 @@ const ProductInfo = ({listing}:{listing:Product}) => (
                 <div className="
                     gap-y-5
                     flex flex-col">
-                    <AddToCart item_id={listing.id} price={listing.price.raw} />
+                    <AddToCart item_id={listing.id} price={listing.price.raw} cart={cart}/>
                 </div>
 
                 <PriceTag>
@@ -141,7 +144,8 @@ const ProductInfo = ({listing}:{listing:Product}) => (
         </div>
 
     </>
-)
+    )
+}
 
 export const ProductFallback = () => (
     <>
