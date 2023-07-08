@@ -56,39 +56,44 @@ export const AddToCart = ({ price, item_id, cart }: { price: number,item_id : st
     
 
     const handle_CartButton = (item_id:string,quantity:string) => {
-                    startTransition(async()=>{
-                        //For the loading effect
-                        try{
+        
+        startTransition(async()=>{
+            //For the loading effect
+            try{
 
-                            const item=cart?.line_items.filter((
-                                line_item=>(line_item.product_id==item_id)
-                            ))[0]
+                const item=cart?.line_items.filter((
+                    line_item=>(line_item.product_id==item_id)
+                ))[0]
 
-                            if (item){
-                                if ( (item.quantity+Number(quantity)>10)){
-                                    console.error("rofl")
-                                    throw (`Cart capacity for this item reached ${item.quantity+Number(quantity)}/10`)
-                                }
 
-                                else{
-                                    setNewQuantity((item.quantity+Number(quantity))+"")
-                                    await addCart(item_id, quantity);
-                                    setSuccess(true);
-                                    setQuantity(1);
-                                }
-                            }
-                        }
-                        catch(error){
-                            setFailure(true);
-                            setError(JSON.stringify(error+""));
-                            setQuantity(1);
-                        }
-                        finally{
-                            router.refresh();
+                let currentQuantity = 0;
+                if (item){
+                    currentQuantity = item.quantity;
+                }
 
-                        }
-                        
-                    })
+                if ( (currentQuantity+Number(quantity)>10)){
+                    console.error("rofl")
+                    throw (`Cart capacity for this item reached ${currentQuantity+Number(quantity)}/10`)
+                }
+
+                else{
+                    setNewQuantity((currentQuantity+Number(quantity))+"")
+                    await addCart(item_id, quantity);
+                    setSuccess(true);
+                    setQuantity(1);
+                }
+            }
+            catch(error){
+                setFailure(true);
+                setError(JSON.stringify(error+""));
+                setQuantity(1);
+            }
+            finally{
+                router.refresh();
+
+            }
+            
+        })
                     
     }
 
