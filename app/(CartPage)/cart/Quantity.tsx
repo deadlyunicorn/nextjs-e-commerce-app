@@ -31,6 +31,21 @@ const QuantityBox = ({item}:{item:LineItem}) => {
     const [failure,setFailure] = useState(false);
     const [error,setError] = useState (' ');
 
+    useEffect(()=>{
+
+        if (failure){
+            setTimeout(()=>{
+                setFailure(false);
+            },5000)
+        }
+        if (success){
+            setTimeout(()=>{
+                setSuccess(false);
+            },5000)
+        }
+
+    },[failure,success])
+
 
     
 
@@ -61,17 +76,10 @@ const QuantityBox = ({item}:{item:LineItem}) => {
                                 try{
                                     await updateCart(cart_id!,e.target.value,item.id);
                                     setSuccess(true);
-                                    setTimeout(()=>{
-                                        setSuccess(false);
-                                    },10000)
-                                    
                                  }
                                  catch(error){
                                     setFailure(true);
                                     setError(JSON.stringify(error));
-                                    setTimeout(()=>{
-                                        setFailure(false);
-                                    },10000)
                                 }
                                 finally{
                                     router.refresh();
