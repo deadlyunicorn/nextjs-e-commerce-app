@@ -80,7 +80,7 @@ const QuantityBox = ({item}:{item:LineItem}) => {
                             startTransition(async()=>{
                                 try{
                                     await updateCart(cart_id!,e.target.value,item.id);
-                                    setNewQuantity((quantity+Number(e.target.value))+"")
+                                    setNewQuantity((e.target.value)+"")
                                     setSuccess(true);
                                  }
                                  catch(error){
