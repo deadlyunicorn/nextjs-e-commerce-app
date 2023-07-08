@@ -18,22 +18,25 @@ export const AddToCart = ({ price, item_id, cart }: { price: number,item_id : st
     const [success,setSuccess] = useState(false);
     const [failure,setFailure] = useState(false);
     const [error,setError] = useState (' ');
+    const [newQuantity,setNewQuantity] = useState('');
 
 
     useEffect(()=>{
 
-        if (failure){
-            setTimeout(()=>{
-                setFailure(false);
-            },5000)
-        }
-        if (success){
-            setTimeout(()=>{
-                setSuccess(false);
-            },5000)
+        if (!pending){
+            if (failure){
+                setTimeout(()=>{
+                    setFailure(false);
+                },5000)
+            }
+            if (success){
+                setTimeout(()=>{
+                    setSuccess(false);
+                },5000)
+            }
         }
 
-    },[failure,success])
+    },[failure,success,pending])
 
 
 
@@ -61,15 +64,18 @@ export const AddToCart = ({ price, item_id, cart }: { price: number,item_id : st
                                 line_item=>(line_item.product_id==item_id)
                             ))[0]
 
-                            if (item && (item.quantity+Number(quantity)>10)){
-                                console.error("rofl")
-                                throw (`Cart capacity for this item reached ${item.quantity+Number(quantity)}/10`)
-                            }
+                            if (item){
+                                if ( (item.quantity+Number(quantity)>10)){
+                                    console.error("rofl")
+                                    throw (`Cart capacity for this item reached ${item.quantity+Number(quantity)}/10`)
+                                }
 
-                            else{
-                                await addCart(item_id, quantity);
-                                setSuccess(true);
-                                setQuantity(1);
+                                else{
+                                    setNewQuantity((item.quantity+Number(quantity))+"")
+                                    await addCart(item_id, quantity);
+                                    setSuccess(true);
+                                    setQuantity(1);
+                                }
                             }
                         }
                         catch(error){
@@ -126,7 +132,7 @@ export const AddToCart = ({ price, item_id, cart }: { price: number,item_id : st
 
         <div className="relative">
             {success&&
-            <Cart_Success/>}
+            <Cart_Success quantity={newQuantity}/>}
 
             {failure&&
             <Cart_Failure error={error}/>} 
@@ -203,12 +209,13 @@ export const AddToCart = ({ price, item_id, cart }: { price: number,item_id : st
 }  
 
 
-export const Cart_Success = () => {
+export const Cart_Success = ({quantity}:{quantity:string}) => {
 
     return (
         <CasualSpan>
             <div className="bg-blue-200">
-                Successfully updated cart
+                Successfully updated cart.
+                You now have {quantity} of this item. 
             </div>
         </CasualSpan>
     )

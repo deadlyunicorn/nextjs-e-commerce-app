@@ -33,18 +33,21 @@ const QuantityBox = ({item}:{item:LineItem}) => {
 
     useEffect(()=>{
 
-        if (failure){
-            setTimeout(()=>{
-                setFailure(false);
-            },5000)
-        }
-        if (success){
-            setTimeout(()=>{
-                setSuccess(false);
-            },5000)
+        
+        if (!pending){
+            if (failure){
+                setTimeout(()=>{
+                    setFailure(false);
+                },5000)
+            }
+            if (success){
+                setTimeout(()=>{
+                    setSuccess(false);
+                },5000)
+            }
         }
 
-    },[failure,success])
+    },[failure,success,pending])
 
 
     
@@ -52,6 +55,8 @@ const QuantityBox = ({item}:{item:LineItem}) => {
 
     const maxQuantity = ( quantity && quantity > 10 ) ? quantity+1 : 11 ;
     const mockArray = [... new Array(maxQuantity)].map((item,index)=>index);
+    const [newQuantity,setNewQuantity] = useState('');
+
 
 
     switch(pending){
@@ -63,7 +68,7 @@ const QuantityBox = ({item}:{item:LineItem}) => {
             return (
                 <div className="relative">
                     {success&&
-                    <Cart_Success/>}
+                    <Cart_Success quantity={newQuantity}/>}
 
                     {failure&&
                     <Cart_Failure error={error}/>} 
@@ -75,6 +80,7 @@ const QuantityBox = ({item}:{item:LineItem}) => {
                             startTransition(async()=>{
                                 try{
                                     await updateCart(cart_id!,e.target.value,item.id);
+                                    setNewQuantity((quantity+Number(e.target.value))+"")
                                     setSuccess(true);
                                  }
                                  catch(error){
