@@ -4,8 +4,9 @@ import { ReactNode, useEffect, useState, useTransition } from "react";
 import { addCart } from "../../api/cart";
 import { useRouter } from "next/navigation";
 import "@/app/(lib)/styles/animations.scss"
+import { Cart } from "@chec/commerce.js/types/cart";
 
-export const AddToCart = ({ price, item_id }: { price: number,item_id : string }) => {
+export const AddToCart = ({ price, item_id, cart }: { price: number,item_id : string, cart:Cart|undefined }) => {
 
     const [pending, startTransition] = useTransition();
     //Used for loading when submitting. I tried using useFormStatus() instead ? It didn't work tho. 
@@ -19,6 +20,20 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
     const [error,setError] = useState (' ');
 
 
+    useEffect(()=>{
+
+        if (failure){
+            setTimeout(()=>{
+                setFailure(false);
+            },5000)
+        }
+        if (success){
+            setTimeout(()=>{
+                setSuccess(false);
+            },5000)
+        }
+
+    },[failure,success])
 
 
 
@@ -35,27 +50,36 @@ export const AddToCart = ({ price, item_id }: { price: number,item_id : string }
         }
     }
 
+    
+
     const handle_CartButton = (item_id:string,quantity:string) => {
                     startTransition(async()=>{
                         //For the loading effect
                         try{
-                            await addCart(item_id, quantity);
-                            setSuccess(true);
-                            setQuantity(1);
-                            setTimeout(()=>{
-                                setSuccess(false);
-                            },5000)
+
+                            const item=cart?.line_items.filter((
+                                line_item=>(line_item.product_id==item_id)
+                            ))[0]
+
+                            if (item && (item.quantity+Number(quantity)>10)){
+                                console.error("rofl")
+                                throw (`Cart capacity for this item reached ${item.quantity+Number(quantity)}/10`)
+                            }
+
+                            else{
+                                await addCart(item_id, quantity);
+                                setSuccess(true);
+                                setQuantity(1);
+                            }
                         }
                         catch(error){
                             setFailure(true);
-                            setError(JSON.stringify(error));
+                            setError(JSON.stringify(error+""));
                             setQuantity(1);
-                            setTimeout(()=>{
-                                setFailure(false);
-                            },5000)
                         }
                         finally{
                             router.refresh();
+
                         }
                         
                     })
