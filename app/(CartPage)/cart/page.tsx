@@ -2,14 +2,18 @@ import { getCart } from "@/app/(lib)/api/cart";
 import { Cart } from "@chec/commerce.js/types/cart";
 import Checkout from "./Checkout";
 import CartItem from "./Item";
+import { getCartCookie } from "@/app/(lib)/api/cookies";
 
 const CartPage = async() => {
 
     const cart:Cart|undefined = await getCart();
+    const cart_id=await getCartCookie();
+
 
     const items = cart?.line_items;
 
     
+
     return(
         <main className="
             pt-2
@@ -19,32 +23,44 @@ const CartPage = async() => {
             w-full">
 
             <div className="
+                relative
                 flex flex-col 
                 gap-y-2 ">
-                {
-                items
-                ?items.map((item)=>(
-                        <CartItem key={item.id} item={item}/>
-                ))
-                :"No items found"
+                
+                {cart_id
+                ?(
+                    items
+                    ?items.map((item)=>(
+                            <CartItem key={item.id} item={item} cart_id={cart_id}/>
+                    ))
+                    :"No items found"
+                )
+                :<>Error no cart found, try refresing the page.. <br/> You might also need to enable cookies for this website..</>
+
                 }
             </div>
 
-            <div className="mt-2 flex flex-col ">
-                <div className="bg-slate-200 flex flex-col px-2">
+            <div className="pt-2 flex flex-col bg-slate-200 min-h-[80px]">
+                {cart
+                
+                ?<div className="flex flex-col px-2">
+               
                     <span className="uppercase text-right">
                         Cart Total: 
                         <span 
                             className="bg-slate-400 px-1 rounded-md">
-                            {cart?.subtotal.formatted_with_symbol}
+                            {cart.subtotal.formatted_with_symbol}
                         </span>
                     </span>
                     <div className="py-2">
-                        <Checkout url={cart!.hosted_checkout_url}/>
+                        <Checkout url={cart.hosted_checkout_url}/>
                     </div>
                 </div>
+                :<>Error no cart found, try refresing the page.. <br/> You might also need to enable cookies for this website..</>
+                }
             </div>
         </main>
+            
     )
 }
 
