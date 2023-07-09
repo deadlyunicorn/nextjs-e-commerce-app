@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Store_Front, { Store_Front_Fallback } from "@/app/(lib)/components/homepage/store_front";
+import Item_StoreFront, { Store_Front_Fallback } from "@/app/(lib)/components/homepage/store_front";
 import NextPage from "@/app/(lib)/components/browsing/nextPage";
 import { fetchItems } from "@/app/(lib)/api/items";
 
@@ -41,7 +41,7 @@ export default async function Explore({params:{page}}:{params:{page:number}}) {
                     {items.map(
                         (item,index)=>(
                         // <Store_Front_Fallback key={index}/>
-                        <Store_Front item={item} key={item.id}/>
+                        <Item_StoreFront item={item} key={item.id}/>
                         )
                     )}
 
