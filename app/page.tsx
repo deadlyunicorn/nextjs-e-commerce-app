@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Store_Front, { Store_Front_Fallback } from "./(lib)/components/homepage/store_front";
+import Item_StoreFront, { Store_Front_Fallback } from "./(lib)/components/homepage/store_front";
 import { fetchItems } from "./(lib)/api/items";
 
 
@@ -29,7 +29,7 @@ export default async function Home() {
             {items.map(
                 (item,index)=>(
                   // <Store_Front_Fallback key={index}/>
-                  <Store_Front item={item} key={item.id}/>
+                  <Item_StoreFront item={item} key={item.id}/>
                 )
               )}
 
