@@ -4,109 +4,172 @@ import { getCart, updateCart } from "@/app/(lib)/api/cart";
 import { Cart_Failure, Cart_Success } from "@/app/(lib)/components/cart/add_Cart";
 import { LineItem } from "@chec/commerce.js/types/line-item";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { startTransition, useEffect, useState, useTransition } from "react";
 import { getCartCookie } from "@/app/(lib)/api/cookies";
 
-const QuantityBox = ({item}:{item:LineItem}) => {
-
-    const [cart_id,setCart] = useState<undefined|string>(undefined);
-
-    useEffect(()=>{
-        (async()=>{
-            setCart (await getCartCookie());
-        })()
-    },[])
+const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
     
+    const [quantity,setQuantity] = useState(item.quantity); 
+    const maxQuantity = ( item.quantity && item.quantity > 10 ) ? item.quantity+1 : 11 ;
+    const mockArray = [... new Array(maxQuantity)].map((item,index)=>index);
     
-    
-    
-    
-    const [quantity,setQuantity] = useState(item.quantity);
 
-    const [pending,startTransition] = useTransition();
+    ////////////
+    const [loading,setLoading] = useState(false);
     const router = useRouter();
-    //used to refresh the page after adding to cart.
     const [success,setSuccess] = useState(false);
     const [failure,setFailure] = useState(false);
     const [error,setError] = useState (' ');
+    ////////////
 
     useEffect(()=>{
 
-        
-        if (!pending){
-            if (failure){
-                setTimeout(()=>{
-                    setFailure(false);
-                },5000)
-            }
-            if (success){
-                setTimeout(()=>{
-                    setSuccess(false);
-                },5000)
-            }
+        if(loading){
+            setSuccess(true);
+            setLoading(false);
+
+            setTimeout(()=>{
+                setSuccess(false);
+            },7000)
+
         }
+       
 
-    },[failure,success,pending])
+    },[quantity])
+    
+    useEffect(()=>{
+
+        if (loading){
+            setLoading(false);
+
+            setTimeout(()=>{
+                setFailure(false);
+            },5000)
+        }
+       
 
 
+    },[failure])
+
+    const RemoveItemButton = () => (
+
+        <button 
+            onClick={async()=>{
+                    try{
+
+                        setLoading(true);
+                        await updateCart(cart_id!,'0',item.id);
+                        setQuantity(0)
+                    
+                    }
+                    catch(error){
+                    
+                        setError(JSON.stringify(error));
+                        setFailure(true);
+
+                    
+                    }
+                    finally{
+
+                        router.refresh();
+
+                    }
+        
+            }}
+            className="uppercase">
+            Remove Item
+        </button>
+    )
+
+    const SetQuantityField = () => (
+        <div className="
+            flex justify-end  
+            gap-x-1">
+
+            <span>Quantity</span>
+            <select
+
+                defaultValue={quantity}
+
+                onChange={async(e)=>{
+                        try{
+
+                            setLoading(true);
+                            await updateCart(cart_id!,e.target.value,item.id);
+                            //update <option> only if successful!
+                            setQuantity(+e.target.value)
+
+                        }
+                        catch(error){
+
+                            setError(JSON.stringify(error));
+                            setFailure(true);
+                            
+                        }
+                        finally{
+                            router.refresh();
+                        }
+            
+                }}>
+                {mockArray.map(
+                    option=>
+                    <option 
+                        className="text-black" 
+                        key={option}>
+                        {option}
+                    </option>
+                )}    
+            </select> 
+
+        </div>
+    )
     
 
 
-    const maxQuantity = ( quantity && quantity > 10 ) ? quantity+1 : 11 ;
-    const mockArray = [... new Array(maxQuantity)].map((item,index)=>index);
-    const [newQuantity,setNewQuantity] = useState('');
+
+    if (cart_id==undefined){
+
+        return(
+            <>Loading..</>
+        )
+    }
+    else{
+
+        switch(loading){
+            
+            case (false):
+                return (
+                    <div className="
+                        flex justify-evenly relative">
+                        
+
+                        {success&&
+                        <Cart_Success quantity={quantity} item_name={item.name}/>}
+
+                        {failure&&
+                        <Cart_Failure error={error}/>} 
 
 
 
-    switch(pending){
-        case (true):
-            return (
-                <>Updating cart...</>
-            )
-        case (false):
-            return (
-                <div className="relative">
-                    {success&&
-                    <Cart_Success quantity={newQuantity}/>}
+                        <RemoveItemButton/>
 
-                    {failure&&
-                    <Cart_Failure error={error}/>} 
+                        <SetQuantityField/>
 
-                    <span>Quantity</span>
-                    <select
-                        defaultValue={item.quantity}
-                        onChange={(e)=>{
-                            startTransition(async()=>{
-                                try{
-                                    await updateCart(cart_id!,e.target.value,item.id);
-                                    setNewQuantity((e.target.value)+"")
-                                    setSuccess(true);
-                                 }
-                                 catch(error){
-                                    setFailure(true);
-                                    setError(JSON.stringify(error));
-                                }
-                                finally{
-                                    router.refresh();
-                                }
-                    
-                            })
-                        }}>
-                        {mockArray.map(
-                            option=>
-                            <option 
-                                className="text-black" 
-                                key={option}>
-                                {option}
-                            </option>
-                        )}    
-                    </select> 
-                </div>
-            )
+                        
 
+                    </div>
+                )
+            case(true):
+                return (
+                    <>Updating cart...</>
+                )
+
+        }
     }
     
 }
+
+
 
 export default QuantityBox;
