@@ -61,8 +61,11 @@ const CartItem = ({item}:{item:LineItem}) => {
                 </div>
             </div>
 
-            <QuantityBox item={item}/>
+            <div className="
+                    pt-1 pr-1">
+                <QuantityBox item={item}/>
             
+            </div>
     </div>
     )
 }
