@@ -22,7 +22,7 @@ const Item_StoreFront = async({item} : {item:Product}) => {
 
 
     return(
-
+        
         <div className="sm:w-[200px]  max-w-[40vw]">
 
                 <Link href={`/product/${item.permalink}`}>
@@ -45,7 +45,7 @@ const Item_StoreFront = async({item} : {item:Product}) => {
                 </div>
 
                 {
-                    <AddToCart cartItem={cartItem} item={item} price={item.price.raw} cart={cart} />}
+                    <AddToCart cartItem={cartItem} item={item} price={item.price.raw}/>}
 
                   
         </div>

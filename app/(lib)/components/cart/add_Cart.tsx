@@ -8,7 +8,11 @@ import { Cart } from "@chec/commerce.js/types/cart";
 import { LineItem } from "@chec/commerce.js/types/line-item";
 import { Product } from "@chec/commerce.js/types/product";
 
-export const AddToCart = ({ price, item, cartItem, cart }: { price: number,item : Product, cartItem: LineItem|undefined, cart:Cart|undefined }) => {
+export const AddToCart = ({ price, item, cartItem }: { price: number,item : Product, cartItem: LineItem|undefined }) => {
+
+
+    //cartItem can be undefined 
+    //when the item is not in cart
 
     const [quantity, setQuantity] = useState(1);
     const [totalQuantity, setTotalQuantity] = useState(0);

@@ -138,7 +138,7 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                 <div className="
                     gap-y-5
                     flex flex-col">
-                    <AddToCart item={listing} cartItem={cartItem} price={listing.price.raw} cart={cart}/>
+                    <AddToCart item={listing} cartItem={cartItem} price={listing.price.raw}/>
                 </div>
 
                 <PriceTag>
