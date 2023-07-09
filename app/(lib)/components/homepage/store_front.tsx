@@ -7,9 +7,19 @@ import PriceTag from "../product/priceTag"
 import { getCart } from "../../api/cart"
 
 
-const Store_Front = async({item} : {item:Product}) => {
+const Item_StoreFront = async({item} : {item:Product}) => {
 
     const cart = await getCart();
+    let cartItem=undefined;
+    
+    if ( cart && cart.line_items.length > 0 ){
+
+        cartItem=cart.line_items.filter((
+            line_item=>(line_item.product_id==item.id)
+        ))[0]
+        
+    }
+
 
     return(
 
@@ -34,14 +44,15 @@ const Store_Front = async({item} : {item:Product}) => {
                 </PriceTag>
                 </div>
 
-                <AddToCart item_id={item.id} price={item.price.raw} cart={cart} />
+                {
+                    <AddToCart cartItem={cartItem} item={item} price={item.price.raw} cart={cart} />}
 
                   
         </div>
     )
 }
 
-export default Store_Front;
+export default Item_StoreFront;
 
 export const Store_Front_Fallback = () => {
     

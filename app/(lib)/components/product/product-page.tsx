@@ -50,6 +50,16 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
 const ProductInfo = async({listing}:{listing:Product}) => {
     const cart = await getCart();
 
+    let cartItem=undefined;
+    
+    if ( cart && cart.line_items.length > 0 ){
+
+        cartItem=cart.line_items.filter((
+            line_item=>(line_item.product_id==listing.id)
+        ))[0]
+        
+    }
+
     return(
 
         <>
@@ -128,7 +138,7 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                 <div className="
                     gap-y-5
                     flex flex-col">
-                    <AddToCart item_id={listing.id} price={listing.price.raw} cart={cart}/>
+                    <AddToCart item={listing} cartItem={cartItem} price={listing.price.raw} cart={cart}/>
                 </div>
 
                 <PriceTag>
