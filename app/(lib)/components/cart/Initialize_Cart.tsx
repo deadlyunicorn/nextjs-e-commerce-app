@@ -60,7 +60,9 @@ export const CookieVerify = () => {
 
     return(
           <>
-            {cart_id}
+            <div className="absolute text-red-700 font-bold left-[70vw] top-[15vh]">
+                {cart_id || "loading cart..."}
+            </div>
           </>
     )
 }
