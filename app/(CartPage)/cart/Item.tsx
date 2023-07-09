@@ -4,10 +4,10 @@ import Link from "next/link";
 import QuantityBox from "./Quantity";
 
 
-const CartItem = ({item}:{item:LineItem}) => {
+const CartItem = async({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
 
-    return(
+    return (
     <div 
         className="
             grid grid-cols-2
@@ -63,11 +63,12 @@ const CartItem = ({item}:{item:LineItem}) => {
 
             <div className="
                     pt-1 pr-1">
-                <QuantityBox item={item}/>
+                <QuantityBox item={item} cart_id={cart_id}/>
             
             </div>
     </div>
     )
+ 
 }
 
 export default CartItem;
