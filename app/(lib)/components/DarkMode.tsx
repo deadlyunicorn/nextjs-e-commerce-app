@@ -19,8 +19,10 @@ const DarkMode = () => {
         if (
             localStorage.theme === 'dark' 
             || ( !('theme' in localStorage) && systemDark)
+
         ) {
-                    
+            
+            setDarkMode(true)                
             document.documentElement.classList.add('dark');
 
             document.querySelector('#dark-mode-button')?.classList.remove('leftPosAnimation');
@@ -31,6 +33,7 @@ const DarkMode = () => {
 
         else 
         {
+            setDarkMode(false)                
             document.documentElement.classList.remove('dark');
             
 
@@ -39,7 +42,7 @@ const DarkMode = () => {
 
         }
 
-    });
+    },[darkMode]);
 
     return (
         <button 
@@ -101,8 +104,6 @@ const DarkMode = () => {
             }
 
             </div>
-                        <br/>
-                        <br/>
         </button>
     )
 }
