@@ -23,16 +23,23 @@ const Item_StoreFront = async({item} : {item:Product}) => {
 
     return(
         
-        <div className="sm:w-[200px]  max-w-[40vw]">
+        <div className="
+            rounded-md
+            bg-white bg-opacity-10 
+            sm:w-[200px]  max-w-[40vw]">
 
                 <Link href={`/product/${item.permalink}`}>
                 <Image src={item.image?item.image["url"]:"/image.png"} 
                 placeholder="blur"
                 blurDataURL="/image.png"
                 alt={item.name}  height={200} width={200}
-                className="rounded-md aspect-square"/>
+                className="rounded-md aspect-square peer"/>
                 
-                  <p className="my-4 h-[80px] text-xl text-white font-light break-words">
+                  <p className="
+                    my-4 h-[80px] 
+                    text-xl text-white 
+                    hover:text-slate-300 peer-hover:text-slate-300 
+                    font-light break-words">
                     {item.name} 
                   </p>
                 </Link>
