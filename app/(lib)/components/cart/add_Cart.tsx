@@ -251,12 +251,15 @@ export const Cart_Failure = ({error}:{error:string}) => {
 
 const CasualSpan = ({children}:{children:ReactNode}) => (
 
+
         <div className="
             z-10
             bottom-0 left-0 
-            fixed w-[100vw]
+            absolute w-fit
+            xs:fixed xs:w-[100vw]
             text-black
             disappear"> 
             {children}
         </div>
+
 )
