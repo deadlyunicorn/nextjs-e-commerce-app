@@ -78,7 +78,14 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
         
             }}
             className="uppercase">
-            Remove Item
+            <svg 
+                viewBox="0 0 105 105"
+                className="fill-none stroke-red-500 hover:stroke-red-400 stroke-[8px] w-5 h-5 ">
+
+            <path
+            // style="fill:none;stroke:#000000;stroke-width:3.77144;stroke-linecap:butt;stroke-linejoin:bevel;stroke-dasharray:none;paint-order:markers fill stroke"
+            d="M 14.593557,10.83938 31.838958,94.993954 H 73.994379 L 91.239777,10.83938 c -25.54874,0 -51.09748,0 -76.64622,0 z"/>
+            </svg>
         </button>
     )
 
