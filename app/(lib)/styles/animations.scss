@@ -50,3 +50,39 @@
         display: none;
     }
 }
+
+.leftPosAnimation{
+    transform: translateX(0px);
+    animation: left;
+    animation-duration: 0.1s;
+    animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    animation-iteration-count: 1;
+}
+
+.rightPosAnimation{
+    transform: translateX(20px);
+    animation: right;
+    animation-duration: 0.1s;
+    animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    animation-iteration-count: 1;
+}
+
+@keyframes right {
+    0%{
+        transform: translateX(0px)
+    }
+    100%{
+        transform: translateX(20px)
+    }
+ 
+}
+
+@keyframes left {
+    0%{
+        transform: translateX(20px)
+    }
+    100%{
+        transform: translateX(0px)
+    }
+ 
+}
