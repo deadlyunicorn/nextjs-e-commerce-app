@@ -130,9 +130,9 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
             <button
                 className="
                     w-5
-                    rounded-md 
-                    bg-blue-500 hover:bg-sky-600 
-                    bg-opacity-50
+                    rounded-md
+                    bg-slate-300 hover:bg-slate-50 
+                    bg-opacity-20 hover:bg-opacity-20
                     text-slate-200 hover:text-white
                     text-center
                     font-extrabold
