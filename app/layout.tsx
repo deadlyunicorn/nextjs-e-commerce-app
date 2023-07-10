@@ -20,9 +20,18 @@ export default function RootLayout(
     <html lang="en">
 
       <body className="
-        bg-stone-900
+        bg-gradient-to-b
+        from-white
+        to-white
+        dark:from-slate-900
+        from-90%
+        dark:to-black
         flex flex-col
         items-center mt-5">
+
+            {/* light mode */}
+        {/* // from-slate-100 */}
+        {/* // to-violet-300 */}
 
         <div className='
           xl:max-w-4xl 
