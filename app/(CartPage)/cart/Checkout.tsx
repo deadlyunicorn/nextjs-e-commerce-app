@@ -10,7 +10,8 @@ const Checkout = ({url}:{url:string}) => {
     return (
         <button 
             className="
-            bg-white rounded-md
+            bg-slate-50 rounded-md
+            dark:bg-black dark:bg-opacity-40
             px-2 py-1
             uppercase"
             onClick={()=>{

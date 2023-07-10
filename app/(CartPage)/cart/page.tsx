@@ -20,6 +20,7 @@ const CartPage = async() => {
             flex flex-col
             justify-between
             bg-white rounded-md
+            dark:bg-black dark:bg-opacity-20
             w-full">
 
             <div className="
@@ -40,7 +41,12 @@ const CartPage = async() => {
                 }
             </div>
 
-            <div className="pt-2 flex flex-col bg-slate-200 min-h-[80px]">
+            <div className="
+                pt-2 
+                flex flex-col 
+                bg-slate-200 
+                dark:bg-black dark:bg-opacity-20
+                min-h-[80px]">
                 {cart
                 
                 ?<div className="flex flex-col px-2">

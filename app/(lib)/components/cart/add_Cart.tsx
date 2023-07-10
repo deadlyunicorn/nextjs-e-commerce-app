@@ -131,9 +131,11 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                 className="
                     w-5
                     rounded-md
-                    bg-slate-300 hover:bg-slate-50 
+                    bg-slate-800 hover:bg-slate-600
+                    hover:text-slate-600
+                    dark:bg-slate-300 dark:hover:bg-slate-50 
                     bg-opacity-20 hover:bg-opacity-20
-                    text-slate-200 hover:text-slate-50
+                    dark:text-slate-200 dark:hover:text-slate-50
                     text-center
                     font-extrabold
                     "
