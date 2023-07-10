@@ -133,7 +133,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                     rounded-md
                     bg-slate-300 hover:bg-slate-50 
                     bg-opacity-20 hover:bg-opacity-20
-                    text-slate-200 hover:text-white
+                    text-slate-200 hover:text-slate-50
                     text-center
                     font-extrabold
                     "
@@ -160,7 +160,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
         sm:justify-between
         justify-center
         gap-x-5">
-                <span className="text-white">
+                <span>
                     Quantity:
                 </span>
 
@@ -196,7 +196,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
 
 
             </div>
-            <p className="text-white text-right">
+            <p className="text-right">
                 {price * quantity} €
             </p>
 

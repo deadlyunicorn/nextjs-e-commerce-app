@@ -21,8 +21,11 @@ export default function RootLayout(
 
       <body className="
         bg-gradient-to-b
-        from-white
-        to-white
+        text-slate-900
+        
+        dark:text-slate-200
+        from-slate-100
+        to-slate-300
         dark:from-slate-900
         from-90%
         dark:to-black

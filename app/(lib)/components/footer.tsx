@@ -5,11 +5,16 @@ export default function Footer(){
         <footer 
             className='
                 min-h-[200px] mt-20 
-                flex justify-center items-center
-                text-white'> 
-            This is a footer, say hello
+                flex flex-col 
+                justify-center items-center'> 
 
-            <DarkMode/>
+            <div>
+                This is a footer, say hello
+            </div>
+
+            <div className="flex gap-x-2">
+                Toggle Dark Mode : <DarkMode/>
+            </div>
         </footer>  
 
     )

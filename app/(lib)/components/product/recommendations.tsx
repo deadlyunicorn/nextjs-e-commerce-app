@@ -14,8 +14,9 @@ export function Recommendation({listing}:{listing:Product}){
     justify-center
     items-center
     w-[110px] rounded-lg
-    bg-white bg-opacity-10 
-    hover:bg-opacity-20 
+    bg-slate-200
+    dark:bg-slate-50 dark:bg-opacity-10 
+    dark:hover:bg-opacity-20 
     group
     ">
 
@@ -23,21 +24,25 @@ export function Recommendation({listing}:{listing:Product}){
             placeholder="blur"
             blurDataURL="/image.png"
             alt={listing.name}  height={100} width={100}
-            className="rounded-md min-h-[100px] min-w-[100px]" />
+            className="rounded-md min-h-[100px] min-w-[100px] aspect-square" />
             
          <div
             className="flex flex-col justify-between flex-wrap">
             <p className="
                 mt-2 min-h-[50px] 
-                text-slate-200 group-hover:text-white 
+                text-slate-900 group-hover:text-slate-600
+                dark:text-slate-200 dark:group-hover:text-slate-50 
                 text-lg font-light">
                 {listing.name}
             </p>
             <div>
                 <div className="
                     bg-gradient-to-r  bg-clip-text
-                    from-red-400 to-yellow-300 
-                    group-hover:from-red-300 group-hover:to-yellow-200
+                    from-red-500 to-yellow-500 
+                    group-hover:from-red-400 group-hover:to-yellow-400
+
+                    dark:from-red-400 dark:to-yellow-300 
+                    dark:group-hover:from-red-300 dark:group-hover:to-yellow-200
                     text-transparent
                     price-tag-multiple
                     ">
@@ -93,7 +98,7 @@ export const Recommendation_Fallback = () => {
                 <div>
                     <p className="
                         mt-2 min-h-[50px]
-                        text-lg text-white
+                        text-lg 
                         font-light text-transparent
                         loading-100
                         bg-gradient-to-r
@@ -114,7 +119,6 @@ export const Recommendation_Fallback = () => {
             <div/>
 
                 <div className="
-                    text-white
                     bg-gradient-to-r 
                     from-red-400 to-yellow-300 
                     group-hover:from-red-300 group-hover:to-yellow-200

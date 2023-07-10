@@ -25,7 +25,6 @@ export default function Header(){
                 h-[100px] 
                 items-center 
                 flex justify-between 
-                text-white
             ">
                 Empty box
 

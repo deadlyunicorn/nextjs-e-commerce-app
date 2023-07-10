@@ -25,7 +25,8 @@ const Item_StoreFront = async({item} : {item:Product}) => {
         
         <div className="
             rounded-md
-            bg-white bg-opacity-10 
+            bg-slate-200
+            dark:bg-white dark:bg-opacity-10 
             sm:w-[200px]  max-w-[40vw]">
 
                 <Link
@@ -40,8 +41,12 @@ const Item_StoreFront = async({item} : {item:Product}) => {
                     
                     <p className="
                         my-4 h-[80px] 
-                        text-xl  text-slate-300
-                        group-hover:text-white 
+                        text-xl  
+                        text-black
+                        group-hover:text-slate-800 
+
+                        dark:text-slate-300
+                        dark:group-hover:text-slate-50
                         font-light break-words">
                         {item.name} 
                     </p>
@@ -90,7 +95,7 @@ export const Store_Front_Fallback = () => {
 
                     <p className="
                         cursor-default my-4 
-                        text-xl text-white 
+                        text-xl 
                         font-light 
                         backdrop-blur-sm blur-sm ">
                         A very cool product

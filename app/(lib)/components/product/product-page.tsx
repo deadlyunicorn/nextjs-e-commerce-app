@@ -15,7 +15,6 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
         <main 
             className="
             py-2 rounded-md
-            bg-white bg-opacity-5 
             flex flex-wrap 
             justify-evenly 
             border border-black">
@@ -76,6 +75,7 @@ const ProductInfo = async({listing}:{listing:Product}) => {
 
                 <figure
                     className="
+                        group
                         flex 
                         flex-col 
                         items-center"
@@ -87,14 +87,14 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                     blurDataURL="/image.png"
                     className="
                         rounded-md aspect-square 
-                        peer 
+                        group-hover:brightness-110
                         max-w-[100%]" />
 
                     <figcaption className="
                         my-4 min-h-[50px]
                         text-4xl
-                        text-slate-200 
-                        peer-hover:text-white hover:text-white
+                        group-hover:text-slate-600 
+                        dark:group-hover:text-slate-50 
                         font-light">
 
                         {listing.name}
@@ -119,14 +119,13 @@ const ProductInfo = async({listing}:{listing:Product}) => {
             justify-between 
             flex-wrap
             flex flex-col
-            text-white 
             text-xl font-light 
             w-[300px] min-h-[150px] pt-10 ">
             {
             listing.description
                 ?<div dangerouslySetInnerHTML={{__html:listing.description}}/>
                 
-                :<p>No description found</p>
+                :<p>There is no description for this item.</p>
             }
 
             <div className="
@@ -184,7 +183,6 @@ export const ProductFallback = () => (
                         
                         <p className="
                             blur-md
-                            text-white
                             my-4 min-h-[50px]
                             text-4xl
                             text-transparent
@@ -199,7 +197,6 @@ export const ProductFallback = () => (
                             {/* peer should be before sibling */}
 
                             <div className="
-                                text-white
                                 loading-300 blur-md
                                 text-2xl
                                 bg-gradient-to-r 
@@ -224,7 +221,7 @@ export const ProductFallback = () => (
                 </div>
                 
                 <div className="
-                    text-white 
+                    
                     text-xl font-light 
                     w-[300px] pt-10 loading-300 
                     blur-sm 

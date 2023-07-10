@@ -14,7 +14,7 @@ export default function Error ({error}:{error:ErrorType}) {
                 
                 mb-96
                 rounded-md py-2 text-lg
-                text-white bg-white
+                 bg-white
                 [&>*]:my-4
                  ">
 
