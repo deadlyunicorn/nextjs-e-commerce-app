@@ -256,7 +256,7 @@ const CasualSpan = ({children}:{children:ReactNode}) => (
             z-10
             bottom-0 left-0 
             absolute w-fit
-            xs:fixed xs:w-[100vw]
+            md:fixed md:w-[100vw]
             text-black
             disappear"> 
             {children}
