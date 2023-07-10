@@ -6,12 +6,11 @@ import { useEffect, useState } from "react"
 const DarkMode = () => {
 
 
-    const localDark = localStorage.theme == 'dark'
 
-    const [darkMode,setDarkMode] = useState(localDark);
+    const [darkMode,setDarkMode] = useState(false);
 
     useEffect(()=>{
-
+        
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
 
         
