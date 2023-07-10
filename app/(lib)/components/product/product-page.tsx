@@ -14,9 +14,11 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
     <>
         <main 
             className="
+            py-2 rounded-md
+            bg-white bg-opacity-5 
             flex flex-wrap 
             justify-evenly 
-            border border-red-700">
+            border border-black">
             
                 <Suspense fallback={<ProductFallback/>}>
                     <ProductInfo listing={listing}/>
