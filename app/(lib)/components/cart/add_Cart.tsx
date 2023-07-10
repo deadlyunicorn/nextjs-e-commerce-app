@@ -177,6 +177,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                         className="w-10 
                         rounded-md 
                         bg-white bg-opacity-[50%]
+                        hover:bg-opacity-[60%]
                         text-black text-center">
 
                         {arr10.map((item) => (
@@ -212,6 +213,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                 text-black
                 w-full min-h-[10mm] 
                 px-2
+                hover:bg-slate-200
                 bg-slate-300 rounded-md ">
 
                 {loading 
@@ -229,7 +231,7 @@ export const Cart_Success = ({quantity,item_name}:{quantity:number,item_name:str
 
     return (
         <CasualSpan>
-            <div className="bg-blue-200 py-5">
+            <div className="bg-blue-200 py-5 rounded-md md:rounded-none">
                 Successfully updated cart.
                 You now have {quantity} of {item_name}. 
             </div>
@@ -241,7 +243,7 @@ export const Cart_Failure = ({error}:{error:string}) => {
 
     return (
         <CasualSpan>
-            <div className="bg-red-200 py-5">
+            <div className="bg-red-200 py-5 rounded-md md:rounded-none ">
                 Failed: {error}
             </div>
         </CasualSpan>
@@ -255,7 +257,7 @@ const CasualSpan = ({children}:{children:ReactNode}) => (
         <div className="
             z-10
             bottom-0 left-0 
-            absolute w-fit
+            absolute w-fit  
             md:fixed md:w-[100vw]
             text-black
             disappear"> 
