@@ -210,11 +210,19 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                 disabled={loading}
                 type="submit"
                 className="
-                text-black
                 w-full min-h-[10mm] 
                 px-2
-                hover:bg-slate-200
-                bg-slate-300 rounded-md ">
+                
+                text-slate-200
+                hover:text-slate-50
+                
+                dark:text-slate-900
+                dark:hover:text-slate-600
+                
+                bg-slate-900
+                hover:bg-slate-600
+                dark:hover:bg-slate-200
+                dark:bg-slate-300 rounded-md ">
 
                 {loading 
                 ?"Adding to cart..."
