@@ -26,9 +26,10 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
             </main>
 
             <aside className="
+                rounded-md
                 flex gap-x-5 mt-10 
                 overflow-x-scroll 
-                border-4 border-red-700">
+                border border-black">
 
                 <Suspense fallback={<Recommendation_Fallback/>}>
 

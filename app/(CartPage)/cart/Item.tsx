@@ -14,7 +14,7 @@ const CartItem = async({item,cart_id}:{item:LineItem,cart_id:string}) => {
             ">
 
 
-            <Link href={`product/${item.permalink}`}
+            <Link href={`/product/${item.permalink}`}
 
                 className="
                 rounded-md
@@ -62,7 +62,7 @@ const CartItem = async({item,cart_id}:{item:LineItem,cart_id:string}) => {
             </div>
 
             <div className="
-                    pt-1 pr-1">
+                    py-1 pr-1">
                 <QuantityBox item={item} cart_id={cart_id}/>
             
             </div>

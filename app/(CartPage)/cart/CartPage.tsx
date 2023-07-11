@@ -20,17 +20,17 @@ export const CartPage = async() => {
             flex flex-col
             justify-between
             bg-white rounded-md
-            dark:bg-black dark:bg-opacity-20
+            dark:bg-slate-900
             w-full">
 
             <div className="
                 relative
                 flex flex-col 
-                gap-y-2 ">
+                gap-y-1 ">
                 
                 {cart_id
                 ?(
-                    items
+                    (items&&items.length>0)
                     ?items.map((item)=>(
                             <CartItem key={item.id} item={item} cart_id={cart_id}/>
                     ))
