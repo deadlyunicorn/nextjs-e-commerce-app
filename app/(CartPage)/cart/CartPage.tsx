@@ -4,7 +4,7 @@ import Checkout from "./Checkout";
 import CartItem from "./Item";
 import { getCartCookie } from "@/app/(lib)/api/cookies";
 
-const CartPage = async() => {
+export const CartPage = async() => {
 
     const cart:Cart|undefined = await getCart();
     const cart_id=await getCartCookie();
@@ -54,7 +54,10 @@ const CartPage = async() => {
                     <span className="uppercase text-right">
                         Cart Total: 
                         <span 
-                            className="bg-slate-400 px-1 rounded-md">
+                            className="
+                                dark:bg-black dark:bg-opacity-30
+                                bg-slate-100 
+                                px-1 rounded-md">
                             {cart.subtotal.formatted_with_symbol}
                         </span>
                     </span>
