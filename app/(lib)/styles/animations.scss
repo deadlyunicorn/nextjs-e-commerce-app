@@ -86,3 +86,17 @@
     }
  
 }
+
+.animation-appear{
+    animation: appear 2s;
+
+}
+
+@keyframes appear {
+    0%{
+        transform: translateY(80vh);
+    }
+    100%{
+        transform: translateY(0vh);
+    }
+}
