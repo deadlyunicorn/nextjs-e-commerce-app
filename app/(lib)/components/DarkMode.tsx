@@ -56,6 +56,7 @@ const DarkMode = () => {
                 }
                 setDarkMode(!darkMode)                
             }}
+            aria-label='toggle dark mode'
             className="
                 px-1 py-1 relative
                 bg-white rounded-md
