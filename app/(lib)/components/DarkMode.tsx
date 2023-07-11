@@ -7,7 +7,7 @@ const DarkMode = () => {
 
 
 
-    const [darkMode,setDarkMode] = useState(true);
+    const [darkMode,setDarkMode] = useState(false);
 
     useEffect(()=>{
         
