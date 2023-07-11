@@ -2,6 +2,7 @@
 
 import '@/app/(lib)/styles/animations.scss'
 import { useEffect, useState } from "react"
+import { createCookie, getCookie } from '../api/cookies';
 
 const DarkMode = () => {
 
@@ -11,35 +12,51 @@ const DarkMode = () => {
 
     useEffect(()=>{
         
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-        
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         if (
             localStorage.theme === 'dark' 
             || ( !('theme' in localStorage) && systemDark)
 
         ) {
+        (async()=>{
+            const darkThemeCookie = await getCookie('darkMode');
+
             
-            setDarkMode(true)                
-            document.documentElement.classList.add('dark');
-
-            document.querySelector('#dark-mode-button')?.classList.remove('leftPosAnimation');
-            document.querySelector('#dark-mode-button')?.classList.add('rightPosAnimation');
-
+                await createCookie('darkMode','dark')
+              
                 
-        } 
-
+                    
+            } 
+        )()
+        setDarkMode(true)                
+                document.documentElement.classList.add('dark');
+    
+                document.querySelector('#dark-mode-button')?.classList.remove('leftPosAnimation');
+                document.querySelector('#dark-mode-button')?.classList.add('rightPosAnimation');
+        }
+    
         else 
         {
-            setDarkMode(false)                
-            document.documentElement.classList.remove('dark');
-            
+            (async()=>{
+                await createCookie('darkMode','light')
+            })()
+                
 
-            document.querySelector('#dark-mode-button')?.classList.remove('rightPosAnimation');
-            document.querySelector('#dark-mode-button')?.classList.add('leftPosAnimation');
 
-        }
+                setDarkMode(false)                
+                document.documentElement.classList.remove('dark');
+                
+    
+                document.querySelector('#dark-mode-button')?.classList.remove('rightPosAnimation');
+                document.querySelector('#dark-mode-button')?.classList.add('leftPosAnimation');
+    
+            }
+
+
+        
+
+       
 
     },[darkMode]);
 

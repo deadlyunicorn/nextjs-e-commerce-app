@@ -6,6 +6,7 @@ import { CookieVerify } from './(lib)/components/cart/Initialize_Cart'
 import CartProvider from './(lib)/components/redux/Provider'
 import { CartClientWrapper } from './(CartPage)/CartClient'
 import CartPage from './(CartPage)/cart/CartPage'
+import { getCookie } from './(lib)/api/cookies'
 
 
 export const metadata = {
@@ -13,13 +14,18 @@ export const metadata = {
   description: 'This is my webstore',
 }
 
-export default function RootLayout(
+export default async function RootLayout(
   {children}: 
   {children: React.ReactNode}
 ) {
- 
+
+  const darkThemeCookie = await getCookie('darkMode');
+
+
+  console.log(darkThemeCookie);
+
   return (
-    <html lang="en">
+    <html lang="en" className={darkThemeCookie}>
 
       <body className="
         bg-gradient-to-b

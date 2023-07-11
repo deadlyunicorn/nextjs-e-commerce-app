@@ -34,3 +34,19 @@ import { cookies } from "next/headers";
             path: "/"
         })
     }
+
+    export const createCookie = async(cookie_name:string,cookie_value: string,maxAge=60 * 60 * 24 * 30)=>{
+
+        cookies().set(
+        { 
+            name: cookie_name,
+            value: cookie_value,
+            maxAge: maxAge,
+            path: "/" 
+        });
+    
+    }
+
+    export const getCookie = (cookie_name:string) => {
+        return cookies().get(cookie_name)?.value;
+    }

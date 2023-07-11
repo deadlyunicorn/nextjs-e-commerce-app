@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState  } from "react"
-import { getCookies, setCookie } from "../../api/cookies"
+import { createCookie, getCookies, setCookie } from "../../api/cookies"
 import { createCart, getCart } from "../../api/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
@@ -27,9 +27,16 @@ export const CookieVerify = () => {
         (async()=>{
 
 
-            const cartCookieArray = [...await getCookies()]
+            const cookies = await getCookies();
+            
+            const cartCookieArray = [...cookies]
             .filter(cookie=>(
                 cookie.name=="cart_id")
+            )
+
+            const darkModeCookieArray = [...cookies]
+            .filter(cookie=>(
+                cookie.name=="darkMode")
             )
 
             //get the value => cartCookieArray[0].value
@@ -50,6 +57,13 @@ export const CookieVerify = () => {
             }
             else{
                 setCart_id(cartCookieArray[0].value); 
+            }
+
+            if(darkModeCookieArray.length == 0 ){
+                await createCookie('darkMode','light')
+                .then(()=>{
+                    router.refresh();
+                })
             }
             
 
