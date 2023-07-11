@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useEffect } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import { setCart } from "@/app/(lib)/components/redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../(lib)/components/redux/store";
@@ -11,6 +11,13 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
     
     const cart = useSelector((state:RootState)=> state.cart.value);
     const dispatch = useDispatch();
+    const [hidden,setHidden]=useState(true);
+
+    useEffect(()=>{
+        if(cart==true){
+            setHidden(false);
+        }
+    },[cart])
 
 
     useEffect(()=>{
@@ -25,14 +32,21 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
     
     return (
         <>
-        {cart&&
-
+        {
         //Above here should be the nav bar - header etc.
             <div 
+                data-cartEnabled={cart}
+                data-hidden={hidden}
+                // need to manually add the data-[] selectors in the css file
                 className="
-                rounded-md
-                flex justify-center
+                animation-disappear
                 animation-appear
+
+                data-[hidden=true]:hidden
+
+                rounded-md
+                justify-center flex
+                
                 bg-slate-100
                 dark:bg-slate-900
                 backdrop-blur-lg

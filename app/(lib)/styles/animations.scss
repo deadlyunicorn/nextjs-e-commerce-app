@@ -87,8 +87,9 @@
  
 }
 
-.animation-appear{
+.animation-appear[data-cartEnabled=true]{
     animation: appear 2s;
+    transform: translateY(0vh);
 
 }
 
@@ -98,5 +99,26 @@
     }
     100%{
         transform: translateY(0vh);
+    }
+}
+
+.animation-disappear[data-cartEnabled=false][data-hidden=false]{
+    transform: translateY(80vh);
+    animation: disappear 2s;
+}
+
+@keyframes disappear {
+    0%{
+        display: flex;
+        transform: translateY(0vh);
+    }
+
+    99%{
+
+        display: flex;
+        transform: translateY(80vh);
+    }
+    100%{
+        display: none;
     }
 }
