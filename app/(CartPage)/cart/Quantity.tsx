@@ -13,8 +13,11 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
     const [quantity,setQuantity] = useState(item.quantity); 
     const maxQuantity = ( item.quantity && item.quantity > 10 ) ? item.quantity+1 : 11 ;
     const mockArray = [... new Array(maxQuantity)].map((item,index)=>index);
-    
 
+
+    useEffect(()=>{
+        setQuantity(item.quantity)
+    },[item.quantity])
     ////////////
     const [loading,setLoading] = useState(false);
     const router = useRouter();
