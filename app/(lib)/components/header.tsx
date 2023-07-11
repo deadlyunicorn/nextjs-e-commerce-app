@@ -1,5 +1,8 @@
 import Link from "next/link";
 import CartComponent from "./cart/Cart";
+import { CartButtonWrapper } from "./cart/CartWrap";
+import { CartClientWrapper } from "@/app/(CartPage)/CartClient";
+import CartPage from "@/app/(CartPage)/cart/CartPage";
 
 export default function Header(){
 
@@ -28,7 +31,11 @@ export default function Header(){
             ">
                 Empty box
 
+            <CartButtonWrapper>
                 <CartComponent/>
+            </CartButtonWrapper>
+
+            
 
             </div>
 

@@ -4,6 +4,8 @@ import Header from '@/app/(lib)/components/header'
 import Categories from './(lib)/components/homepage/categories'
 import { CookieVerify } from './(lib)/components/cart/Initialize_Cart'
 import CartProvider from './(lib)/components/redux/Provider'
+import { CartClientWrapper } from './(CartPage)/CartClient'
+import CartPage from './(CartPage)/cart/CartPage'
 
 
 export const metadata = {
@@ -43,11 +45,16 @@ export default function RootLayout(
           max-w-[100%]'>
 
             <CartProvider>
+              {/* provider not needed? */}
               <Header/>
             
               <CookieVerify/>
             
+              <CartClientWrapper>
+                <CartPage/>
+              </CartClientWrapper>
               {children}
+
 
             </CartProvider>
 
