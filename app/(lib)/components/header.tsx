@@ -19,7 +19,7 @@ export default function Header(){
                 px-10 py-4">
 
             
-            <span className="
+            <Link href={'/'} className="
                 text-4xl
                 bg-gradient-to-b 
                 from-blue-300 to-green-50
@@ -27,22 +27,21 @@ export default function Header(){
                 drop-shadow-[1px_1px_2px_rgba(100,200,100,1)]
             ">
                 The Cool Webstore
-            </span>
+            </Link>
 
             {/* <CartElement/> */}
 
-            <div className="flex justify-around pt-4">
-                <Link href={'/'}>Homepage</Link>
+            <div className="flex justify-between pt-4">
                 
                 <div>
                     <input 
-                        placeholder="Search"
+                        placeholder="Search for cool items."
                         className="
                             bg-slate-200 text-slate-900
                             py-1
                             pl-2 
                             rounded-md
-                            w-40"/>
+                            w-60"/>
                 </div>
 
                 <CartButtonWrapper>
