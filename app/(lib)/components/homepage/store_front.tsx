@@ -27,9 +27,10 @@ const Item_StoreFront = async({item} : {item:Product}) => {
             rounded-md
             bg-slate-200
             dark:bg-white dark:bg-opacity-10 
-            sm:w-[200px]  max-w-[40vw]">
+            xs:w-[200px]  max-w-[40vw]">
 
                 <Link
+                    
                     className="group"
                     href={`/product/${item.permalink}`}>
 
