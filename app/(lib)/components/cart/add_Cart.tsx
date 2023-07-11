@@ -241,7 +241,14 @@ export const Cart_Success = ({quantity,item_name}:{quantity:number,item_name:str
 
     return (
         <CasualSpan>
-            <div className="bg-blue-200 py-5 rounded-md md:rounded-none">
+            <div className="
+                dark:bg-opacity-20
+                dark:bg-slate-950
+                bg-slate-200 
+                bg-opacity-20
+
+                py-5 
+                rounded-md md:rounded-none">
                 Successfully updated cart.
                 You now have {quantity} of {item_name}. 
             </div>
@@ -253,7 +260,14 @@ export const Cart_Failure = ({error}:{error:string}) => {
 
     return (
         <CasualSpan>
-            <div className="bg-red-200 py-5 rounded-md md:rounded-none ">
+            <div className="
+            bg-opacity-20
+            dark:bg-opacity-20
+
+            dark:bg-red-950
+            bg-red-200 
+            py-5 
+            rounded-md md:rounded-none ">
                 Failed: {error}
             </div>
         </CasualSpan>
@@ -266,11 +280,12 @@ const CasualSpan = ({children}:{children:ReactNode}) => (
 
         <div className="
             z-30
+            rounded-md
             bottom-0 left-0 
-            absolute w-fit  
+            absolute w-full
             md:fixed md:w-[100vw]
-            text-black
-            disappear"> 
+            backdrop-blur-md
+            disappear "> 
             {children}
         </div>
 
