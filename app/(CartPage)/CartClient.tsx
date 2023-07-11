@@ -65,10 +65,9 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
                     pb-6
                     max-w-[100%] z-30 h-fit">
 
-                <div className="w-full flex justify-end pr-2 py-1 ">
+                <div className="w-full flex justify-end pr-2 pt-1 pb-[5vh]">
 
                     <button 
-                        className="pb-[5vh]"
                         onClick={()=>{dispatch(setCart(false))}}>
                         <svg
                             className="
