@@ -135,7 +135,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                     hover:text-slate-600
                     dark:bg-slate-300 dark:hover:bg-slate-50 
                     bg-opacity-20 hover:bg-opacity-20
-                    dark:text-slate-200 dark:hover:text-slate-50
+                    dark:text-slate-500 dark:hover:text-slate-400
                     text-center
                     font-extrabold
                     "
@@ -215,16 +215,16 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                 w-full min-h-[10mm] 
                 px-2
                 
-                text-slate-200
-                hover:text-slate-50
+                dark:text-slate-200
+                dark:hover:text-slate-50
                 
-                dark:text-slate-900
-                dark:hover:text-slate-600
+                text-slate-900
+                hover:text-slate-600
                 
-                bg-slate-900
-                hover:bg-slate-600
-                dark:hover:bg-slate-200
-                dark:bg-slate-300 rounded-md ">
+                dark:bg-black dark:bg-opacity-30
+                dark:hover:bg-slate-600
+                hover:bg-slate-200
+                bg-slate-300 rounded-md ">
 
                 {loading 
                 ?"Adding to cart..."

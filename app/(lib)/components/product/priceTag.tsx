@@ -6,8 +6,9 @@ export default function PriceTag({children}:{children:ReactNode}){
         <div className="
             price-tag-multiple
             bg-gradient-to-r 
-            from-red-400 to-yellow-300 
-            peer-hover:from-red-300 peer-hover:to-yellow-200
+            from-red-500 to-yellow-500 
+            dark:from-red-400 dark:to-yellow-300 
+           
             bg-clip-text text-transparent">
 
         {children}
