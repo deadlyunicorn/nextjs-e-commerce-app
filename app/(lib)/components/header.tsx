@@ -8,8 +8,17 @@ export default function Header(){
 
     return (
 
-        <header className="flex flex-col">
+        <header 
+            className="
+                flex flex-col fixed top-0 left-0
+                dark:bg-slate-900 dark:bg-opacity-80
+                bg-slate-100 bg-opacity-80
+                backdrop-blur-md 
+                z-10 
+                h-[15vh] w-[100vw]
+                px-10 py-4">
 
+            
             <span className="
                 text-4xl
                 bg-gradient-to-b 
@@ -17,27 +26,31 @@ export default function Header(){
                 bg-clip-text text-transparent
                 drop-shadow-[1px_1px_2px_rgba(100,200,100,1)]
             ">
-                HELLO WORLD AND WELCOME TO MY WEBSTORE
+                The Cool Webstore
             </span>
 
             {/* <CartElement/> */}
-            <br/>
-            <Link href={'/'}>Homepage</Link>
 
-            <div className="
-                h-[100px] 
-                items-center 
-                flex justify-between 
-            ">
-                Empty box
+            <div className="flex justify-around pt-4">
+                <Link href={'/'}>Homepage</Link>
+                
+                <div>
+                    <input 
+                        placeholder="Search"
+                        className="
+                            bg-slate-200 text-slate-900
+                            py-1
+                            pl-2 
+                            rounded-md
+                            w-40"/>
+                </div>
 
-            <CartButtonWrapper>
-                <CartComponent/>
-            </CartButtonWrapper>
-
-            
+                <CartButtonWrapper>
+                    <CartComponent/>
+                </CartButtonWrapper>
 
             </div>
+       
 
         </header>
     )

@@ -19,7 +19,7 @@ export const CartPage = async() => {
             pt-2
             flex flex-col
             justify-between
-            bg-white rounded-md
+            bg-slate-50 rounded-md
             dark:bg-slate-900
             w-full">
 

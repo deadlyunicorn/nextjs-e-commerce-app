@@ -95,7 +95,7 @@
 
 @keyframes appear {
     0%{
-        transform: translateY(80vh);
+        transform: translateY(85vh);
     }
     100%{
         transform: translateY(0vh);
@@ -103,7 +103,7 @@
 }
 
 .animation-disappear[data-cartEnabled=false][data-hidden=false]{
-    transform: translateY(80vh);
+    transform: translateY(85vh);
     animation: disappear 2s;
 }
 
@@ -116,7 +116,7 @@
     99%{
 
         display: flex;
-        transform: translateY(80vh);
+        transform: translateY(85vh);
     }
     100%{
         display: none;

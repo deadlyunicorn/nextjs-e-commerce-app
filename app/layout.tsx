@@ -39,6 +39,7 @@ export default function RootLayout(
         {/* // to-violet-300 */}
 
         <div className='
+          mt-[15vh]
           xl:max-w-4xl 
           md:max-w-3xl
           text-center xs:px-5
