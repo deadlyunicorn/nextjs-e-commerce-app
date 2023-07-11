@@ -26,6 +26,8 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
     return (
         <>
         {cart&&
+
+        //Above here should be the nav bar - header etc.
             <div 
                 className="
                 rounded-md
@@ -46,7 +48,8 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
                     xl:max-w-4xl 
                     md:max-w-3xl
                     text-center xs:px-5
-                    max-w-[100%]">
+                    pb-6
+                    max-w-[100%] z-30 h-fit">
 
                 <div className="w-full flex justify-end pr-2 py-1">
 
@@ -63,7 +66,16 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
                 </div>
             
                 {children}
+                
 
+
+            </div>
+
+            <div 
+                    onClick={()=>{
+                        dispatch(setCart(false))
+                    }}
+                    className="fixed h-full w-[100vw] bottom-0 left-0 z-20">
 
             </div>
 
