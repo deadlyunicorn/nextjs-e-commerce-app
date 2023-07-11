@@ -13,7 +13,7 @@ export const CartButtonWrapper = ({children}:{children:ReactNode}) => {
     return (
 
         <div>
-            <button onClick={()=>{dispatch(setCart(true))}}>
+            <button onClick={()=>{dispatch(setCart(!cart))}}>
                 {children}
             </button>
 
