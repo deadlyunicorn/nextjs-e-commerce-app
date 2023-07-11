@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## E-store built with Next.JS 13
+---
+### About
+I built this for fun, in order to practise my Next.JS - React.JS. I might use this project as template for future projects - or if I turn into a freelancer heheh. 
 
-## Getting Started
+**Project so far**
 
-First, run the development server:
+ + Can show available products
+ + Can add items to cart
+ + Dark mode <3
+ + Responsive design
+ + 'Categories' and 'Explore' pages
+ + Loaders (needs some CSS update tho)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+**To do list**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [ ] Create a navigation bar
+- [ ] Footer with needed fields (about, terms etc.. general footer of an eshop)
+- [ ] Custom checkout page 
+- [ ] /admin page. Admins can update the products from there. (Especially useful in this case, as I couldn't find any 'team' functionality in Commerce.js)
+- [ ] User Login -> View the same cart on multiple devices, store your creds for the next order, etc. *MIGHT NOT DO THIS*
+- [ ] Maybe Google Analytics, most likely not here.
+### Technologies used
++ Next.JS 13 - App Router
++ Deployed with Vercel (check the link to webpage on GitHub)
++ TailwindCSS
++ Commerce.js
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+	(I was looking for something free. That one had 2% commission on orders. I didn't plan to actually sell things, so we are good. I didn't use the driver. I did it using their API with Next.JS 13 fetch().  
+	
+	---
+	Alternatives I could use  
+	
+	+ Saleor (Though there was a bit of set up needed, if I wanted to use it in the future without paying a fee. I've noticed some high latency with Commerce.js, maybe it would be better with Saleor Cloud during development..)  
+	+ Some cloud database and design the schemas myself - handle auth etc... (Some options: Supabase (non commercial use), MongoDB, Firebase..)
+	
+	
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Vent
+Ahh, that was perhaps the last project I will ever start with React. I am planning to start using Svelte. I also feel like Flutter > ReactNative, so React will kinda feel like nostalgy. I am planning on finishing all of the other unfinished projects by Summer's 2023 end. 
