@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from "react"
+import { ReactNode, useEffect } from "react"
 import { setCart } from "@/app/(lib)/components/redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../(lib)/components/redux/store";
@@ -11,6 +11,16 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
     
     const cart = useSelector((state:RootState)=> state.cart.value);
     const dispatch = useDispatch();
+
+
+    useEffect(()=>{
+
+        document.addEventListener('keydown', e => {
+            if (e.code=='Escape'){
+                dispatch(setCart(false))
+            }
+        })
+    },[])
 
     
     return (
