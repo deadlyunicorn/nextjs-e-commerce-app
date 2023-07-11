@@ -1,15 +1,15 @@
 import { Cart } from "@chec/commerce.js/types/cart";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState:{ value: undefined|Cart} = {
-    value : undefined
+const initialState:{ value: boolean} = {
+    value : false
 }
 
 export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        setCart : (state, action:PayloadAction<Cart>) =>{
+        setCart : (state, action:PayloadAction<boolean>) =>{
             state.value = action.payload
         }
     }
