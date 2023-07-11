@@ -265,7 +265,7 @@ const CasualSpan = ({children}:{children:ReactNode}) => (
 
 
         <div className="
-            z-10
+            z-30
             bottom-0 left-0 
             absolute w-fit  
             md:fixed md:w-[100vw]
