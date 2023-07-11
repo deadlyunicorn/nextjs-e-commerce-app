@@ -23,6 +23,7 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
                 animation-appear
                 bg-slate-100
                 dark:bg-slate-900
+                backdrop-blur-lg
                 bg-opacity-90
                 dark:bg-opacity-90
                 z-20
