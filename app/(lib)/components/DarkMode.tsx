@@ -7,7 +7,7 @@ const DarkMode = () => {
 
 
 
-    const [darkMode,setDarkMode] = useState(false);
+    const [darkMode,setDarkMode] = useState(true);
 
     useEffect(()=>{
         
@@ -65,7 +65,7 @@ const DarkMode = () => {
                     <div 
                     id='dark-mode-button'
                     className="
-                    dark:bg-blue-900
+                    dark:bg-slate-900
                     bg-yellow-400
                         absolute 
                         h-5 w-5 
