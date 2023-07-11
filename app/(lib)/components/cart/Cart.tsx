@@ -10,7 +10,7 @@ const CartComponent = async () => {
     return (
         <>
             <div>
-                <Link href="/cart" className="group">
+                <div className="group">
                     <figure className="flex items-center gap-x-1">
                         
                         <svg 
@@ -39,7 +39,7 @@ const CartComponent = async () => {
 
 
 
-                </Link>
+                </div>
 
                 {/* Added: show 0 when cart hasn't loaded yet */}
             </div>
