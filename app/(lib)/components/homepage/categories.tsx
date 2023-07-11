@@ -24,10 +24,13 @@ const Categories = async() => {
                     Categories
             </h3>
             <div>
-                <ul className="grid-cols-2 grid">
+                <ul className="grid-cols-2 grid pb-4">
                     {categories.map(category=>(
-                        <li key={category.id}>
-                            <Link href={`/category/${category.slug}/1`}>{category.name}</Link>
+                        <li 
+                            key={category.id}>
+                            <Link 
+                                className="hover:underline"
+                                href={`/category/${category.slug}/1`}>{category.name}</Link>
                         </li>
                     ))}
                 </ul>
