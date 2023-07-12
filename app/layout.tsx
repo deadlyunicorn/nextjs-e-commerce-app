@@ -53,7 +53,8 @@ export default function RootLayout(
               </CartClientWrapper>
 
               <div className='
-                mt-[15vh]
+                w-full
+                mt-[5vh] 
                 xl:max-w-4xl 
                 md:max-w-3xl
                 text-center xs:px-5
