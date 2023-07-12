@@ -13,7 +13,6 @@ export async function generateMetadata({params:{permalink}}:{params:{permalink:s
 
 }
 
-//generateMetadata() doesn't seem to work properly..
 
 
 
