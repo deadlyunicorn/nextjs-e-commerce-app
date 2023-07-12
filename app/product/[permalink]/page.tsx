@@ -1,5 +1,5 @@
 import { fetchItems } from "@/app/(lib)/api/items";
-import ProductPage from "@/app/(lib)/components/product/product-page";
+import ProductPage from "@/app/product/[permalink]/product-page";
 
 const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
 
