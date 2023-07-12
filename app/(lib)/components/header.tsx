@@ -11,8 +11,11 @@ export default function Header(){
         <header 
             className="
                 flex flex-col fixed top-0 left-0
-                dark:bg-slate-900 dark:bg-opacity-80
-                bg-slate-100 bg-opacity-80
+                bg-gradient-to-b
+                dark:from-[#0f172acc]
+                dark:to-[#020617cc]
+                from-[#f1f5f9cc]
+                to-[#e2e8f0cc]
                 backdrop-blur-md 
                 z-10 
                 h-[15vh] w-[100vw]

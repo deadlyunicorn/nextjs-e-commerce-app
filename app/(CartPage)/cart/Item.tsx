@@ -18,8 +18,10 @@ const CartItem = async({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
                 className="
                 rounded-md
-                hover:bg-opacity-5
-                bg-black bg-opacity-10
+                bg-slate-200
+                hover:bg-slate-100
+                dark:hover:bg-[#020617aa]
+                dark:bg-slate-950
                 items-center
                 flex ml-2">
 
