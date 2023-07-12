@@ -1,4 +1,4 @@
-import { ProductFallback } from "@/app/(lib)/components/product/product-page";
+import { ProductFallback } from "@/app/product/[permalink]/product-page";
 import { Recommendation_Fallback } from "@/app/(lib)/components/product/recommendations";
 
 export default function ProductLoader(){
