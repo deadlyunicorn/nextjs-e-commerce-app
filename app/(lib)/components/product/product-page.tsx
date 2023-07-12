@@ -34,8 +34,6 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
                 dark:bg-slate-200 dark:bg-opacity-5
                 bg-slate-900 bg-opacity-5
 
-
-
                 ">
 
                 <Suspense fallback={<Recommendation_Fallback/>}>
@@ -73,10 +71,10 @@ const ProductInfo = async({listing}:{listing:Product}) => {
 
         <>
         <div 
-                className=" 
-                flex flex-wrap
-                justify-center
-                ">
+            className=" 
+            flex flex-wrap
+            justify-center
+            ">
 
             <Link 
                 href={`/product/${listing.permalink}`}>
@@ -99,7 +97,7 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                         max-w-[100%]" />
 
                     <figcaption className="
-                        my-4 min-h-[50px]
+                        mt-4 min-h-[50px]
                         text-4xl
                         group-hover:text-slate-600 
                         dark:group-hover:text-slate-50 
@@ -107,19 +105,12 @@ const ProductInfo = async({listing}:{listing:Product}) => {
 
                         {listing.name}
                     </figcaption>
+                    
+                    
                 </figure>
                 
                 
             </Link>
-            <div className="
-                flex flex-col 
-                justify-between ">
-                
-              
-
-               
-
-            </div>
                     
         </div>
         
@@ -128,7 +119,26 @@ const ProductInfo = async({listing}:{listing:Product}) => {
             flex-wrap
             flex flex-col
             text-xl font-light 
-            w-[300px] min-h-[150px] pt-10 ">
+            w-[300px] min-h-[150px] pt-2 ">
+
+            <div className="
+                flex flex-col 
+                justify-between 
+                py-2">
+
+                        <p>
+                            {listing.sku?<span className="text-sm">SKU: {listing.sku}</span>:" "}
+                        </p>
+                        <p>
+                            {listing.inventory.available>0 && listing.inventory.available<15
+                                ?<em className="text-red-600 font-bold underline">Only {listing.inventory.available} left</em>
+                                :" "}
+
+                        </p>
+               
+
+            </div>
+
             {
             listing.description
                 ?<div dangerouslySetInnerHTML={{__html:listing.description}}/>
