@@ -83,3 +83,9 @@ main{
     }
 }
 
+
+
+#categories li:nth-child(even) div span{
+
+    right:0px;
+}
