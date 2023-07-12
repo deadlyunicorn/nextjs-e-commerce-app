@@ -19,13 +19,16 @@ export default function Header(){
                 from-[#f1f5f9cc]
                 to-[#e2e8f0cc]
                 backdrop-blur-md 
-                z-10 
-                h-[15vh] w-[100vw]
-                px-10 py-4">
+                z-10
+                h-[15vh] w-full
+                px-1
+                sm:px-10 py-1 sm:py-2">
 
             
             <Link href={'/'} className="
-                text-4xl
+                text-lg
+                xs:text-2xl
+                sm:text-3xl
                 bg-gradient-to-b 
                 dark:from-blue-300 dark:to-green-50
                 from-blue-600 to-blue-400
@@ -53,7 +56,8 @@ export default function Header(){
                             py-1
                             pl-2 
                             rounded-md
-                            w-60"/>
+                            w-24
+                            xs:w-60"/>
                 </div>
 
                 <CartButtonWrapper>
