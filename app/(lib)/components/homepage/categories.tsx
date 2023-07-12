@@ -26,10 +26,33 @@ const Categories = async() => {
                 <ul className="grid-cols-2 grid pb-4">
                     {categories.map(category=>(
                         <li 
+                            className="flex justify-center"
                             key={category.id}>
-                            <Link 
-                                className="hover:underline"
-                                href={`/category/${category.slug}/1`}>{category.name}</Link>
+
+                            <div className="w-fit relative group">
+
+                                <span 
+                                    className="
+                                    px-2 py-1
+                                    bottom-6 rounded-md
+                                    backdrop-blur-md
+                                    dark:bg-slate-200 dark:bg-opacity-20
+                                    bg-slate-900  bg-opacity-5
+                                    absolute hidden 
+                                    group-hover:inline">
+
+                                    {category.description}
+                                    
+                                </span>
+
+                                <Link 
+                                    className="hover:underline peer"
+                                    href={`/category/${category.slug}/1`}>
+                                        {category.name}
+                                </Link>
+                            </div>
+
+                            
                         </li>
                     ))}
                 </ul>
