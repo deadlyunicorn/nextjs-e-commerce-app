@@ -10,7 +10,9 @@ export default function Header(){
 
         <header 
             className="
-                flex flex-col fixed top-0 left-0
+                flex flex-col 
+                items-center
+                fixed top-0 left-0
                 bg-gradient-to-b
                 dark:from-[#0f172acc]
                 dark:to-[#020617cc]
@@ -34,7 +36,12 @@ export default function Header(){
 
             {/* <CartElement/> */}
 
-            <div className="flex justify-between pt-4">
+            <div className="
+                max-w-[100%]
+                xl:max-w-4xl 
+                md:max-w-3xl
+                w-full
+                flex justify-between pt-4">
                 
                 <div>
                     <input 
