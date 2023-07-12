@@ -6,6 +6,7 @@ import { CookieVerify } from './(lib)/components/cart/Initialize_Cart'
 import CartProvider from './(lib)/components/redux/Provider'
 import { CartClientWrapper } from './(CartPage)/CartClient'
 import CartPage from './(CartPage)/cart/CartPage'
+import Banner from './(lib)/components/Banner'
 
 
 export const metadata = {
@@ -45,7 +46,7 @@ export default function RootLayout(
               {/* provider not needed? */}
 
               <Header/>
-            
+              <Banner/>
             
               <CartClientWrapper>
                 <CartPage/>
