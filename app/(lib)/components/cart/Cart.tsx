@@ -33,7 +33,8 @@ const CartComponent = async () => {
                         text-slate-900 group-hover:text-slate-600
                         dark:text-slate-300 dark:group-hover:text-slate-50
                         ">
-                            {cart?.total_items||0} item(s)
+                            <span>{cart?.total_items || '0'}</span>
+                            <span className="hidden xs:inline">&nbsp;item(s)</span>
                         </figcaption>
                     </figure>
 
