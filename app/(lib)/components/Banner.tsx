@@ -3,9 +3,9 @@ import '@/app/(lib)/styles/animations.scss'
 const Banner = () => (
     <div className='
                 bg-black
-                mt-[15vh]
-                fixed top-0 left-0 w-full
-                z-20 
+                mt-[13vh]
+                w-full overflow-hidden
+                z-0
                 h-7
 
                 '>

@@ -27,7 +27,8 @@ export default function Header(){
             <Link href={'/'} className="
                 text-4xl
                 bg-gradient-to-b 
-                from-blue-300 to-green-50
+                dark:from-blue-300 dark:to-green-50
+                from-blue-600 to-blue-400
                 bg-clip-text text-transparent
                 drop-shadow-[1px_1px_2px_rgba(100,200,100,1)]
             ">
@@ -47,7 +48,8 @@ export default function Header(){
                     <input 
                         placeholder="Search for cool items."
                         className="
-                            bg-slate-200 text-slate-900
+                            bg-slate-50
+                            dark:bg-slate-200 text-slate-900
                             py-1
                             pl-2 
                             rounded-md
