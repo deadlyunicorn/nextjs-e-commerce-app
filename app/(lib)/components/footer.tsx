@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import DarkMode from "./DarkMode";
 import { ReactNode } from "react";
-import Categories from "./homepage/categories";
+import Categories from "./categories";
 import { LinkNewTab } from "@/app/about/page";
 
 export default function Footer() {

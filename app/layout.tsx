@@ -1,7 +1,7 @@
 import './globals.css'
 import Footer from '@/app/(lib)/components/footer'
 import Header from '@/app/(lib)/components/header'
-import Categories from './(lib)/components/homepage/categories'
+import Categories from './(lib)/components/categories'
 import { CookieVerify } from './(lib)/components/cart/Initialize_Cart'
 import CartProvider from './(lib)/components/redux/Provider'
 import { CartClientWrapper } from './(CartPage)/CartClient'
