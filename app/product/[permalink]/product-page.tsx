@@ -5,8 +5,8 @@ import { AddToCart } from "@/app/(lib)/components/cart/add_Cart";
 import { Recommendation, Recommendation_Fallback } from "@/app/(lib)/components/product/recommendations";
 import { Suspense } from "react";
 import { ProductCollection } from "@chec/commerce.js/features/products";
-import PriceTag from "./priceTag";
-import { getCart } from "../../api/cart";
+import PriceTag from "../../(lib)/components/product/priceTag";
+import { getCart } from "../../(lib)/api/cart";
 
 const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollection["data"]}) =>{
 
