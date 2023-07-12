@@ -27,7 +27,11 @@ export function Recommendation({listing}:{listing:Product}){
             className="rounded-md min-h-[100px] min-w-[100px] aspect-square" />
             
          <div
-            className="flex flex-col justify-between flex-wrap">
+            className="
+                flex flex-col 
+                justify-between 
+                flex-wrap 
+                overflow-x-hidden w-full">
             <p className="
                 mt-2 min-h-[50px] 
                 text-slate-900 group-hover:text-slate-600
@@ -37,6 +41,8 @@ export function Recommendation({listing}:{listing:Product}){
             </p>
             <div>
                 <div className="
+                    price-tag-multiple
+
                     bg-gradient-to-r  bg-clip-text
                     from-red-500 to-yellow-500 
                     group-hover:from-red-400 group-hover:to-yellow-400
@@ -44,7 +50,6 @@ export function Recommendation({listing}:{listing:Product}){
                     dark:from-red-400 dark:to-yellow-300 
                     dark:group-hover:from-red-300 dark:group-hover:to-yellow-200
                     text-transparent
-                    price-tag-multiple
                     ">
                     {listing.price["formatted_with_symbol"]}
                     <p className="text-xs">&nbsp;(χωρίς ΦΠΑ)</p>
