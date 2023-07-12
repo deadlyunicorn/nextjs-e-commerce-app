@@ -1,3 +1,6 @@
+/* *{
+    outline: red solid 2px;
+} */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,6 +36,7 @@ main{
 }
 
 .price-tag-multiple{
+    overflow-x: hidden;
     font-size: 1.5rem/* 24px */;
     line-height: 2rem/* 32px */;
     display: flex;
