@@ -17,8 +17,7 @@ const Categories = async() => {
         <aside className="
         rounded-md
         bg-slate-200
-      dark:bg-slate-50 dark:bg-opacity-10 
-        mt-20">
+      dark:bg-slate-600 dark:bg-opacity-10">
             <h3 className="
                 py-2">
                     Categories
