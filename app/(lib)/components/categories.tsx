@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { CategoryCollection } from "@chec/commerce.js/features/categories";
 
-import { fetchItems } from "../../api/items";
-import { fetchCategories as fetchCategories } from "../../api/categories";
+import { fetchItems } from "../api/items";
+import { fetchCategories as fetchCategories } from "../api/categories";
 
 const Categories = async() => {
 
@@ -23,7 +23,10 @@ const Categories = async() => {
                     Categories
             </h3>
             <div>
-                <ul className="grid-cols-2 grid pb-4">
+                <ul 
+                    id="categories"
+                    className="grid-cols-2 grid pb-4">
+                        
                     {categories.map(category=>(
                         <li 
                             className="flex justify-center"
@@ -33,12 +36,15 @@ const Categories = async() => {
 
                                 <span 
                                     className="
+
                                     px-2 py-1
-                                    bottom-6 rounded-md
+                                    bottom-6
+                                    rounded-md
                                     backdrop-blur-md
                                     dark:bg-slate-200 dark:bg-opacity-20
                                     bg-slate-900  bg-opacity-5
                                     absolute hidden 
+                                    w-[40vw] max-w-[300px]
                                     group-hover:inline">
 
                                     {category.description}
