@@ -17,7 +17,9 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
             py-2 rounded-md
             flex flex-wrap 
             justify-evenly 
-            border border-black">
+            dark:bg-slate-200 dark:bg-opacity-5
+            bg-slate-900 bg-opacity-5
+            ">
             
                 <Suspense fallback={<ProductFallback/>}>
                     <ProductInfo listing={listing}/>
@@ -29,7 +31,12 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
                 rounded-md
                 flex gap-x-5 mt-10 
                 overflow-x-scroll 
-                border border-black">
+                dark:bg-slate-200 dark:bg-opacity-5
+                bg-slate-900 bg-opacity-5
+
+
+
+                ">
 
                 <Suspense fallback={<Recommendation_Fallback/>}>
 
