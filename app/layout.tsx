@@ -38,36 +38,39 @@ export default function RootLayout(
         {/* // from-slate-100 */}
         {/* // to-violet-300 */}
 
-        <div className='
-          mt-[15vh]
-          xl:max-w-4xl 
-          md:max-w-3xl
-          text-center xs:px-5
-          max-w-[100%]'>
+        
+            <CookieVerify/>
 
             <CartProvider>
               {/* provider not needed? */}
+
               <Header/>
             
-              <CookieVerify/>
             
               <CartClientWrapper>
                 <CartPage/>
               </CartClientWrapper>
-              {children}
 
+              <div className='
+                mt-[15vh]
+                xl:max-w-4xl 
+                md:max-w-3xl
+                text-center xs:px-5
+                max-w-[100%]'>
+
+                  {children}
+
+                  
+
+              </div>
 
             </CartProvider>
 
 
-            <section id='categories'>
-
-              <Categories/>
-            </section>
+            
 
             <Footer/>
         
-        </div>
     
       </body>
     </html>
