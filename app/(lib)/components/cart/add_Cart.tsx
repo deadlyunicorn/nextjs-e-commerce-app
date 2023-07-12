@@ -242,10 +242,12 @@ export const Cart_Success = ({quantity,item_name}:{quantity:number,item_name:str
     return (
         <CasualSpan>
             <div className="
-                dark:bg-opacity-20
-                dark:bg-slate-950
-                bg-slate-200 
-                bg-opacity-20
+                dark:bg-opacity-60
+                dark:bg-green-600
+                bg-green-300
+                text-slate-900
+                dark:text-slate-200
+                bg-opacity-60
 
                 py-5 
                 rounded-md md:rounded-none">
@@ -261,11 +263,14 @@ export const Cart_Failure = ({error}:{error:string}) => {
     return (
         <CasualSpan>
             <div className="
-            bg-opacity-20
-            dark:bg-opacity-20
+            bg-opacity-60
+            dark:bg-opacity-60
 
-            dark:bg-red-950
-            bg-red-200 
+            dark:bg-red-600
+            bg-red-300 
+            
+            text-slate-900
+            dark:text-slate-200
             py-5 
             rounded-md md:rounded-none ">
                 Failed: {error}
