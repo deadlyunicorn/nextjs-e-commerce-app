@@ -13,6 +13,9 @@ export async function generateMetadata({params:{permalink}}:{params:{permalink:s
 
 }
 
+//generateMetadata() doesn't seem to work properly..
+
+
 
 const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
 
