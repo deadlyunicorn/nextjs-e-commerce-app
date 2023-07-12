@@ -1,16 +1,28 @@
 import { fetchItems } from "@/app/(lib)/api/items";
 import ProductPage from "@/app/product/[permalink]/product-page";
 
+export async function generateMetadata({params:{permalink}}:{params:{permalink:string}}){
+    const product = [...await fetchItems({
+        "query":`${permalink}`  
+    })][0]
+
+    return{
+        title: product.name,
+        description: product.description,
+    }
+
+}
+
+
 const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
 
     const limit = 20;
 
-    const items = await fetchItems({
-        "limit":`${limit}`
-    });
-
-    const listing = items.filter(item=>item.permalink==permalink)[0]
+    const listing = [...await fetchItems({
+        "query":`${permalink}`  
+    })][0];
     
+
     if (listing){
 
         const categories = listing.categories
