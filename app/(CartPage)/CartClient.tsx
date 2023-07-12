@@ -5,6 +5,7 @@ import { setCart } from "@/app/(lib)/components/redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../(lib)/components/redux/store";
 import "@/app/(lib)/styles/animations.scss"
+import { usePathname } from "next/navigation";
 
 
 export const CartClientWrapper= ({children}:{children:ReactNode})=>{
@@ -12,6 +13,8 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
     const cart = useSelector((state:RootState)=> state.cart.value);
     const dispatch = useDispatch();
     const [hidden,setHidden]=useState(true);
+
+    const pathname = usePathname();
 
     useEffect(()=>{
         if(cart==true){
@@ -28,6 +31,10 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
             }
         })
     },[])
+
+    useEffect(()=>{
+        dispatch(setCart(false))
+    },[pathname])
 
     
     return (
