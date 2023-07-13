@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import DarkMode from "./DarkMode";
+import DarkMode from "../../../(Shared)/DarkMode";
 import { ReactNode } from "react";
 import Categories from "./categories";
 import { LinkNewTab } from "@/app/(User)/about/page";
