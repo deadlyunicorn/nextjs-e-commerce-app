@@ -16,7 +16,7 @@ const AdminPage= async()=>{
     )
 }
 
-const CoolLink = ({href,children}:{href:string,children:ReactNode}) => (
+export const CoolLink = ({href,children}:{href:string,children:ReactNode}) => (
 
     <>
         <Link 
