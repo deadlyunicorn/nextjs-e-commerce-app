@@ -1,4 +1,3 @@
-import { getServerSession } from "next-auth"
 import Link from "next/link"
 import { ReactNode } from "react"
 
@@ -16,7 +15,7 @@ const AdminPage= async()=>{
     )
 }
 
-export const CoolLink = ({href,children}:{href:string,children:ReactNode}) => (
+const CoolLink = ({href,children}:{href:string,children:ReactNode}) => (
 
     <>
         <Link 
@@ -47,6 +46,12 @@ export const LoginButtons = () => {
     )
 
 }
+export const SignOutButton = () => (
+    <CoolLink 
+        href="/api/auth/signout">
+        Sign out
+    </CoolLink> 
+)
 
 export const NotLoggedIn = () => {
     return(

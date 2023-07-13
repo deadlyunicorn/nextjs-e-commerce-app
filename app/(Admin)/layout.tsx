@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth/next';
 import DarkMode from '../(Shared)/DarkMode'
 import './globals.css'
-import { CoolLink, LoginButtons, NotLoggedIn } from './admin/page';
+import {  LoginButtons, NotLoggedIn, SignOutButton } from './admin/page';
 
 
 export const metadata = {
@@ -39,10 +39,7 @@ export default async function RootLayout(
           ?<aside>
             Logged in with {session.user?.email}      
 
-            <CoolLink 
-                href="/api/auth/signout">
-                Sign out
-            </CoolLink>      
+            <SignOutButton/>     
           </aside>
           :<LoginButtons/>
           
