@@ -1,5 +1,5 @@
 import { fetchItems } from "@/app/(User)/(lib)/api/items";
-import ProductPage from "@/app/product/[permalink]/product-page";
+import ProductPage from "@/app/(User)/product/[permalink]/product-page";
 
 export async function generateMetadata({params:{permalink}}:{params:{permalink:string}}){
     const product = [...await fetchItems({
