@@ -1,42 +1,20 @@
-'use client'
-
-import { useSession } from "next-auth/react"
-import { SessionProvider } from "next-auth/react"
+import { getServerSession } from "next-auth"
 import Link from "next/link"
 import { ReactNode } from "react"
 
-const AdminPage=()=>{
+const AdminPage= async()=>{
+
+
 
 
     return(
-        <SessionProvider>
 
-            <main>
-
-                <SessionComponent/>
-                {/* {Login.id + " " + Login.email} */}
-                hello world
-                <CoolLink 
-                    href="/api/auth/signin">
-                    Sign in
-                </CoolLink>
-                <CoolLink 
-                    href="/api/auth/signin/github">
-                    Sign in with Github
-                </CoolLink>
-                <CoolLink 
-                    href="/api/auth/signout">
-                    Sign out
-                </CoolLink>
-               
-
-            </main>
-        </SessionProvider>
+        <LoggedIn/>
 
     )
 }
 
-const CoolLink = ({href,children}:{href:string,children:ReactNode}) => (
+export const CoolLink = ({href,children}:{href:string,children:ReactNode}) => (
 
     <Link 
         className="px-2 py-1 bg-white rounded-md text-black"
@@ -48,19 +26,42 @@ const CoolLink = ({href,children}:{href:string,children:ReactNode}) => (
 
 )
 
-const SessionComponent = () => {
 
-    const { data: session, status } = useSession()
+export const LoginButtons = () => {
 
     return (
-        <div>
-            ABC
-            {session?.user?.name}
-                {session?.user?.email + " "}
+        <aside>
+            <CoolLink 
+                href="/api/auth/signin">
+                Sign in
+            </CoolLink>
+            <CoolLink 
+                href="/api/auth/signin/github">
+                Sign in with Github
+            </CoolLink>
             
+        </aside>
+    )
 
-        </div>
+}
+
+export const NotLoggedIn = () => {
+    return(
+        <main>
+            You must login to view this content
+        </main>
     )
 }
+
+const LoggedIn = () => {
+
+    return (
+        <main>
+            Welcome back!
+        </main>
+    )
+    
+}
+
 
 export default AdminPage;

@@ -1,16 +1,22 @@
+import { getServerSession } from 'next-auth/next';
 import DarkMode from '../(Shared)/DarkMode'
 import './globals.css'
+import { CoolLink, LoginButtons, NotLoggedIn } from './admin/page';
 
 
 export const metadata = {
   title: 'Admin Panel',
 }
 
-export default function RootLayout(
+export default async function RootLayout(
   {children}: 
   {children: React.ReactNode}
 ) {
  
+
+  const session = await getServerSession();
+
+
   return (
     <html lang="en">
 
@@ -29,11 +35,25 @@ export default function RootLayout(
 
         <header>
 
-          What a great day
+          {session
+          ?<aside>
+            Logged in with {session.user?.email}      
+
+            <CoolLink 
+                href="/api/auth/signout">
+                Sign out
+            </CoolLink>      
+          </aside>
+          :<LoginButtons/>
+          
+          }
 
         </header>
 
-                  {children}
+          {session
+          ?children
+          :<NotLoggedIn/>
+          }
 
         <footer>
 
