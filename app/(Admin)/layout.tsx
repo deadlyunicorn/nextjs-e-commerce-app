@@ -1,3 +1,4 @@
+import DarkMode from '../(Shared)/DarkMode'
 import './globals.css'
 
 
@@ -13,11 +14,32 @@ export default function RootLayout(
   return (
     <html lang="en">
 
-      <body className="">
+      <body className="
+      bg-gradient-to-b
+      text-slate-900
+      
+      dark:text-slate-200
+      from-slate-100
+      to-slate-300
+      dark:from-slate-900
+      from-90%
+      dark:to-black
+      flex flex-col
+      items-center mt-5">
 
+        <header>
+
+          What a great day
+
+        </header>
 
                   {children}
 
+        <footer>
+
+          <DarkMode/>
+
+        </footer>
 
     
       </body>
