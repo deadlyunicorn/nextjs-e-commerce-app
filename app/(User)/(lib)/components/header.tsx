@@ -1,8 +1,6 @@
 import Link from "next/link";
 import CartComponent from "./cart/Cart";
 import { CartButtonWrapper } from "./cart/CartWrap";
-import { CartClientWrapper } from "@/app/(User)/CartClient";
-import CartPage from "@/app/(User)/cart/CartPage";
 
 export default function Header() {
 
