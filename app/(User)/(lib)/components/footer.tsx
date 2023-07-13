@@ -60,9 +60,13 @@ export default function Footer() {
                     <LinkStyled href={'/about'}>
                         About
                     </LinkStyled>
-                    <LinkStyled href={'/about'}>
-                        Contact
+                    <LinkStyled href={'/admin'}>
+                        Admin Panel
                     </LinkStyled>
+                    {/* <LinkStyled href={'/about'}>
+                        Contact
+                    </LinkStyled> */}
+                    
                   
                 </div>
 
