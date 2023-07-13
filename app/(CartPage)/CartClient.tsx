@@ -63,6 +63,7 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
                 left-0 bottom-0
                 fixed w-[100vw] 
                 h-[max(85vh,210px)]
+                overflow-y-auto
                 ">
 
             <div
