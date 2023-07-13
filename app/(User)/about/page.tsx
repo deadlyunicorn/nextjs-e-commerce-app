@@ -28,7 +28,7 @@ const About = () => (
 
             
 
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-center">
             
             <span>Made by&emsp;
                 <span className="text-transparent">
