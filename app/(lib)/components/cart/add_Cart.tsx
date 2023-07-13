@@ -68,12 +68,18 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
         
             setLoading(true);
 
-
             const requestedCartItems = (cartItem ? cartItem.quantity : 0)+Number(quantity)
             try{
 
 
-                if ( requestedCartItems > 10){
+                
+                if (requestedCartItems > item.inventory.available){
+
+                    const errorMessage = `There are only ${item.inventory.available} available.${cartItem?.quantity? ` You have ${cartItem.quantity} in cart..`:""}`;
+                    throw (errorMessage);
+                
+                }
+                else if( requestedCartItems > 10 ){
 
                     throw (`Cart capacity for this item reached ${(cartItem ? cartItem.quantity : 0)+Number(quantity)}/10`)
                 
