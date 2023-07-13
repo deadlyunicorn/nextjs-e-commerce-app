@@ -282,7 +282,7 @@ export const Cart_Failure = ({error}:{error:string}) => {
 
 const CasualSpan = ({children}:{children:ReactNode}) => (
 
-
+// On mobile fixed will not work as expected (the component might be behind browser navbar..)
         <div className="
             z-30
             rounded-md
