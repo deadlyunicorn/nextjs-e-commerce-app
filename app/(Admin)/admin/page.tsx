@@ -9,7 +9,9 @@ const AdminPage= async()=>{
 
     return(
 
-        <LoggedIn/>
+        <div>
+            <LoggedIn/>
+        </div>
 
     )
 }
