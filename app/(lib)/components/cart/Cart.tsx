@@ -14,12 +14,12 @@ const CartComponent = async () => {
                     <figure className="flex items-center gap-x-1">
                         
                         <svg 
-                            viewBox="0 0 18 18"
+                            viewBox="0 0 16 16"
                             className="
                             fill-none 
                             stroke-slate-900 group-hover:stroke-slate-600
                             dark:stroke-slate-300 dark:group-hover:stroke-slate-50 
-                            w-8 h-8
+                            w-7 h-7
                             aspect-square ">
 
                             <path

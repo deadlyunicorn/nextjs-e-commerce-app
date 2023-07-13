@@ -61,7 +61,9 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
                 dark:bg-opacity-90
                 z-20
                 left-0 bottom-0
-                fixed w-[100vw] h-[85vh]">
+                fixed w-[100vw] 
+                h-[max(85vh,210px)]
+                ">
 
             <div
                 className="
