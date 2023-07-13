@@ -16,14 +16,15 @@ const AdminPage= async()=>{
 
 export const CoolLink = ({href,children}:{href:string,children:ReactNode}) => (
 
-    <Link 
-        className="px-2 py-1 bg-white rounded-md text-black"
-        href={href}>
+    <>
+        <Link 
+            className="px-2 py-1 bg-white rounded-md text-black"
+            href={href}>
 
-        {children}
-        
-    </Link>
-
+            {children}
+            
+        </Link>
+    </>
 )
 
 
