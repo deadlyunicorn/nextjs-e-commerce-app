@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth/next';
 import DarkMode from '../(Shared)/DarkMode'
 import './globals.css'
-import {  LoginButtons, NotLoggedIn, SignOutButton } from './admin/page';
+import { LoginButtons, NotLoggedIn, SignOutButton } from './components/Global';
 
 
 export const metadata = {
