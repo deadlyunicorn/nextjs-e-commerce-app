@@ -44,6 +44,8 @@ const DarkMode = () => {
     },[darkMode]);
 
     return (
+        <div className="flex gap-x-2">
+            Toggle Dark Mode : 
         <button 
             onClick={()=>{
                 if (
@@ -105,6 +107,9 @@ const DarkMode = () => {
 
             </div>
         </button>
+
+        </div>
+
     )
 }
 
