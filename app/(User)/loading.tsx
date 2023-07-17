@@ -1,4 +1,4 @@
-import LoadingScreen from "./loader/page";
+import LoadingScreen from "@/app/(User)/loader/page";
 
 export default function Loader(){
     return(
