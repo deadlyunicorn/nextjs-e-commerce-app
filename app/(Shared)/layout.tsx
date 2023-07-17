@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth/next';
 import DarkMode from '@/app/(Shared)/DarkMode'
 import './globals.css'
 import Link from 'next/link';
+import Footer from '../(User)/(lib)/components/footer';
 
 
 export const metadata = {
@@ -34,7 +35,12 @@ export default async function RootLayout(
       flex flex-col
       items-center mt-5">
 
-        <header>
+        <header className='
+          w-full py-10 
+            
+          flex gap-x-1 
+          justify-around items-center'>
+            <p> Log in to &apos;The Cool Webstore&apos; </p>    
 
 
         </header>
@@ -47,11 +53,13 @@ export default async function RootLayout(
           : children
           }
 
-        <footer>
-
-          <DarkMode/>
-
-        </footer>
+        <Footer>
+          You are viewing the Authentication Page.
+          <br/>
+          <Link
+            className='hover:underline' 
+            href={"/"}>Store Page</Link>
+        </Footer>
 
     
       </body>
