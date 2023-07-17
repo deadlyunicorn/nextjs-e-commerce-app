@@ -7,7 +7,7 @@ const DarkMode = () => {
 
 
 
-    const [darkMode,setDarkMode] = useState(false);
+    const [darkMode,setDarkMode] = useState(localStorage.theme === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches);
 
     useEffect(()=>{
         
