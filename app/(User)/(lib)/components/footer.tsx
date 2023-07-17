@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import Categories from "./categories";
 import { LinkNewTab } from "@/app/(User)/about/page";
 
-export default function Footer() {
+export default function Footer({children}:{children:ReactNode}) {
     return (
         <footer
             className='
@@ -41,13 +41,10 @@ export default function Footer() {
                     className="w-full text-center mt-1 mb-2"
                     id='categories'>
 
-                    <Categories />
-
+                    {children}
                 </section>
 
-                <div className="flex gap-x-2">
-                    Toggle Dark Mode : <DarkMode />
-                </div>
+                <DarkMode/>
 
                 <div 
                     className="

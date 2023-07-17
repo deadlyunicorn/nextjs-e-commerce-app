@@ -71,7 +71,9 @@ export default function RootLayout(
 
             
 
-            <Footer/>
+            <Footer>
+              <Categories />
+            </Footer>
         
     
       </body>
