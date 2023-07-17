@@ -39,7 +39,8 @@ export default function Error ({error}:{error:ErrorType}) {
                 onClick={()=>{
                     
                     router.replace("/");
-                    window.location.reload();
+                    window.location.reload(); //maybe replace with redirect('./')??
+                    
                     //we may also need to trigger a refresh..
                     //but not on the current path.
                     //Link might be okay?
