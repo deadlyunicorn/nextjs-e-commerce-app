@@ -9,9 +9,8 @@ export const CoolButton = ({children}:{children:ReactNode}) => (
     <>
         <div 
             className="
-            w-44 h-10 
             flex items-center justify-center
-             min-w-fit
+            w-fit
             text-slate-700
             bg-slate-300 hover:bg-slate-200
             rounded-md">
@@ -28,7 +27,10 @@ export const SignOutButton = () => {
 
     return(
         <button 
-            className="capitalize hover:underline"
+            
+            className="
+            w-44 h-10 
+            capitalize hover:underline"
             onClick={()=>{signOut()}}>
                 sign out
         </button>
@@ -37,9 +39,43 @@ export const SignOutButton = () => {
 
 export const NotLoggedIn = () => {
     return(
-        <main>
+        <main className="min-h-[70vh]">
             You must login to view this content
         </main>
     )
 }
 
+export const LoginButtons = ({setLoading}:{setLoading:(value:boolean)=>void}) => {
+
+
+
+    const providers = ["github","google"];
+
+    const LoginButton = ({provider}:{provider:string}) => (
+        <button 
+            onClick={()=>{
+                setLoading(true);
+                signIn(provider);
+            }}
+            className="
+            w-44 h-10 
+            capitalize">
+                {provider}
+        </button>
+    )
+
+    return (
+        <aside 
+            className="
+            gap-y-2
+            flex flex-col">
+            {providers
+            .map(provider=>(
+                <CoolButton key={provider}>
+                    <LoginButton provider={provider}/>
+                </CoolButton>
+            ))}
+        </aside>
+    )
+
+}
