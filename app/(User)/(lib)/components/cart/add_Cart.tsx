@@ -16,7 +16,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
 
     const [quantity, setQuantity] = useState(1);
     const [totalQuantity, setTotalQuantity] = useState(0);
-    const arr10 = [...Array(10).keys()];
+    const arr10 = [...Array(item.inventory.managed?(Math.min(item.inventory.available,10)):10).keys()];
     
     const router = useRouter();
     //used to refresh the page after adding to cart.
