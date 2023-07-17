@@ -62,7 +62,10 @@ export const CartPage = async() => {
                         </span>
                     </span>
                     <div className="py-2">
-                        <Checkout url={cart.hosted_checkout_url}/>
+                        {cart.total_items>0 
+                        ?<Checkout url={cart.hosted_checkout_url}/>
+                        :"You cart is empty"}
+                        
                     </div>
                 </div>
                 :<>Error no cart found, try refresing the page.. <br/> You might also need to enable cookies for this website..</>
