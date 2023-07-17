@@ -1,26 +1,35 @@
+import { fetchItems } from "@/app/(User)/(lib)/api/items"
 import Link from "next/link"
+import Image from "next/image"
 import { ReactNode } from "react"
+import { redirect } from "next/navigation"
 
 const AdminPage= async()=>{
 
-
+    redirect('/admin/items/default')
 
 
     return(
 
-        <div>
+        <main className="w-full sm:px-4">
             <LoggedIn/>
-        </div>
+        </main>
 
     )
 }
 
+const Search = () => {
+
+}
+
+
+
 const LoggedIn = () => {
 
     return (
-        <main>
+        <div>
             Welcome back!
-        </main>
+        </div>
     )
     
 }
