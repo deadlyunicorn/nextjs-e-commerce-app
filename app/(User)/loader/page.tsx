@@ -24,3 +24,20 @@ export default function LoadingScreen(){
         </div>
     )
 }
+
+//In case you need to fullscreen the loader in the future
+//add those classes:
+
+/*
+   bg-gradient-to-b
+        text-slate-900
+        
+        dark:text-slate-200
+        from-slate-100
+        to-slate-300
+        dark:from-slate-900
+        from-90%
+        dark:to-black
+            fixed left-0 bottom-0
+            w-full h-full
+*/
