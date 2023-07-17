@@ -1,7 +1,8 @@
 import { getServerSession } from 'next-auth/next';
 import DarkMode from '../(Shared)/DarkMode'
 import './globals.css'
-import { LoginButtons, NotLoggedIn, SignOutButton } from './components/Global';
+import { NotLoggedIn, SignOutButton } from '../(Shared)/components/Global';
+import Link from 'next/link';
 
 
 export const metadata = {
@@ -30,20 +31,34 @@ export default async function RootLayout(
       dark:from-slate-900
       from-90%
       dark:to-black
+
       flex flex-col
-      items-center mt-5">
+      items-center">
 
-        <header>
-
+        <header className='
+          w-full py-10 
+            
+          flex gap-x-1 
+          justify-around items-center'>
           {session
-          ?<aside>
-            Logged in with {session.user?.email}      
+          ?
+            <>
+            <p>Logged in as {session.user?.name}  </p>    
 
-            <SignOutButton/>     
-          </aside>
-          :<LoginButtons/>
+            <SignOutButton/>    
+            </>
+
+          :
+          <>
+          <p>Not logged in</p>    
+
           
-          }
+            <Link 
+              className='hover:underline capitalize'
+              href="/signin">Log in</Link>
+          </>
+          
+         }
 
         </header>
 
