@@ -73,7 +73,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
 
 
                 
-                if (requestedCartItems > item.inventory.available){
+                if ( item.inventory.managed && ( requestedCartItems > item.inventory.available ) ){
 
                     const errorMessage = `There are only ${item.inventory.available} available.${cartItem?.quantity? ` You have ${cartItem.quantity} in cart..`:""}`;
                     throw (errorMessage);
