@@ -6,13 +6,6 @@ import Image from "next/image";
 export const ChangeItemServer = ({item,categories}:{item:Product,categories:Category[]}) => {
 
     const itemCategoryNames = item.categories.map(category=>category.name);
-    const categoryIDs= categories.map(category=>category.slug);
-
-    const submitForm = async(formSubmit:any)=>{
-        "use server"
-        console.log(JSON.stringify(formSubmit.body))
-    }
-
 
 
     return (
@@ -25,7 +18,6 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                     text-lg 
                     grid gap-y-2">
 
-            <p>{JSON.stringify(categoryIDs)}</p>
 
 
                     <input
