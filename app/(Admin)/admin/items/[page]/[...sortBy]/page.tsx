@@ -1,16 +1,27 @@
-import { fetchItems } from "@/app/(User)/(lib)/api/items";
+import { fetchItems, fetchItemsADMIN } from "@/app/(User)/(lib)/api/items";
 
 import Link from "next/link";
 import Image from "next/image"
 import SortBy from "./SortBy";
 import { redirect } from "next/navigation"
 
-const ItemsList = async({params}:{params:{sortBy:string}}) => {
+const ItemsList = async({params}:{params:{page:string,sortBy:string[]}}) => {
 
+    const limit=4;
 
-    if(params.sortBy[1]!=undefined && params.sortBy[1]!="desc" ){
+    const page = +params.page;
+
+    if(!(page>0)){
+        redirect('/admin')
+    }
+
+    const sortingOrder = params.sortBy[1];
+
+    if(sortingOrder!=undefined && sortingOrder!="desc" ){
         redirect('./')
     }
+
+
 
     const sortOptions = ["created_at","updated_at","id","sort_order", "name", "price"]
     const sortBy = sortOptions.includes(String(params.sortBy[0]))
@@ -19,25 +30,41 @@ const ItemsList = async({params}:{params:{sortBy:string}}) => {
 
 
 
-    const items= await fetchItems({
-        limit:'20',
+    const items= await fetchItemsADMIN({
+        limit:String(limit),
         sortBy: sortBy,
-        sortDirection: params.sortBy[1] //or desc
-    
+        page: String(page),
+        sortDirection: sortingOrder //or desc
+    });
+    const nextPage= await fetchItemsADMIN({
+        limit:String(limit),
+        sortBy: sortBy,
+        page: String(page+1),
+        sortDirection: sortingOrder //or desc
     });
 
     return (
-        <main>
+        <main className="
+            w-full
+            flex flex-col items-center 
+            justify-start
+            ">
 
+            <div className="w-3/4
+            flex flex-col items-center 
+            justify-start">
 
-            <ul>
+            
+            <div aria-label="page number">Page Number: {page}</div>
+
+            <ul
+                className="w-full">
 
                 <li 
                     className="
                         py-4
                         grid-cols-4
                         grid 
-                        border
                         border-slate-200
                         dark:border-slate-800
                         w-full
@@ -77,7 +104,7 @@ const ItemsList = async({params}:{params:{sortBy:string}}) => {
                         
                         <Link 
                         
-                        href={`/${item.id}`}
+                        href={`/admin/edit/${item.id}`}
                         className="
                             backdrop-blur-sm
                             bg-slate-200 bg-opacity-20
@@ -90,16 +117,48 @@ const ItemsList = async({params}:{params:{sortBy:string}}) => {
                     </li>
                 ))
                 }
+
+                <li 
+                    className="
+                        py-4 
+                        grid grid-cols-2
+                        border
+                        border-slate-200
+                        dark:border-slate-800
+                        w-full 
+                        justify-items-center"
+                key="Next Page">
+
+                    {page>1
+                    ?
+                    <Link href={`/admin/items/${page-1}/${sortBy}/${sortingOrder}`}
+                    className="hover:underline">
+                        Previous Page
+                    </Link>
+                    :<div></div>
+                    }
+                    {nextPage?
+                    <Link href={`/admin/items/${page+1}/${sortBy}/${sortingOrder||""}`}
+                    className="hover:underline">
+                        Next Page
+                    </Link>
+                    :<div></div>
+                    }
+                    
+                </li>
             </ul>
 
-            <div className="flex justify-between">
+            <div className="flex justify-between w-full">
                 <SortBy currentSort={sortBy}/>
-                {params.sortBy[1]
+                {sortingOrder
                 ?<Link href={'./'}>Reverse Order</Link>
                 :<Link href={`${sortBy}/desc`}>Reverse Order</Link>
                 }
 
             </div>
+
+            </div>
+
         </main>
 
     )
