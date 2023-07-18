@@ -1,4 +1,4 @@
-import { fetchItems, fetchItemsADMIN } from "@/app/(User)/(lib)/api/items";
+import { fetchItemsADMIN } from "@/app/(Admin)/api/items";
 
 import Link from "next/link";
 import Image from "next/image"
