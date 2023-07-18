@@ -6,7 +6,7 @@ import { redirect } from "next/navigation"
 
 const AdminPage= async()=>{
 
-    redirect('/admin/items/default')
+    redirect('/admin/items/1/default')
 
 
     return(
