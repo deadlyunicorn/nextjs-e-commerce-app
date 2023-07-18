@@ -1,9 +1,7 @@
-import {   fetchItemsADMIN, updateItem } from "@/app/(User)/(lib)/api/items";
+import {   fetchItemsADMIN, updateItem } from "@/app/(Admin)/api/items";
 import Link from "next/link";
-import Image from "next/image";
 import { fetchCategories } from "@/app/(User)/(lib)/api/categories";
-import { CoolButton } from "@/app/(Shared)/components/Global";
-import { ChangeItem } from "./ChangeItem";
+import { ChangeItemServer } from "./ChangeItemServer";
 
 
 
@@ -18,11 +16,6 @@ const ItemsList = async({params}:{params:{id:string}}) => {
 
     const categories = await fetchCategories();
 
-    const update = await updateItem(item.id);
-
-
-
-
     return (
         <main className="
             w-full
@@ -30,8 +23,6 @@ const ItemsList = async({params}:{params:{id:string}}) => {
             justify-start
             ">
 
-
-            {JSON.stringify(update)}
 
             <div className="
             bg-slate-300 py-4 rounded-md
@@ -41,7 +32,7 @@ const ItemsList = async({params}:{params:{id:string}}) => {
             justify-start">
 
             
-                <ChangeItem item={item} categories={categories}/>
+                <ChangeItemServer item={item} categories={categories}/>
                 
             </div>
 
