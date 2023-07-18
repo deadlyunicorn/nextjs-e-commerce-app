@@ -1,4 +1,6 @@
-export const fetchCategories = async () => {
+import { Category } from "@chec/commerce.js/types/category";
+
+export const fetchCategories = async ():Promise<Category[]> => {
     const url = new URL(
         "https://api.chec.io/v1/categories/"
     )
