@@ -19,6 +19,7 @@ const ItemsList = async({params}:{params:{id:string}}) => {
     return (
         <main className="
             w-full
+            overflow-x-hidden
             flex flex-col items-center 
             justify-start
             ">

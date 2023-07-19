@@ -20,8 +20,10 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
             id="itemForm"
             action={handleSubmit}
             className="
+                    px-2
+                    flex flex-col
                     text-lg 
-                    grid gap-y-2">
+                    gap-y-2">
 
 
 
@@ -32,7 +34,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                     <div className="flex items-center justify-between">
 
                         <Image 
-                            className="rounded-md aspect-square"
+                            className="
+                            rounded-md aspect-square"
                             alt={item.name}
                             height={50}
                             width={50}
@@ -46,7 +49,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                     
                     </div>
                     
-                    <div>
+                    <div
+                        className="flex flex-wrap">
                         Item Name:&ensp;
                         <CoolInput>
                             <input
@@ -56,7 +60,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                             defaultValue={item.name}/>
                         </CoolInput>
                     </div>
-                    <div>
+                    <div
+                        className="flex flex-wrap">
                         Permalink:&ensp;
                         <CoolInput>
                             <input
@@ -67,7 +72,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                             defaultValue={item.permalink}/>
                         </CoolInput>
                     </div>
-                    <div>
+                    <div
+                        className="flex flex-wrap">
                         Active:&ensp;
                         <input
                             type="checkbox"
@@ -76,7 +82,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                             className="text-inherit bg-inherit hover:bg-slate-50 dark:hover:bg-slate-950" />
                     </div>
 
-                    <div>
+                    <div
+                        className="flex flex-wrap">
                         Item SKU:&ensp;
                         {/* better 8-12 */}
                         <CoolInput>
@@ -88,7 +95,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                         </CoolInput>
 
                     </div>
-                    <div>
+                    <div
+                        className="flex flex-wrap">
                         Description:&ensp;
                         <CoolInput>
                             <input
@@ -98,7 +106,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                         </CoolInput>
 
                     </div>
-                    <div className="flex">
+                    <div 
+                        className="flex flex-wrap">
                         Price:&ensp;
                         <CoolInput>
 
@@ -112,7 +121,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                         </CoolInput>
                         Euro
                     </div>
-                    <div className="flex">
+                    <div 
+                        className="flex flex-wrap">
                         Managed Stock:&ensp;
                         <input
                             className="peer"
@@ -138,7 +148,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                             </div>
 
                     </div>
-                    <div className="flex">
+                    <div 
+                        className="flex flex-wrap">
 
                         Categories:&ensp;
                         <ul>
@@ -159,7 +170,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                     </div>
 
                     <div 
-                    className="justify-self-center">
+                        className="flex flex-wrap justify-center">
+                        
                         <CoolButton>
                             <input 
                             defaultValue={"Submit"}
@@ -183,7 +195,7 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
 const CoolInput = ({children}:{children:ReactNode}) => (
     <div
     className="
-    w-fit
+    max-w-[100%]
     text-inherit px-1 rounded-md
     hover:bg-slate-50 bg-slate-200 
     dark:hover:bg-slate-950 dark:bg-slate-900">
