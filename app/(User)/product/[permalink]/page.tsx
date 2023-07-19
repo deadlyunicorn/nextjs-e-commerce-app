@@ -35,7 +35,7 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
                 "category_slug":`${categories}`,
                 "limit":`${limit}`,
             }).then(
-                async(res)=>res.length>0?res:await fetchItems({ //if there are no items found on the same category, fetch all items
+                async(res)=>res.length>1?res:await fetchItems({ //if the item, is the only one found on the same category, fetch all items
                 "limit":`${limit}`,
                 "sortBy":"updated_at"
             }))
