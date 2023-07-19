@@ -40,7 +40,8 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
 
                     {similar //we could splice, but api provides limit..
                     .map((item)=>
-                        <Recommendation listing={item} key={item.id}/>
+                        item.id == listing.id ? false
+                        :<Recommendation listing={item} key={item.id}/>
                     )}
 
                 </Suspense>
