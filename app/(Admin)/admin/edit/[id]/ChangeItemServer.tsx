@@ -2,6 +2,7 @@ import { CoolButton } from "@/app/(Shared)/components/Global"
 import { Category } from "@chec/commerce.js/types/category";
 import { Product } from "@chec/commerce.js/types/product";
 import Image from "next/image";
+import { ReactNode } from "react";
 
 export const ChangeItemServer = ({item,categories}:{item:Product,categories:Category[]}) => {
 
@@ -43,15 +44,23 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                     
                     <div>
                         Item Name:&ensp;
-                        <CoolInput
+                        <CoolInput>
+                            <input
+                            minLength={4}
+                            maxLength={20}
                             name="name"
                             defaultValue={item.name}/>
+                        </CoolInput>
                     </div>
                     <div>
                         Permalink:&ensp;
-                        <CoolInput
+                        <CoolInput>
+                            <input
+                            pattern="[^ \W \s ]+"
+                            minLength={4}
                             name="permalink"
                             defaultValue={item.permalink}/>
+                        </CoolInput>
                     </div>
                     <div>
                         Active:&ensp;
@@ -65,27 +74,41 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                     <div>
                         Item SKU:&ensp;
                         {/* better 8-12 */}
-                        <CoolInput
+                        <CoolInput>
+                            <input
+                            minLength={8}
+                            maxLength={12}
                             name="sku"
                             defaultValue={item.sku+""}/>
+                        </CoolInput>
 
                     </div>
                     <div>
                         Description:&ensp;
-                        <CoolInput
+                        <CoolInput>
+                            <input
+                            minLength={10}
                             name="description"
                             defaultValue={item.description+""}/>
+                        </CoolInput>
 
                     </div>
-                    <div>
+                    <div className="flex">
                         Price:&ensp;
-                        <CoolNumberInput
+                        <CoolInput>
+
+                            <input
+                            type="number"
+                            className="w-[80px]"
+                            step={0.01}
                             min={1}
                             defaultValue={item.price.raw}
-                            name="price"/> Euro
+                            name="price"/> 
+                        </CoolInput>
+                        Euro
                     </div>
                     <div className="flex">
-                        Stock:&ensp;
+                        Managed Stock:&ensp;
                         <input
                             className="peer"
                             name="managed"
@@ -93,20 +116,20 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                             defaultChecked={item.inventory.managed}/>
                             
                             <div
-                                className="hidden peer-checked:inline">  
+                                className=
+                                " hidden peer-checked:flex">  
 
-                                Managed: 
-                                <CoolNumberInput
-                                    
+                                <CoolInput>
+                                <input  
+                                    className="w-14"
+                                    type="number"
                                     name="available" 
                                     min={0}
                                     defaultValue={item.inventory.available}
-                                    /> Left
+                                    /> 
+                                </CoolInput>
+                                Left
                             
-                            </div>
-                            <div
-                                className="inline peer-checked:hidden">
-                                Not Managed
                             </div>
 
                     </div>
@@ -137,7 +160,10 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                             defaultValue={"Submit"}
                             type="submit" 
                             className="
+                            cursor-pointer
                             w-44 h-10 
+                            bg-slate-200 hover:bg-slate-100 rounded-md
+                            dark:bg-transparent
                             capitalize"/>
                                 {/* {loading?"Loading":"Make Changes"} */}
                         </CoolButton>
@@ -149,29 +175,14 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
 
 }
 
-const CoolInput = ({name,defaultValue,}:{name:string,defaultValue:string}) => (
-    <input
-    placeholder="No data"
-    name={name}
-    className="text-inherit px-1 rounded-md
-    hover:bg-slate-50 bg-slate-200 
-    dark:hover:bg-slate-950 dark:bg-slate-900" 
-    defaultValue={defaultValue}
-    
-    />
-)
-
-const CoolNumberInput = ({name,defaultValue,min}:{name:string,defaultValue:number,min:number}) => (
-    <input
-    name={name}
+const CoolInput = ({children}:{children:ReactNode}) => (
+    <div
     className="
-    max-w-[120px]
+    w-fit
     text-inherit px-1 rounded-md
     hover:bg-slate-50 bg-slate-200 
-    dark:hover:bg-slate-950 dark:bg-slate-900"
-    min={min}
-    defaultValue={defaultValue}
-    type="number"
-    
-    />
+    dark:hover:bg-slate-950 dark:bg-slate-900">
+        {children}
+    </div>
 )
+

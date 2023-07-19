@@ -18,3 +18,7 @@ h3{
 main{
     min-height: 400px;
 }
+
+input{
+    background-color: transparent;
+}
