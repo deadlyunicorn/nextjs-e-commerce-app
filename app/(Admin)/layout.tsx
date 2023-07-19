@@ -39,7 +39,6 @@ export default async function RootLayout(
 
         <header className='
           w-full py-10
-          border
           grid grid-cols-2 gap-x-1 
           justify-items-center'>
           {session
