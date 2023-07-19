@@ -38,14 +38,14 @@ export default async function RootLayout(
       items-center">
 
         <header className='
-          w-full py-10 
-            
-          flex gap-x-1 
-          justify-around items-center'>
+          w-full py-10
+          border
+          grid grid-cols-2 gap-x-1 
+          justify-items-center'>
           {session
           ?
             <>
-            <p>Logged in as {session.user?.name}  </p>    
+            <p className='text-center'>Logged in as {session.user?.name}  </p>    
 
             <SignOutButton/>    
             </>
@@ -56,7 +56,9 @@ export default async function RootLayout(
 
           
             <Link 
-              className='hover:underline capitalize'
+              className='
+              text-right 
+              hover:underline capitalize'
               href="/signin">Log in</Link>
           </>
           
