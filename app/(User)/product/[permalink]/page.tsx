@@ -30,10 +30,15 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
         const categories = listing.categories
         .map( object=> object.slug );
 
-        const similar = await fetchItems({
-            "category_slug":`${categories}`,
-            "limit":`${limit}`,
-        });
+        const similar = categories.length>0
+            ?await fetchItems({
+                "category_slug":`${categories}`,
+                "limit":`${limit}`,
+            })
+            :await fetchItems({
+                "limit":`${limit}`,
+                "sortBy":"updated_at"
+            })
 
 
 
