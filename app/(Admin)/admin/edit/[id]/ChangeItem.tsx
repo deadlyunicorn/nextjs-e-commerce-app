@@ -1,7 +1,7 @@
 'use client'
 
 import { CoolButton } from "@/app/(Shared)/components/Global"
-import { updateItem } from "@/app/(User)/(lib)/api/items";
+import { updateItem } from "@/app/(Admin)/api/items";
 import { Cart_Failure, Cart_Success } from "@/app/(User)/(lib)/components/cart/add_Cart";
 import { Category } from "@chec/commerce.js/types/category";
 import { Product } from "@chec/commerce.js/types/product";
@@ -233,7 +233,7 @@ export const ChangeItem = ({item,categories}:{item:Product,categories:Category[]
                                 try{
 
                                     setLoading(true);
-                                    await updateItem(item.id,itemState);
+                                    // await updateItem(item.id,itemState);
         
                                 }
                                 catch(error){
