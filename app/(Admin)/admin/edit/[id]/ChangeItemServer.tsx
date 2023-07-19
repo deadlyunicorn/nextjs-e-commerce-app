@@ -1,7 +1,9 @@
+import { ItemUpdateData, updateItem } from "@/app/(Admin)/api/items";
 import { CoolButton } from "@/app/(Shared)/components/Global"
 import { Category } from "@chec/commerce.js/types/category";
 import { Product } from "@chec/commerce.js/types/product";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
 export const ChangeItemServer = ({item,categories}:{item:Product,categories:Category[]}) => {
@@ -9,12 +11,14 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
     const itemCategoryNames = item.categories.map(category=>category.name);
 
 
+    
+
+
     return (
         <form 
 
             id="itemForm"
-            method="POST"
-            action="/api/editForm/"
+            action={handleSubmit}
             className="
                     text-lg 
                     grid gap-y-2">
@@ -56,7 +60,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                         Permalink:&ensp;
                         <CoolInput>
                             <input
-                            pattern="[^ \W \s ]+"
+                            pattern="([^ \W \s ]|-)+"
+                            title="Permalink shouldn't contain any whitespaces. You can use '_' or '-' e.g. 'cool_item'"
                             minLength={4}
                             name="permalink"
                             defaultValue={item.permalink}/>
@@ -186,3 +191,115 @@ const CoolInput = ({children}:{children:ReactNode}) => (
     </div>
 )
 
+
+
+const handleSubmit = async(formData:FormData)=>{
+    "use server"
+    
+    const data:ItemUpdateData = {
+        product_id:"",
+        properties:{
+            product:{
+                name:"",
+                permalink:"",
+                active:false,
+                sku:null,
+                description:"",
+                price:0,
+                inventory:{
+                    managed:false,
+                    available:0,
+                }
+            },
+            categories:{}
+        }
+
+    };
+
+    let categoryIndex=0;
+
+    const BooleanFields = ["managed","active"] as const;
+    const NumberFields = ["price","available"] as const;
+    const StringFields = ["description","permalink","product_id","name","sku"] as const;
+    // const NotCategoryKey = [...BooleanFields,...NumberFields,...StringFields];
+
+
+    for (const entry of formData.entries()){
+
+
+        const [key,value]
+            :[key:string,value:FormDataEntryValue]
+            = entry;
+
+
+        if (key=="product_id"){
+            data.product_id=String(value);
+        }
+
+        else if(key.includes("category.cat")){
+
+            data.properties.categories={
+                
+                ...data.properties.categories,
+                [categoryIndex]:{
+                
+                    id:String(key.slice(9))
+                
+                }
+                
+            }
+
+            categoryIndex++;
+        }
+
+        else{
+            
+            // @ts-ignore 
+            if ( BooleanFields.includes(key) ){
+
+                const fixedValue = value=="on"?true:value;
+                
+                
+                if ( key == "managed" ) {
+                    data.properties.product.inventory.managed = Boolean(fixedValue);
+                }
+                else{
+                    
+                    // @ts-ignore 
+                    data.properties.product[key]=Boolean(fixedValue)
+                } 
+    
+            }
+            
+            // @ts-ignore 
+            else if ( NumberFields.includes(key) ){
+
+                if ( key == "available") { 
+                    data.properties.product.inventory.available = +value;
+                }
+                else{
+                    
+                    // @ts-ignore 
+                    data.properties.product[key]=+value
+                } 
+            }
+            
+            // @ts-ignore 
+            else if(StringFields.includes(key)){
+                
+                // @ts-ignore 
+                data.properties.product[key]=String(value)
+            }
+        }
+    }
+
+    try{
+        await updateItem(data.product_id,data.properties);
+        console.log('success');
+
+    }
+    catch(error){
+        redirect(String(error));
+    }
+
+}

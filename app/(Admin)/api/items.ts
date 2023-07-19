@@ -78,7 +78,6 @@ export const updateItem = async (product_id:string,newProduct:ItemUpdateData["pr
   
 
     const body = newProduct;
-    console.log(newProduct)
 
   
     const res = await fetch(url, {
