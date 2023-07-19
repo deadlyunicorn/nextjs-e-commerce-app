@@ -13,10 +13,9 @@ const SignInPage = ()=>{
 
         <main
             className="
-                pt-[20%]
                 justify-start gap-y-8
                 flex flex-col
-                min-h-[70vh]">
+                min-h-[50vh]">
 
             <div className="text-xl text-center">
                 {loading?"Loading..":"Log in with"}
