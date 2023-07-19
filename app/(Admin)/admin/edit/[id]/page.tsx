@@ -27,7 +27,7 @@ const ItemsList = async({params}:{params:{id:string}}) => {
             <div className="
             bg-slate-300 py-4 rounded-md
             dark:bg-slate-800
-            w-3/4
+            xs:w-3/4
             flex flex-col items-center 
             justify-start">
 
