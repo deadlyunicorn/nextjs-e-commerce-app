@@ -48,9 +48,12 @@ const ItemsList = async({params}:{params:{page:string,sortBy:string[]}}) => {
             w-full
             flex flex-col items-center 
             justify-start
+            text-center
+            overflow-x-hidden
+
             ">
 
-            <div className="w-3/4
+            <div className="xs:w-3/4
             flex flex-col items-center 
             justify-start">
 
@@ -72,15 +75,16 @@ const ItemsList = async({params}:{params:{page:string,sortBy:string[]}}) => {
                         font-semibold"
                 key="Table titles">
                     <div>Image</div> 
-                    <div>Item Name</div> 
-                    <div>Item Price (Euro)</div> 
-                    <div className="">Stock Quantity</div> 
+                    <div>Name</div> 
+                    <div>Price</div> 
+                    <div className="">Stock</div> 
                 </li>
                 {
                 items.map(item=>(
                     <li 
                         className="
-                            group h-[50px]
+                            group h-[80px]
+                            xs:h-[50px]
                             relative
                             "
                         key={item.id}>
@@ -126,12 +130,11 @@ const ItemsList = async({params}:{params:{page:string,sortBy:string[]}}) => {
                         border-slate-200
                         dark:border-slate-800
                         w-full 
-                        justify-items-center"
-                key="Next Page">
+                        justify-items-center">
 
                     {page>1
                     ?
-                    <Link href={`/admin/items/${page-1}/${sortBy}/${sortingOrder}`}
+                    <Link href={`/admin/items/${page-1}/${sortBy}/${sortingOrder||""}`}
                     className="hover:underline">
                         Previous Page
                     </Link>
