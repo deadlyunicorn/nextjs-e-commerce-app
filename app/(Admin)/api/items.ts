@@ -86,13 +86,87 @@ export const updateItem = async (product_id:string,newProduct:ItemUpdateData["pr
       body: JSON.stringify(body),
     })
   
+   
+    const resJSON = await res.json();
+
+  
     if (!res.ok) {
-      if (res.status==422){
-        throw "Some of the fields were invalid"
-      }
-      else{
-        throw res.status;
-      }
+      throw (JSON.stringify(resJSON.error.message)+JSON.stringify(resJSON.error.errors))
     }
-    return res.status;
+
+    return resJSON;
+  }
+
+  export const createItem = async (newProduct:ItemUpdateData["properties"]) => {
+  
+  
+    const url = new URL(
+      `https://api.chec.io/v1/products/`
+    )
+  
+  
+  
+    const headers = {
+      "X-Authorization": `${process.env.PRIVATE_API_KEY}`,
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*" //stop fetch errors
+  
+    };
+
+  
+
+    const body = newProduct;
+
+  
+    const res = await fetch(url, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    })
+
+
+    const resJSON = await res.json();
+
+  
+    if (!res.ok) {
+      throw (JSON.stringify(resJSON.error.message)+JSON.stringify(resJSON.error.errors))
+    }
+
+    return resJSON;
+  }
+
+  export const deleteItem = async (product_id:string) => {
+  
+  
+    const url = new URL(
+      `https://api.chec.io/v1/products/${product_id}`
+    )
+  
+  
+  
+    const headers = {
+      "X-Authorization": `${process.env.PRIVATE_API_KEY}`,
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*" //stop fetch errors
+  
+    };
+
+
+  
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: headers,
+    })
+
+
+    const resJSON = await res.json();
+
+  
+    if (!res.ok) {
+      throw (JSON.stringify(resJSON.error.message)+JSON.stringify(resJSON.error.errors))
+    }
+
+    return resJSON;
   }
