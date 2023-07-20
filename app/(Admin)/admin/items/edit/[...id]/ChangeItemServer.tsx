@@ -3,6 +3,7 @@ import { CoolButton } from "@/app/(Shared)/components/Global"
 import { Category } from "@chec/commerce.js/types/category";
 import { Product } from "@chec/commerce.js/types/product";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ReactNode } from "react";
 
@@ -55,6 +56,7 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                         Item Name:&ensp;
                         <CoolInput>
                             <input
+                            required
                             minLength={4}
                             maxLength={20}
                             name="name"
@@ -113,10 +115,11 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                         <CoolInput>
 
                             <input
+                            required
                             type="number"
                             className="w-[80px]"
                             step={0.01}
-                            min={1}
+                            min={0.5}
                             defaultValue={item.price.raw}
                             name="price"/> 
                         </CoolInput>
@@ -171,7 +174,7 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                     </div>
 
                     <div 
-                        className="flex flex-wrap justify-center">
+                        className="flex flex-col flex-wrap items-center justify-center">
                         
                         <CoolButton>
                             <input 
@@ -185,7 +188,19 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
                             capitalize"/>
                                 {/* {loading?"Loading":"Make Changes"} */}
                         </CoolButton>
+                        <Link 
+                            className="
+                                bg-red-700 hover:bg-red-500
+                                dark:bg-red-800 dark:hover:bg-red-600
+                                rounded-md px-2 text-white
+                                mt-2"
+                            href={`/admin/items/delete/${item.id}/loading/`}>
+                            Delete 
+                        </Link>
+                        
+                       
                     </div>
+                    
 
 
                 </form>
