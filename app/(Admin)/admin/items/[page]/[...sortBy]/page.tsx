@@ -53,7 +53,8 @@ const ItemsList = async({params}:{params:{page:string,sortBy:string[]}}) => {
 
             ">
 
-            <div className="xs:w-3/4
+            <div className="xs:w-3/4 w-full
+            min-h-[60vh]
             flex flex-col items-center 
             justify-start">
 
@@ -70,6 +71,7 @@ const ItemsList = async({params}:{params:{page:string,sortBy:string[]}}) => {
                         grid 
                         border-slate-200
                         dark:border-slate-800
+                        border
                         w-full
                         justify-items-center
                         font-semibold"
