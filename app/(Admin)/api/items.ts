@@ -87,7 +87,12 @@ export const updateItem = async (product_id:string,newProduct:ItemUpdateData["pr
     })
   
     if (!res.ok) {
-      throw new Error(`Fetch failed`);
+      if (res.status==422){
+        throw "Some of the fields were invalid"
+      }
+      else{
+        throw res.status;
+      }
     }
-    return res.json();
+    return res.status;
   }
