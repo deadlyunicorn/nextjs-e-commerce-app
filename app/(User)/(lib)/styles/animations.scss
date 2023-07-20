@@ -32,12 +32,16 @@
     animation-iteration-count: 1;
     animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
     opacity: 0%;
+    pointer-events: none;
+
 }
 
 @keyframes disappear-animation {
     0%{
         display: block;
         opacity: 0%;
+        pointer-events: all;
+
     }
     50%{
         display: block;
