@@ -28,8 +28,9 @@ const ItemsList = async({params,searchParams}:{params:{id:string},searchParams:{
             w-full
             overflow-x-hidden
             flex flex-col items-center 
-            justify-start
+            justify-start relative
             ">
+
 
             {status=="success" && 
             <SuccessMessage message={searchParams.message}/>}
