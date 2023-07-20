@@ -120,18 +120,9 @@ const handleSubmit = async(formData:FormData)=>{
     let success = false;
 
     try{
-        await updateItem(data.product_id,data.properties)
-        .then(status=>{
-            if(status==422){
-                throw "422:Some of the fields was invalid"
-            }
-            else if (status!=200){
-                throw "Submit failed"
-            }
-            else{
-                success=true;
-            }
-        })
+        await updateItem(data.product_id,data.properties);
+        success=true;
+      
     }
     catch(error){
         redirect(`/admin/items/edit/${data.product_id}/fail?error=${error}`)
