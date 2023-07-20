@@ -15,10 +15,16 @@ const ItemsList = async({params,searchParams}:{params:{id:string},searchParams:{
     const id = params.id[0];
     const status = params.id[1];
 
+    let item;
 
-    const item= [...await fetchItemsADMIN({
-        query:id,
-    })][0];
+    try{
+        item=[...await fetchItemsADMIN({
+            query:id,
+        })][0];
+    }
+    catch(error){
+        redirect('/admin/items/1/default')        
+    }
 
 
     const categories = await fetchCategories();
