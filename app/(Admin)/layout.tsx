@@ -38,30 +38,43 @@ export default async function RootLayout(
       items-center">
 
         <header className='
-          w-full py-10
-          grid grid-cols-2 gap-x-1 
-          justify-items-center'>
+          w-full py-10'>
+
+          <div
+            className='
+            grid grid-cols-2 gap-x-1 
+            justify-items-center'>
+
           {session
-          ?
+            ?
+              <>
+              <p className='text-center'>Logged in as {session.user?.name}  </p>    
+
+              <SignOutButton/>    
+              </>
+
+            :
             <>
-            <p className='text-center'>Logged in as {session.user?.name}  </p>    
+            <p>Not logged in</p>    
 
-            <SignOutButton/>    
+            
+              <Link 
+                className='
+                text-right 
+                hover:underline capitalize'
+                href="/signin">Log in</Link>
             </>
-
-          :
-          <>
-          <p>Not logged in</p>    
-
           
-            <Link 
-              className='
-              text-right 
-              hover:underline capitalize'
-              href="/signin">Log in</Link>
-          </>
-          
-         }
+          }
+
+        </div>
+
+        <div className='mt-2 grid grid-cols-4 justify-items-center'>
+          <Link className='hover:underline' href={"/admin/items/1/default"}>Items</Link>
+          <Link className='hover:underline' href={"/admin/items/1/default"}>Categories</Link>
+          <Link className='hover:underline' href={"/admin/items/1/default"}>Search</Link>
+          <Link className='hover:underline' href={"/admin/items/1/default"}>Future</Link>
+        </div>
 
         </header>
 
