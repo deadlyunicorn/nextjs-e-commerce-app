@@ -7,7 +7,7 @@ interface ErrorType{
 
 }
 
-export default function Error ({error}:{error:ErrorType}) {
+export default function Error ({error,reset}:{error:ErrorType,reset:()=>void}) {
     const router = useRouter();
     return(
             <div className="
@@ -40,6 +40,8 @@ export default function Error ({error}:{error:ErrorType}) {
                     
                     router.replace("/");
                     window.location.reload(); //maybe replace with redirect('./')??
+
+                    // reset()// 
                     
                     //we may also need to trigger a refresh..
                     //but not on the current path.
