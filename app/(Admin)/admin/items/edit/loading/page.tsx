@@ -134,12 +134,12 @@ const handleSubmit = async(formData:FormData)=>{
         })
     }
     catch(error){
-        redirect(`/admin/edit/${data.product_id}/fail?error=${error}`)
+        redirect(`/admin/items/edit/${data.product_id}/fail?error=${error}`)
     }
     finally{
         const message=`Successfully updated ${data.properties.product.name}.`;
         if (success){
-            redirect(`/admin/edit/${data.product_id}/success?message=${message}`)
+            redirect(`/admin/items/edit/${data.product_id}/success?message=${message}`)
         }
     }
 

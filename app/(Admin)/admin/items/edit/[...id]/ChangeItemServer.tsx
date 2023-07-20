@@ -19,7 +19,7 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
 
             id="itemForm"
             // action={handleSubmit}
-            action={'/admin/edit/loading'}
+            action={'/admin/items/edit/loading'}
             className="
                     px-2
                     flex flex-col
