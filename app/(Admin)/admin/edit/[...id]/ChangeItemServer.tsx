@@ -3,7 +3,7 @@ import { CoolButton } from "@/app/(Shared)/components/Global"
 import { Category } from "@chec/commerce.js/types/category";
 import { Product } from "@chec/commerce.js/types/product";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ReactNode } from "react";
 
 export const ChangeItemServer = ({item,categories}:{item:Product,categories:Category[]}) => {
@@ -18,7 +18,8 @@ export const ChangeItemServer = ({item,categories}:{item:Product,categories:Cate
         <form 
 
             id="itemForm"
-            action={handleSubmit}
+            // action={handleSubmit}
+            action={'/admin/edit/loading'}
             className="
                     px-2
                     flex flex-col
@@ -205,113 +206,3 @@ const CoolInput = ({children}:{children:ReactNode}) => (
 
 
 
-const handleSubmit = async(formData:FormData)=>{
-    "use server"
-    
-    const data:ItemUpdateData = {
-        product_id:"",
-        properties:{
-            product:{
-                name:"",
-                permalink:"",
-                active:false,
-                sku:null,
-                description:"",
-                price:0,
-                inventory:{
-                    managed:false,
-                    available:0,
-                }
-            },
-            categories:{}
-        }
-
-    };
-
-    let categoryIndex=0;
-
-    const BooleanFields = ["managed","active"] as const;
-    const NumberFields = ["price","available"] as const;
-    const StringFields = ["description","permalink","product_id","name","sku"] as const;
-    // const NotCategoryKey = [...BooleanFields,...NumberFields,...StringFields];
-
-
-    for (const entry of formData.entries()){
-
-
-        const [key,value]
-            :[key:string,value:FormDataEntryValue]
-            = entry;
-
-
-        if (key=="product_id"){
-            data.product_id=String(value);
-        }
-
-        else if(key.includes("category.cat")){
-
-            data.properties.categories={
-                
-                ...data.properties.categories,
-                [categoryIndex]:{
-                
-                    id:String(key.slice(9))
-                
-                }
-                
-            }
-
-            categoryIndex++;
-        }
-
-        else{
-            
-            // @ts-ignore 
-            if ( BooleanFields.includes(key) ){
-
-                const fixedValue = value=="on"?true:value;
-                
-                
-                if ( key == "managed" ) {
-                    data.properties.product.inventory.managed = Boolean(fixedValue);
-                }
-                else{
-                    
-                    // @ts-ignore 
-                    data.properties.product[key]=Boolean(fixedValue)
-                } 
-    
-            }
-            
-            // @ts-ignore 
-            else if ( NumberFields.includes(key) ){
-
-                if ( key == "available") { 
-                    data.properties.product.inventory.available = +value;
-                }
-                else{
-                    
-                    // @ts-ignore 
-                    data.properties.product[key]=+value
-                } 
-            }
-            
-            // @ts-ignore 
-            else if(StringFields.includes(key)){
-                
-                // @ts-ignore 
-                data.properties.product[key]=String(value)
-            }
-        }
-    }
-
-    try{
-        await updateItem(data.product_id,data.properties);
-        console.log('success');
-
-    }
-    catch(error){
-        redirect(String(error));
-    }
-
-}
