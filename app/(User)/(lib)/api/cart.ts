@@ -24,7 +24,7 @@ export const createCart = async () : Promise<Cart> => {
     })
 
     if (!res.ok) {
-        throw new Error(`Fetch failed`);
+        throw new Error(`Fetch failed - (${res.status}) ${res.statusText}`);
     }
 
     return res.json();
@@ -55,7 +55,7 @@ export const getCart = async():Promise<Cart|undefined> =>{
         })
 
         if (!res.ok) {
-            throw new Error(`Fetch failed`);
+            throw new Error(`Fetch failed - (${res.status}) ${res.statusText}`);
         }
 
         return res.json();

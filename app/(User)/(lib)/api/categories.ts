@@ -20,7 +20,7 @@ export const fetchCategories = async ():Promise<Category[]> => {
     })
 
     if (!res.ok) {
-        throw new Error(`Fetch failed`);
+        throw new Error(`Fetch failed - (${res.status}) ${res.statusText}`);
     }
     return res.json().then(result => result.data);
 }

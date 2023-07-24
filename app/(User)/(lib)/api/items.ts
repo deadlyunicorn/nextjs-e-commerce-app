@@ -28,11 +28,11 @@ export const fetchItems = async (params: { [key: string]: string }): Promise<Pro
   const res = await fetch(url, {
     method: "GET",
     headers: headers,
-    next: {revalidate: 60 * 3}
+    next: {revalidate: 60 * 30}
   })
 
   if (!res.ok) {
-    throw new Error(`Fetch failed`);
+    throw new Error(`Fetch failed - (${res.status}) ${res.statusText}`);
   }
   return res.json().then(result => result.data);
 }

@@ -34,7 +34,7 @@ export const sendUserLogin = async () : Promise<LoginTokenGeneration> => {
     })
 
     if (!res.ok) {
-        throw new Error(`Fetch failed`);
+        throw new Error(`Fetch failed - (${res.status}) ${res.statusText}`);
     }
 
     return res.json();
@@ -79,7 +79,7 @@ export const sendUserRegister = async () : Promise<RegisterTokenGeneration> => {
     })
 
     if (!res.ok) {
-        throw new Error(`Fetch failed`);
+        throw new Error(`Fetch failed - (${res.status}) ${res.statusText}`);
     }
 
     return res.json();

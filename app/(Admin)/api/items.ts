@@ -32,7 +32,7 @@ export const fetchItemsADMIN = async (params: { [key: string]: string }): Promis
     })
   
     if (!res.ok) {
-      throw new Error(`Fetch failed`);
+      throw new Error(`Fetch failed - (${res.status}) ${res.statusText}`);
     }
     return res.json().then(result => result.data);
 }
