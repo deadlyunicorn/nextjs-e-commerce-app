@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react"
 import { signOut,signIn } from "next-auth/react"
+import { deleteCookie, setCookie } from "@/app/(User)/(lib)/api/cookies"
 
 
 export const CoolButton = ({children}:{children:ReactNode}) => (
@@ -37,10 +38,47 @@ export const SignOutButton = () => {
     )
 }
 
+const setGuestMode = async() => {
+        await setCookie("guestAdmin","true");
+}
+
+const exitGuestMode = async()=>{
+    await deleteCookie("guestAdmin");
+}
+
+export const ExitGuestComponent = () => (
+    <form 
+            action={exitGuestMode}
+            className="mt-1 flex justify-center">
+            
+            <CoolButton>
+            
+              <input
+                  className="cursor-pointer px-2 py-1 capitalize"
+                  value={"exit guest mode"} 
+                  type="submit"/>
+            </CoolButton>
+
+    </form>
+)
+
+
+
 export const NotLoggedIn = () => {
     return(
-        <main className="min-h-[70vh]">
+        <main className="min-h-[70vh] flex flex-col items-center">
             You must login to view this content
+            <form 
+                action={setGuestMode}
+                className="mt-1">
+                <CoolButton>
+                
+                <input
+                    className="cursor-pointer px-2 py-1"
+                    value={"Guest Mode"} 
+                    type="submit"/>
+                </CoolButton>
+            </form>
         </main>
     )
 }

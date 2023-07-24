@@ -1,18 +1,22 @@
 import { CoolButton } from "@/app/(Shared)/components/Global"
 import { fetchCategories } from "@/app/(User)/(lib)/api/categories";
+import { getCookies } from "@/app/(User)/(lib)/api/cookies";
+import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import { ReactNode } from "react";
 
 export const CreateItemForm = async() => {
 
     const categories = await fetchCategories();
+    const session =  await getServerSession();
+
 
 
     return (
         <form
 
             id="itemForm"
-            action={'/admin/items/create/loading'}
+            action={session?'/admin/items/create/loading':"/admin/unauthorized"}
             className="
                     px-2
                     flex flex-col
