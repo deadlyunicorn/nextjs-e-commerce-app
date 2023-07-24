@@ -1,9 +1,10 @@
 import { getServerSession } from 'next-auth/next';
 import DarkMode from '../(Shared)/DarkMode'
 import './globals.css'
-import { NotLoggedIn, SignOutButton } from '../(Shared)/components/Global';
+import {  ExitGuestComponent, NotLoggedIn, SignOutButton } from '../(Shared)/components/Global';
 import Link from 'next/link';
 import Footer from '../(User)/(lib)/components/footer';
+import { getCookies } from '../(User)/(lib)/api/cookies';
 
 
 export const metadata = {
@@ -16,8 +17,10 @@ export default async function RootLayout(
 ) {
  
 
-  const session = await getServerSession();
+  const session =  await getServerSession();
+  const guestCookie =  session?null:await getCookies().filter(cookie=>cookie.name=="guestAdmin")[0];
 
+  
 
   return (
     <html lang="en">
@@ -44,6 +47,9 @@ export default async function RootLayout(
             className='
             grid grid-cols-2 gap-x-1 
             justify-items-center'>
+              
+              
+          {guestCookie && <p>Guest Mode</p>}
 
           {session
             ?
@@ -55,7 +61,7 @@ export default async function RootLayout(
 
             :
             <>
-            <p>Not logged in</p>    
+            {!guestCookie && <p>Not logged in</p>}    
 
             
               <Link 
@@ -69,26 +75,36 @@ export default async function RootLayout(
 
         </div>
 
+        { ( session || guestCookie ) &&
         <div className='mt-2 grid grid-cols-4 justify-items-center'>
           <Link className='hover:underline' href={"/admin/items/1/default"}>Items</Link>
           <Link className='hover:underline' href={"/admin/items/1/default"}>Categories</Link>
           <Link className='hover:underline' href={"/admin/items/1/default"}>Search</Link>
           <Link className='hover:underline' href={"/admin/items/1/default"}>Future</Link>
         </div>
+        }
 
         </header>
 
-          {session
+          {session 
+          // || guestCookie UNCOMMENT when ready for production
           ?children
           :<NotLoggedIn/>
           }
 
         <Footer>
-          You are in the admin view.
+          You are in the admin view{guestCookie && <>&nbsp;as guest</>}. 
           <br/>
+          {guestCookie &&
+          
+          <ExitGuestComponent/>
+          // Currently doesn't redirect..
+          
+          }
           <Link
             className='hover:underline' 
             href={"/"}>Store Page</Link>
+
         </Footer>
 
     
