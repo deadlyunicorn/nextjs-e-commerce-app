@@ -2,7 +2,7 @@
 import { cookies } from "next/headers";
 
 
-    export const setCookie = async(cart_id: string)=>{
+    export const setCartCookie = async(cart_id: string)=>{
 
         'use server'
         cookies().set(
@@ -33,4 +33,17 @@ import { cookies } from "next/headers";
             maxAge: 0,
             path: "/"
         })
+    }
+
+    export const setCookie = async(cookieName: string,value:string)=>{
+
+        'use server'
+        cookies().set(
+        { 
+            name:cookieName,
+            value: value,
+            maxAge: 60 * 30,
+            path: "/" 
+        });
+    
     }

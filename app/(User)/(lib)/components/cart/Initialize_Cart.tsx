@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState  } from "react"
-import { getCookies, setCookie } from "../../api/cookies"
+import { getCookies, setCartCookie } from "../../api/cookies"
 import { createCart, getCart } from "../../api/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
@@ -39,7 +39,7 @@ export const CookieVerify = () => {
                 
                 await createCart().then(
                     async(cart)=>{
-                        await setCookie(cart.id)
+                        await setCartCookie(cart.id)
                         .then(()=>{
                             router.refresh();
                         })
