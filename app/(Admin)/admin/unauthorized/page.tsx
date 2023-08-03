@@ -28,9 +28,10 @@ export default function Unauthorized() {
                 <div>
                     <span 
                     className="
-                        text-center bg-red-500 text-white 
+                        text-center bg-red-500 text-white
+                        dark:bg-red-700 
                         px-2 py-1 rounded-md">
-                            Unauthorized
+                            Unauthorized (Not logged in)
                     </span>
                     
                 </div>
@@ -39,6 +40,8 @@ export default function Unauthorized() {
 
                 <button className="w-fit
                     mt-2
+                    dark:bg-blue-800
+                    dark:hover:bg-blue-700
                     hover:bg-blue-500
                     bg-blue-600 rounded-md px-1"
                     onClick={()=>{
@@ -53,6 +56,8 @@ export default function Unauthorized() {
 
                     <button className="w-fit
                     mt-2
+                    dark:bg-blue-800
+                    dark:hover:bg-blue-700
                     hover:bg-blue-500
                     bg-blue-600 rounded-md px-1"
                     onClick={()=>{
