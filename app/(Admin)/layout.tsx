@@ -18,7 +18,14 @@ export default async function RootLayout(
  
 
   const session =  await getServerSession();
-  const guestCookie =  session?null:await getCookies().filter(cookie=>cookie.name=="guestAdmin")[0];
+  const guestCookie =  session
+    ?null
+    :await getCookies()
+      .filter(
+        cookie=>
+          cookie.name=="guestAdmin")[0];
+
+  const guestDisplay = guestCookie?guestCookie.value=="true":null
 
   
 
@@ -49,7 +56,7 @@ export default async function RootLayout(
             justify-items-center'>
               
               
-          {guestCookie && <p>Guest Mode</p>}
+          {guestDisplay && <p>Viewing in Guest Mode</p>}
 
           {session
             ?
@@ -61,7 +68,7 @@ export default async function RootLayout(
 
             :
             <>
-            {!guestCookie && <p>Not logged in</p>}    
+            {!guestDisplay && <p>Not logged in</p>}    
 
             
               <Link 
@@ -75,7 +82,7 @@ export default async function RootLayout(
 
         </div>
 
-        { ( session || guestCookie ) &&
+        { ( session || guestDisplay ) &&
         <div className='mt-2 grid grid-cols-4 justify-items-center'>
           <Link className='hover:underline' href={"/admin/items/1/default"}>Items</Link>
           <Link className='hover:underline' href={"/admin/items/1/default"}>Categories</Link>
@@ -87,15 +94,15 @@ export default async function RootLayout(
         </header>
 
           {session 
-          // || guestCookie UNCOMMENT when ready for production
+          || guestDisplay //UNCOMMENT when ready for production
           ?children
           :<NotLoggedIn/>
           }
 
         <Footer>
-          You are in the admin view{guestCookie && <>&nbsp;as guest</>}. 
+          You are in the admin view{guestDisplay && <>&nbsp;as guest</>}. 
           <br/>
-          {guestCookie &&
+          {guestDisplay &&
           
           <ExitGuestComponent/>
           // Currently doesn't redirect..

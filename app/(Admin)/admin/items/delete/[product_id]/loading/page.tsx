@@ -2,10 +2,14 @@ import { ItemUpdateData, createItem, deleteItem, updateItem } from "@/app/(Admin
 import LoadingScreen from "@/app/(User)/loader/page";
 import { redirect } from "next/navigation";
 import { CoolInput } from "../../../create/[...status]/CreateItemForm";
+import { getServerSession } from "next-auth/next";
+import Link from "next/link";
 
 const FormLoader = async({params}:{params:{product_id:string}}) => {
 
     const product_id = params.product_id;
+    const session =  await getServerSession();
+
 
     return (
         <>
@@ -24,7 +28,7 @@ const FormLoader = async({params}:{params:{product_id:string}}) => {
 
             <form
                 className="flex flex-col justify-center"
-                action={handleSubmit}>
+                action={session?handleSubmit:"/admin/unauthorized"}>
                 <CoolInput>
 
                 <input
@@ -48,6 +52,11 @@ const FormLoader = async({params}:{params:{product_id:string}}) => {
             </form>
             <LoadingScreen/>
         </div>
+        <Link
+                    className="hover:underline"
+                    href="/admin">
+                    Back to Dashboard
+        </Link>
 
         </>
     )

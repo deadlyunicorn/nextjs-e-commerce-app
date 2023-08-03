@@ -43,7 +43,8 @@ const setGuestMode = async() => {
 }
 
 const exitGuestMode = async()=>{
-    await deleteCookie("guestAdmin");
+    await setCookie("guestAdmin","false");
+
 }
 
 export const ExitGuestComponent = () => (

@@ -2,25 +2,26 @@ import { ItemUpdateData, updateItem } from "@/app/(Admin)/api/items";
 import { CoolButton } from "@/app/(Shared)/components/Global"
 import { Category } from "@chec/commerce.js/types/category";
 import { Product } from "@chec/commerce.js/types/product";
+import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ReactNode } from "react";
 
-export const ChangeItemServer = ({item,categories}:{item:Product,categories:Category[]}) => {
+export const ChangeItemServer = async({item,categories}:{item:Product,categories:Category[]}) => {
 
     const itemCategoryNames = item.categories.map(category=>category.name);
 
 
     
 
+    const session =  await getServerSession();
 
     return (
         <form 
 
             id="itemForm"
-            // action={handleSubmit}
-            action={'/admin/items/edit/loading'}
+            action={session?'/admin/items/edit/loading':"/admin/unauthorized"}
             className="
                     px-2
                     flex flex-col
