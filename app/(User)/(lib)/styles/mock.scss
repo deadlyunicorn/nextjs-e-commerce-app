@@ -4,15 +4,17 @@
 }
 
 .mock_product >div >div:first-child{
-    width: 3px;
     
+    width: 10px;
+
     position: absolute;
+    border-radius: 20px;
     height: 90%;
     top: 5%;
 
     background-color: white;
-
     animation: loading 2s infinite;
+
     animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 

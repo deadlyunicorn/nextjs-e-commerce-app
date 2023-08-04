@@ -22,6 +22,8 @@ export default async function RootLayout(
     <html lang="en">
 
       <body className="
+
+
       min-h-screen
       bg-gradient-to-b
       text-slate-900
@@ -33,6 +35,7 @@ export default async function RootLayout(
       from-90%
       dark:to-black
       flex flex-col
+      justify-between
       items-center mt-5">
 
         <header className='

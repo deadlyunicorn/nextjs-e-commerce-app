@@ -33,6 +33,8 @@ export default function RootLayout(
         from-90%
         dark:to-black
         flex flex-col
+        min-h-screen
+        justify-between
         items-center mt-5">
 
             {/* light mode */}

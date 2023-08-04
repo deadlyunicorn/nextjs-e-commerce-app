@@ -1,7 +1,7 @@
 import { Product } from "@chec/commerce.js/types/product";
 import Image from "next/image";
 import Link from "next/link";
-import { AddToCart } from "@/app/(User)/(lib)/components/cart/add_Cart";
+import { AddToCart, MockAddToCart } from "@/app/(User)/(lib)/components/cart/add_Cart";
 import { Recommendation, Recommendation_Fallback } from "@/app/(User)/(lib)/components/product/recommendations";
 import { Suspense } from "react";
 import { ProductCollection } from "@chec/commerce.js/features/products";
@@ -153,7 +153,12 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                 flex flex-col
                 ">
 
-                
+                <PriceTag>
+                    <span className="text-4xl">
+                        {listing.price["formatted_with_symbol"]}
+                    </span>
+                    
+                </PriceTag>
 
                 <div className="
                     gap-y-5
@@ -161,12 +166,7 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                     <AddToCart item={listing} cartItem={cartItem} price={listing.price.raw}/>
                 </div>
 
-                <PriceTag>
-                    <span className="text-4xl">
-                        {listing.price["formatted_with_symbol"]}
-                    </span>
-                    
-                </PriceTag>
+                
 
             </div>
 
@@ -185,72 +185,68 @@ export const ProductFallback = () => (
             product-list-div
         ">
 
-
-            
-                    <div className="
+            <div className="
                         bg-white
+                        bg-opacity-5
                         blur-md 
                         loading-300
                         bg-gradient-to-r
                         from-slate-200  to-transparent
                         h-[300px] aspect-square"/>
+                
+                
                     
-                    
-                     <div className="
-                        flex flex-col 
-                        justify-between flex-wrap">
-                        
-                        <p className="
-                            blur-md
-                            my-4 min-h-[50px]
-                            text-4xl
-                            text-transparent
-                            bg-clip-text loading
-                            font-light">
+        </div>
+        
+        
+        <div className="
+            blur-md
+            justify-between 
+            flex-wrap
+            flex flex-col
+            text-xl font-light 
+            w-[300px] min-h-[150px] pt-2 ">
 
-                                The product is loading...
+            <div className="
+                flex flex-col 
+                justify-between 
+                py-2">
+
+                        <p>
+                            SKU: COOLNUM
                         </p>
 
-                        <div className="flex flex-col-reverse">
-                            
-                            {/* peer should be before sibling */}
+            </div>
 
-                            <div className="
-                                loading-300 blur-md
-                                text-2xl
-                                bg-gradient-to-r 
-                                from-red-400 to-yellow-300 
-                                peer-hover:from-red-300 peer-hover:to-yellow-200
-                                bg-clip-text text-transparent">
+            {
+                <p>There is no description for this item.</p>
+            }
 
-                                This is a test price
+            <div className="
+                pb-2
+                gap-y-5
+                flex flex-col
+                ">
 
-                                <span className="">
-                                    &nbsp;(χωρίς ΦΠΑ)
-                                </span>
-                            
-                            </div>
-                            
-                        </div>
-                    </div>
-
-            
-                        
-                    
-                </div>
                 
-                <div className="
-                    
-                    text-xl font-light 
-                    w-[300px] pt-10 loading-300 
-                    blur-sm 
-                    bg-gradient-to-r 
-                    from-transparent to-white
-                    bg-clip-text text-transparent ">
 
-                        This is a template description
+                <div className="
+                    gap-y-5
+                    flex flex-col">
+                    <MockAddToCart/>
                 </div>
+
+                <PriceTag>
+                    <span className="text-4xl">
+                    € 22.00
+                    </span>
+                    
+                </PriceTag>
+
+            </div>
+        </div>
     </>
+               
 )
 
 export default ProductPage;

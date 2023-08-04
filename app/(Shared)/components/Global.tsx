@@ -33,7 +33,7 @@ export const SignOutButton = () => {
             h-10
             capitalize hover:underline"
             onClick={()=>{signOut()}}>
-                sign out
+                log out
         </button>
     )
 }

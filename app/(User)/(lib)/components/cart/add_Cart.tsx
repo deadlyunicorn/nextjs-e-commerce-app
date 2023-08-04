@@ -230,7 +230,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                 dark:bg-black dark:bg-opacity-30
                 dark:hover:bg-slate-600
                 hover:bg-slate-200
-                bg-slate-300 rounded-md ">
+                bg-slate-300 rounded-b-md ">
 
                 {loading 
                 ?"Adding to cart..."
@@ -301,3 +301,101 @@ const CasualSpan = ({children}:{children:ReactNode}) => (
         </div>
 
 )
+
+export const MockAddToCart = ()=>{
+
+        const QuantityButton = ({ children }: { children: ReactNode }) => {
+    
+            return (
+                <button
+                    className="
+                        w-5
+                        rounded-md
+                        bg-slate-800 hover:bg-slate-600
+                        hover:text-slate-600
+                        dark:bg-slate-300 dark:hover:bg-slate-50 
+                        bg-opacity-20 hover:bg-opacity-20
+                        dark:text-slate-500 dark:hover:text-slate-400
+                        text-center
+                        font-extrabold
+                        ">
+    
+                    {children}
+    
+                </button>
+            )
+    
+        }
+        return (
+    
+            <div className="relative">
+                <div className="
+            pt-2
+            text-lg
+            flex flex-wrap
+            sm:justify-between
+            justify-center
+            gap-x-5">
+                    <span>
+                        Quantity:
+                    </span>
+    
+                    <div className="
+                    flex gap-x-2">
+    
+                        <QuantityButton>
+                            -
+                        </QuantityButton>
+    
+                        <select
+                            className="w-10 
+                            rounded-md 
+                            bg-white bg-opacity-[50%]
+                            hover:bg-opacity-[60%]
+                            text-black text-center">
+    
+    
+                        </select>
+                        <QuantityButton>
+                            +
+                        </QuantityButton>
+    
+    
+                    </div>
+    
+    
+    
+    
+                </div>
+                <p className="text-right">
+                    XX €
+                </p>
+    
+    
+                {/* peer should be before sibling */}
+                <button
+                    // form is not needed.
+                    disabled={true}
+                    type="submit"
+                    className="
+                    w-full min-h-[10mm] 
+                    px-2
+                    
+                    dark:text-slate-200
+                    dark:hover:text-slate-50
+                    
+                    text-slate-900
+                    hover:text-slate-600
+                    
+                    dark:bg-black dark:bg-opacity-30
+                    dark:hover:bg-slate-600
+                    hover:bg-slate-200
+                    bg-slate-300 rounded-b-md ">
+    
+                    {<>ADD TO <b className="font-bold">CART</b></>
+                    }
+                </button>
+            </div>
+        )
+    
+}  

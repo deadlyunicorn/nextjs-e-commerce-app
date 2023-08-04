@@ -29,7 +29,6 @@ export default async function CategoryProducts({params:{slug,page},params}:{para
             <>
             <main>
             <div>
-                <p>Page number {page}</p>
 
 
                 <div className="
@@ -49,6 +48,8 @@ export default async function CategoryProducts({params:{slug,page},params}:{para
 
             </div>
             </main>
+            <p>Page number {page}</p>
+
             
             <NextPage currentPage={Number(page)} nextPageExists={nextPageExists}/>
             </>

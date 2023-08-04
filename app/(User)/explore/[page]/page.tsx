@@ -30,7 +30,6 @@ export default async function Explore({params:{page}}:{params:{page:number}}) {
             <div>
 
             
-                <p>Page number {page}</p>
 
 
                 <div className="
@@ -50,6 +49,8 @@ export default async function Explore({params:{page}}:{params:{page:number}}) {
 
             </div>
             </main>
+            <p>Page number {page}</p>
+
 
             <NextPage currentPage={Number(page)} nextPageExists={nextPageExists}/>
             </>

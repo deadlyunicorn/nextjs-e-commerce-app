@@ -1,7 +1,7 @@
 import { Product } from "@chec/commerce.js/types/product"
 import Link from "next/link"
 import Image from "next/image"
-import { AddToCart } from "@/app/(User)/(lib)/components/cart/add_Cart"
+import { AddToCart, MockAddToCart } from "@/app/(User)/(lib)/components/cart/add_Cart"
 import "@/app/(User)/(lib)/styles/mock.scss"
 import PriceTag from "../product/priceTag"
 import { getCart } from "../../api/cart"
@@ -77,7 +77,14 @@ export const Store_Front_Fallback = () => {
     const Template = ()=>(
         <div className="relative w-[200px]" >
 
-            <div  className="mock_product">
+            <div  className="
+            
+            rounded-md
+            bg-slate-200
+            dark:bg-white dark:bg-opacity-10 
+            blur-md
+            xs:w-[200px]  max-w-[40vw]
+            mock_product">
 
                 <div>
                     
@@ -85,40 +92,43 @@ export const Store_Front_Fallback = () => {
 
                     <div
                         className="
-                        rounded-md h-[200px] bg-white bg-opacity-70 
-                        
-                        backdrop-blur-sm blur-sm"/>
+                        rounded-md h-[200px] bg-white bg-opacity-30 "/>
                     
-                </div>
+                    </div>
 
                 <div>
+
                     <div/>
 
                     <p className="
-                        cursor-default my-4 
-                        text-xl 
-                        font-light 
-                        backdrop-blur-sm blur-sm ">
+
+                        my-4 h-[80px] 
+                        text-xl  
+                        text-black
+                        group-hover:text-slate-800 
+
+                        dark:text-slate-300
+                        dark:group-hover:text-slate-50
+                        font-light break-words
+                        cursor-default">
                         A very cool product
                     </p>
              
                 </div>
+
             
                 <div>
                     <div/>
 
-                    <div 
-                        className="
-                            cursor-default 
-                            bg-gradient-to-r from-red-400 to-yellow-300
-                            hover:from-red-300 hover:to-yellow-200
-                             bg-clip-text text-transparent 
-                             backdrop-blur-sm blur-sm">
-                            For a great price
-                            <span className="text-xs"> (χωρίς&nbsp;ΦΠΑ)</span>
-                            
+                    <div >
+                        <PriceTag>
+                          €XX.00
+                        </PriceTag>
+                        <MockAddToCart/>
                     </div>
+                 
                 </div>
+
                 
                 
             </div>
