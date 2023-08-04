@@ -34,7 +34,7 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
 
         // edit at your own risk o.O
 
-        const getAllItems = async(categoryArray) =>{
+        const getAllItems = async(categoryArray:string[]) =>{
 
                 let array:Product[]=[]; 
                 for (const category of categoryArray){
