@@ -22,5 +22,13 @@ export const fetchCategories = async ():Promise<Category[]> => {
     if (!res.ok) {
         throw new Error(`Fetch failed - (${res.status}) ${res.statusText}`);
     }
-    return res.json().then(result => result.data);
+    return res.json().then(result =>{
+
+        const categories=result.data;
+        const nonEmptyCategories=categories.filter(
+            (category:Category)=>category.products>0
+        )
+        
+        return nonEmptyCategories;
+    });
 }
