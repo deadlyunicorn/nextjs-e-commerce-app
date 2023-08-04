@@ -1,5 +1,6 @@
 import { fetchItems } from "@/app/(User)/(lib)/api/items";
 import ProductPage from "@/app/(User)/product/[permalink]/product-page";
+import { Product } from "@chec/commerce.js/types/product";
 
 export async function generateMetadata({params:{permalink}}:{params:{permalink:string}}){
     const product = [...await fetchItems({
@@ -30,19 +31,47 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
         const categories = listing.categories
         .map( object=> object.slug );
 
+
+        // edit at your own risk o.O
+
+        const getAllItems = async(categoryArray) =>{
+
+                let array:Product[]=[]; 
+                for (const category of categoryArray){
+                    array=[
+                        ...array,
+                        
+                        ...await fetchItems({
+                        "category_slug":category,
+                        "limit":`${limit}`,
+                        })
+                          
+                    ]
+
+
+                }
+                const itemIDs = [...new Set(array.map(product=>product.id))];
+                const itemIncluded = itemIDs.map(product=>0);
+                return array.filter(
+                    product => {
+                        if (itemIncluded[itemIDs.indexOf(product.id)]==0){
+                            itemIncluded[itemIDs.indexOf(product.id)]=1; //basically mark that the product was added to the final array.
+                            return product;
+                        }
+                    }
+                )
+
+
+            } 
+        
+
         const similar = categories.length>0
-            ?await fetchItems({
-                "category_slug":`${categories}`,
-                "limit":`${limit}`,
-            }).then(
-                async(res)=>res.length>1?res:await fetchItems({ //if the item, is the only one found on the same category, fetch all items
-                "limit":`${limit}`,
-                "sortBy":"updated_at"
-            }))
+            ?await getAllItems(categories)
             :await fetchItems({
                 "limit":`${limit}`,
                 "sortBy":"updated_at"
             })
+
 
 
 
