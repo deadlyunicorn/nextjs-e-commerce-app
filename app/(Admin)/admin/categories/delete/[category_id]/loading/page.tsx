@@ -102,7 +102,6 @@ const handleSubmit = async(formData:FormData)=>{
         }
     }
 
-    console.log(category_id)
     let success = false;
 
     try{
