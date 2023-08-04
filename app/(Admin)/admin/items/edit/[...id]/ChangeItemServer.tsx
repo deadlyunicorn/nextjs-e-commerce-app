@@ -157,7 +157,7 @@ export const ChangeItemServer = async({item,categories}:{item:Product,categories
                         className="flex flex-wrap">
 
                         Categories:&ensp;
-                        <ul>
+                        <ul className="grid grid-cols-2">
                         {categories.map(
                             category=>(
                                 <li key={category.slug}>

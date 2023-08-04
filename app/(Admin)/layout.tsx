@@ -53,7 +53,7 @@ export default async function RootLayout(
           <div
             className='
             grid grid-cols-2 gap-x-1 
-            justify-items-center'>
+            justify-items-center place-items-center'>
               
               
           {guestDisplay && <p>Viewing in Guest Mode</p>}
@@ -83,9 +83,13 @@ export default async function RootLayout(
         </div>
 
         { ( session || guestDisplay ) &&
-        <div className='mt-2 grid grid-cols-4 justify-items-center'>
+        <div className='
+        bg-opacity-5 bg-black
+          dark:bg-opacity-5 dark:bg-white 
+          py-2 text-lg
+          mt-2 grid grid-cols-4 justify-items-center'>
           <Link className='hover:underline' href={"/admin/items/1/default"}>Items</Link>
-          <Link className='hover:underline' href={"/admin/items/1/default"}>Categories</Link>
+          <Link className='hover:underline' href={"/admin/categories"}>Categories</Link>
           <Link className='hover:underline' href={"/admin/items/1/default"}>Search</Link>
           <Link className='hover:underline' href={"/admin/items/1/default"}>Future</Link>
         </div>
@@ -94,7 +98,7 @@ export default async function RootLayout(
         </header>
 
           {session 
-          || guestDisplay //UNCOMMENT when ready for production
+          || guestDisplay 
           ?children
           :<NotLoggedIn/>
           }

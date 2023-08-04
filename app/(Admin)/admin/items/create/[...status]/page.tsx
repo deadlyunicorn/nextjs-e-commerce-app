@@ -19,6 +19,8 @@ const ItemsList = async({params,searchParams}:{params:{status:string},searchPara
             justify-start relative
             ">
 
+            <h1 className="text-2xl my-2">Create new item</h1>
+
 
             {status=="success" && 
             <SuccessMessage message={searchParams.message}/>}

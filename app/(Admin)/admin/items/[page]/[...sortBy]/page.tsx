@@ -63,7 +63,9 @@ const ItemsList = async({params}:{params:{page:string,sortBy:string[]}}) => {
             justify-start">
 
             
-                
+                <h1
+                    className="text-2xl my-2">Items</h1>
+
 
                 <ul
                     className="w-full">

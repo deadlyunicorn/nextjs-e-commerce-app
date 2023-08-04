@@ -1,13 +1,11 @@
+import { fetchCategoriesADMIN } from "@/app/(Admin)/api/categories";
 import { CoolButton } from "@/app/(Shared)/components/Global"
-import { fetchCategories } from "@/app/(User)/(lib)/api/categories";
-import { getCookies } from "@/app/(User)/(lib)/api/cookies";
 import { getServerSession } from "next-auth/next";
-import Image from "next/image";
 import { ReactNode } from "react";
 
 export const CreateItemForm = async() => {
 
-    const categories = await fetchCategories();
+    const categories = await fetchCategoriesADMIN();
     const session =  await getServerSession();
 
 
@@ -141,7 +139,7 @@ export const CreateItemForm = async() => {
                 className="flex flex-wrap">
 
                 Categories:&ensp;
-                <ul>
+                <ul className="grid grid-cols-2 gap-x-2">
                     {categories.map(
                         category => (
                             <li key={category.slug}>

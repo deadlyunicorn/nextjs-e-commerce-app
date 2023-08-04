@@ -12,27 +12,33 @@ const FormLoader = async({params}:{params:{product_id:string}}) => {
 
 
     return (
-        <>
+        <main>
+
+            <h1 className="text-2xl my-2 pb-4 text-center">
+                
+            You are about to delete {product_id}. 
+                <p className="text-lg">Procceed with caution.</p>
+            </h1>
+
+
+
         <div className="
+        w-full
         bg-slate-300 py-4 rounded-md
         dark:bg-slate-800
-        w-full
-        xs:w-3/4
         flex flex-col items-center 
-        justify-start">
+        justify-around">
 
-            <p className="my-4 pb-4 text-center">
-                You are about to delete {product_id}. 
-                <br/>Procceed with caution.
-            </p>
+
 
             <form
-                className="flex flex-col justify-center"
+                className="flex flex-col justify-center mt-4"
                 action={session?handleSubmit:"/admin/unauthorized"}>
                 <CoolInput>
 
                 <input
-                    placeholder="Product id"
+                    className="placeholder:text-center"
+                    placeholder="Enter the product id"
                     title="Please type in exactly the product id."
                     name="product_id"
                     required
@@ -51,6 +57,7 @@ const FormLoader = async({params}:{params:{product_id:string}}) => {
                     />
             </form>
             <LoadingScreen/>
+
         </div>
         <Link
                     className="hover:underline"
@@ -58,7 +65,7 @@ const FormLoader = async({params}:{params:{product_id:string}}) => {
                     Back to Dashboard
         </Link>
 
-        </>
+        </main>
     )
 
 
@@ -76,7 +83,6 @@ const handleSubmit = async(formData:FormData)=>{
         }
     }
 
-    console.log(product_id)
     let success = false;
 
     try{

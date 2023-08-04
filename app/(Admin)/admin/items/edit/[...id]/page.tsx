@@ -5,6 +5,7 @@ import { ChangeItemServer } from "./ChangeItemServer";
 import { Cart_Failure, Cart_Success } from "@/app/(User)/(lib)/components/cart/add_Cart";
 import { redirect } from "next/navigation";
 import { FailureMessage, SuccessMessage } from "@/app/(Shared)/components/UserAlert";
+import { fetchCategoriesADMIN } from "@/app/(Admin)/api/categories";
 
 
 
@@ -27,7 +28,7 @@ const ItemsList = async({params,searchParams}:{params:{id:string},searchParams:{
     }
 
 
-    const categories = await fetchCategories();
+    const categories = await fetchCategoriesADMIN();
 
     return (
         <main className="
@@ -36,6 +37,9 @@ const ItemsList = async({params,searchParams}:{params:{id:string},searchParams:{
             flex flex-col items-center 
             justify-start relative
             ">
+
+            <h1 className="text-2xl my-2">Edit {item.name}</h1>
+
 
 
             {status=="success" && 
