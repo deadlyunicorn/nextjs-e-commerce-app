@@ -114,7 +114,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
         const handle_QuantityButton = () => {
             if (children == "+") {
 
-                if (quantity < 10) {
+                if (quantity < Math.min(item.inventory.available,10)) {
 
                     setQuantity(quantity + 1);
 
@@ -205,7 +205,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
 
             </div>
             <p className="text-right">
-                {price * quantity} €
+                {Math.round(price * quantity*100)/100} €
             </p>
 
 
@@ -233,7 +233,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                 bg-slate-300 rounded-b-md ">
 
                 {loading 
-                ?"Adding to cart..."
+                ?"Updating cart..."
                 :<>ADD TO <b className="font-bold">CART</b></>
                 }
             </button>

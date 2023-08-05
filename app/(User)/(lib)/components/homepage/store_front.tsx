@@ -34,12 +34,35 @@ const Item_StoreFront = async({item} : {item:Product}) => {
                     className="group"
                     href={`/product/${item.permalink}`}>
 
-                    <Image src={item.image?item.image["url"]:"/image.png"} 
-                    placeholder="blur"
-                    blurDataURL="/image.png"
-                    alt={item.name}  height={200} width={200}
-                    className="rounded-md aspect-square group-hover:brightness-110"/>
-                    
+                    <div className="relative">
+
+
+                        <Image src={item.image?item.image["url"]:"/image.png"} 
+                        placeholder="blur"
+                        blurDataURL="/image.png"
+                        alt={item.name}  height={200} width={200}
+                        className="
+                            bg-white
+                            rounded-md aspect-square group-hover:brightness-110"/>
+
+                        {item.inventory
+                            &&item.inventory.available<10
+                            &&
+                            <p className="
+                                font-bold
+                                text-red-600
+                                bg-slate-200 bg-opacity-40
+                                backdrop-blur-md
+                                absolute bottom-2 
+                                w-full">
+                                
+                                Only {item.inventory.available} left
+                            </p>
+                        }
+
+                    </div>
+
+
                     <p className="
                         my-4 h-[80px] 
                         text-xl  
@@ -53,9 +76,12 @@ const Item_StoreFront = async({item} : {item:Product}) => {
                     </p>
                 </Link>
 
+                
+
                 <div className="price-tag-multiple">
 
                 <PriceTag>
+
                         {item.price["formatted_with_symbol"]}&emsp;
                 </PriceTag>
                 </div>

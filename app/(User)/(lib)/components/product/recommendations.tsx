@@ -20,42 +20,45 @@ export function Recommendation({listing}:{listing:Product}){
     group
     ">
 
-            <Image src={listing.image?listing.image["url"]:"/image.png"}
-            placeholder="blur"
-            blurDataURL="/image.png"
-            alt={listing.name}  height={100} width={100}
-            className="rounded-md min-h-[100px] min-w-[100px] aspect-square" />
+        <Image src={listing.image?listing.image["url"]:"/image.png"}
+        placeholder="blur"
+        blurDataURL="/image.png"
+        alt={listing.name}  height={100} width={100}
+        className="
+            mt-4
+            bg-white
+            rounded-md min-h-[100px] min-w-[100px] aspect-square" />
             
-         <div
+        <div
             className="
                 flex flex-col 
-                justify-between 
+                justify-between h-full
                 flex-wrap 
                 overflow-x-hidden w-full">
+
             <p className="
-                mt-2 min-h-[50px] 
+                overflow-hidden
+                mt-2 h-[50px] 
                 text-slate-900 group-hover:text-slate-600
                 dark:text-slate-200 dark:group-hover:text-slate-50 
                 text-lg font-light">
                 {listing.name}
             </p>
-            <div>
-                <div className="
-                    price-tag-multiple
+            <div className="
+                price-tag-multiple
 
-                    bg-gradient-to-r  bg-clip-text
-                    from-red-500 to-yellow-500 
-                    group-hover:from-red-400 group-hover:to-yellow-400
+                bg-gradient-to-r  bg-clip-text
+                from-red-500 to-yellow-500 
+                group-hover:from-red-400 group-hover:to-yellow-400
 
-                    dark:from-red-400 dark:to-yellow-300 
-                    dark:group-hover:from-red-300 dark:group-hover:to-yellow-200
-                    text-transparent
-                    ">
-                    {listing.price["formatted_with_symbol"]}
+                dark:from-red-400 dark:to-yellow-300 
+                dark:group-hover:from-red-300 dark:group-hover:to-yellow-200
+                text-transparent
+                ">
+                {listing.price["formatted_with_symbol"]}
 
-                </div>
-                
             </div>
+            
         </div>
 
 
@@ -91,7 +94,8 @@ export const Recommendation_Fallback = () => {
             ">
 
                 <div className="
-                    h-[100px] w-[100px]
+                    mt-4
+                    min-h-[100px] min-w-[100px]
                     rounded-md
                     aspect-square
                     bg-slate-300
@@ -107,7 +111,7 @@ export const Recommendation_Fallback = () => {
             className="
             flex flex-col 
             justify-between 
-            flex-wrap 
+            flex-wrap h-full
             overflow-x-hidden w-full">
                 <p className="
                     mt-2 min-h-[50px] 
