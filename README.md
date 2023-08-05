@@ -17,7 +17,7 @@ I built this for fun, in order to practise my Next.JS - React.JS. I might use th
 - [ ] Create a navigation bar
 - [ ] Footer with needed fields (about, terms etc.. general footer of an eshop)
 - [ ] Custom checkout page 
-- [ ] /admin page. Admins can update the products from there. (Especially useful in this case, as I couldn't find any 'team' functionality in Commerce.js)
+- [x] /admin page. Admins can update the products from there. (Especially useful in this case, as I couldn't find any 'team' functionality in Commerce.js)
 - [ ] User Login -> View the same cart on multiple devices, store your creds for the next order, etc. *MIGHT NOT DO THIS*
 - [ ] Maybe Google Analytics, most likely not here.
 ### Technologies used
