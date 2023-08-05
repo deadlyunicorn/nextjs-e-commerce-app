@@ -2,6 +2,7 @@
 
 import { Cart } from "@chec/commerce.js/types/cart";
 import { getCartCookie } from "./cookies";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 
 export const createCart = async () : Promise<Cart> => {
@@ -51,7 +52,8 @@ export const getCart = async():Promise<Cart|undefined> =>{
         const res = await fetch(url, {
             method: "GET",
             headers: headers,
-            next: {revalidate:0}
+            cache: 'force-cache',
+            next: {tags: ['cart']}
         })
 
         if (!res.ok) {
@@ -96,6 +98,10 @@ export const addCart = async (id:string,quantity:string) =>{
     if (!res.ok) {
         throw new Error(`Fetch failed ${res.status}`);
     }
+    else{
+        revalidateTag('cart');
+    }
+
 
     return res.json();
 
@@ -130,6 +136,9 @@ export const updateCart = async (cart_id:string,quantity:string,item_id:string) 
 
     if (!res.ok) {
         throw new Error(`Fetch failed ${res.status}`);
+    }
+    else{
+        revalidateTag('cart');
     }
 
 
