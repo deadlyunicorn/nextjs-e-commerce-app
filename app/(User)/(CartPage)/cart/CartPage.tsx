@@ -63,7 +63,7 @@ export const CartPage = async() => {
                     </span>
                     <div className="py-2">
                         {cart.total_items>0 
-                        ?<Checkout url={cart.hosted_checkout_url}/>
+                        ?<Checkout url={`/checkout/${cart.id}`}/>
                         :"You cart is empty"}
                         
                     </div>
