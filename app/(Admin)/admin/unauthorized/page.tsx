@@ -10,7 +10,8 @@ export default function Unauthorized() {
                 
                 mb-96
                 rounded-md py-2 text-lg
-                dark:bg-slate-950
+                dark:bg-white
+                dark:bg-opacity-10
                 bg-slate-200
                 [&>*]:my-4 
                 w-full
