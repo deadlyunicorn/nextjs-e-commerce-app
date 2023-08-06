@@ -1,11 +1,8 @@
 'use client'
 import { useEffect, useState  } from "react"
-import { getCookies, setCartCookie } from "../../api/cookies"
+import {  getCookies, setCartCookie } from "../../api/cookies"
 import { createCart, getCart } from "../../api/cart";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-import { setCart } from "../redux/cartSlice";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 
 //No async() on client components..!!!
@@ -13,6 +10,7 @@ export const CookieVerify = () => {
 
 
     const router = useRouter();
+    const pathname = usePathname();
 
     const [cart_id,setCart_id] = useState<undefined|string> (undefined);
     
@@ -55,7 +53,7 @@ export const CookieVerify = () => {
 
         })()
 
-    },[cart_id,router])
+    },[cart_id,router,pathname])
 
 
     return(

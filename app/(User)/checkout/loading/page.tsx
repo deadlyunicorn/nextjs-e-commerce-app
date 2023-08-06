@@ -87,7 +87,8 @@ const handleSubmit = async(formData:FormData)=>{
     console.log("HELLO WORLD")
 
 
-    return res;
+    redirect('./success')
+    // return res;
     // .then(res=>{
     //     console.log(`Logging`)
     //     console.log(res)});
