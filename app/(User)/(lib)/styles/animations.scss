@@ -91,7 +91,7 @@
  
 }
 
-.animation-appear[data-cartEnabled=true]{
+.animation-appear[data-cartenabled=true]{
     animation: appear 2s;
     transform: translateY(0vh);
 
@@ -106,7 +106,7 @@
     }
 }
 
-.animation-disappear[data-cartEnabled=false][data-hidden=false]{
+.animation-disappear[data-cartenabled=false][data-hidden=false]{
     transform: translateY(85vh);
     animation: disappear 2s;
 }

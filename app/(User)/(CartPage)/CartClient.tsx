@@ -42,7 +42,7 @@ export const CartClientWrapper= ({children}:{children:ReactNode})=>{
         {
         //Above here should be the nav bar - header etc.
             <div 
-                data-cartEnabled={cart}
+                data-cartenabled={cart}
                 data-hidden={hidden}
                 // need to manually add the data-[] selectors in the css file
                 className="
