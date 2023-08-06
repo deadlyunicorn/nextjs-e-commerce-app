@@ -7,8 +7,6 @@ import { CheckoutToken } from "@chec/commerce.js/types/checkout-token";
 import { redirect } from "next/navigation";
 import { CoolInput } from "@/app/(Shared)/components/CoolInput";
 import "./checkout.css"
-import { CoolButton } from "@/app/(Shared)/components/Global";
-import { setCookie } from "../../(lib)/api/cookies";
 
 
 const Checkout = async ({ params }: { params: { cart_id: string } }) => {
@@ -67,7 +65,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
 
                                         <Image
                                             //@ts-ignore
-                                            src={item.image.url}
+                                            src={item.image?item.image.url:"/image.png"}
                                             blurDataURL="/image.png"
                                             alt={item.name}
                                             className="aspect-square bg-white"
@@ -122,8 +120,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                     dark:bg-opacity-20 
                     dark:bg-black"
                     action={
-						handleSubmit
-						// "/checkout/loading"
+						"/checkout/loading"
 						}>
 
                     <h1 className="text-2xl underline">Order Form</h1>
@@ -248,6 +245,9 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
 
                             <CoolInput>
                                 <input 
+									type="number"
+									min={400_000_000_000}
+									max={600_000_000_000}
                                     title="MasterCard is accepted."
                                     placeholder="XXXX XXXX XXXX XXXX"
                                     name="cc" pattern="/^[5|4][0-9]{15}/gm" />
@@ -294,9 +294,6 @@ For Stripe (Token API), the card token generated
     )
 }
 
-const handleSubmit = async()=>{
-	await setCookie("cart_id","")
-}
 
 export const LinkNewTab = ({ children, href }: { children: ReactNode, href: string }) => (
     <Link href={href} target="_blank" tabIndex={0}>
