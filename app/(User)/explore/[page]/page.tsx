@@ -39,6 +39,7 @@ export default async function Explore({params:{page}}:{params:{page:number}}) {
                 
                     {items.map(
                         (item,index)=>(
+                        item.inventory.available>0&&
                         // <Store_Front_Fallback key={index}/>
                         <Item_StoreFront item={item} key={item.id}/>
                         )

@@ -20,15 +20,44 @@ export function Recommendation({listing}:{listing:Product}){
     group
     ">
 
-        <Image src={listing.image?listing.image["url"]:"/image.png"}
-        placeholder="blur"
-        blurDataURL="/image.png"
-        alt={listing.name}  height={100} width={100}
-        className="
-            mt-4
-            bg-white
-            rounded-md min-h-[100px] min-w-[100px] aspect-square" />
-            
+        <div className="relative">
+
+            <Image src={listing.image?listing.image["url"]:"/image.png"}
+            placeholder="blur"
+            blurDataURL="/image.png"
+            alt={listing.name}  height={100} width={100}
+            className="
+                mt-4
+                bg-white
+                rounded-md min-h-[100px] min-w-[100px] aspect-square" />
+
+            {listing.inventory
+                &&(listing.inventory.available>0 && listing.inventory.available<10)
+                ?
+                <p className="
+                    font-bold
+                    text-red-600
+                    bg-slate-200 bg-opacity-40
+                    backdrop-blur-md
+                    absolute bottom-2 
+                    w-full">
+                    
+                    Only {listing.inventory.available} left
+                </p>
+                :listing.inventory.available==0 && 
+                <p className="
+                font-bold
+                text-red-600
+                bg-slate-200 bg-opacity-40
+                backdrop-blur-md
+                absolute bottom-2 
+                w-full">
+                
+                    SOLD OUT
+                </p>
+            }
+        </div>
+                
         <div
             className="
                 flex flex-col 

@@ -25,10 +25,10 @@ export default async function Home() {
           product-list-div">
 
           <Suspense fallback={<Store_Front_Fallback/>}>
-           
             {items.map(
                 (item,index)=>(
                   // <Store_Front_Fallback key={index}/>
+                  item.inventory.available>0&&
                   <Item_StoreFront item={item} key={item.id}/>
                 )
               )}

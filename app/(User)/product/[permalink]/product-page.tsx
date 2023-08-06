@@ -133,7 +133,7 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                         <p>
                             {listing.inventory.available>0 && listing.inventory.available<15
                                 ?<em className="text-red-600 font-bold underline">Only {listing.inventory.available} left</em>
-                                :" "}
+                                :<em className="text-red-600 font-bold underline">SOLD OUT</em>}
 
                         </p>
                
