@@ -337,6 +337,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 									<input
 										required 
 										type="number"
+										defaultValue={4242_4242_4242_4242}
 										min={4000_0000_0000_0000}
 										max={6000_0000_0000_0000}
 										title="MasterCard is accepted."
