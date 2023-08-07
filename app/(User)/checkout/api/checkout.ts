@@ -83,23 +83,5 @@ export const captureOrder = async(checkoutData:checkoutData) =>{
         body: JSON.stringify(checkoutData.body)
     });
 
-    (async()=>{
-        "use server"
-        await setCookie("cart_id","");
-        revalidateTag('cart');
-        redirect('/') //order success page
-    })()
-
-    
-
-    // if (!res.ok) {
-    //     throw ` ${res.status}:  ${res.statusText}, ${res.url}, ${JSON.stringify(res.error.errors)} `;
-    // }
-    
-    // else
-    
-  
- 
- 
     return res.json();
 }
