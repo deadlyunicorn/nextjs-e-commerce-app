@@ -343,11 +343,6 @@ For Stripe (Token API), the card token generated
 }
 
 
-export const LinkNewTab = ({ children, href }: { children: ReactNode, href: string }) => (
-    <Link href={href} target="_blank" tabIndex={0}>
-        {children}
-    </Link>
-)
 
 const countryListNumeric = [
     {code: 'AF', name: 'Afghanistan'},
