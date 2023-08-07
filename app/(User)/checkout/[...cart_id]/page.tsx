@@ -208,17 +208,17 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 					<h1 className="text-2xl underline">Order Form </h1>
 
 					<input
-						// required
+						required
 						readOnly
 						className="hidden" value={cart_id_url} name="cart_id" />
 
 					<input
-						// required
+						required
 						readOnly
 						className="hidden" value={checkoutToken} name="checkout_token_id" />
 
 					<input
-						// required 
+						required 
 						readOnly
 						className="hidden" name="gateway" value={'test_gateway'} />
 
@@ -228,7 +228,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							<div className="">
 								<CoolInput>
 									<input
-										// required 
+										required 
 										placeholder="example@mail.com"
 										type="email" name="customer_email" />
 								</CoolInput>
@@ -244,7 +244,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 
 								<CoolInput>
 									<input
-										// required 
+										required 
 										pattern="[a-zA-Z]+"
 										minLength={3}
 										placeholder="Your Name"
@@ -257,7 +257,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							<div className="w-[50%]">
 								<CoolInput>
 									<input
-										// required
+										required
 										pattern="[a-zA-Z]+"
 										minLength={4}
 										placeholder="Your Surname"
@@ -294,7 +294,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							<span>City:</span>
 							<CoolInput>
 								<input
-									// required 
+									required 
 									pattern="[a-zA-Z]+"
 									minLength={4}
 									placeholder="Your City"
@@ -305,7 +305,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							<span>Postcode:</span>
 							<CoolInput>
 								<input
-									// required 
+									required 
 									type="number"
 									placeholder="XXX XX"
 									min={10000} max={99999} name="card_postal_zip_code" />
@@ -318,7 +318,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							<span>Address:</span>
 							<CoolInput>
 								<input
-									// required
+									required
 									// pattern="/(?:[a-zA-Z]+\s)+[1-9][0-9]{0,2}/gm"
 									minLength={4}
 									placeholder="Address and number"
@@ -350,7 +350,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 								<span>CVV:</span>
 								<CoolInput>
 									<input
-										// required
+										required
 										name="card_cvc"
 										placeholder="123"
 										type="number" min={100} max={999} />
@@ -369,7 +369,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							<div className="w-14">
 								<CoolInput>
 									<input
-										// required
+										required
 										name="card_expiry_month"
 										placeholder="MO"
 										type="number" min={1} max={12} />
@@ -379,7 +379,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							<div className="w-16">
 								<CoolInput>
 									<input
-										// required 
+										required 
 										name="card_expiry_year"
 										placeholder="Year"
 										type="number" min={date.getFullYear()} max={date.getFullYear() + 20} />
