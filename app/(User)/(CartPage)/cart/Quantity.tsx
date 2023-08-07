@@ -99,7 +99,9 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
             <span>Quantity</span>
             <select
-                className="text-slate-900 rounded-lg"
+                className="
+                    bg-slate-200
+                    text-slate-900 rounded-lg"
                 defaultValue={quantity}
 
                 onChange={async(e)=>{
