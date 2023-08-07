@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { captureOrder } from "../api/checkout";
+import { redirect } from "next/navigation";
 
 export async function POST(res: NextResponse) {
 
@@ -72,18 +73,7 @@ export async function POST(res: NextResponse) {
     }
 
     const req=await captureOrder(checkoutData);
-    try{
-        if(JSON.stringify(req).includes("error")){
-            console.log(req.error.message);
-            if(JSON.stringify(req).includes("errors")){
-                console.log(JSON.stringify(req.error.errors))
-            }
-        }
-        else{}
-    }
-    finally{
-
-    }
-
+    
     return NextResponse.json(req);
+
 }
