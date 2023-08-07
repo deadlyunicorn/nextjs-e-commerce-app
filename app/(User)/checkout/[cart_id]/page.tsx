@@ -4,9 +4,13 @@ import { ReactNode } from "react"
 import { getCheckoutToken } from "../api/checkout";
 import { LineItem } from "@chec/commerce.js/types/line-item";
 import { CheckoutToken } from "@chec/commerce.js/types/checkout-token";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { CoolInput } from "@/app/(Shared)/components/CoolInput";
 import "./checkout.css"
+import { headers } from "next/headers";
+import LoadingScreen from "../../loader/page";
+
+
 
 
 const Checkout = async ({ params }: { params: { cart_id: string } }) => {
@@ -34,9 +38,8 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
 
     return (
         <main className="flex flex-col justify-start min-h-[70vh] ">
-
             <div className="px-2 text-center">
-
+				{JSON.stringify(params)}
                 <h1 className="capitalize text-2xl">order summary</h1>
                 <ul className="flex flex-col gap-2 w-full my-2 py-2 px-2 rounded-md bg-slate-200 dark:bg-slate-800">
 
@@ -121,22 +124,22 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                     dark:bg-opacity-20 
                     dark:bg-black"
 					//trying to see if this will work on production
-					method={"post"}
+					method={"POST"}
                     action={
-						"/checkout/loading"
+						handleSubmit
 						}>
 
                     <h1 className="text-2xl underline">Order Form</h1>
 
-					<input
+					<input required
                         readOnly
                         className="hidden" value={cart_id} name="cart_id" />
 
-                    <input
+                    <input required
                         readOnly
                         className="hidden" value={checkoutToken} name="checkout_token_id" />
 
-                    <input readOnly
+                    <input required readOnly
                         className="hidden" name="gateway" value={'test_gateway'} />
 
                     <div className="grid xs:grid-cols-2 justify-items-center">
@@ -144,7 +147,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                             <span>Email:</span>
                             <div className="">
                                 <CoolInput>
-                                    <input 
+                                    <input required 
                                         placeholder="example@mail.com"
                                         type="email" name="customer_email" />
                                 </CoolInput>
@@ -159,7 +162,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                             <div className="w-[50%]">
 
                                 <CoolInput>
-                                    <input 
+                                    <input required 
                                         pattern="[a-zA-Z]+"
                                         minLength={3}
                                         placeholder="Your Name"
@@ -171,7 +174,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                             <span>Surname:</span>
                             <div className="w-[50%]">
                                 <CoolInput>
-                                    <input
+                                    <input required
                                         pattern="[a-zA-Z]+"
                                         minLength={4}
                                         placeholder="Your Surname"
@@ -185,7 +188,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                         <div className="flex w-[90%] gap-x-1">
                             <span>Country:</span>
                             {/* <CoolInput>
-                                <input
+                                <input required
                                     className=""
                                     list="countryList"
                                     pattern="[a-zA-Z]+"
@@ -216,7 +219,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                         <div className="flex w-[70%] gap-x-1">
                             <span>City:</span>
                             <CoolInput>
-                                <input 
+                                <input required 
                                     pattern="[a-zA-Z]+"
                                     minLength={4}
                                     placeholder="Your City"
@@ -226,7 +229,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                         <div className="flex gap-x-1 items-center w-[70%]">
                             <span>Postcode:</span>
                             <CoolInput>
-                                <input type="number"
+                                <input required type="number"
                                     placeholder="XXX XX"
                                     min={10000} max={99999} name="card_postal_zip_code" />
                             </CoolInput>
@@ -237,7 +240,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                         <div className="flex gap-x-1 items-center">
                             <span>Address:</span>
                             <CoolInput>
-                                <input
+                                <input required
                                     // pattern="/(?:[a-zA-Z]+\s)+[1-9][0-9]{0,2}/gm"
                                     minLength={4}
                                     placeholder="Address and number" 
@@ -253,7 +256,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
 
 							<div className="w-44 xs:w-48">
 								<CoolInput>
-									<input 
+									<input required 
 										type="number"
 										min={400_000_000_000}
 										max={600_000_000_000}
@@ -267,7 +270,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
 							<div className="flex  gap-x-1">
 								<span>CVV:</span>
 								<CoolInput>
-									<input
+									<input required
 										name="card_cvc"
 										placeholder="123" 
 										type="number" min={100} max={999}/>
@@ -285,7 +288,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
 								
 								<div className="w-14">
 									<CoolInput>
-										<input
+										<input required
 											name="card_expiry_month"
 											placeholder="MO" 
 											type="number" min={1} max={12}/>
@@ -294,7 +297,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
 
 								<div className="w-16">
 									<CoolInput>
-										<input 
+										<input required 
 											name="card_expiry_year"
 											placeholder="Year"
 											type="number" min={date.getFullYear()} max={date.getFullYear()+20}/>
@@ -303,8 +306,10 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
 						</div>
 					</div>
 
-                    <div className="w-full">
-                    <input 
+                    <div className="w-full relative">
+					
+                    <input required 
+						id="submit"
                         className="
                         hover:underline 
                         text-lg 
@@ -318,20 +323,11 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
 
                         rounded-md px-2 py-1
                         w-fit "
+					
                         type="submit" />
                     </div>
                 </form>
-
-                {/* payment.card.token	string	optional	
-For Stripe (Token API), the card token generated
-
-->temp to stripe_pk*/}
-
-                <div>
-                    {/* {process.env.STRIPE_PK} */}
-                </div>
-
-
+				<LoadingScreen/>
 
             </div>
 
@@ -340,6 +336,30 @@ For Stripe (Token API), the card token generated
 
         </main>
     )
+}
+
+const handleSubmit=async(body:FormData)=>{
+	"use server"
+
+	//@ts-ignore
+
+	//! REMOVE
+	const host__testing = `http://${headers().headers.host}`;
+	const host = `https://${headers().headers.host}`;
+	const url = `${host__testing}/checkout/handle`;
+	// const url = "http://localhost:3000/checkout/handle";
+
+	console.log(url);
+
+
+	const res= await fetch(url, {
+        method: "POST",
+        body: body
+    }).then(data=>data.json());
+
+	console.log(JSON.stringify(res))
+	// redirect('/checkout/success');
+
 }
 
 
