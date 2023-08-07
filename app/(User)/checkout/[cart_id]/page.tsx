@@ -12,9 +12,10 @@ import "./checkout.css"
 const Checkout = async ({ params }: { params: { cart_id: string } }) => {
 
     const cart_id = params.cart_id;
+	const date = new Date;
 
 
-    let res
+    let res;
 
     try {
         res = await getCheckoutToken(cart_id)
@@ -125,6 +126,10 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
 
                     <h1 className="text-2xl underline">Order Form</h1>
 
+					<input
+                        readOnly
+                        className="hidden" value={cart_id} name="cart_id" />
+
                     <input
                         readOnly
                         className="hidden" value={checkoutToken} name="checkout_token_id" />
@@ -133,13 +138,13 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                         className="hidden" name="gateway" value={'test_gateway'} />
 
                     <div className="grid xs:grid-cols-2 justify-items-center">
-                        <div className="flex items-center px-1">
+                        <div className="flex items-center gap-x-1">
                             <span>Email:</span>
                             <div className="">
                                 <CoolInput>
                                     <input 
                                         placeholder="example@mail.com"
-                                        type="email" name="email" />
+                                        type="email" name="customer_email" />
                                 </CoolInput>
                             </div>
                         </div>
@@ -156,7 +161,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                                         pattern="[a-zA-Z]+"
                                         minLength={3}
                                         placeholder="Your Name"
-                                        type="text" name="firstName" />
+                                        type="text" name="customer_firstname" />
                                 </CoolInput>
                             </div>
                         </div>
@@ -168,7 +173,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                                         pattern="[a-zA-Z]+"
                                         minLength={4}
                                         placeholder="Your Surname"
-                                        type="text" name="lastName" />
+                                        type="text" name="customer_lastname" />
                                 </CoolInput>
                             </div>
                         </div>
@@ -190,7 +195,8 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                             <CoolInput>
 
                                 <select
-                                    name="country">
+									defaultValue={'US'}
+                                    name="shipping_country">
                                     {countryListNumeric.map(
                                         entry=>
                                             <option 
@@ -212,7 +218,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                                     pattern="[a-zA-Z]+"
                                     minLength={4}
                                     placeholder="Your City"
-                                    type="text" name="city" />
+                                    type="text" name="shipping_town_city" />
                             </CoolInput>
                         </div>
                         <div className="flex gap-x-1 items-center w-[70%]">
@@ -220,7 +226,7 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                             <CoolInput>
                                 <input type="number"
                                     placeholder="XXX XX"
-                                    min={10000} max={99999} name="postcode" />
+                                    min={10000} max={99999} name="card_postal_zip_code" />
                             </CoolInput>
                         </div>
 
@@ -233,27 +239,67 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                                     // pattern="/(?:[a-zA-Z]+\s)+[1-9][0-9]{0,2}/gm"
                                     minLength={4}
                                     placeholder="Address and number" 
-                                    type="text" name="address" />
+                                    type="text" name="shipping_street" />
                             </CoolInput>
                         </div>
                     </div>
                     
-                    <div className="grid xs:grid-cols-2 justify-items-center">
-                        <div className="flex gap-x-1 items-center">
-                            <span className="hidden xs:inline">Credit Card:</span>
+                    <div className="grid xs:grid-cols-2 xs:justify-items-center gap-y-1">
+                        <div className="flex gap-x-1 xs:items-center">
+                            <span className="hidden xs:inline ">Credit Card:</span>
                             <span className="xs:hidden">CC:</span>
 
-                            <CoolInput>
-                                <input 
-									type="number"
-									min={400_000_000_000}
-									max={600_000_000_000}
-                                    title="MasterCard is accepted."
-                                    placeholder="XXXX XXXX XXXX XXXX"
-                                    name="cc" pattern="/^[5|4][0-9]{15}/gm" />
-                            </CoolInput>
+							<div className="w-44 xs:w-48">
+								<CoolInput>
+									<input 
+										type="number"
+										min={400_000_000_000}
+										max={600_000_000_000}
+										title="MasterCard is accepted."
+										placeholder="XXXX XXXX XXXX XXXX"
+										name="card_number" pattern="/^[5|4][0-9]{15}/gm" />
+								</CoolInput>
+							</div>
                         </div>
-                    </div>
+						<div className="place-self-start place-items-center">
+							<div className="flex  gap-x-1">
+								<span>CVV:</span>
+								<CoolInput>
+									<input
+										name="card_cvc"
+										placeholder="123" 
+										type="number" min={100} max={999}/>
+											
+								</CoolInput>
+							</div>
+							
+
+						</div>
+    
+	                </div>
+					<div className="grid xs:grid-cols-2">
+						<div className="flex xs:place-self-center gap-x-1">
+								<span>Expires on:</span>
+								
+								<div className="w-14">
+									<CoolInput>
+										<input
+											name="card_expiry_month"
+											placeholder="MO" 
+											type="number" min={1} max={12}/>
+									</CoolInput>
+								</div>
+
+								<div className="w-16">
+									<CoolInput>
+										<input 
+											name="card_expiry_year"
+											placeholder="Year"
+											type="number" min={date.getFullYear()} max={date.getFullYear()+20}/>
+									</CoolInput>
+								</div>
+						</div>
+					</div>
 
                     <div className="w-full">
                     <input 
