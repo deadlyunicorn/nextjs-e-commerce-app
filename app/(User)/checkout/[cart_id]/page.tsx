@@ -120,6 +120,8 @@ const Checkout = async ({ params }: { params: { cart_id: string } }) => {
                     bg-slate-300
                     dark:bg-opacity-20 
                     dark:bg-black"
+					//trying to see if this will work on production
+					method={"post"}
                     action={
 						"/checkout/loading"
 						}>

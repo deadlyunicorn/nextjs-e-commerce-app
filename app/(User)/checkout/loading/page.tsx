@@ -5,11 +5,11 @@ import { captureOrder } from "../api/checkout";
 
 const FormLoader = async({searchParams}:{searchParams:FormData}) => {
 
-    // const res = await handleSubmit(searchParams);
+    const res = await handleSubmit(searchParams);
 
     return (
         <>
-            {/* {JSON.stringify(searchParams)} */}
+            {JSON.stringify(res)}
             <LoadingScreen/>
             
         </>
@@ -89,7 +89,7 @@ const handleSubmit = async(formData:FormData)=>{
     }
     let success = false;
 
-    return cart_id;
+    return checkoutData;
 
 
     // redirect('./success')
