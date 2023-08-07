@@ -45,7 +45,7 @@ const Item_StoreFront = async({item} : {item:Product}) => {
                             bg-white
                             rounded-md aspect-square group-hover:brightness-110"/>
 
-                        {item.inventory
+                        {item.inventory.managed
                             &&item.inventory.available<10
                             &&
                             <p className="

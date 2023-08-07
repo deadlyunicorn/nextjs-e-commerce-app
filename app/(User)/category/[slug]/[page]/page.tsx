@@ -39,7 +39,7 @@ export default async function CategoryProducts({params:{slug,page},params}:{para
                     {items.map(
                         (item,index)=>(
                         // <Store_Front_Fallback key={index}/>
-                            item.inventory.available>0&&
+                            (!item.inventory.managed||item.inventory.available>0)&&
                             <Item_StoreFront item={item} key={item.id}/>
                         )
                     )}

@@ -31,7 +31,7 @@ export function Recommendation({listing}:{listing:Product}){
                 bg-white
                 rounded-md min-h-[100px] min-w-[100px] aspect-square" />
 
-            {listing.inventory
+            {listing.inventory.managed
                 &&(listing.inventory.available>0 && listing.inventory.available<10)
                 ?
                 <p className="
