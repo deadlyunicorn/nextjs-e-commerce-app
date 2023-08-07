@@ -3,6 +3,7 @@
 import { ReactNode } from "react"
 import { signOut,signIn } from "next-auth/react"
 import { deleteCookie, setCookie } from "@/app/(User)/(lib)/api/cookies"
+import Link from "next/link"
 
 
 export const CoolButton = ({children}:{children:ReactNode}) => (
@@ -117,4 +118,20 @@ export const LoginButtons = ({setLoading}:{setLoading:(value:boolean)=>void}) =>
         </aside>
     )
 
+}
+export const CoolLink = ({href,children}:{href:string,children:ReactNode})=>{
+    return (
+    <Link 
+        href={href}
+        className="
+        text-blue-600
+        hover:text-blue-500
+        hover:underline
+        dark:text-blue-400
+        dark:hover:text-blue-300
+        ">
+            {children}
+    
+    </Link>
+    )
 }
