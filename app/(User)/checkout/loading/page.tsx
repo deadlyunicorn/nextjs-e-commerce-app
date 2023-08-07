@@ -5,12 +5,12 @@ import { captureOrder } from "../api/checkout";
 
 const FormLoader = async({searchParams}:{searchParams:FormData}) => {
 
-    const res = await handleSubmit(searchParams);
+    // const res = await handleSubmit(searchParams);
 
     return (
         <>
+            {/* {JSON.stringify(searchParams)} */}
             <LoadingScreen/>
-            {JSON.stringify(res)}
             
         </>
     )
@@ -22,29 +22,31 @@ const handleSubmit = async(formData:FormData)=>{
     "use server"
 
 
-    
+    let cart_id;
+
     const checkoutData = {
         checkout_token_id:"",
-        payment:{
-            gateway:"",
-            card:{
-                number:"",
-                expiry_month:1,
-                expiry_year:2022,
-                postal_zip_code:100000
+        body:{
+            payment:{
+                gateway:"",
+                card:{
+                    number:0,
+                    expiry_month:0,
+                    expiry_year:0,
+                    postal_zip_code:0
+                }
+            },
+            customer:{
+                email:"",
+                firstname:"",
+                lastname:"",
+            },
+            shipping:{
+                name:"Receive Address",
+                country:"",
+                town_city:"",
+                street:"",
             }
-        },
-        customer:{
-            email:"",
-            firstname:"",
-            lastname:"",
-        },
-        shipping:{
-            name:"Receive Address",
-            country:"",
-            town_city:"",
-            postal_zip_code:"",
-            street:"",
         }
 
     };
@@ -61,50 +63,43 @@ const handleSubmit = async(formData:FormData)=>{
         if (key=="checkout_token_id"){
             checkoutData.checkout_token_id=String(value);
         }
-
-        // else if(key.includes("category.cat")){
-
-        //     data.properties.categories={
-                
-        //         ...data.properties.categories,
-        //         [categoryIndex]:{
-                
-        //             id:String(key.slice(9))
-                
-        //         }
-                
-        //     }
-
-        //     categoryIndex++;
-        // }
+        else if (key=="cart_id"){
+            cart_id=String(value);
+        }
+        else if (key=="gateway"){
+            checkoutData.body.payment.gateway=String(value);
+        }
+        else if (key.includes("card_")){
+            const tempKey = key.slice("card_".length); 
+            // @ts-ignore
+            checkoutData.body.payment.card[tempKey] = +value;
+        }
+        else if (key.includes("customer_")){
+            const tempKey = key.slice("customer_".length); 
+            //@ts-ignore
+            checkoutData.body.customer[tempKey] = String(value);
+        
+        }
+        else if (key.includes("shipping_")){
+            const tempKey = key.slice("shipping_".length); 
+            //@ts-ignore
+            checkoutData.body.shipping[tempKey] = String(value);
+        }
+     
     }
     let success = false;
 
-    const res = await captureOrder(checkoutData.checkout_token_id)
-    console.log(res)
-    console.log("HELLO WORLD")
-    console.log("HELLO WORLD")
-    console.log("HELLO WORLD")
+    return cart_id;
 
 
-    redirect('./success')
-    // return res;
-    // .then(res=>{
-    //     console.log(`Logging`)
-    //     console.log(res)});
-    // }
-
+    // redirect('./success')
+/*
     try{
-        // await captureOrder(checkoutData.checkout_token_id)
-        // .then(res=>{
-        //     console.log(`Logging`)
-        //     console.log(res)});
+        // await captureOrder(checkoutData);
         success=true;
-      
     }
     catch(error){
-        console.log(error)
-        // redirect(`/admin/items/edit/${data.product_id}/fail?error=${error}`)
+        redirect(`/checkout/${cart_id}/fail?error=${error}`)
     }
     finally{
         const message=`Order placed successfully.`;
@@ -112,6 +107,7 @@ const handleSubmit = async(formData:FormData)=>{
             // redirect(`/admin/items/edit/${data.product_id}/success?message=${message}`)
         }
     }
+    */
 
 }
 

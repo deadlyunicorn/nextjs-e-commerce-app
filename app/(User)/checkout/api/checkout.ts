@@ -3,6 +3,33 @@ import { deleteCookie, setCookie } from "../../(lib)/api/cookies";
 import { createCart } from "../../(lib)/api/cart";
 import { redirect } from "next/navigation";
 
+type checkoutData  = {
+    checkout_token_id:string,
+    body:{
+        payment:{
+            gateway:string,
+            card:{
+                number:number,
+                expiry_month:number,
+                expiry_year:number,
+                postal_zip_code:number
+            }
+        },
+        customer:{
+            email:string,
+            firstname:string,
+            lastname:string,
+        },
+        shipping:{
+            name:string,
+            country:string,
+            town_city:string,
+            street:string,
+        }
+    }
+
+};
+
 export const getCheckoutToken = async(cart_id:string)=>{
 
     const url = new URL(
@@ -38,11 +65,9 @@ export const getCheckoutToken = async(cart_id:string)=>{
 
 }
 
-export const captureOrder = async(checkout_token_id:string
-    // ,body:{}
-    ) =>{
+export const captureOrder = async(checkoutData:checkoutData) =>{
     const url = new URL(
-        `https://api.chec.io/v1/checkouts/${checkout_token_id}`
+        `https://api.chec.io/v1/checkouts/${checkoutData.checkout_token_id}`
     );
     
     const headers = {
@@ -51,36 +76,11 @@ export const captureOrder = async(checkout_token_id:string
         "Accept": "application/json",
         "Access-Control-Allow-Origin": "*" 
     };
-
-    const body={
-        customer:{
-            email:"hello2312312@gmail.com"
-        },
-        shipping:{
-            name:"House",
-            street:"Cool street 442",
-            town_city:"Athens",
-            country:"GR",
-        },
-        payment:{
-            gateway:"test_gateway",
-            card:{
-                number:"4242 4242 4242 4242",
-                expiry_month:12,
-                expiry_year:2027,
-                cvc:444,
-                postal_zip_code:10444
-            }
-        },
-    }
-
-    
-
     
     const res= await fetch(url, {
         method: "POST",
         headers: headers,
-        body: JSON.stringify(body)
+        body: JSON.stringify(checkoutData.body)
     });
 
     (async()=>{
