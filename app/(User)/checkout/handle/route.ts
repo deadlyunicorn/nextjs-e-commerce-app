@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { captureOrder } from "../api/checkout";
 import { redirect } from "next/navigation";
 
-export async function POST(res: NextResponse) {
+export async function POST(res: NextRequest) {
 
     const data: FormData = await res.formData();
 
