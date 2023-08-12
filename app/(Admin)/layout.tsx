@@ -91,7 +91,7 @@ export default async function RootLayout(
           <Link className='hover:underline' href={"/admin/items/1/default"}>Items</Link>
           <Link className='hover:underline' href={"/admin/categories"}>Categories</Link>
           <Link className='hover:underline' href={"/admin/items/1/default"}>Search</Link>
-          <Link className='hover:underline' href={"/admin/items/1/default"}>Future</Link>
+          <Link className='hover:underline' href={"/admin/orders"}>Orders</Link>
         </div>
         }
 
