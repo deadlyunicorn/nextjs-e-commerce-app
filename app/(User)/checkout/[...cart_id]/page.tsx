@@ -200,7 +200,6 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
                     dark:bg-opacity-20 
                     dark:bg-black"
 					//trying to see if this will work on production
-					method={"POST"}
 					action={
 						handleSubmit
 					}>
