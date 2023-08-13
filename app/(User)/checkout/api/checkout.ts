@@ -1,7 +1,4 @@
-import { revalidateTag } from "next/cache";
-import { deleteCookie, setCookie } from "../../(lib)/api/cookies";
-import { createCart } from "../../(lib)/api/cart";
-import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 type checkoutData  = {
     checkout_token_id:string,
@@ -82,6 +79,11 @@ export const captureOrder = async(checkoutData:checkoutData) =>{
         headers: headers,
         body: JSON.stringify(checkoutData.body)
     });
+
+    if ( res.ok ){
+        revalidatePath('/');
+    }
+ 
 
     return res.json();
 }
