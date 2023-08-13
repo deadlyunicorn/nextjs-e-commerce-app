@@ -47,6 +47,7 @@ export const CookieVerify = () => {
                 
             }
             else{
+                // consider checking  cartCookieArray[0].value!="" ??
                 setCart_id(cartCookieArray[0].value); 
             }
             

@@ -31,9 +31,8 @@ export const createCart = async () : Promise<Cart> => {
     return res.json();
 }
 
-type CartError = "CartNotFound";
 
-export const getCart = async():Promise<Cart|undefined|CartError> =>{
+export const getCart = async():Promise<Cart|undefined> =>{
     try{
         const cartCookie = await getCartCookie();
         if ( cartCookie == null ){
@@ -59,16 +58,15 @@ export const getCart = async():Promise<Cart|undefined|CartError> =>{
         })
 
         if (!res.ok) {
-            if (res.status == 404){
-                return "CartNotFound";
-            } //a way to fix not having the cart removed after checkout
+            // if (res.status == 404){
+                // old cart still used
+            // }
             throw new Error(`Fetch failed - (${res.status}) ${res.statusText}`);
         }
 
         return res.json();
     }
    catch (error){
-        console.error(error);
         return undefined;
    }
 
