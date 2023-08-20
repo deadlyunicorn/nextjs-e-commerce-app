@@ -63,7 +63,7 @@ const About = () => (
                     gap-y-2 pt-2">
 
                 {/* //Vercel */}
-                <LinkNewTab href={'https://vercel.com/dashboard'}>
+                <LinkNewTab href={'https://vercel.com/'}>
                         <svg 
                             fill="currentColor"
                             className="h-5"
