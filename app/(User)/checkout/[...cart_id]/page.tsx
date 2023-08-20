@@ -89,6 +89,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 			<h1 className="capitalize text-2xl underline">DISCLAIMER</h1>
 				<p>Don&apos;t enter any real information, as they will become publicly available at</p>
 				<Link
+					target="_blank"
 					className="
 					text-blue-600
 					hover:text-blue-500
