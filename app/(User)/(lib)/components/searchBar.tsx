@@ -82,12 +82,13 @@ export const ClientItemSearch = () => {
                     z-[2]
                     rounded-md
                     top-0 left-0
-                    mt-10
+                    mt-14 ml-[10vw]
                     w-[80vw] h-fit
                     py-2
                     absolute hidden
                     items-center justify-center text-center
-                    peer-focus-within:inline ">
+                    peer-focus-within:inline
+                    hover:inline ">
                     
 
                         
@@ -101,6 +102,7 @@ export const ClientItemSearch = () => {
                                 product=>
                                     <li 
                                         className="
+                                            mx-2
                                             bg-blue-600 bg-opacity-5
                                             dark:bg-white dark:bg-opacity-5
 
@@ -108,7 +110,7 @@ export const ClientItemSearch = () => {
                                             hover:brightness-110"
                                         key={product.id}>
                                         <Link 
-                                            className="flex justify-between items-center px-2"
+                                            className="flex justify-between items-center"
                                             href={`/product/${product.permalink}`}>
                                             <Image 
                                                 src={product.image?.url||'/image.png'}
@@ -124,7 +126,7 @@ export const ClientItemSearch = () => {
                                     </li>
                             )}
                         </ul>
-                        :<div className="h-[40px] flex items-center justify-center">No products found.</div>
+                        :<div className="h-[80px] flex items-center justify-center">No products found.</div>
                         }
                 </div>
             }
@@ -160,7 +162,7 @@ const Loading=()=>{
         <div className="
           flex 
           justify-around items-center   
-          gap-5 h-10 py-5 px-2 w-[90vw]
+          gap-5 h-20 py-5 px-2 w-[90vw]
           animation-loader
           ">
 
