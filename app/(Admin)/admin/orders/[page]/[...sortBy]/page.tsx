@@ -105,9 +105,15 @@ const OrderList = async({params}:{params:{page:string,sortBy:string[]}}) => {
                                
                                 
                                 <div>{getDate(order.created)}</div>
-                                <div>{order.customer.email}</div>
+                                <div>
+                                    ID : {order.customer_reference}
+                                    <hr/>
+                                    {order.customer.email}
+                                </div>
                                 <div>{order.order_value.formatted_with_symbol}</div>
-                                <div>{order.status_fulfillment}</div>
+                                <div>{order.status_fulfillment} and {order.status_payment}</div>
+
+                                {/* <div>{order.customer_reference}</div> */}
 
                                 {/* <div>{order.shipping.country} - {order.shipping.town_city}</div> */}
 
