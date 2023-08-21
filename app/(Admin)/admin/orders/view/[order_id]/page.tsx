@@ -78,7 +78,7 @@ const OrderDetails = async({params}:{params:{order_id:string}}) => {
                         <li>Country: {country}</li>
                         <li>City: {order.shipping.town_city}</li>
                         {/* //todo basically post code we used is for the card verification, not shipping..*/}
-                        {/* <li>Post Code: {order.shipping.postal_zip_code||"Not Found"}</li> */}
+                        <li>Post Code: {order.transactions[0].payment_source.billing_zip_postal_code||"Not Found"}</li>
                         <li>Address: {order.shipping.street}</li>
                     </ul>
                 </section>
