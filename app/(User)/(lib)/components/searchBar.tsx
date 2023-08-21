@@ -85,7 +85,7 @@ export const ClientItemSearch = () => {
                     mt-10
                     w-[80vw] h-fit
                     py-2
-                    absolute
+                    absolute hidden
                     items-center justify-center text-center
                     peer-focus-within:inline ">
                     
