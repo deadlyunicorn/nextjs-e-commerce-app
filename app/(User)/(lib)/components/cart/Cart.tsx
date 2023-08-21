@@ -4,16 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-type CartError = "CartNotFound";
-
 
 
 const CartComponent = async () => {
 
-    const cart:Cart|undefined|CartError = await getCart();
-    if ( cart == "CartNotFound" ){
-        redirect('/checkout/success');
-    }
+    const cart:Cart|undefined = await getCart();
 
     return (
         <>
