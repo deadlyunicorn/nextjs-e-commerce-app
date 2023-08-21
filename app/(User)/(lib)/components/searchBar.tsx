@@ -82,10 +82,10 @@ export const ClientItemSearch = () => {
                     z-[2]
                     rounded-md
                     top-0 left-0
-                    mt-14 ml-[10vw]
+                    mt-36 ml-[10vw]
                     w-[80vw] h-fit
                     py-2
-                    absolute hidden
+                    fixed hidden
                     items-center justify-center text-center
                     peer-focus-within:inline
                     hover:inline ">
