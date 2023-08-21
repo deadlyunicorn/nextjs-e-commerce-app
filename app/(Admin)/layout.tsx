@@ -5,6 +5,7 @@ import {  ExitGuestComponent, NotLoggedIn, SignOutButton } from '../(Shared)/com
 import Link from 'next/link';
 import Footer from '../(User)/(lib)/components/footer';
 import { getCookies } from '../(User)/(lib)/api/cookies';
+import {ClientItemSearch} from './SearchComponent'
 
 
 export const metadata = {
@@ -87,12 +88,13 @@ export default async function RootLayout(
         { ( session || guestDisplay ) &&
         <div className='
         bg-opacity-5 bg-black
-          dark:bg-opacity-5 dark:bg-white 
-          py-2 text-lg
+          dark:bg-opacity-5 dark:bg-white
+          py-2 text-lg place-items-center
+          xs:text-base
           mt-2 grid grid-cols-4 justify-items-center'>
+          <ClientItemSearch/>
           <Link className='hover:underline' href={"/admin/items/1/default"}>Items</Link>
           <Link className='hover:underline' href={"/admin/categories"}>Categories</Link>
-          <Link className='hover:underline' href={"/admin/items/1/default"}>Search</Link>
           <Link className='hover:underline' href={"/admin/orders"}>Orders</Link>
         </div>
         }
