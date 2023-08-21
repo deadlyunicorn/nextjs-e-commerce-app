@@ -48,6 +48,8 @@ const OrderList = async({params}:{params:{page:string,sortBy:string[]}}) => {
         sortDirection: sortingOrder //or desc
     });
 
+
+
     return (
         <main className="
             w-full
@@ -74,7 +76,8 @@ const OrderList = async({params}:{params:{page:string,sortBy:string[]}}) => {
                     <li 
                         className="
                             py-4
-                            grid-cols-4
+                            grid-cols-2
+                            md:grid-cols-4
                             grid 
                             border-slate-200
                             dark:border-slate-800
@@ -83,10 +86,10 @@ const OrderList = async({params}:{params:{page:string,sortBy:string[]}}) => {
                             justify-items-center
                             font-semibold"
                     key="Table titles">
-                        <div>Date</div> 
+                        <div className="hidden md:inline">Date</div> 
                         <div>Customer</div> 
                         <div>Total</div> 
-                        <div className="">Status</div> 
+                        <div className="hidden md:inline">Status</div> 
                     </li>
                     {
                     orders.map(order=>(
@@ -98,20 +101,21 @@ const OrderList = async({params}:{params:{page:string,sortBy:string[]}}) => {
                                 "
                             key={order.id}>
                             <div className="
-                                grid-cols-4 justify-items-center place-items-center
+                                grid-cols-2
+                                md:grid-cols-4 justify-items-center place-items-center
                                 border border-slate-200 dark:border-slate-800
                                 grid  w-full h-full overflow-hidden
                                 "> 
                                
                                 
-                                <div>{getDate(order.created)}</div>
+                                <div className="hidden md:inline">{getDate(order.created)}</div>
                                 <div>
-                                    ID : {order.customer_reference}
+                                    {`${order.customer.firstname||"Anonymous"}  ${order.customer.lastname||""}`} 
                                     <hr/>
-                                    {order.customer.email}
+                                    #{order.customer_reference.slice(order.customer_reference.indexOf('-')+1)}
                                 </div>
                                 <div>{order.order_value.formatted_with_symbol}</div>
-                                <div>{order.status_fulfillment} and {order.status_payment}</div>
+                                <div className="hidden md:inline">{order.status_fulfillment} and {order.status_payment}</div>
 
                                 {/* <div>{order.customer_reference}</div> */}
 
