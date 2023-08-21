@@ -496,7 +496,7 @@ const handleSubmit = async (body: FormData) => {
 
 
 
-const countryListNumeric = [
+export const countryListNumeric = [
 	{ code: 'AF', name: 'Afghanistan' },
 	{ code: 'AX', name: 'Åland Islands' },
 	{ code: 'AL', name: 'Albania' },
