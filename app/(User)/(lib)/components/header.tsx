@@ -1,6 +1,7 @@
 import Link from "next/link";
 import CartComponent from "./cart/Cart";
 import { CartButtonWrapper } from "./cart/CartWrap";
+import { ClientItemSearch } from "./searchBar";
 
 export default function Header() {
 
@@ -42,15 +43,8 @@ export default function Header() {
                     className="
                         max-w-[100%] flex 
                         xs:w-60 pb-1">
-                    <input
-                        placeholder="Search for cool items."
-                        className="
-                            bg-slate-50
-                            dark:bg-slate-200 text-slate-900
-                            py-1
-                            pl-2  
-                            rounded-md
-                            w-full"/>
+                    <ClientItemSearch/>
+                    
                 </div>
 
                 <Link href={'/'} className="
