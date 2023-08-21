@@ -59,9 +59,14 @@ export default async function RootLayout(
         <Footer>
           You are viewing the Authentication Page.
           <br/>
-          <Link
-            className='hover:underline' 
-            href={"/"}>Store Page</Link>
+          <div className='pt-2'>
+
+            <Link
+              className='mt-10 hover:underline' 
+              href={"/"}>Store Page
+            </Link>
+          </div>
+
         </Footer>
 
     

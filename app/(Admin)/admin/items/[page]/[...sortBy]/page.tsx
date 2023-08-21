@@ -109,7 +109,7 @@ const ItemsList = async({params}:{params:{page:string,sortBy:string[]}}) => {
                                     src={item.image?.url || "/image.png"}/>
                                 
                                 <div>{item.name}</div>
-                                <div>{item.price.raw}</div>
+                                <div>{item.price.formatted_with_symbol}</div>
                                 <div className="justify-self-center">{item.inventory.managed? item.inventory.available:"Not managed"}</div>
 
                             </div>

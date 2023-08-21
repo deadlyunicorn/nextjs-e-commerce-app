@@ -48,10 +48,12 @@ export default async function RootLayout(
       items-center">
 
         <header className='
-          w-full py-10'>
+          w-full pb-10 pt-5'>
 
           <div
             className='
+            text-center
+            mb-6
             grid grid-cols-2 gap-x-1 
             justify-items-center place-items-center'>
               
@@ -112,9 +114,14 @@ export default async function RootLayout(
           // Currently doesn't redirect..
           
           }
-          <Link
-            className='hover:underline' 
-            href={"/"}>Store Page</Link>
+          <div className='pt-2'>
+
+            <Link
+              className='hover:underline' 
+              href={"/"}>Store Page
+            </Link>
+
+          </div>
 
         </Footer>
 

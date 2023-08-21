@@ -31,6 +31,7 @@ export default function SortBy({currentSort}:{currentSort:string}) {
                     setSortBy(e.target.value)
                 }}
                 className="
+                    hover:cursor-pointer
                     bg-slate-200
                     dark:bg-slate-900
                     text-inherit">
