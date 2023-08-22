@@ -60,6 +60,21 @@ export default function Footer({children}:{children:ReactNode}) {
                     <LinkStyled href={'/admin'}>
                         Admin Panel
                     </LinkStyled>
+                    <Link
+                        className="
+                            dark:hover:text-slate-50 
+                            dark:hover:underline
+                            hover:text-slate-600
+                            hover:underline"
+                        target="_blank"
+                        href="https://deadlyunicorn.notion.site/How-does-the-Cool-Webstore-by-deadlyunicorn-work-ab9bb2d8203c4e1a9210528311749326?pvs=4">
+
+                        How it works
+                    </Link>
+
+                    <LinkStyled href="/contact">
+                        Contact Dev
+                    </LinkStyled>
                     {/* <LinkStyled href={'/about'}>
                         Contact
                     </LinkStyled> */}
