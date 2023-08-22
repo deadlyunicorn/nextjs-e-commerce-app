@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { getCheckoutToken } from "../api/checkout";
+import { generateCheckoutToken } from "../api/checkout";
 import { LineItem } from "@chec/commerce.js/types/line-item";
 import { CheckoutToken } from "@chec/commerce.js/types/checkout-token";
 import { redirect, usePathname } from "next/navigation";
@@ -59,7 +59,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 		}
 
 		noUrlErrors=true;
-		res = await getCheckoutToken(cart_id);
+		res = await generateCheckoutToken(cart_id);
 		
 	}
 	catch (err) {
