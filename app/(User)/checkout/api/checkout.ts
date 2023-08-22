@@ -1,3 +1,4 @@
+import { CheckoutToken } from "@chec/commerce.js/types/checkout-token";
 import { revalidatePath } from "next/cache";
 
 type checkoutData  = {
@@ -27,7 +28,7 @@ type checkoutData  = {
 
 };
 
-export const getCheckoutToken = async(cart_id:string)=>{
+export const generateCheckoutToken = async(cart_id:string)=>{
 
     const url = new URL(
         `https://api.chec.io/v1/checkouts/${cart_id}`
@@ -60,6 +61,30 @@ export const getCheckoutToken = async(cart_id:string)=>{
     return res.json();
 
 
+}
+
+export const getCheckoutToken = async(checkout_token:string):Promise<CheckoutToken>=>{
+    const url = new URL(
+        `https://api.chec.io/v1/checkouts/tokens/${checkout_token}`
+    );
+    
+    const headers = {
+        "X-Authorization": `${process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY}`,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*" 
+    };
+
+    const res:Response=await fetch(url, {
+        method: "GET",
+        headers: headers,
+    })
+    if (!res.ok) {
+       throw ` ${res.status}:  ${res.statusText}, ${res.url} `;
+    }
+
+
+    return res.json();
 }
 
 export const captureOrder = async(checkoutData:checkoutData) =>{
