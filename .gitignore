@@ -39,3 +39,4 @@ cypress/support/commands.ts
 cypress/support/component-index.html
 cypress/support/component.ts
 cypress/support/e2e.ts
+cypress/e2e/Order-placement.cy.ts
