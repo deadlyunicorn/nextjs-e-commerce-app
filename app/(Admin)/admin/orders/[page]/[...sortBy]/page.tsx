@@ -37,9 +37,7 @@ const OrderList = async({params}:{params:{page:string,sortBy:string[]}}) => {
         page: String(page),
         sortDirection: sortingOrder //or desc
     });
-    if (!orders || orders.length<1){
-        redirect('/admin')
-    }
+    
 
     const nextPage= await getOrders({
         limit:String(limit),
@@ -70,6 +68,8 @@ const OrderList = async({params}:{params:{page:string,sortBy:string[]}}) => {
                     className="text-2xl my-2">Orders</h1>
 
 
+                {(orders && orders.length > 0) 
+                ?<>
                 <ul
                     className="w-full">
 
@@ -186,6 +186,9 @@ const OrderList = async({params}:{params:{page:string,sortBy:string[]}}) => {
                     </div>
 
                 </div>
+                </>
+                :"No orders found."}
+
 
             </div>
 
