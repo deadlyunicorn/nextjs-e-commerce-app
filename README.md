@@ -150,6 +150,18 @@ The hard part was making a switch for it. I was skeptical weather I should have 
   Also despite the development environment's warnings/errors, I put LocalStorage inside useState.   
   During development that gives not defined errors, however it doesn't seem to break anything and it is the only way I managed to prevent FOUC.
 
+#### 6. Search Bar
+
+  The Search bar is a “use client” component imported in the header server (default)  component. We use React Hooks to listen for changes on input. We do wait for some delay before making a fetch request — just to make sure the user isn’t still typing.
+
+After that delay we make a fetch request and get back our results. The API has a query option, that will match all of the items related to our query — making it quite simple for us that don’t want to spend time optimizing that item search.
+
+All of these happen inside a useEffect() hook.
+
+While typing and until we get some results there is a loading animation.
+
+To make the result field (which also includes the animation) visible, I use a ‘peer-focus-within:inline’ class by Tailwind. However! this isn’t enough to let us click on our results. The result field becomes ‘hidden’ again before our click triggers. To solve this, we can also add a ‘hover:inline’ class to our field.
+
 ---
 
 ### <u>Admin Panel</u>
