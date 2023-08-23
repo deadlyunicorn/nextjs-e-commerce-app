@@ -29,9 +29,9 @@ const OrderSuccess = () => {
             <div className="flex w-full justify-center">
                 <CoolButton>
                     <Link 
-                        className="px-2 py-1"
-                        href="/">
-                        Browse More    
+                        className="px-2 py-1 capitalize"
+                        href="/explore">
+                        Browse the store
                     </Link>
                 </CoolButton>
             </div>
