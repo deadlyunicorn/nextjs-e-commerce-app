@@ -26,3 +26,14 @@ const NextPage = ({currentPage,nextPageExists}:{currentPage:number,nextPageExist
 }
 
 export default NextPage;
+
+export const PageNotFoundComponent = () => (
+    <main>
+        There was an error in your request.
+        <br/>
+        <CoolLink href="/explore">
+            Go back.
+        </CoolLink>
+
+    </main>
+)
