@@ -1,12 +1,18 @@
 import { Suspense } from "react";
 import Item_StoreFront, { Store_Front_Fallback } from "@/app/(User)/(lib)/components/homepage/store_front";
-import NextPage from "@/app/(User)/(lib)/components/browsing/nextPage";
+import NextPage, { PageNotFoundComponent } from "@/app/(User)/(lib)/components/browsing/nextPage";
 import { fetchItems } from "@/app/(User)/(lib)/api/items";
+import Link from "next/link";
+import { CoolLink } from "@/app/(Shared)/components/Global";
+import { redirect } from "next/navigation";
 
 export default async function Explore({params:{page}}:{params:{page:number}}) {
 
 
-    const limit = 1; 
+    if (! (+page>0) ){
+        redirect('/explore ')
+    }
+    const limit = 5;
 
 
     const items = await fetchItems({
@@ -50,7 +56,6 @@ export default async function Explore({params:{page}}:{params:{page:number}}) {
 
             </div>
             </main>
-            <p>Page number {page}</p>
 
 
             <NextPage currentPage={Number(page)} nextPageExists={nextPageExists}/>
@@ -59,6 +64,6 @@ export default async function Explore({params:{page}}:{params:{page:number}}) {
         )
     }
     else{
-        return  (<main>Page not found component</main>)
+        return  <PageNotFoundComponent/>
     }
 } 

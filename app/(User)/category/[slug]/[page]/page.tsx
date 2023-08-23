@@ -1,10 +1,15 @@
 import { Suspense } from "react";
 import Item_StoreFront, { Store_Front_Fallback } from "@/app/(User)/(lib)/components/homepage/store_front";
-import NextPage from "@/app/(User)/(lib)/components/browsing/nextPage";
+import NextPage, { PageNotFoundComponent } from "@/app/(User)/(lib)/components/browsing/nextPage";
 import { fetchItems } from "@/app/(User)/(lib)/api/items";
+import { redirect } from "next/navigation";
 
 export default async function CategoryProducts({params:{slug,page},params}:{params:{slug:string,page:number}}) {
 
+
+    if (! (+page>0) ){
+        redirect('/explore ')
+    }
     const limit = 20; 
 
     const items = await fetchItems({
@@ -49,8 +54,6 @@ export default async function CategoryProducts({params:{slug,page},params}:{para
 
             </div>
             </main>
-            <p>Page number {page}</p>
-
             
             <NextPage currentPage={Number(page)} nextPageExists={nextPageExists}/>
             </>
@@ -58,6 +61,7 @@ export default async function CategoryProducts({params:{slug,page},params}:{para
         )
     }
     else{
-        return  (<main>Page not found component</main>)
+        return <PageNotFoundComponent/>
     }
 } 
+
