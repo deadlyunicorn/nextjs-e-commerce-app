@@ -128,7 +128,7 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                 py-2">
 
                         <p>
-                            {listing.sku?<span className="text-sm">SKU: {listing.sku}</span>:" "}
+                            {(listing.sku&&listing.sku!='null')?<span className="text-sm">SKU: {listing.sku}</span>:" "}
                         </p>
                         {listing.inventory.managed&&
                         <p>

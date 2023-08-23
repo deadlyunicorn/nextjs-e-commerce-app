@@ -95,7 +95,7 @@ export const ChangeItemServer = async({item,categories}:{item:Product,categories
                             minLength={8}
                             maxLength={12}
                             name="sku"
-                            defaultValue={item.sku+""}/>
+                            defaultValue={item.sku||""}/>
                         </CoolInput>
 
                     </div>
