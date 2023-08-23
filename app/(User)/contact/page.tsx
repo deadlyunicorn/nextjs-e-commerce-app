@@ -1,9 +1,15 @@
 import { redirect } from "next/navigation";
 import { MockSubmitButton, SubmitContactButton } from "./submitButton";
 
-const ContactForm = () => {
+const ContactForm = ({fail}:{fail:boolean}) => {
+
+
+    if (fail == undefined){
+        fail = false;
+    }
 
     return (
+        <main>
         <form 
             action={handleForm}
             className="group flex flex-col gap-y-2 items-center">
@@ -49,14 +55,15 @@ const ContactForm = () => {
             </div>
 
             <div className="group-valid:inline hidden">
-                <SubmitContactButton fail={false}/>
+                <SubmitContactButton fail={fail}/>
             </div>
             <div className="group-valid:hidden inline"> 
-                <MockSubmitButton fail={false}/>
+                <MockSubmitButton fail={fail}/>
 
             </div>
             
         </form>
+        </main>
     )
 }
 
@@ -114,10 +121,10 @@ const handleForm = async(data:FormData)=>{
         .then(()=>"okay")
 
     if (res=="okay"){
-        redirect('/');
+        redirect('/contact/success');
     }
     else{
-        redirect('/error')
+        redirect('/contact/fail');
     }
         
     
