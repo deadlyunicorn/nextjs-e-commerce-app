@@ -1,19 +1,23 @@
+import { CoolLink } from "@/app/(Shared)/components/Global";
 import Link from "next/link"
 
 const NextPage = ({currentPage,nextPageExists}:{currentPage:number,nextPageExists:boolean}) => {
     return(
         <nav className="
-            flex justify-between 
-            text-blue-300 hover:text-blue-100
+            mt-10 w-full
+            grid grid-cols-3 
             text-lg">
             {
                 (currentPage>1)
-                ?<Link href={`./${currentPage-1}`}>Previous page</Link>
+                ?<CoolLink href={`./${currentPage-1}`}>Previous page</CoolLink>
                 :<div></div>
             }
+
+            <p>Page number {currentPage}</p>
+
             {
                 nextPageExists
-                ?<Link href={`./${currentPage+1}`}>Next page</Link>
+                ?<CoolLink href={`./${currentPage+1}`}>Next page</CoolLink>
                 :<div></div>
             }
             
