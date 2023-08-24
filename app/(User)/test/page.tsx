@@ -181,6 +181,32 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
             }
 
         }
+
+        // @ts-ignore
+        document.querySelector('#slider2').ontouchstart = (e:TouchEvent) => {
+            document.ontouchmove = (e) => {
+                const touch = e.changedTouches[0];
+
+                if (touch.clientX > range1_right + 20 && touch.clientX < range3_right + 1) {
+                    const pos2 = range1_left + range - touch.clientX;
+
+                    setMax(Math.round(((range - pos2) / range) * 100))
+
+                }
+                else if (touch.clientX < range1_right) {
+                    // setMax(Math.min(Math.round(((range-range1_right)/range)*100),min+10))
+                    // currently div resets after dragging, causing it to bug
+                }
+                else if (touch.clientX > range3_right + 1) {
+                    setMax(Math.round(((range) / range) * 100))
+                }
+            }
+            document.onmouseup = () => {
+                document.onmousedown = null;
+                document.onmousemove = null;
+            }
+
+        }
     });
 
 
