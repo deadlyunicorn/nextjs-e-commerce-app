@@ -33,7 +33,8 @@ export default async function Explore(
         || !sortByOptions.includes(searchParams.sortBy)
         || !sortDirectionOptions.includes(searchParams.sortDirection)
         ){
-        redirect('/explore/1?sortBy=created_at&sortDirection=desc')
+         
+        redirect(`/explore/${page}?sortBy=created_at&sortDirection=desc`)
     }
     const limit = 5;
 
