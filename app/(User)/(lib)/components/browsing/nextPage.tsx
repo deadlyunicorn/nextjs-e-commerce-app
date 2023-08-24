@@ -55,11 +55,11 @@ export const NextPageWithQuery = (
     )
 }
 
-export const PageNotFoundComponent = () => (
+export const PageNotFoundComponent = ({goBackURL}:{goBackURL:string}) => (
     <main>
         There was an error in your request.
         <br/>
-        <CoolLink href="/explore">
+        <CoolLink href={goBackURL}>
             Go back.
         </CoolLink>
 

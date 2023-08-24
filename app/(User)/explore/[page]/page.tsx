@@ -17,7 +17,6 @@ export default async function Explore(
 
 
 
-
     if (! (+page>0) ){
         redirect('/explore/1?sortBy=created_at&sortDirection=desc')
     }
@@ -91,6 +90,6 @@ export default async function Explore(
         )
     }
     else{
-        return  <PageNotFoundComponent/>
+        return  <PageNotFoundComponent goBackURL="/explore"/>
     }
 } 
