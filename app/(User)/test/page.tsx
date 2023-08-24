@@ -128,20 +128,25 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
     
     document.querySelector('#slider1').ontouchstart = (e) => {
 
-        alert('hello');
 
         document.ontouchmove = (e) => {
-            alert(JSON.stringify(e));
-            if (e.clientX > range1_left && e.clientX < range3_left - 10) {
-                const pos1 = e.clientX - range1_left
+            //https://stackoverflow.com/questions/41993176/determine-touch-position-on-tablets-with-javascript/61732450#61732450
+
+            //@ts-ignore
+            const evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
+            //@ts-ignore
+            const touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+            
+            if (touch.pageX > range1_left && touch.pageX < range3_left - 10) {
+                const pos1 = touch.pageX - range1_left
                 setMin(Math.round((pos1 / range) * 100))
 
             }
-            else if (e.clientX < range1_left) {
+            else if (touch.pageX < range1_left) {
                 // currently div resets after dragging, causing it to bug
                 setMin(0)
             }
-            else if (e.clientX > range3_left - 10) {
+            else if (touch.pageX > range3_left - 10) {
                 setMin(Math.round(((range3_left - 10 - range1_left) / range) * 100))
             }
         }
