@@ -31,7 +31,8 @@ export default async function CategoryProducts({params:{slug,page}}:{params:{slu
     const items = await fetchItems({
         "category_slug":`${slug}`,
         "limit":`${limit}`,
-        "page":`${Number(page)}`
+        "page":`${Number(page)}`,
+        active:"1"
 
     });
 

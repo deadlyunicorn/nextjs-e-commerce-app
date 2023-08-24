@@ -4,7 +4,9 @@ import { Product } from "@chec/commerce.js/types/product";
 
 export async function generateMetadata({params:{permalink}}:{params:{permalink:string}}){
     const product = [...await fetchItems({
-        "query":`${permalink}`  
+        "query":`${permalink}`,
+        "active":"1"
+
     })][0]
 
     return{
@@ -22,7 +24,9 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
     const limit = 20;
 
     const listing = [...await fetchItems({
-        "query":`${permalink}`  
+        "query":`${permalink}`,
+        "active":"1"
+
     })][0];
     
 
@@ -44,6 +48,8 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
                         ...await fetchItems({
                         "category_slug":category,
                         "limit":`${limit}`,
+                        "active":"1"
+
                         })
                           
                     ]
@@ -69,7 +75,8 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
             ?await getAllItems(categories)
             :await fetchItems({
                 "limit":`${limit}`,
-                "sortBy":"updated_at"
+                "sortBy":"updated_at",
+                "active":"1"
             })
 
 

@@ -41,7 +41,9 @@ export const ClientItemSearch = () => {
                     if (query==change){
 
                         await fetchItems({
-                            query:query
+                            query:query,
+                            active:"1"
+
                         }).then(res=>{
                             setProducts(res);
                             setLoading(false);

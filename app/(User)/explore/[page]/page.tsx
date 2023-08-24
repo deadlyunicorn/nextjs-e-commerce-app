@@ -42,7 +42,9 @@ export default async function Explore(
         "limit":`${limit}`,
         "page":`${Number(page)}`,
         "sortBy":searchParams.sortBy,
-        "sortDirection":searchParams.sortDirection
+        "sortDirection":searchParams.sortDirection,
+        "active":"1"
+
 
     });
 
@@ -50,7 +52,9 @@ export default async function Explore(
         "limit":`${limit}`,
         "page":`${Number(page)+1}`,
         "sortBy":searchParams.sortBy,
-        "sortDirection":searchParams.sortDirection
+        "sortDirection":searchParams.sortDirection,
+        "active":"1"
+
 
     })
     .then(result=> result != undefined);
