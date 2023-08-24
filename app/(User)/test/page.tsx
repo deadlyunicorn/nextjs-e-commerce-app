@@ -126,32 +126,30 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
         }
 
         //@ts-ignore
-    
-    document.querySelector('#slider1').ontouchstart = (e:TouchEvent) => {
 
-        document.ontouchmove = (e) => {
-            const touch = e.changedTouches[0];
+        document.querySelector('#slider1').ontouchstart = (e: TouchEvent) => {
 
-            //https://stackoverflow.com/questions/41993176/determine-touch-position-on-tablets-with-javascript/61732450#61732450
-            
-            if (touch.clientX > range1_left && touch.clientX < range3_left - 10) {
-                const pos1 = touch.clientX - range1_left
-                setMin(Math.round((pos1 / range) * 100))
+            document.ontouchmove = (e) => {
+                const touch = e.changedTouches[0];
 
+                if (touch.clientX > range1_left && touch.clientX < range3_left - 10) {
+                    const pos1 = touch.clientX - range1_left
+                    setMin(Math.round((pos1 / range) * 100))
+
+                }
+                else if (touch.clientX < range1_left) {
+                    // currently div resets after dragging, causing it to bug
+                    setMin(0)
+                }
+                else if (touch.clientX > range3_left - 10) {
+                    setMin(Math.round(((range3_left - 10 - range1_left) / range) * 100))
+                }
             }
-            else if (touch.clientX < range1_left) {
-                // currently div resets after dragging, causing it to bug
-                setMin(0)
-            }
-            else if (touch.clientX > range3_left - 10) {
-                setMin(Math.round(((range3_left - 10 - range1_left) / range) * 100))
+            document.ontouchend = () => {
+                document.ontouchstart = null;
+                document.ontouchmove = null;
             }
         }
-        document.ontouchend = () => {
-            document.ontouchstart = null;
-            document.ontouchmove = null;
-        }
-    }
 
     })
 
@@ -183,7 +181,7 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
         }
 
         // @ts-ignore
-        document.querySelector('#slider2').ontouchstart = (e:TouchEvent) => {
+        document.querySelector('#slider2').ontouchstart = (e: TouchEvent) => {
             document.ontouchmove = (e) => {
                 const touch = e.changedTouches[0];
 
@@ -201,9 +199,9 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
                     setMax(Math.round(((range) / range) * 100))
                 }
             }
-            document.onmouseup = () => {
-                document.onmousedown = null;
-                document.onmousemove = null;
+            document.ontouchend = () => {
+                document.ontouchstart = null;
+                document.ontouchmove = null;
             }
 
         }
@@ -212,76 +210,76 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
 
 
 
-            return (
-                <>
+    return (
+        <>
 
-                    <div className="min-w-[10rem] max-w-[10rem] h-2 rounded-md flex ">
-                        <div
-                            id="drag1"
-                            style={{ width: `${per1}%` }}
-                            className="relative 
+            <div className="min-w-[10rem] max-w-[10rem] h-2 rounded-md flex ">
+                <div
+                    id="drag1"
+                    style={{ width: `${per1}%` }}
+                    className="relative 
                     flex justify-end 
                     shadow-inner shadow-black 
                     rounded-l-md 
                     bg-slate-200 h-full">
 
-                            <div
-                                id="slider1"
-                                style={{ left: `${Math.round(min * range) / 100}px` }}
-                                className="cursor-col-resize 
+                    <div
+                        id="slider1"
+                        style={{ left: `${Math.round(min * range) / 100}px` }}
+                        className="cursor-col-resize 
                             w-3 h-3
                             -translate-x-1
                             -translate-y-[2px]
                             rounded-full bg-gradient-radial from-red-200 to-black shadow-inner shadow-black  absolute"/>
 
 
-                        </div>
-                        <div
-                            id="drag2"
-                            style={{ width: `${per2}%` }}
-                            className="shadow-inner shadow-blue-950
+                </div>
+                <div
+                    id="drag2"
+                    style={{ width: `${per2}%` }}
+                    className="shadow-inner shadow-blue-950
                 bg-blue-600 h-full"/>
-                        <div
-                            id="drag3"
-                            style={{ width: `${per3}%` }}
-                            className="
+                <div
+                    id="drag3"
+                    style={{ width: `${per3}%` }}
+                    className="
                 relative
                 shadow-inner shadow-black
                 rounded-r-md bg-slate-200 h-full">
 
 
-                            <div
-                                id="slider2"
-                                style={{ right: `${Math.round(100 * (limit - max) / limit) * range / 100}px` }}
-                                className="cursor-col-resize 
+                    <div
+                        id="slider2"
+                        style={{ right: `${Math.round(100 * (limit - max) / limit) * range / 100}px` }}
+                        className="cursor-col-resize 
                     w-3 h-3
                     translate-x-1
                     -translate-y-[2px]
                     rounded-full bg-gradient-radial from-red-200 to-black shadow-inner shadow-black  absolute"/>
 
-                        </div>
+                </div>
 
-                    </div>
+            </div>
 
-                    <div className="flex flex-col absolute translate-y-4">
-                        <div>%1:{per1}</div>
-                        <div>%2:{per2}</div>
-                        <div>%3:{per3}</div>
-                        <hr />
-                        Left:{range1_left}
-                        <br />Right:{range1_right}
-                        <hr />
-                        <br />
-                        Left:{range3_left}
-                        <br />Right:{range3_right}
+            <div className="flex flex-col absolute translate-y-4">
+                <div>%1:{per1}</div>
+                <div>%2:{per2}</div>
+                <div>%3:{per3}</div>
+                <hr />
+                Left:{range1_left}
+                <br />Right:{range1_right}
+                <hr />
+                <br />
+                Left:{range3_left}
+                <br />Right:{range3_right}
 
-                        <br />range:{range}
+                <br />range:{range}
 
 
 
-                    </div>
-                </>
+            </div>
+        </>
 
-            )
+    )
 
-        }
+}
