@@ -1,7 +1,4 @@
-import { fetchItemsADMIN } from "@/app/(Admin)/api/items";
-
 import Link from "next/link";
-import Image from "next/image"
 import { redirect } from "next/navigation"
 import { Category } from "@chec/commerce.js/types/category";
 import { fetchCategoriesADMIN } from "@/app/(Admin)/api/categories";
