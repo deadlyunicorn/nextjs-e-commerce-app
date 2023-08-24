@@ -127,23 +127,12 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
 
         //@ts-ignore
     
-    document.querySelector('#slider1').ontouchstart = (e) => {
-
-        console.log(e)
-
+    document.querySelector('#slider1').ontouchstart = (e:TouchEvent) => {
 
         document.ontouchmove = (e) => {
-        console.log(e)
+            const touch = e.changedTouches[0];
 
             //https://stackoverflow.com/questions/41993176/determine-touch-position-on-tablets-with-javascript/61732450#61732450
-
-            alert('Moving')
-            alert(JSON.stringify(e));
-
-            //@ts-ignore
-            const evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
-            //@ts-ignore
-            const touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
             
             if (touch.clientX > range1_left && touch.clientX < range3_left - 10) {
                 const pos1 = touch.clientX - range1_left
