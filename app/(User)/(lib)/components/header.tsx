@@ -34,7 +34,7 @@ export default function Header() {
                 md:max-w-3xl
                 w-full h-full
                 justify-items-center place-items-end
-                grid grid-cols-4
+                grid grid-cols-2
                 pb-1">
 
 
@@ -50,8 +50,8 @@ export default function Header() {
                 <Link href={'/'} className="
                     text-center
                     place-self-center justify-self-center
-                    text-lg col-span-2
-                    xs:text-2xl
+                    text-2xl col-span-2
+                    absolute top-4
                     sm:text-3xl
                     lg:text-4xl
                     bg-gradient-to-b 
@@ -63,9 +63,12 @@ export default function Header() {
                 </Link>
 
 
+                <div className=" w-full flex justify-end">
+
                 <CartButtonWrapper>
                     <CartComponent/>
                 </CartButtonWrapper>
+                </div>
 
             </div>
        
