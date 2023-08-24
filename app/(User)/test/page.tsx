@@ -123,7 +123,38 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
             }
 
         }
+
+        //@ts-ignore
+    
+    // document.querySelector('#slider1').ontouchstart = (e) => {
+
+    //     alert('hello');
+
+    //     document.ontouchmove = (e) => {
+    //         if (e.clientX > range1_left && e.clientX < range3_left - 10) {
+    //             const pos1 = e.clientX - range1_left
+    //             setMin(Math.round((pos1 / range) * 100))
+
+    //         }
+    //         else if (e.clientX < range1_left) {
+    //             // currently div resets after dragging, causing it to bug
+    //             setMin(0)
+    //         }
+    //         else if (e.clientX > range3_left - 10) {
+    //             setMin(Math.round(((range3_left - 10 - range1_left) / range) * 100))
+    //         }
+    //     }
+    //     document.ontouchend = () => {
+    //         document.ontouchstart = null;
+    //         document.ontouchmove = null;
+    //     }
+    // }
+
     })
+
+        document.ontouchstart=()=>{
+            alert('hii')
+        }
 
     useEffect(() => {
         //@ts-ignore
