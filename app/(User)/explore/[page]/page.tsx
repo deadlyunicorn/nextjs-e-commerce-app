@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Item_StoreFront, { Store_Front_Fallback } from "@/app/(User)/(lib)/components/homepage/store_front";
-import NextPage, { PageNotFoundComponent } from "@/app/(User)/(lib)/components/browsing/nextPage";
+import NextPage, { NextPageWithQuery, PageNotFoundComponent } from "@/app/(User)/(lib)/components/browsing/nextPage";
 import { fetchItems } from "@/app/(User)/(lib)/api/items";
 import Link from "next/link";
 import { CoolLink } from "@/app/(Shared)/components/Global";
@@ -34,7 +34,7 @@ export default async function Explore(
         || !sortDirectionOptions.includes(searchParams.sortDirection)
         ){
          
-        redirect(`/explore/${page}?sortBy=created_at&sortDirection=desc`)
+        redirect(`/explore/1?sortBy=created_at&sortDirection=desc`)
     }
     const limit = 5;
 
@@ -84,7 +84,7 @@ export default async function Explore(
             </main>
 
 
-            <NextPage currentPage={Number(page)} nextPageExists={nextPageExists}/>
+            <NextPageWithQuery currentPage={Number(page)} nextPageExists={nextPageExists} searchQuery={`?sortBy=${searchParams.sortBy}&sortDirection=${searchParams.sortDirection}`}/>
             <SortByForm sortBy={searchParams.sortBy} sortDirection={searchParams.sortDirection}/>
             </>
 
