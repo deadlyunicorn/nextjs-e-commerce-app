@@ -114,8 +114,8 @@ const CustomSlider = ({ min, max,setMin,setMax }: { min: number, max: number,set
                     bg-slate-200 h-full">
 
                 <div
-                    draggable 
-                    onDrag={(e) => {
+                     
+                    onMouseMove={(e) => {
                         e.preventDefault();
                         if ( e.clientX > range1_left && e.clientX < range3_left -10){
                             const pos1 = e.clientX-range1_left
@@ -148,7 +148,7 @@ const CustomSlider = ({ min, max,setMin,setMax }: { min: number, max: number,set
         
         
                      <div
-                    draggable 
+                     
                     onDrag={(e) => {
 
                         e.preventDefault();
