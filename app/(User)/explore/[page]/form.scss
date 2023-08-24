@@ -1,0 +1,25 @@
+:is(.dark) {
+    #sortForm {
+        input,
+        option,
+        select{
+            background-color: rgb(2 6 23);
+
+        }
+    }
+}
+
+#sortForm {
+    input,
+    select,
+    option {
+        background-color: rgb(226 232 240);
+    }
+
+    select{
+        text-align: center;
+        border-radius: 6px;
+        padding-inline: 8px;
+        padding-block: 4px;
+    }
+}

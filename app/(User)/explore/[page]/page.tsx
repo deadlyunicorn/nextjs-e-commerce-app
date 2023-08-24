@@ -5,27 +5,57 @@ import { fetchItems } from "@/app/(User)/(lib)/api/items";
 import Link from "next/link";
 import { CoolLink } from "@/app/(Shared)/components/Global";
 import { redirect } from "next/navigation";
+import { SortByForm } from "./SortByForm";
 
-export default async function Explore({params:{page}}:{params:{page:number}}) {
+export default async function Explore(
+        {params:{page},
+        searchParams}
+        :{params:{page:number},
+        searchParams:{sortBy:string,sortDirection:string}}
+    
+    ) {
+
+
 
 
     if (! (+page>0) ){
-        redirect('/explore ')
+        redirect('/explore/1?sortBy=created_at&sortDirection=desc')
+    }
+
+
+    const sortByOptions = ["price","created_at"];
+    const sortDirectionOptions = ["asc","desc"];
+
+    if (
+        Object.entries(searchParams).length != 2 
+        || searchParams.sortBy == "" 
+        || searchParams.sortDirection == ""
+        || !sortByOptions.includes(searchParams.sortBy)
+        || !sortDirectionOptions.includes(searchParams.sortDirection)
+        ){
+        redirect('/explore/1?sortBy=created_at&sortDirection=desc')
     }
     const limit = 5;
 
 
     const items = await fetchItems({
         "limit":`${limit}`,
-        "page":`${Number(page)}`
+        "page":`${Number(page)}`,
+        "sortBy":searchParams.sortBy,
+        "sortDirection":searchParams.sortDirection
 
     });
 
     const nextPageExists = await fetchItems({
         "limit":`${limit}`,
-        "page":`${Number(page)+1}`
+        "page":`${Number(page)+1}`,
+        "sortBy":searchParams.sortBy,
+        "sortDirection":searchParams.sortDirection
+
     })
     .then(result=> result != undefined);
+
+
 
     
     if (items){
@@ -33,10 +63,6 @@ export default async function Explore({params:{page}}:{params:{page:number}}) {
         return (
             <>
             <main>
-            <div>
-
-            
-
 
                 <div className="
                 product-list-div">
@@ -54,11 +80,11 @@ export default async function Explore({params:{page}}:{params:{page:number}}) {
                 </Suspense>
                 </div>
 
-            </div>
             </main>
 
 
             <NextPage currentPage={Number(page)} nextPageExists={nextPageExists}/>
+            <SortByForm sortBy={searchParams.sortBy} sortDirection={searchParams.sortDirection}/>
             </>
 
         )
