@@ -3,14 +3,30 @@ import Item_StoreFront, { Store_Front_Fallback } from "@/app/(User)/(lib)/compon
 import NextPage, { PageNotFoundComponent } from "@/app/(User)/(lib)/components/browsing/nextPage";
 import { fetchItems } from "@/app/(User)/(lib)/api/items";
 import { redirect } from "next/navigation";
+import { fetchCategories } from "@/app/(User)/(lib)/api/categories";
 
-export default async function CategoryProducts({params:{slug,page},params}:{params:{slug:string,page:number}}) {
+export default async function CategoryProducts({params:{slug,page}}:{params:{slug:string,page:number}}) {
 
+    const category_slugs:string[] = [];
+
+    await fetchCategories().then(
+        res=>{
+            res.map(
+                category=>{
+                    category_slugs.push(category.slug);
+                }
+            )
+        }
+    );
+
+    if (! category_slugs.includes(slug)){
+        redirect('/');
+    }
 
     if (! (+page>0) ){
-        redirect('/explore ')
+        redirect(`/category/${slug}/1`)
     }
-    const limit = 20; 
+    const limit = 4; 
 
     const items = await fetchItems({
         "category_slug":`${slug}`,
@@ -61,7 +77,7 @@ export default async function CategoryProducts({params:{slug,page},params}:{para
         )
     }
     else{
-        return <PageNotFoundComponent/>
+        return <PageNotFoundComponent goBackURL="/"/>
     }
 } 
 
