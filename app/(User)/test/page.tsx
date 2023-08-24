@@ -98,6 +98,8 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
     }, [])
 
     useEffect(() => {
+
+        // based on https://www.w3schools.com/howto/howto_js_draggable.asp
         //@ts-ignore
         document.querySelector('#slider1').onmousedown = (e) => {
 
