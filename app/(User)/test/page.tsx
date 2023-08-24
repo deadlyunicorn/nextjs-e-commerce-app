@@ -137,16 +137,16 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
             //@ts-ignore
             const touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
             
-            if (touch.pageX > range1_left && touch.pageX < range3_left - 10) {
-                const pos1 = touch.pageX - range1_left
+            if (touch.clientX > range1_left && touch.clientX < range3_left - 10) {
+                const pos1 = touch.clientX - range1_left
                 setMin(Math.round((pos1 / range) * 100))
 
             }
-            else if (touch.pageX < range1_left) {
+            else if (touch.clientX < range1_left) {
                 // currently div resets after dragging, causing it to bug
                 setMin(0)
             }
-            else if (touch.pageX > range3_left - 10) {
+            else if (touch.clientX > range3_left - 10) {
                 setMin(Math.round(((range3_left - 10 - range1_left) / range) * 100))
             }
         }
