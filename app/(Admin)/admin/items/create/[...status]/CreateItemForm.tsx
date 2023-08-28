@@ -2,6 +2,7 @@ import { fetchCategoriesADMIN } from "@/app/(Admin)/api/categories";
 import { CoolButton } from "@/app/(Shared)/components/Global"
 import { getServerSession } from "next-auth/next";
 import { ReactNode } from "react";
+import { ImageInput } from "./imageInputField";
 
 export const CreateItemForm = async() => {
 
@@ -23,21 +24,9 @@ export const CreateItemForm = async() => {
 
 
 
-            <div className="flex items-center justify-between">
-{/* 
-                <Image
-                    className="
-                            rounded-md aspect-square"
-                    alt={item.name}
-                    height={50}
-                    width={50}
-                    src={item.image?.url || "/image.png"} /> */}
+            <div className="flex justify-center">
 
-                <div>
-                    {/* &ensp;<input  */}
-                    {/* name="imgFile" */}
-                    {/* type="file"/>  */}
-                </div>
+                <ImageInput/>
 
             </div>
 

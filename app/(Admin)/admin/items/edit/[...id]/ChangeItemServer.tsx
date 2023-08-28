@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ReactNode } from "react";
+import { ImageInput } from "../../create/[...status]/imageInputField";
 
 export const ChangeItemServer = async({item,categories}:{item:Product,categories:Category[]}) => {
 
@@ -34,7 +35,9 @@ export const ChangeItemServer = async({item,categories}:{item:Product,categories
                         name="product_id"
                         defaultValue={item.id} 
                         className="hidden"/>
-                    <div className="flex items-center justify-between">
+
+                        
+                    <div className="flex items-center justify-between h-36">
 
                         <Image 
                             className="
@@ -44,11 +47,7 @@ export const ChangeItemServer = async({item,categories}:{item:Product,categories
                             width={50}
                             src={item.image?.url || "/image.png"}/>
 
-                        <div>
-                            {/* &ensp;<input  */}
-                                        {/* name="imgFile" */}
-                                        {/* type="file"/>  */}
-                        </div>
+                        <ImageInput/>
                     
                     </div>
                     
