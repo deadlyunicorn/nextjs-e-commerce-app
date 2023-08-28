@@ -103,7 +103,6 @@ const uploadImage = async(e:any) => {
                     body: JSON.stringify({binaryData:encodedFile,fileName:fileName}),
                 })
                 .then( async(res) => {
-                    console.log(`Your image was successfully uploaded`)
                     return await res.json().then(data=>{
                         return data["fileUpload"]["id"];
                     })

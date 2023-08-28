@@ -102,7 +102,6 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
         document.querySelector('#slider1').onmousedown = (e) => {
 
             document.onmousemove = (e) => {
-                console.log(e)
                 if (e.clientX > range1_left && e.clientX < range3_left - 10) {
                     const pos1 = e.clientX - range1_left
                     setMin(Math.round((pos1 / range) * limit))
