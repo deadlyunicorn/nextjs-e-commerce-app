@@ -2,7 +2,7 @@
 
 const nextConfig = {
     images:{
-        domains:["cdn.chec.io"]
+        domains:["cdn.chec.io",'lh3.googleusercontent.com','avatars.githubusercontent.com']
     },
     async redirects(){
         return [

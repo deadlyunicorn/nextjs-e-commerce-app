@@ -18,7 +18,7 @@ const handler = NextAuth({
     ],
     callbacks:{
         async redirect({ url,baseUrl }){
-           return '/admin'
+           return '/'
         },
         async signIn({account,profile}){
             if (account?.provider === "google"){
