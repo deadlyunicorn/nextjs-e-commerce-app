@@ -8,6 +8,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ReactNode } from "react";
 import { ImageInput } from "../../create/[...status]/imageInputField";
+import { CoolInput } from "@/app/(Shared)/components/CoolInput";
 
 export const ChangeItemServer = async({item,categories}:{item:Product,categories:Category[]}) => {
 
@@ -207,17 +208,5 @@ export const ChangeItemServer = async({item,categories}:{item:Product,categories
     )
 
 }
-
-const CoolInput = ({children}:{children:ReactNode}) => (
-    <div
-    className="
-    max-w-[100%]
-    text-inherit px-1 rounded-md
-    hover:bg-slate-50 bg-slate-200 
-    dark:hover:bg-slate-950 dark:bg-slate-900">
-        {children}
-    </div>
-)
-
 
 
