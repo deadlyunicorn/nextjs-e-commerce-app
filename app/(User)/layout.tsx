@@ -35,17 +35,11 @@ export default function RootLayout(
         flex flex-col
         min-h-screen
         justify-between
-        items-center mt-5">
+        items-center">
 
-            {/* light mode */}
-        {/* // from-slate-100 */}
-        {/* // to-violet-300 */}
-
-        
             <CookieVerify/>
 
             <CartProvider>
-              {/* provider not needed? */}
 
               <Header/>
               <Banner/>

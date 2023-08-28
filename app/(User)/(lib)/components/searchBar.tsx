@@ -84,7 +84,7 @@ export const ClientItemSearch = () => {
                     z-[2]
                     rounded-md
                     top-0 left-0
-                    mt-36 ml-[10vw]
+                    mt-24 ml-[10vw]
                     w-[80vw] h-fit
                     py-2
                     fixed hidden
