@@ -14,17 +14,18 @@ I built this for fun, in order to practise my Next.JS - React.JS. I might use th
 
 **To do list**
 
-- [ ] Create a navigation bar
-- [ ] Footer with needed fields (about, terms etc.. general footer of an eshop)
-- [ ] Custom checkout page 
+- [x] Custom checkout page 
 - [x] /admin page. Admins can update the products from there. (Especially useful in this case, as I couldn't find any 'team' functionality in Commerce.js)
 - [ ] User Login -> View the same cart on multiple devices, store your creds for the next order, etc. *MIGHT NOT DO THIS*
 - [ ] Maybe Google Analytics, most likely not here.
+
 ### Technologies used
 + Next.JS 13 - App Router
 + Deployed with Vercel (check the link to webpage on GitHub)
 + TailwindCSS
 + Commerce.js
++ Auth.js ( 0Auth user login )
++ SendGrid ( order confirmation mails )
 
 	(I was looking for something free. That one had 2% commission on orders. I didn't plan to actually sell things, so we are good. I didn't use the driver. I did it using their API with Next.JS 13 fetch().  
 	
@@ -200,6 +201,31 @@ It enables viewing what an actual admin can view, but disables the form submit f
   
   I feel like this ternary operator is kind of dangerous and that the action could be more secure. Mistakes can happen.. 
   
+  
+  #### 3. Image Upload  
+  
+  Uploading images with forms was a bit more complicated than I initially anticipated. There was no place in the internet demonstrating a straightforward approach and they were mostly using some external libraries (e.g. Axios, formidable etc.).  
+    
+   My approach is kind of simple.
+   
+   1. We create a new FileReader and we convert the file to a base64 encoded string. 
+  
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+   2. Uploading the file directly didn't work for me (I don't know why), so I created a route as a middleman. We pass the data with the fetch API and 'Post' as the method.
+   
+    await fetch("/admin/items/upload",{
+		method: "POST",
+		body:JSON.stringify({binaryData:encodedFile,fileName:fileName})
+	})
+  3. From the route we can upload the asset using the commerce API.
+  4. We get the response from the API. We specifically use the assetID returned and use that as a hidden field in our form. 
+  
+  What basically happens is:
+  1. We upload the image (asset)
+  2. We get the asset id
+  3. We submit our new item (we get our product id back)
+  4. If (3) is successful we pass our asset id to the new item.
   
   ---
   Overally I believe that this is the best of all my Web Development Projects (or atleast the most complete and of bigger scale -- considering what you can do).   
