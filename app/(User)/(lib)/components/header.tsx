@@ -2,6 +2,7 @@ import Link from "next/link";
 import CartComponent from "./cart/Cart";
 import { CartButtonWrapper } from "./cart/CartWrap";
 import { ClientItemSearch } from "./searchBar";
+import { CoolLink } from "@/app/(Shared)/components/Global";
 
 export default function Header() {
 
@@ -19,7 +20,7 @@ export default function Header() {
                 to-[#e2e8f0cc]
                 backdrop-blur-md 
                 z-10
-                h-[max(15vh,70px)] w-full
+                h-[min(15vh,70px)] w-full
                 px-1
                 sm:px-10 py-1 sm:py-2">
 
@@ -29,9 +30,6 @@ export default function Header() {
             {/* <CartElement/> */}
 
             <div className="
-                max-w-[100%]
-                xl:max-w-4xl 
-                md:max-w-3xl
                 w-full h-full
                 justify-items-center place-items-end
                 grid grid-cols-4
@@ -41,14 +39,17 @@ export default function Header() {
 
                 <div 
                     className="
-                        max-w-[100%] flex 
-                        xs:w-60 pb-1">
+                        h-full w-full
+                        justify-start
+                        items-center
+                        flex 
+                        py-1 px-2">
                     <ClientItemSearch/>
                     
                 </div>
 
                 <Link href={'/'} className="
-                    text-center
+                    text-center  w-full
                     place-self-center justify-self-center
                     text-lg col-span-2
                     xs:text-2xl
@@ -63,9 +64,17 @@ export default function Header() {
                 </Link>
 
 
-                <CartButtonWrapper>
-                    <CartComponent/>
-                </CartButtonWrapper>
+                <div 
+                    className="
+                        w-full h-full 
+                        flex justify-center px-2 
+                        items-center">
+                    <CartButtonWrapper>
+                        
+                        <CartComponent/>
+                    
+                    </CartButtonWrapper>
+                </div>
 
             </div>
        

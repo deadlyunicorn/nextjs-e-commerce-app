@@ -14,7 +14,7 @@ const CartComponent = async () => {
         <>
             <div>
                 <div className="group">
-                    <figure className="flex items-center gap-x-1">
+                    <figure className="flex items-center gap-x-1 py-1">
                         
                         <svg 
                             viewBox="0 0 16 16"
