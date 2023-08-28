@@ -1,3 +1,4 @@
+import { setAsset } from "@/app/(Admin)/api/assets";
 import { ItemUpdateData, createItem, updateItem } from "@/app/(Admin)/api/items";
 import LoadingScreen from "@/app/(User)/loader/page";
 import { redirect } from "next/navigation";
@@ -19,9 +20,43 @@ const handleSubmit = async(formData:FormData)=>{
     "use server"
 
 
+        
+    const data:ItemUpdateData = formDataProccessor(formData);
     
+    
+
+    let success = false;
+
+    try{
+        await createItem(data.properties)
+        .then(res=>{
+            data.product_id=res.id
+        })
+        success=true;
+        if (data.assetID){
+            await setAsset(data.product_id,data.assetID);
+        }
+        
+    }
+    catch(error){
+        redirect(`/admin/items/create/fail?error=${error}`)
+    }
+    finally{
+        const message=`Successfully created ${data.properties.product.name}.`;
+        if (success){
+            redirect(`/admin/items/edit/${data.product_id}/success?message=${message}`)
+        }
+    }
+
+}
+
+export default FormLoader;
+
+
+export const formDataProccessor = (formData:FormData) => {
     const data:ItemUpdateData = {
         product_id:"",
+        assetID:undefined,
         properties:{
             product:{
                 name:"",
@@ -58,6 +93,9 @@ const handleSubmit = async(formData:FormData)=>{
 
         if (key=="product_id"){
             data.product_id=String(value);
+        }
+        else if (key == "assetID"){
+            data.assetID = String(value);
         }
 
         else if(key.includes("category.cat")){
@@ -117,26 +155,5 @@ const handleSubmit = async(formData:FormData)=>{
         }
     }
 
-    let success = false;
-
-    try{
-        await createItem(data.properties)
-        .then(res=>{
-            data.product_id=res.id
-        })
-        success=true;
-        
-    }
-    catch(error){
-        redirect(`/admin/items/create/fail?error=${error}`)
-    }
-    finally{
-        const message=`Successfully created ${data.properties.product.name}.`;
-        if (success){
-            redirect(`/admin/items/edit/${data.product_id}/success?message=${message}`)
-        }
-    }
-
+    return data;
 }
-
-export default FormLoader;

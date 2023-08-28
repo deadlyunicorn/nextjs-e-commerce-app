@@ -38,7 +38,8 @@ export const fetchItemsADMIN = async (params: { [key: string]: string }): Promis
 }
   
 export type ItemUpdateData = {
-  product_id:string;
+  product_id:string
+  assetID:string|undefined;
   properties:{
     product:{
       name:string;
@@ -170,3 +171,5 @@ export const updateItem = async (product_id:string,newProduct:ItemUpdateData["pr
 
     return resJSON;
   }
+
+ 
