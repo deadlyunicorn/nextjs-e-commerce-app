@@ -1,7 +1,7 @@
 import {   fetchItemsADMIN, updateItem } from "@/app/(Admin)/api/items";
 import Link from "next/link";
 import { fetchCategories } from "@/app/(User)/(lib)/api/categories";
-import { ChangeItemServer } from "./ChangeCategoryServer";
+import { EditCategory } from "./ChangeCategoryServer";
 import { Cart_Failure, Cart_Success } from "@/app/(User)/(lib)/components/cart/add_Cart";
 import { redirect } from "next/navigation";
 import { FailureMessage, SuccessMessage } from "@/app/(Shared)/components/UserAlert";
@@ -57,14 +57,14 @@ const CategoryEdit = async({params,searchParams}:{params:{id:string},searchParam
 
 
             <div className="
-            bg-slate-300 py-4 rounded-md
+            bg-slate-200 py-4 rounded-md
             dark:bg-slate-800
             w-full
             flex flex-col items-center 
             justify-start">
 
             
-                <ChangeItemServer category={category}/>
+                <EditCategory category={category}/>
                 
             </div>
 

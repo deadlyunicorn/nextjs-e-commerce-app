@@ -183,14 +183,14 @@ export const ChangeItemServer = async({item,categories}:{item:Product,categories
                             className="
                             cursor-pointer
                             w-44 h-10 
-                            bg-slate-200 hover:bg-slate-100 rounded-md
+                            rounded-md
                             dark:bg-transparent
                             capitalize"/>
                                 {/* {loading?"Loading":"Make Changes"} */}
                         </CoolButton>
                         <Link 
                             className="
-                                bg-red-700 hover:bg-red-500
+                                bg-red-600 hover:bg-red-500
                                 dark:bg-red-800 dark:hover:bg-red-600
                                 rounded-md px-2 text-white
                                 mt-2"

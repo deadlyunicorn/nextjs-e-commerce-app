@@ -1,9 +1,9 @@
 import { ItemUpdateData, createItem, deleteItem, updateItem } from "@/app/(Admin)/api/items";
 import LoadingScreen from "@/app/(User)/loader/page";
 import { redirect } from "next/navigation";
-import { CoolInput } from "../../../create/[...status]/CreateItemForm";
 import { getServerSession } from "next-auth/next";
 import Link from "next/link";
+import { CoolInput } from "@/app/(Shared)/components/CoolInput";
 
 const FormLoader = async({params}:{params:{product_id:string}}) => {
 
@@ -24,7 +24,7 @@ const FormLoader = async({params}:{params:{product_id:string}}) => {
 
         <div className="
         w-full
-        bg-slate-300 py-4 rounded-md
+        bg-slate-200 py-4 rounded-md
         dark:bg-slate-800
         flex flex-col items-center 
         justify-around">
@@ -48,7 +48,7 @@ const FormLoader = async({params}:{params:{product_id:string}}) => {
                 <input
                     className="
                     cursor-pointer
-                    bg-red-700 hover:bg-red-500
+                    bg-red-600 hover:bg-red-500
                     dark:bg-red-800 dark:hover:bg-red-600
                     rounded-md px-2 text-white
                     mt-2"

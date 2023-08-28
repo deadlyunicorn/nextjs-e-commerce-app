@@ -148,7 +148,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 											src={item.image ? item.image.url : "/image.png"}
 											blurDataURL="/image.png"
 											alt={item.name}
-											className="aspect-square bg-white"
+											className="aspect-square bg-white w-[50px] h-[50px]"
 											height={50} width={50} />
 										<span >{item.name}</span>
 									</Link>
@@ -197,7 +197,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
                     flex flex-col 
                     gap-y-4 
                     rounded-md
-                    bg-slate-300
+                    bg-slate-200
                     dark:bg-opacity-20 
                     dark:bg-black"
 					//trying to see if this will work on production
@@ -222,7 +222,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 						readOnly
 						className="hidden" name="gateway" value={'test_gateway'} />
 
-					<div className="grid xs:grid-cols-2 justify-items-center">
+					<div className="grid xs:grid-cols-2 justify-items-start">
 						<div className="flex items-center gap-x-1">
 							<span>Email:</span>
 							<div className="">
@@ -236,7 +236,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 						</div>
 					</div>
 
-					<div className="grid xs:grid-cols-2 gap-x-2 gap-y-2 justify-items-center">
+					<div className="grid xs:grid-cols-2 gap-x-2 gap-y-2 justify-items-start">
 
 						<div className="flex gap-x-1 items-center">
 							<span>Name:</span>
@@ -266,7 +266,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							</div>
 						</div>
 					</div>
-					<div className="grid xs:grid-cols-3 xs:place-items-center gap-y-2 gap-x-2">
+					<div className="grid xs:grid-cols-3 xs:place-items-start gap-y-2 gap-x-2">
 
 						<div className="flex w-[90%] gap-x-1">
 							<span>Country:</span>
@@ -313,7 +313,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 						</div>
 
 					</div>
-					<div className="grid xs:grid-cols-2 justify-items-center">
+					<div className="grid xs:grid-cols-2 justify-items-start">
 						<div className="flex gap-x-1 items-center">
 							<span>Address:</span>
 							<CoolInput>
@@ -327,12 +327,12 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 						</div>
 					</div>
 
-					<div className="grid xs:grid-cols-2 xs:justify-items-center gap-y-1">
-						<div className="flex gap-x-1 xs:items-center">
-							<span className="hidden xs:inline ">Credit Card:</span>
-							<span className="xs:hidden">CC:</span>
+					<div className="grid xs:grid-cols-2 xs:justify-items-start gap-y-1">
+						<div className="flex gap-x-1 sm:items-center">
+							<span className="hidden sm:inline ">Credit Card:</span>
+							<span className="sm:hidden">CC:</span>
 
-							<div className="w-44 xs:w-48">
+							<div className="w-40 sm:w-48">
 								<CoolInput>
 									<input
 										required 

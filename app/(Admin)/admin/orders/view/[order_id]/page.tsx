@@ -37,7 +37,7 @@ const OrderDetails = async({params}:{params:{order_id:string}}) => {
 
             <article
                 className="
-                bg-slate-300 py-4 rounded-md
+                bg-slate-200 py-4 rounded-md
                 dark:bg-slate-800
                 xs:max-w-[3/4]
                 xs:px-20
@@ -50,7 +50,6 @@ const OrderDetails = async({params}:{params:{order_id:string}}) => {
                 lg:px-20
                 xl:px-44
                 md:grid-cols-2 
-                border
                 grid-cols-1 ">
 
 
@@ -96,8 +95,7 @@ const OrderDetails = async({params}:{params:{order_id:string}}) => {
                                 key={item.id}>
                                 <h1 className="text-center text-lg md:absolute right-0">#{index+1}</h1>
                                 
-                                <hr/>
-                                <ul>
+                                <ul className="border-l pl-2">
                                     <li>
                                         Item:&ensp;
                                         <Link 
@@ -120,7 +118,7 @@ const OrderDetails = async({params}:{params:{order_id:string}}) => {
                                       SUM: {item.line_total.formatted_with_symbol}
                                     </li>
                                     <li>
-                                        SKU: {item.product_sku}
+                                        SKU: {item.product_sku || "NO SKU"}
                                     </li>
                                 </ul>
                             </li>

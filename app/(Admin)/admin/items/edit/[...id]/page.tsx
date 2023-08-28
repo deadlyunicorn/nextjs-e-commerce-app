@@ -50,7 +50,7 @@ const ItemsList = async({params,searchParams}:{params:{id:string},searchParams:{
 
 
             <div className="
-            bg-slate-300 py-4 rounded-md
+            bg-slate-200 py-4 rounded-md
             dark:bg-slate-800
             w-full
             xs:w-3/4

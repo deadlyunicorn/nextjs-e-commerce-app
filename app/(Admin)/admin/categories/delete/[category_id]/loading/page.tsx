@@ -38,7 +38,7 @@ const FormLoader = async({params}:{params:{category_id:string}}) => {
 
         <div className="
         w-full
-        bg-slate-300 py-4 rounded-md
+        bg-slate-200 py-4 rounded-md
         dark:bg-slate-800
         flex flex-col items-center 
         justify-around">
@@ -62,7 +62,7 @@ const FormLoader = async({params}:{params:{category_id:string}}) => {
                 <input
                     className="
                     cursor-pointer
-                    bg-red-700 hover:bg-red-500
+                    bg-red-600 hover:bg-red-500
                     dark:bg-red-800 dark:hover:bg-red-600
                     rounded-md px-2 text-white
                     mt-2"

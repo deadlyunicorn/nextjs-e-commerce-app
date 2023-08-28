@@ -30,7 +30,7 @@ export default function Unauthorized() {
                     <span 
                     className="
                         text-center bg-red-500 text-white
-                        dark:bg-red-700 
+                        dark:bg-red-600 
                         px-2 py-1 rounded-md">
                             Unauthorized (Not logged in)
                     </span>

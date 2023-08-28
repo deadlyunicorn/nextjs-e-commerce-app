@@ -1,13 +1,11 @@
-import { ItemUpdateData, updateItem } from "@/app/(Admin)/api/items";
+import { CoolInput } from "@/app/(Shared)/components/CoolInput";
 import { CoolButton } from "@/app/(Shared)/components/Global"
 import { Category } from "@chec/commerce.js/types/category";
 import { getServerSession } from "next-auth/next";
-import Image from "next/image";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
 import { ReactNode } from "react";
 
-export const ChangeItemServer = async({category}:{category:Category}) => {
+export const EditCategory = async({category}:{category:Category}) => {
 
     const session =  await getServerSession();
 
@@ -78,14 +76,14 @@ export const ChangeItemServer = async({category}:{category:Category}) => {
                     className="
                     cursor-pointer
                     w-44 h-10 
-                    bg-slate-200 hover:bg-slate-100 rounded-md
+                    rounded-md
                     dark:bg-transparent
                     capitalize"/>
                         {/* {loading?"Loading":"Make Changes"} */}
                 </CoolButton>
                 <Link 
                     className="
-                        bg-red-700 hover:bg-red-500
+                        bg-red-600 hover:bg-red-500
                         dark:bg-red-800 dark:hover:bg-red-600
                         rounded-md px-2 text-white
                         mt-2"
@@ -102,17 +100,5 @@ export const ChangeItemServer = async({category}:{category:Category}) => {
     )
 
 }
-
-const CoolInput = ({children}:{children:ReactNode}) => (
-    <div
-    className="
-    max-w-[100%]
-    text-inherit px-1 rounded-md
-    hover:bg-slate-50 bg-slate-200 
-    dark:hover:bg-slate-950 dark:bg-slate-900">
-        {children}
-    </div>
-)
-
 
 

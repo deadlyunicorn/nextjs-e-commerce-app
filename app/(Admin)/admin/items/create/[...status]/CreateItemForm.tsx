@@ -3,6 +3,7 @@ import { CoolButton } from "@/app/(Shared)/components/Global"
 import { getServerSession } from "next-auth/next";
 import { ReactNode } from "react";
 import { ImageInput } from "./imageInputField";
+import { CoolInput } from "@/app/(Shared)/components/CoolInput";
 
 export const CreateItemForm = async() => {
 
@@ -154,7 +155,7 @@ export const CreateItemForm = async() => {
                         className="
                             cursor-pointer
                             w-44 h-10 
-                            bg-slate-200 hover:bg-slate-100 rounded-md
+                            rounded-md
                             dark:bg-transparent
                             capitalize"/>
                     {/* {loading?"Loading":"Make Changes"} */}
@@ -167,16 +168,6 @@ export const CreateItemForm = async() => {
 
 }
 
-export const CoolInput = ({ children }: { children: ReactNode }) => (
-    <div
-        className="
-    max-w-[100%]
-    text-inherit px-1 rounded-md
-    hover:bg-slate-50 bg-slate-200 
-    dark:hover:bg-slate-950 dark:bg-slate-900">
-        {children}
-    </div>
-)
 
 
 

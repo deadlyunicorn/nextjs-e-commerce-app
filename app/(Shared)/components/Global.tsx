@@ -14,7 +14,7 @@ export const CoolButton = ({children}:{children:ReactNode}) => (
             flex items-center justify-center
             w-fit
             text-slate-700
-            bg-slate-300 hover:bg-slate-200
+            bg-slate-300 hover:bg-slate-100
             rounded-md">
 
             {children}
