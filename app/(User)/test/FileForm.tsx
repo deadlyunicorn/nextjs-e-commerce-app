@@ -2,114 +2,114 @@
 
 import { CoolButton } from "@/app/(Shared)/components/Global";
 import Image from "next/image";
-import { FormEvent } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { uploadAsset } from "../../(Admin)/api/assets";
 
 export const ImageForm = () => {
 
+    const [imageSource,setImageSource] = useState<string|undefined>(undefined);
+    const [loading, setLoading] = useState(false);
+
     return (
-        <form 
-            className="flex flex-col items-center gap-y-2 py-2"
-            onSubmit={handleSubmit}>
+        <div
+            className="flex flex-col items-center gap-y-2 py-2">
 
 
-                <h2 className="text-2xl underline my-4">Upload an image</h2>
+            <h2 className="text-2xl underline my-4">Upload an image</h2>
 
-            
 
+
+
+                {imageSource&&
                 <Image
+                    src={imageSource}
                     className="aspect-square"
-                    src={""}
-                    width={50} 
-                    height={50} 
+                    width={50}
+                    height={50}
                     id="thumbnail"
-                    alt="Image to upload."/>
+                    alt="Image to upload." />
+                }
+                
 
                 <CoolButton>
 
-                    <label 
+                    <label
                         className="
-                            px-2 py-1
-                            cursor-pointer"
+                                px-2 py-1
+                                cursor-pointer"
                         id="fileLabel"
                         htmlFor="image">
-                            
-                            Select an Image.
-                        
+
+                        Select an Image.
+
                     </label>
                 </CoolButton>
 
-                <input 
+                <input
                     className="hidden"
                     id="image"
-                    onChange={handleFiles}
+                    onChange={async(e:ChangeEvent)=>{
+                            // @ts-ignore
+                        const imgSource = URL.createObjectURL(e.target.files[0]);
+                        setImageSource(imgSource);
+
+                        setLoading(true);
+                        await uploadImage(e).catch(()=>{setImageSource(undefined)});
+                        setLoading(false);
+                    }}
                     accept="image/*"
                     name="image"
-                    type="file"/>
+                    type="file" />
+
+                {loading&&"Loading..."}
 
 
-            
-                <br/>
-            <button>Submit</button>
-            
-        </form>
+
+
+
+        </div>
     )
 }
 
-const handleFiles = () => {
 
+const uploadImage = async(e:any) => {
 
-        try{
-            //@ts-ignore
-            const imgSource = URL.createObjectURL(document.querySelector('#image').files[0]);
-            //@ts-ignore
-            document.querySelector('#thumbnail').src = imgSource;
-        }
-        catch(e){}
+    if (e.target.files && e.target.files.length > 0) {
 
-
-        // document.querySelector('#fileLabel').textContent = 
-}
-
-
-    // for (const entry of  formData.entries()){
-    // // @ts-ignore
-    // if (entry[1]!=undefined && entry[1].size != undefined){
-    // // @ts-ignore
-    // if (entry[1].size > 2000000){
-    //             throw "File size should be under 2MB."
-    //         }
-    //         else {
-    //             file=entry;
-    //         }
-    //     }
+        const toBase64 = (file: File): Promise<string> => (new Promise((res, err) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => (res(reader.result as string))
+            reader.onerror = () => { alert("There was an error reading your file.") }
+        }));
         
-    // };
 
-    // URL.createObjectURL(file)); // we will use this to show the preview of the image
-  
 
-const handleSubmit = (e:FormEvent)=> {
-    
-    e.preventDefault();
+            const file = e.target.files[0];
+            const fileName = e.target.files[0].name;
 
-    //@ts-ignore
-    const fileSubmitElement:HTMLInputElement = document.querySelector('#image');
+            const encodedFile: string = await toBase64(file)
+                .then(res => res.slice(res.indexOf('base64,') + 'base64,'.length));
 
-    if (fileSubmitElement.files && fileSubmitElement.files.length > 0 ){
-        alert("ahoy");
-        
-        const file = fileSubmitElement.files[0];
 
-        const reader = new FileReader();
-        reader.onload = (e)=>{
-            console.log(e.target?.result);
+            if (encodedFile) {
+                await fetch("admin/items/upload",{
+                    method: "POST", 
+                    body: JSON.stringify({binaryData:encodedFile,fileName:fileName}),
+                })
+                .then( async(res) => {
+                    console.log(`Your image was successfully uploaded`,await res.json());
+                })
+                .catch(err=>{
+                    alert("There was an error uploading your image (make sure it's <2MiB).");
+                    throw "Upload error.";
+                });
+            }
         }
-        reader.readAsBinaryString(file);
+
+
 
 
     }
 
 
-
-
-}
