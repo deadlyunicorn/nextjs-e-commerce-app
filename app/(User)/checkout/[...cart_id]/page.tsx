@@ -295,7 +295,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							<CoolInput>
 								<input
 									required 
-									pattern="[a-zA-Z]+"
+									pattern="[A-Za-z\s]{4,14}"
 									minLength={4}
 									placeholder="Your City"
 									type="text" name="shipping_town_city" />
@@ -318,8 +318,9 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							<span>Address:</span>
 							<CoolInput>
 								<input
+									title="Street and street number."
 									required
-									// pattern="/(?:[a-zA-Z]+\s)+[1-9][0-9]{0,2}/gm"
+									pattern="([a-zA-Z]+\s)+[1-9][0-9]{0,2}"
 									minLength={4}
 									placeholder="Address and number"
 									type="text" name="shipping_street" />
@@ -351,10 +352,13 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 								<span>CVV:</span>
 								<CoolInput>
 									<input
+										className="w-14 text-center"
 										required
 										name="card_cvc"
 										placeholder="123"
-										type="number" min={100} max={999} />
+										title="CVV can have 3 digits."
+										pattern="[0-9]{3}"
+										/>
 
 								</CoolInput>
 							</div>
@@ -389,12 +393,14 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 						</div>
 					</div>
 
-					<div className="w-full relative group-valid:inline hidden">
+					<div className="w-full relative group-valid:flex hidden
+					justify-center">
 
 									
 						<SubmitButton fail={!(message==null)}/>
 					</div>
-					<div className="w-full relative inline group-valid:hidden">
+					<div className="w-full relative  group-valid:hidden
+						flex justify-center">
 						<MockSubmitButton fail={!(message==null)}/>
 
 					</div>
