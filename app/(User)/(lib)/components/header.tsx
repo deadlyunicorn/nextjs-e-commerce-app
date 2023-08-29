@@ -80,7 +80,20 @@ export default async function Header() {
                         <CartComponent />
 
                     </CartButtonWrapper>
-                    <div className="h-full flex items-center">
+                    <div className="
+                        fixed top-[15vh] 
+                        left-5
+                        bg-slate-200 
+                        dark:bg-slate-950
+                        h-fit 
+                        p-1 rounded-md
+                        xs:left-0
+                        xs:p-0 xs:top-0
+                        xs:dark:bg-transparent
+                        xs:h-full xs:flex xs:items-center
+                        xs:bg-transparent xs:relative">
+                        
+                        
                         <Link
                             href={session ? "/myProfile" : "/signin"}>
 
