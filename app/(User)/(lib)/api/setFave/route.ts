@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
 import { addFavorite } from "../favorites";
+import { OPERATION } from "./types";
 
-export const OPERATION = {
-    SUCCESS : 1,
-    ERROR : 0
-}
 
 
 type addToFavoritesRequest = {

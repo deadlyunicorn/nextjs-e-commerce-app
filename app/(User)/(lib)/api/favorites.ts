@@ -1,5 +1,5 @@
 import { Collection } from "mongodb";
-import { OPERATION } from "./setFave/route";
+import { OPERATION } from "./setFave/types";
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
