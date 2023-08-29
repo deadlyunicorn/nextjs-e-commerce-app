@@ -6,6 +6,8 @@ import Link from "next/link";
 import { CoolLink } from "@/app/(Shared)/components/Global";
 import { redirect } from "next/navigation";
 import { SortByForm } from "./SortByForm";
+import { getServerSession } from "next-auth";
+import { getFavorites } from "../../(lib)/api/favorites";
 
 export default async function Explore(
         {params:{page},
@@ -59,6 +61,9 @@ export default async function Explore(
     })
     .then(result=> result != undefined);
 
+    const email = await getServerSession().then(res=>res?.user?.email);
+    const favorites:[] = email?await getFavorites(email):[];
+
 
 
     
@@ -77,7 +82,9 @@ export default async function Explore(
                         (item,index)=>(
                         (!item.inventory.managed||item.inventory.available>0)&&
                         // <Store_Front_Fallback key={index}/>
-                        <Item_StoreFront item={item} key={item.id}/>
+                        <Item_StoreFront 
+                            email={email} favorites={favorites}
+                            item={item} key={item.id}/>
                         )
                     )}
 

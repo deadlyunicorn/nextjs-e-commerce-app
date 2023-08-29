@@ -7,8 +7,21 @@ import { Suspense } from "react";
 import { ProductCollection } from "@chec/commerce.js/features/products";
 import PriceTag from "../../(lib)/components/product/priceTag";
 import { getCart } from "../../(lib)/api/cart";
+import { FavoriteButton } from "../../(lib)/components/browsing/addToFaves";
+import { getServerSession } from "next-auth";
+import { getFavorites } from "../../(lib)/api/favorites";
 
-const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollection["data"]}) =>{
+const ProductPage = async({product,similar}:{product:Product,similar:ProductCollection["data"]}) =>{
+
+
+    const email = await getServerSession().then(res=>res?.user?.email);
+    
+    const favorites:[] = email?await getFavorites(email):[];
+
+ 
+    //@ts-ignore
+    const isFavorite = favorites.includes(product.id);
+
 
     return(
     <>
@@ -22,7 +35,7 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
             ">
             
                 <Suspense fallback={<ProductFallback/>}>
-                    <ProductInfo listing={listing}/>
+                    <ProductInfo email={email} isFavorite={isFavorite} product={product}/>
                 </Suspense>
 
             </main>
@@ -40,8 +53,12 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
 
                     {similar //we could splice, but api provides limit..
                     .map((item)=>
-                        item.id == listing.id ? false
-                        :<Recommendation listing={item} key={item.id}/>
+                        item.id == product.id ? false
+                        :<Recommendation 
+                            email={email} 
+                            //@ts-ignore
+                            isFavorite={favorites.includes(item.id)}
+                            listing={item} key={item.id}/>
                     )}
 
                 </Suspense>
@@ -55,7 +72,7 @@ const ProductPage = ({listing,similar}:{listing:Product,similar:ProductCollectio
     )
 }
 
-const ProductInfo = async({listing}:{listing:Product}) => {
+const ProductInfo = async({product,isFavorite,email}:{product:Product,isFavorite:boolean,email:string|undefined|null}) => {
     const cart = await getCart();
 
     let cartItem=undefined;
@@ -63,7 +80,7 @@ const ProductInfo = async({listing}:{listing:Product}) => {
     if ( cart && cart.line_items.length > 0 ){
 
         cartItem=cart.line_items.filter((
-            line_item=>(line_item.product_id==listing.id)
+            line_item=>(line_item.product_id==product.id)
         ))[0]
         
     }
@@ -73,12 +90,13 @@ const ProductInfo = async({listing}:{listing:Product}) => {
         <>
         <div 
             className=" 
+            relative
             flex flex-wrap
             justify-center
             ">
 
             <Link 
-                href={`/product/${listing.permalink}`}>
+                href={`/product/${product.permalink}`}>
 
                 <figure
                     className="
@@ -88,14 +106,15 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                         items-center"
                     >
                     <Image 
-                    src={listing.image?listing.image["url"]:"/image.png"} 
-                    alt={listing.name}  height={300} width={300}
+                    src={product.image?product.image["url"]:"/image.png"} 
+                    alt={product.name}  height={300} width={300}
                     placeholder="blur"
                     blurDataURL="/image.png"
                     className="
                         rounded-md aspect-square 
                         group-hover:brightness-110
                         max-w-[100%]" />
+
 
                     <figcaption className="
                         mt-4 min-h-[50px]
@@ -104,7 +123,7 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                         dark:group-hover:text-slate-50 
                         font-light">
 
-                        {listing.name}
+                        {product.name}
                     </figcaption>
                     
                     
@@ -112,6 +131,17 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                 
                 
             </Link>
+            
+            <div 
+                    className="
+                        bottom-[20%]
+                        absolute right-[5%]">
+
+                    <FavoriteButton 
+                        isFavorite={isFavorite}
+                        email={email} item_id={product.id}/>
+                        
+            </div>
                     
         </div>
         
@@ -128,12 +158,12 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                 py-2">
 
                         <p>
-                            {(listing.sku&&listing.sku!='null')?<span className="text-sm">SKU: {listing.sku}</span>:" "}
+                            {(product.sku&&product.sku!='null')?<span className="text-sm">SKU: {product.sku}</span>:" "}
                         </p>
-                        {listing.inventory.managed&&
+                        {product.inventory.managed&&
                         <p>
-                            {(listing.inventory.available>0 && listing.inventory.available<15)
-                                ?<em className="text-red-600 font-bold underline">Only {listing.inventory.available} left</em>
+                            {(product.inventory.available>0 && product.inventory.available<15)
+                                ?<em className="text-red-600 font-bold underline">Only {product.inventory.available} left</em>
                                 :<em className="text-red-600 font-bold underline">SOLD OUT</em>}
 
                         </p>
@@ -143,8 +173,8 @@ const ProductInfo = async({listing}:{listing:Product}) => {
             </div>
 
             {
-            listing.description
-                ?<div dangerouslySetInnerHTML={{__html:listing.description}}/>
+            product.description
+                ?<div dangerouslySetInnerHTML={{__html:product.description}}/>
                 
                 :<p>There is no description for this item.</p>
             }
@@ -157,7 +187,7 @@ const ProductInfo = async({listing}:{listing:Product}) => {
 
                 <PriceTag>
                     <span className="text-4xl">
-                        {listing.price["formatted_with_symbol"]}
+                        {product.price["formatted_with_symbol"]}
                     </span>
                     
                 </PriceTag>
@@ -165,7 +195,7 @@ const ProductInfo = async({listing}:{listing:Product}) => {
                 <div className="
                     gap-y-5
                     flex flex-col">
-                    <AddToCart item={listing} cartItem={cartItem} price={listing.price.raw}/>
+                    <AddToCart item={product} cartItem={cartItem} price={product.price.raw}/>
                 </div>
 
                 

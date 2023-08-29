@@ -2,11 +2,14 @@ import { Product } from "@chec/commerce.js/types/product"
 import Image from "next/image"
 import Link from "next/link"
 import "@/app/(User)/(lib)/styles/mock.scss"
+import { FavoriteButton } from "../browsing/addToFaves"
 
 
-export function Recommendation({listing}:{listing:Product}){
+export function Recommendation({listing,email,isFavorite}:{listing:Product,email:string|undefined|null,isFavorite:boolean}){
     return (
-        
+
+    
+    <div className="relative">
     <Link href={`/product/${listing.permalink}`}
     // dangerous css?
     className=" 
@@ -94,6 +97,13 @@ export function Recommendation({listing}:{listing:Product}){
             
         
     </Link>
+    <div className="absolute top-2">
+
+        <FavoriteButton 
+            isFavorite={isFavorite}
+            item_id={listing.id} email={email}/>
+    </div>
+    </div>
     )
 }
 

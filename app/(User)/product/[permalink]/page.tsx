@@ -83,7 +83,7 @@ const ItemPage = async({params:{permalink}}:{params:{permalink:string}}) =>{
 
 
         return (
-            <ProductPage similar={similar} listing={listing}/>
+            <ProductPage similar={similar} product={listing}/>
         )
 
     }
