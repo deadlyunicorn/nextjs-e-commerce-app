@@ -41,15 +41,15 @@ export default async function Header() {
 
 
 
-                <div 
+                <div
                     className="
                         h-full w-full
                         justify-start
                         items-center
                         flex 
                         px-2">
-                    <ClientItemSearch/>
-                    
+                    <ClientItemSearch />
+
                 </div>
 
                 <Link href={'/'} className="
@@ -69,38 +69,42 @@ export default async function Header() {
                 </Link>
 
 
-                <div 
+                <div
                     className="
                         w-full h-full 
                         flex justify-center px-2 
                         gap-x-2
                         items-center">
                     <CartButtonWrapper>
-                        
-                        <CartComponent/>
-                    
-                    </CartButtonWrapper>
-                    <Link
-                        className="h-full flex items-center" 
-                        href={session?"/myProfile":"/signin"}>
 
-                        {userImage
-                        ?<Image 
-                            alt="user icon"
-                            src={userImage} width={24} height={24} className="w-6 h-6 rounded-full"/>
-                        :<svg 
-                            className=" w-6 h-6 
+                        <CartComponent />
+
+                    </CartButtonWrapper>
+                    <div className="h-full flex items-center">
+                        <Link
+                            href={session ? "/myProfile" : "/signin"}>
+
+                            {userImage
+                                ? <Image
+                                    alt="user icon"
+                                    src={userImage} width={24} height={24}
+                                    className="
+                                hover:brightness-110
+                                w-6 h-6 rounded-full"/>
+                                : <svg
+                                    className=" w-6 h-6 
                             stroke-slate-900 hover:stroke-slate-600
-                            dark:stroke-slate-300 dark:hover:stroke-slate-50" 
-                            width="40.555447mm"height="52mm"viewBox="0 0 40.555447 52"><g transform="translate(-4.7222748,1)"><circle fill="none" strokeWidth={3}strokeLinecap="round"strokeLinejoin="round"strokeDasharray={'none'}strokeOpacity={1}id="path1"cx="25"cy="11.315115"r="11.315115" /><path strokeWidth={3} fill="none"strokeLinecap="round"d="M 5.7222747,50 C 5.75066,22.365673 25,22.63023 25,22.63023 c 0,0 19.24673,-0.248585 19.277725,27.36977"id="path2"/><path strokeWidth={3}fill="none"d="M 5.7222747,50 H 44.277725"id="path3"/></g>
-                        </svg>
-                 
-                      }
-                           </Link>
+                            dark:stroke-slate-300 dark:hover:stroke-slate-50"
+                                    width="40.555447mm" height="52mm" viewBox="0 0 40.555447 52"><g transform="translate(-4.7222748,1)"><circle fill="none" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={'none'} strokeOpacity={1} id="path1" cx="25" cy="11.315115" r="11.315115" /><path strokeWidth={3} fill="none" strokeLinecap="round" d="M 5.7222747,50 C 5.75066,22.365673 25,22.63023 25,22.63023 c 0,0 19.24673,-0.248585 19.277725,27.36977" id="path2" /><path strokeWidth={3} fill="none" d="M 5.7222747,50 H 44.277725" id="path3" /></g>
+                                </svg>
+
+                            }
+                        </Link>
+                    </div>
                 </div>
 
             </div>
-       
+
 
         </header>
     )
