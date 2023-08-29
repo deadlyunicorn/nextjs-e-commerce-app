@@ -12,7 +12,7 @@ export const CartButtonWrapper = ({children}:{children:ReactNode}) => {
 
     return (
 
-        <div className="h-full flex">
+        <div className="flex">
             <button onClick={()=>{dispatch(setCart(!cart))}}>
                 {children}
             </button>
