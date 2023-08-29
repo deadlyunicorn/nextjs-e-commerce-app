@@ -4,7 +4,6 @@ import { Order } from "@chec/commerce.js/types/order";
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
-import { getUserFavorites } from "../(lib)/api/favorites";
 
 const UserPage = async()=>{
 
@@ -21,7 +20,6 @@ const UserPage = async()=>{
         query: session.user?.email+""
       });
 
-    const userFavorites = await getUserFavorites('Johhny');
     
 
     return (
