@@ -23,11 +23,13 @@ const handler = NextAuth({
         async signIn({account,profile}){
             if (account?.provider === "google"){
 
-                return profile?.email==process.env.ALLOWED_EMAIL;
+                return true; 
+                // profile?.email==process.env.ALLOWED_EMAIL;
 
                 // return profile?.email_verified && profile.email!.endsWith("@gmail.com") 
             }
-            return profile?.email==process.env.ALLOWED_EMAIL;
+            return true 
+            // profile?.email==process.env.ALLOWED_EMAIL;
 
         }
     },

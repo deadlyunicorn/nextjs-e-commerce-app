@@ -1,4 +1,5 @@
 import { Category } from "@chec/commerce.js/types/category";
+import { AdminList } from "./admins";
 
 export const fetchCategoriesADMIN = async ():Promise<Category[]> => {
     const url = new URL(
@@ -39,6 +40,14 @@ export type CategoryPOST={
 
 export const createCategory = async (newCategory:CategoryPOST) => {
   
+    //current version is vulnerable!!
+    //one can just modify the url and
+    //create a new category even in guest mode.
+    
+    // http://localhost:3000/admin/categories/create/loading?name=Example&slug=This-is-vulnerable&description=hello+world%21
+    // the form won't submit
+
+
   
     const url = new URL(
       `https://api.chec.io/v1/categories`
@@ -90,8 +99,11 @@ export type CategoryPUT={
 };
   
 
-export const editCategory = async (newCategory:CategoryPUT) => {
+export const editCategory = async (newCategory:CategoryPUT,adminEmail:string) => {
   
+  if (! AdminList.includes(adminEmail)){
+    throw 'Unauthorized Email';
+  }
   
   const url = new URL(
     `https://api.chec.io/v1/categories/${newCategory.category_id}`
@@ -129,8 +141,11 @@ export const editCategory = async (newCategory:CategoryPUT) => {
   return resJSON;
 }
 
-export const deleteCategory = async (category_id:string) => {
+export const deleteCategory = async (category_id:string,adminEmail:string) => {
   
+  if (! AdminList.includes(adminEmail)){
+    throw 'Unauthorized Email';
+  }
   
   const url = new URL(
     `https://api.chec.io/v1/categories/${category_id}`

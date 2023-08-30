@@ -3,6 +3,7 @@ import LoadingScreen from "@/app/(User)/loader/page";
 import { redirect } from "next/navigation";
 import { formDataProccessor } from "../../create/loading/page";
 import { setAsset } from "@/app/(Admin)/api/assets";
+import { getServerSession } from "next-auth";
 
 const FormLoader = async({searchParams}:{searchParams:FormData}) => {
 
@@ -20,17 +21,18 @@ const FormLoader = async({searchParams}:{searchParams:FormData}) => {
 const handleSubmit = async(formData:FormData)=>{
     "use server"
 
-
+    const session =  await getServerSession();
+    const email = session?.user?.email||"";
     
     const data = formDataProccessor(formData);
 
     let success = false;
 
     try{
-        await updateItem(data.product_id,data.properties);
+        await updateItem(data.product_id,data.properties,email);
         success=true;
         if (data.assetID){
-            await setAsset(data.product_id,data.assetID);
+            await setAsset(data.product_id,data.assetID,email);
         }
       
     }

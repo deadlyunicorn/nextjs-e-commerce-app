@@ -1,6 +1,7 @@
 import { CategoryPUT, editCategory } from "@/app/(Admin)/api/categories";
 import { ItemUpdateData, updateItem } from "@/app/(Admin)/api/items";
 import LoadingScreen from "@/app/(User)/loader/page";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 const FormLoader = async({searchParams}:{searchParams:FormData}) => {
@@ -19,7 +20,8 @@ const FormLoader = async({searchParams}:{searchParams:FormData}) => {
 const handleSubmit = async(formData:FormData)=>{
     "use server"
 
-
+    const session =  await getServerSession();
+    const email = session?.user?.email;
     
     const data:CategoryPUT = {
         category_id:"",
@@ -53,7 +55,7 @@ const handleSubmit = async(formData:FormData)=>{
     let category_id;
 
     try{
-        await editCategory(data)
+        await editCategory(data,email||"")
         .then(res=>{
             category_id=res.id
         })

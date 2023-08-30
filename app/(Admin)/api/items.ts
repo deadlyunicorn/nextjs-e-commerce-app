@@ -2,6 +2,7 @@
 
 import { ProductCollection } from "@chec/commerce.js/features/products";
 import { Product } from "@chec/commerce.js/types/product";
+import { AdminList } from "./admins";
 
 export const fetchItemsADMIN = async (params: { [key: string]: string }): Promise<ProductCollection["data"]> => {
 
@@ -59,8 +60,11 @@ export type ItemUpdateData = {
   }        
 }
 
-export const updateItem = async (product_id:string,newProduct:ItemUpdateData["properties"]) => {
+export const updateItem = async (product_id:string,newProduct:ItemUpdateData["properties"],adminEmail:string) => {
   
+  if (! AdminList.includes(adminEmail)){
+    throw 'Unauthorized Email';
+  }
   
     const url = new URL(
       `https://api.chec.io/v1/products/${product_id}`
@@ -98,8 +102,11 @@ export const updateItem = async (product_id:string,newProduct:ItemUpdateData["pr
     return resJSON;
   }
 
-  export const createItem = async (newProduct:ItemUpdateData["properties"]) => {
+  export const createItem = async (newProduct:ItemUpdateData["properties"],adminEmail:string) => {
   
+    if (! AdminList.includes(adminEmail)){
+      throw 'Unauthorized Email';
+    }
   
     const url = new URL(
       `https://api.chec.io/v1/products/`
@@ -137,9 +144,12 @@ export const updateItem = async (product_id:string,newProduct:ItemUpdateData["pr
     return resJSON;
   }
 
-  export const deleteItem = async (product_id:string) => {
+  export const deleteItem = async (product_id:string,adminEmail:string) => {
   
-  
+    if (! AdminList.includes(adminEmail)){
+      throw 'Unauthorized Email';
+    }
+
     const url = new URL(
       `https://api.chec.io/v1/products/${product_id}`
     )

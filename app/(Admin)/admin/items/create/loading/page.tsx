@@ -1,6 +1,7 @@
 import { setAsset } from "@/app/(Admin)/api/assets";
 import { ItemUpdateData, createItem, updateItem } from "@/app/(Admin)/api/items";
 import LoadingScreen from "@/app/(User)/loader/page";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 const FormLoader = async({searchParams}:{searchParams:FormData}) => {
@@ -19,7 +20,8 @@ const FormLoader = async({searchParams}:{searchParams:FormData}) => {
 const handleSubmit = async(formData:FormData)=>{
     "use server"
 
-
+    const session =  await getServerSession();
+    const email = session?.user?.email||"";
         
     const data:ItemUpdateData = formDataProccessor(formData);
     
@@ -28,13 +30,13 @@ const handleSubmit = async(formData:FormData)=>{
     let success = false;
 
     try{
-        await createItem(data.properties)
+        await createItem(data.properties,email)
         .then(res=>{
             data.product_id=res.id
         })
         success=true;
         if (data.assetID){
-            await setAsset(data.product_id,data.assetID);
+            await setAsset(data.product_id,data.assetID,email);
         }
         
     }

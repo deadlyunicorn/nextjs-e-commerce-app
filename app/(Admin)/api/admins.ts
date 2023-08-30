@@ -1,0 +1,1 @@
+export const AdminList = [process.env.ALLOWED_EMAIL]

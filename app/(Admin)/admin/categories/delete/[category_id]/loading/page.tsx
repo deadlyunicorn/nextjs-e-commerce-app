@@ -93,6 +93,12 @@ const FormLoader = async({params}:{params:{category_id:string}}) => {
 const handleSubmit = async(formData:FormData)=>{
     "use server"
 
+    //actually this might not be vulnerable?
+
+    const session =  await getServerSession();
+    const email = session?.user?.email;
+
+
     let category_id;
 
     for (const entry of formData.entries()){
@@ -105,7 +111,7 @@ const handleSubmit = async(formData:FormData)=>{
     let success = false;
 
     try{
-        await deleteCategory(String(category_id))
+        await deleteCategory(String(category_id),email||"")
         success=true;
     }
     catch(error){

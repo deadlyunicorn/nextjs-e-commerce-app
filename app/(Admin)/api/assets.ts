@@ -1,3 +1,4 @@
+import { AdminList } from "./admins";
 
 export const getAllAssets = async()=>{
 
@@ -27,8 +28,11 @@ export const getAllAssets = async()=>{
 
 }
 
-export const uploadAsset = async(imageBase64:string,fileName:string) =>{
+export const uploadAsset = async(imageBase64:string,fileName:string,adminEmail:string) =>{
 
+    if (! AdminList.includes(adminEmail)){
+        throw 'Unauthorized Email';
+      }
     const body = {
         filename: fileName,
         contents: imageBase64,
@@ -59,8 +63,11 @@ export const uploadAsset = async(imageBase64:string,fileName:string) =>{
 
 }
 
-export const setAsset = async (product_id:string,asset_id:string)=>{
+export const setAsset = async (product_id:string,asset_id:string,adminEmail:string)=>{
 
+    if (! AdminList.includes(adminEmail)){
+        throw 'Unauthorized Email';
+      }
     const url = new URL(
       `https://api.chec.io/v1/products/${product_id}/assets`
     )

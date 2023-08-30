@@ -74,6 +74,9 @@ const FormLoader = async({params}:{params:{product_id:string}}) => {
 const handleSubmit = async(formData:FormData)=>{
     "use server"
 
+    const session =  await getServerSession();
+    const email = session?.user?.email||"";
+
     let product_id;
 
     for (const entry of formData.entries()){
@@ -86,7 +89,7 @@ const handleSubmit = async(formData:FormData)=>{
     let success = false;
 
     try{
-        await deleteItem(String(product_id))
+        await deleteItem(String(product_id),email)
         success=true;
     }
     catch(error){

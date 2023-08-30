@@ -108,7 +108,7 @@ const uploadImage = async(e:any) => {
                     })
                 })
                 .catch(err=>{
-                    alert("There was an error uploading your image (make sure it's <2MiB).");
+                    alert("There was an error uploading your image (make sure it's <2MiB). Are you signed in with an admin account?");
                     throw "Upload error.";
                 });
             }
