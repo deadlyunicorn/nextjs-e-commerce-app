@@ -10,18 +10,7 @@ const SubmitButton = ({fail}:{fail:boolean}) => {
     return(
         <>
         {loading &&
-        <div className="
-        
-        bg-slate-200 bg-opacity-20
-        dark:bg-slate-950 dark:bg-opacity-20 
-        backdrop-blur-md
-        fixed z-20 
-        top-0 left-0 
-        w-screen h-screen">
-            <div className="flex flex-col h-full justify-center">
-                <LoadingScreen/>
-            </div>
-        </div>
+            <LoadingFullscreen/>
         }
         
         <CoolButton>
@@ -66,3 +55,18 @@ export const MockSubmitButton=({fail}:{fail:boolean}) => (
 )
 
 export default SubmitButton;
+
+export const LoadingFullscreen = () => (
+    <div className="
+        
+        bg-slate-200 bg-opacity-20
+        dark:bg-slate-950 dark:bg-opacity-20 
+        backdrop-blur-md
+        fixed z-20 
+        top-0 left-0 
+        w-screen h-screen">
+            <div className="flex flex-col h-full justify-center">
+                <LoadingScreen/>
+            </div>
+    </div>
+)
