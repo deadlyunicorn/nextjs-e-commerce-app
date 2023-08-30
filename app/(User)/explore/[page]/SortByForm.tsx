@@ -3,6 +3,7 @@
 import { useState } from "react"
 import './form.scss'
 import { CoolButton } from "@/app/(Shared)/components/Global";
+import { LoadingFullscreen } from "../../checkout/[...cart_id]/SubmitButton";
 
 export const SortByForm = (props:{sortBy:string,sortDirection:string}) => {
 
@@ -15,7 +16,10 @@ export const SortByForm = (props:{sortBy:string,sortDirection:string}) => {
 
     return (
         <div className="flex w-full justify-center relative 2xl:fixed 2xl:top-48 2xl:left-0 rounded-sm 2xl:w-[20vw]">
+            
+            {loading&&<LoadingFullscreen/>}
             <form 
+                // submitting the form redirects to the page with the search params...
                 className="flex flex-col gap-y-2  my-4 items-center bg-white bg-opacity-5 py-2 px-4 w-[250px] h-fit"
                 id="sortForm">
                     
