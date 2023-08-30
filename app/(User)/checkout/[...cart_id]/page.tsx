@@ -8,6 +8,7 @@ import { CoolInput } from "@/app/(Shared)/components/CoolInput";
 import "./checkout.css"
 import SubmitButton, { MockSubmitButton } from "./SubmitButton";
 import { getCartCookie } from "../../(lib)/api/cookies";
+import { getServerSession } from "next-auth";
 
 
 
@@ -47,6 +48,10 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 	// Is the URL valid? Else go home
 	let res;
 	let noUrlErrors = false;
+
+	const user = await getServerSession().then(res=>res?.user);
+	const email = user?.email;
+	const name = user?.name?.split(' ');
 
 	try {
 		if (! (cart_id && cart_id_url.includes(cart_id) )) {
@@ -228,6 +233,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							<div className="">
 								<CoolInput>
 									<input
+										defaultValue={email||" "}
 										required 
 										placeholder="example@mail.com"
 										type="email" name="customer_email" />
@@ -244,6 +250,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 
 								<CoolInput>
 									<input
+										defaultValue={name?name[0]:" "}
 										required 
 										pattern="[a-zA-Z]+"
 										minLength={3}
@@ -257,6 +264,7 @@ const Checkout = async ({ params, searchParams }: { params: { cart_id: string[] 
 							<div className="w-[50%]">
 								<CoolInput>
 									<input
+										defaultValue={name?name[1]:" "}
 										required
 										pattern="[a-zA-Z]+"
 										minLength={4}
