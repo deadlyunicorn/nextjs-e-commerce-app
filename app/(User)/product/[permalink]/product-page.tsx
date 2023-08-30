@@ -164,10 +164,11 @@ const ProductInfo = async({product,isFavorite,email}:{product:Product,isFavorite
                         <p>
                             {(product.inventory.available>0 && product.inventory.available<15)
                                 ?<em className="text-red-600 font-bold underline">Only {product.inventory.available} left</em>
-                                :<em className="text-red-600 font-bold underline">SOLD OUT</em>}
+                                :product.inventory.available==0&&<em className="text-red-600 font-bold underline">SOLD OUT</em>}
 
                         </p>
                         }
+
                
 
             </div>
