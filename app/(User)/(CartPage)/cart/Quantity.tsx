@@ -3,7 +3,6 @@
 import { getCart, updateCart } from "@/app/(User)/(lib)/api/cart";
 import { Cart_Failure, Cart_Success } from "@/app/(User)/(lib)/components/cart/add_Cart";
 import { LineItem } from "@chec/commerce.js/types/line-item";
-import { useRouter } from "next/navigation";
 import {  useEffect, useState, useTransition } from "react";
 import { getCartCookie } from "@/app/(User)/(lib)/api/cookies";
 
@@ -15,7 +14,6 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
     const mockArray = [... new Array(maxQuantity)].map((item,index)=>index);
 
 
-    const router = useRouter();
     ////////////
 
     const [isPending,startTransition]=useTransition();
@@ -26,14 +24,7 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
     useEffect(()=>{
         setQuantity(item.quantity)
-    },[item.quantity,router])
-
-    useEffect(()=>{
-
-        if(!isPending){
-            router.refresh();
-        }
-    },[isPending])
+    },[item.quantity])
 
     
     ////////////

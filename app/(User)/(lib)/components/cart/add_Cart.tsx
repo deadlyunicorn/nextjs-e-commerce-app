@@ -2,7 +2,6 @@
 
 import { ReactNode, useEffect, useState, useTransition } from "react";
 import { addCart } from "../../api/cart";
-import { useRouter } from "next/navigation";
 import "@/app/(User)/(lib)/styles/animations.scss"
 import { Cart } from "@chec/commerce.js/types/cart";
 import { LineItem } from "@chec/commerce.js/types/line-item";
@@ -18,7 +17,6 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
     const [totalQuantity, setTotalQuantity] = useState(0);
     const arr10 = [...Array(item.inventory.managed?(Math.min(item.inventory.available,10)):10).keys()];
     
-    const router = useRouter();
     //used to refresh the page after adding to cart.
 
     const [isPending,startTransition] = useTransition();
@@ -28,12 +26,6 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
     const [error,setError] = useState (' ');
 
 
-    useEffect(()=>{
-
-        if(!isPending){
-            router.refresh();
-        }
-    },[isPending])
    
     
 
