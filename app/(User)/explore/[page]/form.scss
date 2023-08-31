@@ -1,7 +1,7 @@
 :is(.dark) {
     #sortForm {
-        input,
         option,
+        input,
         select{
             background-color: rgb(2 6 23);
 
@@ -10,13 +10,13 @@
 }
 
 #sortForm {
-    input,
     select,
+    input,
     option {
         background-color: rgb(226 232 240);
     }
 
-    select{
+    input,select{
         text-align: center;
         border-radius: 6px;
         padding-inline: 8px;
