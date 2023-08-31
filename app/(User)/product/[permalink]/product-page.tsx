@@ -42,7 +42,7 @@ const ProductPage = async({product,similar}:{product:Product,similar:ProductColl
 
             <aside className="
                 rounded-md
-                flex gap-x-5 mt-10 
+                flex gap-x-5 mt-10 px-2
                 overflow-x-scroll 
                 dark:bg-slate-200 dark:bg-opacity-5
                 bg-slate-900 bg-opacity-5
