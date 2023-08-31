@@ -25,7 +25,7 @@ export default async function Header() {
                 to-[#e2e8f0cc]
                 backdrop-blur-md 
                 z-10
-                h-[min(15vh,70px)] w-full
+                h-[min(20vh,70px)] w-full
                 px-1
                 sm:px-10 py-2">
 

@@ -3,7 +3,7 @@ import '@/app/(User)/(lib)/styles/animations.scss'
 const Banner = () => (
     <div className='
                 bg-black
-                mt-[min(15vh,70px)]
+                mt-[min(20vh,70px)]
                 w-full overflow-hidden
                 z-0
                 h-7'>
