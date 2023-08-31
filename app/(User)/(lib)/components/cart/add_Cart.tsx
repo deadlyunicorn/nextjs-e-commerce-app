@@ -7,7 +7,6 @@ import "@/app/(User)/(lib)/styles/animations.scss"
 import { Cart } from "@chec/commerce.js/types/cart";
 import { LineItem } from "@chec/commerce.js/types/line-item";
 import { Product } from "@chec/commerce.js/types/product";
-import { getCartCookie } from "../../api/cookies";
 
 export const AddToCart = ({ price, item, cartItem }: { price: number,item : Product, cartItem: LineItem|undefined }) => {
 
@@ -95,16 +94,9 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                             await fetch("/api/setFave",{
                                 method:"POST",
                                 body:JSON.stringify({
-                                    cart_id:await getCartCookie(),
-                                    quantity:quantity,
-                                    item_id:item_id,
-                                    result:{res}
+                                    value:res
                                 })
                             })
-                            // if (!res){
-
-                            // }
-
                         }
                     );
                     setQuantity(1);
