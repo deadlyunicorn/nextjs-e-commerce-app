@@ -95,10 +95,13 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                             await fetch("/api/setFave",{
                                 method:"POST",
                                 body:JSON.stringify({
-                                    cart_id:await getCartCookie(),
-                                    quantity:quantity,
-                                    item_id:item_id,
-                                    result:{res}
+                                    value:{
+                                        cart_id:await getCartCookie(),
+                                        quantity:quantity,
+                                        item_id:item_id,
+                                        result:{res}
+                                    }
+                                    
                                 })
                             })
                             // if (!res){
