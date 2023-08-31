@@ -65,45 +65,49 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
 
     
 
-    const handle_AddToCart = async(item_id:string,quantity:string) => {
+    const handle_AddToCart = (item_id:string,quantity:string) => {
         
 
             const requestedCartItems = (cartItem ? cartItem.quantity : 0)+Number(quantity)
 
-            try{
+            setTotalQuantity(requestedCartItems);
+
+            startTransition(async()=>{
+
+                try{
 
 
-                
-                if ( item.inventory.managed && ( requestedCartItems > item.inventory.available ) ){
-
-                    const errorMessage = `There are only ${item.inventory.available} available.${cartItem?.quantity? ` You have ${cartItem.quantity} in cart..`:""}`;
-                    throw (errorMessage);
-                
-                }
-                else if( requestedCartItems > 10 ){
-
-                    throw (`Cart capacity for this item reached ${(cartItem ? cartItem.quantity : 0)+Number(quantity)}/10`)
-                
-                }
-
-                else{
                     
-                    setTotalQuantity(requestedCartItems);
-                    await addCart(item_id, quantity);
-                    setQuantity(1);
-                    setSuccess(true);
+                    if ( item.inventory.managed && ( requestedCartItems > item.inventory.available ) ){
 
-                    setTimeout(()=>{
-                        setSuccess(false);
-                    },5000)
+                        const errorMessage = `There are only ${item.inventory.available} available.${cartItem?.quantity? ` You have ${cartItem.quantity} in cart..`:""}`;
+                        throw (errorMessage);
+                    
+                    }
+                    else if( requestedCartItems > 10 ){
 
+                        throw (`Cart capacity for this item reached ${(cartItem ? cartItem.quantity : 0)+Number(quantity)}/10`)
+                    
+                    }
+
+                    else{
+                        
+                        setTotalQuantity(requestedCartItems);
+                        await addCart(item_id, quantity);
+                        setQuantity(1);
+                        setSuccess(true);
+
+                        setTimeout(()=>{
+                            setSuccess(false);
+                        },5000)
+
+                    }
                 }
-            }
-            catch(error){
-                setError(JSON.stringify(error+""));
-                setFailure(true);
-            }
-            
+                catch(error){
+                    setError(JSON.stringify(error+""));
+                    setFailure(true);
+                }
+            })
         }
                     
 
@@ -219,9 +223,8 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
             {/* peer should be before sibling */}
             <button
                 onClick={()=>{
-                    startTransition(()=>{
                         handle_AddToCart(item.id,JSON.stringify(quantity))
-                    })
+                    
                 }}
                 // form is not needed.
                 disabled={isPending}
