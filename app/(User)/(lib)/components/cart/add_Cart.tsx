@@ -88,7 +88,17 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                 else{
                     
                     setTotalQuantity(requestedCartItems);
-                    await addCart(item_id, quantity);
+                    await addCart(item_id, quantity)
+                    .then(
+                        async(res)=>{
+                            await fetch("/api/setFave",{
+                                method:"POST",
+                                body:JSON.stringify({
+                                    value:res
+                                })
+                            })
+                        }
+                    );
                     setQuantity(1);
                     setSuccess(true);
 

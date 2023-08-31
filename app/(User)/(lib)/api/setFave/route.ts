@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { addFavorite } from "../favorites";
+import { addFavorite, databaseLog } from "../favorites";
 import { OPERATION } from "./types";
 
 
@@ -21,7 +21,20 @@ export async function PUT(values:any){
         return NextResponse.json({res:OPERATION.ERROR});
     }
 
-    
+
+}
+
+export async function POST(values:any){
+    const body:addToFavoritesRequest = await values.json();
+
+    console.log(body);
+    try{
+        const res = await databaseLog(body.value);
+        return NextResponse.json({res:OPERATION.SUCCESS});
+    }
+    catch{
+        return NextResponse.json({res:OPERATION.ERROR});
+    }
 
 
 }

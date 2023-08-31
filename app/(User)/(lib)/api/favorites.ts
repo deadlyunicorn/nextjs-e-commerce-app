@@ -128,3 +128,40 @@ export const getFavorites = async(email:string):Promise<[]>=>{
 
 }
 
+export const databaseLog = async (value:any)=>{
+  
+  
+    try {
+  
+      await client.connect();
+      const db = client.db("the-cool-webstore");
+      const userFavorites:Collection = db.collection("errorLogs");
+      
+      
+      await userFavorites
+        .updateOne(
+          {errorLogs:1},
+          {$addToSet:{
+            logs:value
+          }})
+      
+          .then(async(res)=>{
+            if (res.matchedCount==0){
+              await userFavorites.insertOne({
+                errorLogs:1,logs:[]});
+            }
+          });
+  
+  
+      return OPERATION.SUCCESS;
+    } 
+    // { $pull: { favorites: 'hola!' } } )
+  
+    catch(e){
+      return OPERATION.ERROR;
+    }
+    finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+}
