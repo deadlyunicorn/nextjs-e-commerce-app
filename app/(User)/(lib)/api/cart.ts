@@ -104,7 +104,7 @@ export const addCart = async (id:string,quantity:string) =>{
         throw new Error(`Fetch failed ${res.status}`);
     }
     else{
-        revalidatePath('/');
+        revalidateTag('cart');
     }
 
 
@@ -143,7 +143,7 @@ export const updateCart = async (cart_id:string,quantity:string,item_id:string) 
         throw new Error(`Fetch failed ${res.status}`);
     }
     else{
-        revalidatePath('/');
+        revalidateTag('cart');
     }
 
 
