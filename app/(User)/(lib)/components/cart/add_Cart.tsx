@@ -29,23 +29,6 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
 
    
     
-    useEffect(()=>{
-
-        if (isPending){
-
-            setTimeout(()=>{
-                setFailure(false);
-            },5000)
-
-            router.refresh();
-
-        }
-       
-
-
-    },[failure,success])
-
-  
 
 
 
@@ -94,20 +77,31 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                         
                         setTotalQuantity(requestedCartItems);
                         await addCart(item_id, quantity);
+
                         setQuantity(1);
+                        
                         setSuccess(true);
 
                         setTimeout(()=>{
                             setSuccess(false);
                         },5000)
 
+
+
                     }
                 }
                 catch(error){
                     setError(JSON.stringify(error+""));
                     setFailure(true);
+
+                    setTimeout(()=>{
+                        setFailure(false);
+                    },5000)
+        
                 }
+                
             })
+
         }
                     
 

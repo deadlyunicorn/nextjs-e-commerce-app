@@ -15,53 +15,18 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
     const mockArray = [... new Array(maxQuantity)].map((item,index)=>index);
 
 
-    useEffect(()=>{
-        setQuantity(item.quantity)
-    },[item.quantity])
     ////////////
 
     const [isPending,startTransition]=useTransition();
 
-    const router = useRouter();
     const [success,setSuccess] = useState(false);
     const [failure,setFailure] = useState(false);
     const [error,setError] = useState (' ');
+
+    
     ////////////
 
-    useEffect(()=>{
-
-        if(isPending){
-
-            setSuccess(true);
-
-            setTimeout(()=>{
-                setSuccess(false);
-            },7000)
-
-            router.refresh();
-
-
-        }
-       
-
-    },[quantity])
     
-    useEffect(()=>{
-
-        if (isPending){
-
-            setTimeout(()=>{
-                setFailure(false);
-            },5000)
-
-            router.refresh();
-
-        }
-       
-
-
-    },[failure])
-
     const RemoveItemButton = () => (
 
         <button 
@@ -72,12 +37,23 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
                         await updateCart(cart_id!,'0',item.id);
                         setQuantity(0);
+
+                        setSuccess(true);
+
+                        setTimeout(()=>{
+                            setSuccess(false);
+                        },5000)
                     
                     }
                     catch(error){
                     
                         setError(JSON.stringify(error));
                         setFailure(true);
+                        
+                        setTimeout(()=>{
+                            setFailure(false);
+                        },5000)
+            
 
                     
                     }
@@ -111,17 +87,28 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
                 onChange={(e)=>{
 
+                    setQuantity(+e.target.value)
+
                     startTransition(async()=>{
                         try{
                             await updateCart(cart_id!,e.target.value,item.id);
                             //update <option> only if successful!
-                            setQuantity(+e.target.value)
+
+                            setSuccess(true);
+
+                            setTimeout(()=>{
+                                setSuccess(false);
+                            },5000)
 
                         }
                         catch(error){
 
                             setError(JSON.stringify(error));
                             setFailure(true);
+
+                            setTimeout(()=>{
+                                setFailure(false);
+                            },5000)
                             
                         }
 
