@@ -53,10 +53,8 @@ export const getCart = async():Promise<Cart|undefined> =>{
         const res = await fetch(url, {
             method: "GET",
             headers: headers,
-            cache: 'force-cache',
             next: {
                 tags: ['cart'],
-                revalidate: 60 * 60
             }
         })
 
