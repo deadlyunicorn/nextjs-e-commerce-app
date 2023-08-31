@@ -3,47 +3,20 @@ import { useEffect, useState } from "react";
 
 
 const limit = 500;
+const minimumProductPrice = null || 1
+const maximumProductPrice = limit;
 
 export default function Doubleslider() {
 
 
-    const [min, setMin] = useState(0);
-    const [max, setMax] = useState(80);
+    const [min, setMin] = useState(minimumProductPrice);
+    const [max, setMax] = useState(limit);
 
 
     return (
         <>
 
-            <input
-                type="range" min={0} max={limit}
-                value={max}
-                className="
-                    absolute   
-                    appearance-none 
-                    shadow-black shadow-inner
-                    text-blue-500 bg-left rounded-lg h-2"
-
-                onChange={(e) => {
-                    const newValue = +e.target.value;
-                    if (newValue > min + 5) {
-                        setMax(newValue)
-                    }
-                }} />
-            <input
-                value={min}
-                className="
-                -translate-y-10
-                absolute hover:z-10  appearance-none shadow-black  shadow-inner text-blue-500 bg-left rounded-lg h-2 "
-
-                onChange={(e) => {
-                    const newValue = +e.target.value;
-
-                    if (newValue < max - 5) {
-                        setMin(newValue)
-                    }
-
-                }}
-                type="range" min={0} max={limit} />
+            <DefaultSliders max={max} min={min} setMax={setMax} setMin={setMin} />
 
             <CustomSlider min={min} setMin={setMin} max={max} setMax={setMax} />
 
@@ -55,188 +28,243 @@ export default function Doubleslider() {
     )
 }
 
+//@ts-ignore
+const DefaultSliders = ({ min, max, setMin, setMax }) => (
+
+    <>
+
+        <input
+            type="range" min={0} max={limit}
+            value={max}
+            className="
+                    absolute   
+                    appearance-none 
+                    shadow-black shadow-inner
+                    text-blue-500 bg-left rounded-lg h-2"
+
+            onChange={(e) => {
+                const newValue = +e.target.value;
+                if (newValue > min + 5) {
+                    setMax(newValue)
+                }
+            }} />
+        <input
+            value={min}
+            className="
+                -translate-y-10
+                absolute hover:z-10  appearance-none shadow-black  shadow-inner text-blue-500 bg-left rounded-lg h-2 "
+
+            onChange={(e) => {
+                const newValue = +e.target.value;
+
+                if (newValue < max - 5) {
+                    setMin(newValue)
+                }
+
+            }}
+            type="range" min={0} max={limit} />
+
+    </>
+
+)
+
 
 const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, setMin: any, setMax: any }) => {
 
-    const [remaining, setRemaining] = useState(0);
 
 
 
-    useEffect(() => {
-        setRemaining(limit - (limit - max) - min);
-    }, [min, max])
+    //the slider is divided in 3 ranges
+    //
+    //      r1   r2    r3
+    // !  [////|/////|////]
+    ///   l   r l   r l   r
+    //
 
 
-    useEffect(() => {
-        setPer1(Math.round(100 * min / limit));
-        setPer3(Math.round(100 * (limit - max) / limit));
-        setPer2(Math.round(100 * remaining / limit));
-
-    }, [min, max, remaining])
-
-
-    const [per1, setPer1] = useState(0);
-    const [per2, setPer2] = useState(0);
-    const [per3, setPer3] = useState(0);
-
-
-    const range1 = document.querySelector('#drag1')?.getBoundingClientRect()
-    const range1_left = Math.round(range1?.left! * 100) / 100
-    const range1_right = Math.round(range1?.right! * 100) / 100
-
-    const range3 = document.querySelector('#drag3')?.getBoundingClientRect()
-    const range3_left = Math.round(range3?.left! * 100) / 100
-    const range3_right = Math.round(range3?.right! * 100) / 100
-
-    const range = Math.round((range3_right - range1_left) * 100) / 100;
-
-    useEffect(() => {
-        setMax(max - 1)
-        //prevents slider position bug?
-    }, [])
+    const [range1, setRange1] = useState<DOMRect | undefined>(undefined);
+    const [range3, setRange3] = useState<DOMRect | undefined>(undefined);
 
     useEffect(() => {
 
-        // based on https://www.w3schools.com/howto/howto_js_draggable.asp
-        //@ts-ignore
-        document.querySelector('#slider1').onmousedown = (e) => {
-
-            document.onmousemove = (e) => {
-                if (e.clientX > range1_left && e.clientX < range3_left - 10) {
-                    const pos1 = e.clientX - range1_left
-                    setMin(Math.round((pos1 / range) * limit))
-
-                }
-                else if (e.clientX < range1_left) {
-                    // currently div resets after dragging, causing it to bug
-                    setMin(0)
-                }
-                else if (e.clientX > range3_left - 10) {
-                    setMin(Math.min(Math.round(((range3_left - range1_left) / range) * limit),max-10))
-                }
-            }
-            document.onmouseup = () => {
-                document.onmousedown = null;
-                document.onmousemove = null;
-            }
-
+        if (document.querySelector('#drag1')) {
+            setRange1(document.querySelector('#drag1')?.getBoundingClientRect())
         }
-
-        //@ts-ignore
-
-        document.querySelector('#slider1').ontouchstart = (e: TouchEvent) => {
-
-            document.ontouchmove = (e) => {
-                const touch = e.changedTouches[0];
-
-                if (touch.clientX > range1_left && touch.clientX < range3_left - 10) {
-                    const pos1 = touch.clientX - range1_left
-                    setMin(Math.round((pos1 / range) * limit))
-
-                }
-                else if (touch.clientX < range1_left) {
-                    // currently div resets after dragging, causing it to bug
-                    setMin(0)
-                }
-                else if (touch.clientX > range3_left - 10) {
-                    setMin(Math.min(Math.round(((range3_left - range1_left) / range) * limit),max-10))
-                }
-            }
-            document.ontouchend = () => {
-                document.ontouchstart = null;
-                document.ontouchmove = null;
-            }
+        if (document.querySelector('#drag3')) {
+            setRange3(document.querySelector('#drag3')?.getBoundingClientRect());
         }
 
     })
 
-    useEffect(() => {
-        //@ts-ignore
+    let range = 1;
 
-        document.querySelector('#slider2').onmousedown = (e) => {
-            document.onmousemove = (e) => {
-                e.preventDefault();
-                if (e.clientX > range1_right + 10 && e.clientX < range3_right + 1) {
-                    const pos2 = range1_left + range - e.clientX;
+    if (range3 && range1) {
+        range = (range3.right - range1.left) || 1;
 
-                    setMax(Math.round(((range - pos2) / range) * limit))
+    }
 
-                }
-                else if (e.clientX < range1_right) {
-                    setMax(Math.max(Math.round(((range - range1_right) / range) * limit), min + 10))
-                }
-                else if (e.clientX > range3_right + 1) {
-                    setMax(Math.round(((range) / range) * limit))
-                }
-            }
-            document.onmouseup = () => {
-                document.onmousedown = null;
-                document.onmousemove = null;
-            }
 
+
+
+    const handleMouseDownS1 = () => {
+
+        document.onmousemove = (e) => {
+            sliderLogic_1(e)
         }
 
-        // @ts-ignore
-        document.querySelector('#slider2').ontouchstart = (e: TouchEvent) => {
-            document.ontouchmove = (e) => {
-                const touch = e.changedTouches[0];
-
-                if (touch.clientX > range1_right + 10 && touch.clientX < range3_right + 1) {
-                    const pos2 = range1_left + range - touch.clientX;
-
-                    setMax(Math.round(((range - pos2) / range) * limit))
-
-                }
-                else if (touch.clientX < range1_right) {
-                    setMax(Math.max(Math.round(((range - range1_right) / range) * limit), min + 10))
-                }
-                else if (touch.clientX > range3_right + 1) {
-                    setMax(Math.round(((range) / range) * limit))
-                }
-            }
-            document.ontouchend = () => {
-                document.ontouchstart = null;
-                document.ontouchmove = null;
-            }
-
+        document.onmouseup = () => {
+            document.onmousedown = null;
+            document.onmousemove = null;
         }
-    });
+    }
+
+    const handleTouchStartS1 = () => {
+        document.ontouchmove = (evt) => {
+            const e = evt.changedTouches[0];
+            sliderLogic_1(e);
+        }
+        document.ontouchend = () => {
+            document.ontouchstart = null;
+            document.ontouchmove = null;
+        }
+    }
+
+    const handleMouseDownS2 = () => {
+
+        document.onmousemove = (e) => {
+            sliderLogic_2(e)
+        }
+
+        document.onmouseup = () => {
+            document.onmousedown = null;
+            document.onmousemove = null;
+        }
+    }
+
+    const handleTouchStartS2 = () => {
+        document.ontouchmove = (evt) => {
+            const e = evt.changedTouches[0];
+            sliderLogic_2(e);
+        }
+        document.ontouchend = () => {
+            document.ontouchstart = null;
+            document.ontouchmove = null;
+        }
+    }
 
 
+    const minimalSpace = 0.05 * (range || 100);
+    const positionCorrection = range1 ? range1.left : 0;
+    const scaleCorrection = limit / (range || 1);
+
+    const sliderLogic_1 = (e: any) => {
+
+        const mousePositionX = e.clientX;
+
+        if (range1 && range3) {
+
+
+            //slider1 pos. must be larger than range1_right
+            //     r1   r2   r3
+            // ! [////|////|////] 
+            //       s1    s2
+
+            //      if the mouse is within the slider and left from slider2 
+
+            if (mousePositionX > range1.left && mousePositionX < range3.left - minimalSpace) {
+
+
+                //mouse position from the edge of the screen
+                //minus position of range 1's left from the edge of the screen
+
+                const newPos = mousePositionX - positionCorrection;
+
+                setMin(newPos * scaleCorrection)
+
+            }
+
+
+            else if (mousePositionX < range1.left) {
+
+                setMin(minimumProductPrice);
+
+            }
+
+            else if (mousePositionX > range3.left - minimalSpace) {
+
+                const newPos = (range3.left - minimalSpace) - positionCorrection;
+                setMin(newPos * scaleCorrection)
+
+            }
+        }
+    }
+
+    const sliderLogic_2 = (e: any) => {
+
+        const mousePositionX = e.clientX;
+
+        if (range1 && range3) {
+
+            if (mousePositionX > range1.right + minimalSpace && mousePositionX < range3.right) {
+
+                const newPos = mousePositionX - positionCorrection;
+                setMax(newPos * scaleCorrection)
+
+            }
+            else if (mousePositionX < range1.right + minimalSpace) {
+
+                const newPos = range1.right + minimalSpace - positionCorrection;
+                setMax(newPos * scaleCorrection)
+            }
+            else if (mousePositionX > range3.right) {
+
+                setMax(limit)
+
+            }
+        }
+
+    }
 
 
     return (
         <>
 
-            <div className="min-w-[10rem] max-w-[10rem] h-2 rounded-md flex ">
+
+            <div className="min-w-[10rem] max-w-[10rem] h-2 rounded-md flex relative">
                 <div
                     id="drag1"
-                    style={{ width: `${per1}%` }}
-                    className="relative 
+                    style={{ width: `${100 * min / limit}%` }}
+                    className="
+                    relative 
                     flex justify-end 
                     shadow-inner shadow-black 
-                    rounded-l-md 
-                    bg-slate-200 h-full">
+                    rounded-md
+                    bg-inherit h-full"> 
 
                     <div
+                        onMouseDown={handleMouseDownS1}
+                        onTouchStart={handleTouchStartS1}
                         id="slider1"
-                        style={{ left: `${Math.round(min * range) / limit}px` }}
-                        className="cursor-col-resize 
-                            w-3 h-3
-                            -translate-x-1
-                            -translate-y-[2px]
-                            rounded-full bg-gradient-radial from-red-200 to-black shadow-inner shadow-black  absolute"/>
+                        style={{ left: `${min * range / limit} }px`}}
+                        className="
+                        cursor-col-resize 
+                        z-10
+                        w-3 h-3
+                        translate-x-1
+                        -translate-y-[2px]
+                        rounded-full 
+                        bg-gradient-radial from-red-200 to-black shadow-inner shadow-black  absolute"/>
 
 
                 </div>
                 <div
                     id="drag2"
-                    style={{ width: `${per2}%` }}
+                    style={{ width: `${100 * (max - min) / limit}%` }}
                     className="shadow-inner shadow-blue-950
                 bg-blue-600 h-full"/>
                 <div
                     id="drag3"
-                    style={{ width: `${per3}%` }}
+                    style={{ width: `${100 * (limit - max) / limit}%` }}
                     className="
                 relative
                 shadow-inner shadow-black
@@ -245,34 +273,47 @@ const CustomSlider = ({ min, max, setMin, setMax }: { min: number, max: number, 
 
                     <div
                         id="slider2"
-                        style={{ right: `${Math.round(100 * (limit - max) / limit) * range / 100}px` }}
+                        onTouchStart={handleTouchStartS2}
+                        onMouseDown={handleMouseDownS2}
+                        style={{ right: `${ (limit - max) / limit * range}px` }}
                         className="cursor-col-resize 
-                    w-3 h-3
-                    translate-x-1
-                    -translate-y-[2px]
-                    rounded-full bg-gradient-radial from-red-200 to-black shadow-inner shadow-black  absolute"/>
+                        z-10
+                        w-3 h-3
+                        translate-x-1
+                        -translate-y-[2px]
+                        rounded-full bg-gradient-radial from-red-200 to-black shadow-inner shadow-black  absolute"/>
 
                 </div>
 
             </div>
 
-            <div className="flex flex-col absolute translate-y-4">
-                <div>%1:{per1}</div>
-                <div>%2:{per2}</div>
-                <div>%3:{per3}</div>
-                <hr />
-                Left:{range1_left}
-                <br />Right:{range1_right}
-                <hr />
-                <br />
-                Left:{range3_left}
-                <br />Right:{range3_right}
 
-                <br />range:{range}
+            {(range1 && range3) &&
+                <div className="flex flex-col absolute translate-y-4">
+
+                    <div className="grid grid-cols-2">
+                        <span className="col-span-2">R1</span>
+                        <span>Left:{Math.round(range1.left * 100) / 100}</span>
+                        <span>Right:{Math.round(range1.right * 100) / 100}</span>
+
+                    </div>
+
+                    <div className="grid grid-cols-2">
+                        <span className="col-span-2">R3</span>
+                        <span>Left:{Math.round(range3.left * 100) / 100}</span>
+                        <span>Right:{Math.round(range3.right * 100) / 100}</span>
+
+                    </div>
+                    TOTAL
+                    <br />range:{range}
+
+                </div>
+
+            }
 
 
 
-            </div>
+
         </>
 
     )
