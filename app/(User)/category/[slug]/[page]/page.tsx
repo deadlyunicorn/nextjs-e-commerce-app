@@ -53,7 +53,7 @@ export default async function CategoryProducts({params:{slug,page}}:{params:{slu
 
  
 
-    if (items){
+    if (items&&items.length>0){
 
         return (
             <>

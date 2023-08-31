@@ -57,7 +57,7 @@ export const NextPageWithQuery = (
 
 export const PageNotFoundComponent = ({goBackURL}:{goBackURL:string}) => (
     <main>
-        There was an error in your request.
+        There was an error in your request. The page you are searching for might not exist.
         <br/>
         <CoolLink href={goBackURL}>
             Go back.
