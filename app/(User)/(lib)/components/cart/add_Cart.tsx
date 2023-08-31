@@ -162,15 +162,15 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
             {failure&&
             <Cart_Failure error={error}/>} 
             <div className="
-        pt-2
+        w-full
+        pt-2 px-4
         text-lg
-        flex flex-wrap
+        flex flex-col
         sm:justify-between
+        items-center
         justify-center
         gap-x-5">
-                <span>
-                    Quantity:
-                </span>
+                
 
                 <div className="
                 flex gap-x-2">
@@ -199,6 +199,10 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
 
 
                 </div>
+
+                <span>
+                    Quantity
+                </span>
 
 
 
