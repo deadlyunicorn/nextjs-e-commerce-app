@@ -11,7 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ListOrders, getDate } from "@/app/(Admin)/admin/orders/[page]/[...sortBy]/page";
 
-const UserPage = async()=>{
+const MyProfile = async()=>{
 
 
  
@@ -25,7 +25,8 @@ const UserPage = async()=>{
     const userOrders:Order[] = await getOrders({
         limit:String(10),
         page: String(1),
-        query: email+""
+        query: email+"",
+        sortDirection: "desc"
       });
 
     
@@ -146,4 +147,4 @@ const UserSection = ({children}:{children:ReactNode}) => (
             </section>
 )
 
-export default UserPage;
+export default MyProfile;
