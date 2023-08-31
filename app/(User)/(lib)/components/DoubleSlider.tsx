@@ -2,16 +2,12 @@
 import { useEffect, useState } from "react";
 
 
-const limit = 500;
-const minimumProductPrice = null || 1
-const maximumProductPrice = limit;
-   
 
-export const CustomSlider = () => {
+export const CustomSlider = ({ priceLimit, minimumProductPrice, prevMin, prevMax }: { priceLimit: number, minimumProductPrice: number,prevMin:number,prevMax:number }) => {
 
 
-    const [min, setMin] = useState(minimumProductPrice);
-    const [max, setMax] = useState(limit);
+    const [min, setMin] = useState(prevMin);
+    const [max, setMax] = useState(prevMax);
 
     //the slider is divided in 3 ranges
     //
@@ -33,7 +29,7 @@ export const CustomSlider = () => {
             setRange3(document.querySelector('#range3')?.getBoundingClientRect());
         }
 
-    })
+    },[])
 
     let range = 1;
 
@@ -94,7 +90,7 @@ export const CustomSlider = () => {
 
     const minimalSpace = 0.05 * (range || 100);
     const positionCorrection = range1 ? range1.left : 0;
-    const scaleCorrection = limit / (range || 1);
+    const scaleCorrection = priceLimit / (range || 1);
 
     const sliderLogic_1 = (e: any) => {
 
@@ -157,85 +153,113 @@ export const CustomSlider = () => {
             }
             else if (mousePositionX > range3.right) {
 
-                setMax(limit)
+                setMax(priceLimit)
 
             }
         }
 
     }
 
+    const minPriceDifference = 0.05 * priceLimit;
 
     return (
 
-        <div 
-            className="
-                w-40 h-2 rounded-md flex relative">
-            
+        <>
+            <div className="flex justify-between w-40">
+                <input
+                    className="w-16 rangeInput"
+                    onChange={(e) => {
+                        const newValue = +e.target.value;
+                        if (newValue > minimumProductPrice && newValue + minPriceDifference < max) {
+                            setMin(newValue)
+                        }
+                    }
+                    }
+                    type="number" name="min" value={Math.floor(min)} />
+                <input
+                    onChange={(e) => {
+                        const newValue = +e.target.value;
+                        if (newValue <= priceLimit && newValue - minPriceDifference > min) {
+                            setMax(newValue)
+                        }
+                    }
+                    }
+                    className="w-16 rangeInput"
+                    type="number" name="max" value={Math.ceil(max)} />
+            </div>
+
             <div
-                id="range1"
-                style={{ width: `${100 * min / limit}%` }}
-                
                 className="
+                w-40 h-2 rounded-md flex relative">
+
+
+                <div
+                    id="range1"
+                    style={{ width: `${100 * min / priceLimit}%` }}
+
+                    className="
                     flex justify-end
                     shadow-inner shadow-black 
                     rounded-md
                     bg-white h-full">
 
-                <div
-                    className="
+                    <div
+                        className="
                         translate-x-1
                         -translate-y-1
                         absolute
                         z-10"
 
-                    id="slider1"
+                        id="slider1"
 
-                    onMouseDown={handleMouseDownS1}
-                    onTouchStart={handleTouchStartS1}
+                        onMouseDown={handleMouseDownS1}
+                        onTouchStart={handleTouchStartS1}
 
 
-                    style={{ left: `${min * range / limit} }px` }}>
+                        style={{ left: `${min * range / priceLimit} }px` }}>
 
-                    <Slider />
+                        <Slider />
+
+                    </div>
 
                 </div>
 
-            </div>
+                <div
+                    id="range2"
+                    style={{ width: `${100 * (max - min) / priceLimit}%` }}
+                    className=" bg-blue-600 h-full" />
 
-            <div
-                id="range2"
-                style={{ width: `${100 * (max - min) / limit}%` }}
-                className=" bg-blue-600 h-full"/>
-            
-            <div
-                id="range3"
-                style={{ width: `${100 * (limit - max) / limit}%` }}
-                className="
+                <div
+                    id="range3"
+                    style={{ width: `${100 * (priceLimit - max) / priceLimit}%` }}
+                    className="
                     shadow-inner shadow-black
                     rounded-r-md bg-white h-full">
 
-                <div
-                    className="w-3 h-3
+                    <div
+                        className="w-3 h-3
                         z-10
                         translate-x-1
                         -translate-y-1
                         absolute"
 
-                    id="slider2"
+                        id="slider2"
 
-                    onTouchStart={handleTouchStartS2}
-                    onMouseDown={handleMouseDownS2}
+                        onTouchStart={handleTouchStartS2}
+                        onMouseDown={handleMouseDownS2}
 
-                    style={{ right: `${(limit - max) / limit * range}px` }}>
-                    
-                    <Slider />
-                
+                        style={{ right: `${(priceLimit - max) / priceLimit * range}px` }}>
+
+                        <Slider />
+
+                    </div>
+
+
                 </div>
 
-
             </div>
+        </>
 
-        </div>
 
     )
 
