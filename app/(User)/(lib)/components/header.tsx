@@ -61,7 +61,7 @@ export default async function Header() {
 
                 </div>
 
-                <Link href={'/'} className={`
+                <Link href={'/explore'} className={`
                     ${customFont.className}
                     text-center  w-full h-full
                     flex items-center justify-center
