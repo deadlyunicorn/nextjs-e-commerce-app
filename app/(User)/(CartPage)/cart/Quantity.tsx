@@ -19,7 +19,9 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
         setQuantity(item.quantity)
     },[item.quantity])
     ////////////
-    const [loading,setLoading] = useState(false);
+
+    const [isPending,startTransition]=useTransition();
+
     const router = useRouter();
     const [success,setSuccess] = useState(false);
     const [failure,setFailure] = useState(false);
@@ -28,9 +30,9 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
     useEffect(()=>{
 
-        if(loading){
+        if(isPending){
+
             setSuccess(true);
-            setLoading(false);
 
             setTimeout(()=>{
                 setSuccess(false);
@@ -46,8 +48,7 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
     
     useEffect(()=>{
 
-        if (loading){
-            setLoading(false);
+        if (isPending){
 
             setTimeout(()=>{
                 setFailure(false);
@@ -64,10 +65,11 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
     const RemoveItemButton = () => (
 
         <button 
-            onClick={async()=>{
+            onClick={()=>{
+
+                startTransition(async()=>{
                     try{
 
-                        setLoading(true);
                         await updateCart(cart_id!,'0',item.id);
                         setQuantity(0);
                     
@@ -80,6 +82,8 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
                     
                     }
         
+                })
+                    
             }}
             className="uppercase">
             <svg 
@@ -105,10 +109,10 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
                     text-slate-900 rounded-lg"
                 defaultValue={quantity}
 
-                onChange={async(e)=>{
-                        try{
+                onChange={(e)=>{
 
-                            setLoading(true);
+                    startTransition(async()=>{
+                        try{
                             await updateCart(cart_id!,e.target.value,item.id);
                             //update <option> only if successful!
                             setQuantity(+e.target.value)
@@ -120,6 +124,10 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
                             setFailure(true);
                             
                         }
+
+                    })
+
+                        
             
                 }}>
                 {mockArray.map(
@@ -146,7 +154,7 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
     }
     else{
 
-        switch(loading){
+        switch(isPending){
             
             case (false):
                 return (
