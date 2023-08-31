@@ -165,6 +165,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
             <Cart_Failure 
                 inCart={false}
                 error={error}/>} 
+
             <div className="
         w-full
         pt-2 px-4
@@ -285,8 +286,6 @@ export const Cart_Failure = ({error,inCart}:{error:string,inCart:boolean}) => {
 
             ${inCart&&`z-40 absolute
                 w-[100vw] bottom-0`}
-            z-40 absolute
-            w-[100vw] bottom-0
 
             dark:bg-red-900
             bg-red-600 
