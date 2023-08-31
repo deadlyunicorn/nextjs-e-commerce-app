@@ -39,7 +39,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
        
 
 
-    },[failure])
+    },[failure,success])
 
     useEffect(()=>{
         setLoading(false); //this will prevent weird numbers from success status 
