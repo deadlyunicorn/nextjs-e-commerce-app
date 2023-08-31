@@ -121,12 +121,11 @@ export const Store_Front_Fallback = () => {
     const arr6 = [...new Array(6)];
 
     const Template = ()=>(
-        <div className="relative w-[200px]" >
 
-            <div  className="
+        <div  className="
             
             rounded-md
-            bg-slate-200
+            bg-slate-200 relative
             dark:bg-white dark:bg-opacity-10 
             blur-md
             xs:w-[200px]  max-w-[40vw]
@@ -178,7 +177,6 @@ export const Store_Front_Fallback = () => {
                 
                 
             </div>
-        </div>
     )
     return (
         arr6.map((item,index)=>(
