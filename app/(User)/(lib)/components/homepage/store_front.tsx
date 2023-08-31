@@ -12,6 +12,18 @@ import { getFavorites } from "../../api/favorites"
 
 const Item_StoreFront = async({item,email,favorites} : {item:Product,email:string|undefined|null,favorites:string[]}) => {
 
+    const cart = await getCart();
+    let cartItem=undefined;
+
+
+
+    if ( cart && cart.line_items.length > 0 ){
+
+        cartItem=cart.line_items.filter((
+            line_item=>(line_item.product_id==item.id)
+        ))[0]
+    }
+
 
     const isFavorite = favorites.includes(item.id);
 
@@ -95,7 +107,7 @@ const Item_StoreFront = async({item,email,favorites} : {item:Product,email:strin
                 </div>
 
                 {
-                    <AddToCart  item={item} price={item.price.raw}/>}
+                    <AddToCart cartItem={cartItem} item={item} price={item.price.raw}/>}
 
                   
         </div>

@@ -1,14 +1,14 @@
 'use client'
 
 import { ReactNode, useEffect, useState, useTransition } from "react";
-import { addCart, getCart } from "../../api/cart";
+import { addCart } from "../../api/cart";
 import { useRouter } from "next/navigation";
 import "@/app/(User)/(lib)/styles/animations.scss"
 import { Cart } from "@chec/commerce.js/types/cart";
 import { LineItem } from "@chec/commerce.js/types/line-item";
 import { Product } from "@chec/commerce.js/types/product";
 
-export const AddToCart = ({ price, item }: { price: number,item : Product }) => {
+export const AddToCart = ({ price, item, cartItem }: { price: number,item : Product, cartItem: LineItem|undefined }) => {
 
 
     //cartItem can be undefined 
@@ -25,27 +25,7 @@ export const AddToCart = ({ price, item }: { price: number,item : Product }) => 
     const [failure,setFailure] = useState(false);
     const [error,setError] = useState (' ');
 
-    const [cartItem,setCartItem]= useState<undefined|LineItem>(undefined);
-    
-
-    useEffect(()=>{
-
-        (async()=>{
-
-            let cart=await getCart().then(res=>res?.line_items.filter(product=>{
-                return product.product_id==item.id;
-            
-            })[0]);
-            setCartItem(
-                cart
-            )
-          
-        })()
-
-     
-
-    },[router,loading])
-
+   
     
     useEffect(()=>{
 
@@ -91,7 +71,6 @@ export const AddToCart = ({ price, item }: { price: number,item : Product }) => 
         
             setLoading(true);
 
-            
             const requestedCartItems = (cartItem ? cartItem.quantity : 0)+Number(quantity)
             try{
 
@@ -111,8 +90,8 @@ export const AddToCart = ({ price, item }: { price: number,item : Product }) => 
 
                 else{
                     
-                    await addCart(item_id, quantity);
                     setTotalQuantity(requestedCartItems);
+                    await addCart(item_id, quantity);
                     setQuantity(1);
                     setSuccess(true);
 
