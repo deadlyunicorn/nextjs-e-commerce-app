@@ -69,6 +69,8 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
                         setLoading(true);
                         await updateCart(cart_id!,'0',item.id);
+                        await getCart();
+
                         setQuantity(0);
                     
                     }
@@ -111,6 +113,7 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
                             setLoading(true);
                             await updateCart(cart_id!,e.target.value,item.id);
                             //update <option> only if successful!
+                            await getCart();
                             setQuantity(+e.target.value)
 
                         }
