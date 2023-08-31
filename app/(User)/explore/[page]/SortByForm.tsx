@@ -4,8 +4,19 @@ import { useState } from "react"
 import './form.scss'
 import { CoolButton } from "@/app/(Shared)/components/Global";
 import { LoadingFullscreen } from "../../checkout/[...cart_id]/SubmitButton";
+import { CustomSlider } from "../../(lib)/components/DoubleSlider";
 
-export const SortByForm = (props:{sortBy:string,sortDirection:string}) => {
+export const SortByForm = (props:{ 
+        
+        prevMin:number,
+        prevMax:number,
+
+        priceLimit: number,
+        minimumProductPrice: number,
+
+        sortBy:string,sortDirection:string
+
+    }) => {
 
     const sortByOptions = ["price","created_at"];
     const sortDirectionOptions = ["asc","desc"];
@@ -65,6 +76,20 @@ export const SortByForm = (props:{sortBy:string,sortDirection:string}) => {
                         <label htmlFor="sortDirection"> first.</label>
                         
                     </div>
+
+                    <section className="
+                        py-2 flex flex-col gap-y-2">
+                        <span className="capitalize">Price range</span>
+
+                        <CustomSlider 
+                        
+                            prevMin={props.prevMin} prevMax={props.prevMax}
+
+                            priceLimit={props.priceLimit} minimumProductPrice={props.minimumProductPrice}/>
+
+                    </section>
+
+
                     <CoolButton>
                         <button
                             onClick={()=>{setLoading(true)}} 
