@@ -6,6 +6,7 @@ import { LineItem } from "@chec/commerce.js/types/line-item";
 import { useRouter } from "next/navigation";
 import { startTransition, useEffect, useState, useTransition } from "react";
 import { getCartCookie } from "@/app/(User)/(lib)/api/cookies";
+import { revalidateTag } from "next/cache";
 
 const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
@@ -69,6 +70,7 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
                         setLoading(true);
                         await updateCart(cart_id!,'0',item.id);
+                        revalidateTag('cart')
                         await getCart();
 
                         setQuantity(0);
@@ -113,6 +115,8 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
                             setLoading(true);
                             await updateCart(cart_id!,e.target.value,item.id);
                             //update <option> only if successful!
+                            revalidateTag('cart')
+
                             await getCart();
                             setQuantity(+e.target.value)
 
