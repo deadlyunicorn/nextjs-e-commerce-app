@@ -1,5 +1,6 @@
 'use client'
 
+import { CoolButton } from "@/app/(Shared)/components/Global";
 import { useRouter } from "next/navigation"
 
 const Checkout = ({url}:{url:string}) => {
@@ -8,17 +9,20 @@ const Checkout = ({url}:{url:string}) => {
     const router=useRouter();
 
     return (
-        <button 
-            className="
-            bg-slate-50 rounded-md
-            dark:bg-black dark:bg-opacity-40
-            px-2 py-1
-            uppercase"
-            onClick={()=>{
-                router.replace(url);
-            }}>
-            Checkout
-        </button>
+        <div className="w-full flex justify-center">
+        <CoolButton>
+            <button 
+                className="
+                rounded-md
+                px-2 py-1
+                uppercase"
+                onClick={()=>{
+                    router.replace(url);
+                }}>
+                Checkout
+            </button>
+        </CoolButton>
+        </div>
     )
 }
 
