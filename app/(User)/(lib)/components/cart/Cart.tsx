@@ -1,8 +1,5 @@
 import { Cart } from "@chec/commerce.js/types/cart";
 import { getCart } from "../../api/cart";
-import Link from "next/link";
-import Image from "next/image";
-import { redirect } from "next/navigation";
 
 
 

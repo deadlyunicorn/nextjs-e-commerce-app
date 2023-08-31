@@ -54,7 +54,10 @@ export const getCart = async():Promise<Cart|undefined> =>{
             method: "GET",
             headers: headers,
             cache: 'force-cache',
-            next: {tags: ['cart']}
+            next: {
+                tags: ['cart'],
+                revalidate: 60 * 60
+            }
         })
 
         if (!res.ok) {
