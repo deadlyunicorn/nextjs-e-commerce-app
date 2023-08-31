@@ -26,7 +26,7 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
     useEffect(()=>{
         setQuantity(item.quantity)
-    },[item.quantity])
+    },[item.quantity,router])
 
     useEffect(()=>{
 
