@@ -8,6 +8,14 @@ import { CartClientWrapper } from './(CartPage)/CartClient'
 import CartPage from './(CartPage)/cart/CartPage'
 import Banner from './(lib)/components/Banner'
 
+import {Lato} from 'next/font/google'
+
+const lato = Lato({
+  subsets: ['latin'],
+  display: 'auto',
+  weight: "400"
+})
+
 
 export const metadata = {
   title: 'My Webstore',
@@ -17,15 +25,15 @@ export const metadata = {
 export default function RootLayout(
   {children}: 
   {children: React.ReactNode}
+  
 ) {
- 
+
   return (
     <html lang="en">
 
-      <body className="
+      <body className={`
         bg-gradient-to-b
         text-slate-900
-        
         dark:text-slate-200
         from-slate-100
         to-slate-300
@@ -35,7 +43,8 @@ export default function RootLayout(
         flex flex-col
         min-h-screen
         justify-between
-        items-center">
+        items-center ${lato.className}`}>
+
 
             <CookieVerify/>
 
@@ -71,7 +80,6 @@ export default function RootLayout(
               <Categories />
             </Footer>
         
-    
       </body>
     </html>
   )

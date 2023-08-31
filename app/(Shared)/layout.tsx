@@ -9,6 +9,16 @@ export const metadata = {
   title: 'Authentication',
 }
 
+
+import {Lato} from 'next/font/google'
+
+const lato = Lato({
+  subsets: ['latin'],
+  display: 'auto',
+  weight: "400"
+})
+
+
 export default async function RootLayout(
   {children}: 
   {children: React.ReactNode}
@@ -21,8 +31,9 @@ export default async function RootLayout(
   return (
     <html lang="en">
 
-      <body className="
+      <body className={`
 
+      ${lato.className}
 
       min-h-screen
       bg-gradient-to-b
@@ -36,7 +47,7 @@ export default async function RootLayout(
       dark:to-black
       flex flex-col
       justify-between
-      items-center mt-5">
+      items-center mt-5`}>
 
         <header className='
           w-full py-10 

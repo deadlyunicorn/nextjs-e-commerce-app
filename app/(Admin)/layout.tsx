@@ -7,6 +7,14 @@ import Footer from '../(User)/(lib)/components/footer';
 import { getCookies } from '../(User)/(lib)/api/cookies';
 import {ClientItemSearch} from './SearchComponent'
 
+import {Lato} from 'next/font/google'
+
+const lato = Lato({
+  subsets: ['latin'],
+  display: 'auto',
+  weight: "400"
+})
+
 
 export const metadata = {
   title: 'Admin Panel',
@@ -33,7 +41,8 @@ export default async function RootLayout(
   return (
     <html lang="en">
 
-      <body className="
+      <body className={`
+      ${lato.className}
       min-h-screen
       bg-gradient-to-b
       text-slate-900
@@ -46,7 +55,7 @@ export default async function RootLayout(
       dark:to-black
 
       flex flex-col justify-between
-      items-center">
+      items-center`}>
 
         <header className='
           w-full pb-10 pt-5'>

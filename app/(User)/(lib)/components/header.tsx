@@ -6,6 +6,15 @@ import { ClientItemSearch } from "./searchBar";
 import { CoolLink } from "@/app/(Shared)/components/Global";
 import { getServerSession } from "next-auth";
 
+
+import {Cinzel, Lato, Noto_Sans_Linear_B, Permanent_Marker} from 'next/font/google'
+
+const customFont = Cinzel({
+  subsets: ["latin"],
+  weight: "400"
+})
+
+
 export default async function Header() {
 
     const session = await getServerSession();
@@ -52,7 +61,8 @@ export default async function Header() {
 
                 </div>
 
-                <Link href={'/'} className="
+                <Link href={'/'} className={`
+                    ${customFont.className}
                     text-center  w-full h-full
                     flex items-center justify-center
                     text-lg col-span-2
@@ -64,7 +74,7 @@ export default async function Header() {
                     dark:from-blue-300 dark:to-green-50
                     from-blue-600 to-blue-400
                     bg-clip-text text-transparent
-                    drop-shadow-[1px_1px_2px_rgba(100,200,100,1)]">
+                    drop-shadow-[1px_1px_2px_rgba(100,200,100,1)]`}>
                     The Cool Webstore
                 </Link>
 
