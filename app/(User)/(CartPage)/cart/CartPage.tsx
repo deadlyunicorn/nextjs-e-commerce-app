@@ -24,9 +24,12 @@ export const CartPage = async() => {
             w-full">
 
             <div className="
+              overflow-y-auto
+              h-[50vh]
+              py-2
                 relative
                 flex flex-col 
-                gap-y-1 ">
+                gap-y-4 ">
                 
                 {cart_id
                 ?(
