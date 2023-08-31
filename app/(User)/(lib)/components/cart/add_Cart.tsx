@@ -27,6 +27,13 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
     const [failure,setFailure] = useState(false);
     const [error,setError] = useState (' ');
 
+
+    useEffect(()=>{
+
+        if(!isPending){
+            router.refresh();
+        }
+    },[isPending])
    
     
 

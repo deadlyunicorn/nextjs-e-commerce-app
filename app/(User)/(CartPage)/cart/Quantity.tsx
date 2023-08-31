@@ -15,6 +15,7 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
     const mockArray = [... new Array(maxQuantity)].map((item,index)=>index);
 
 
+    const router = useRouter();
     ////////////
 
     const [isPending,startTransition]=useTransition();
@@ -26,6 +27,13 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
     useEffect(()=>{
         setQuantity(item.quantity)
     },[item.quantity])
+
+    useEffect(()=>{
+
+        if(!isPending){
+            router.refresh();
+        }
+    },[isPending])
 
     
     ////////////
