@@ -35,6 +35,9 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
             setTimeout(()=>{
                 setFailure(false);
             },5000)
+
+            router.refresh();
+
         }
        
 
@@ -101,9 +104,6 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
             catch(error){
                 setError(JSON.stringify(error+""));
                 setFailure(true);
-            }
-            finally{
-                router.refresh();
             }
             
         }

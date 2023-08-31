@@ -36,6 +36,9 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
                 setSuccess(false);
             },7000)
 
+            router.refresh();
+
+
         }
        
 
@@ -49,6 +52,9 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
             setTimeout(()=>{
                 setFailure(false);
             },5000)
+
+            router.refresh();
+
         }
        
 
@@ -63,7 +69,7 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
                         setLoading(true);
                         await updateCart(cart_id!,'0',item.id);
-                        setQuantity(0)
+                        setQuantity(0);
                     
                     }
                     catch(error){
@@ -72,11 +78,6 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
                         setFailure(true);
 
                     
-                    }
-                    finally{
-
-                        router.refresh();
-
                     }
         
             }}
@@ -118,9 +119,6 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
                             setError(JSON.stringify(error));
                             setFailure(true);
                             
-                        }
-                        finally{
-                            router.refresh();
                         }
             
                 }}>
