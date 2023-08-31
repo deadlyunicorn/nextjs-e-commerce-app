@@ -77,17 +77,24 @@ export const SortByForm = (props:{
                         
                     </div>
 
+                    {sortBy=="created_at"?
+
                     <section className="
                         py-2 flex flex-col gap-y-2">
                         <span className="capitalize">Price range</span>
 
                         <CustomSlider 
                         
-                            prevMin={props.prevMin} prevMax={props.prevMax}
+                        prevMin={props.prevMin} prevMax={props.prevMax}
 
-                            priceLimit={props.priceLimit} minimumProductPrice={props.minimumProductPrice}/>
+                        priceLimit={props.priceLimit} minimumProductPrice={props.minimumProductPrice}/>
+                        
 
                     </section>
+                    :<p className="capitalize italic">Range is unavailable when sorting by price!</p>
+
+                    }
+
 
 
                     <CoolButton>
