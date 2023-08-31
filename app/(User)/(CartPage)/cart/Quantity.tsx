@@ -155,10 +155,14 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
                         
 
                         {success&&
-                        <Cart_Success quantity={quantity} item_name={item.name}/>}
+                        <Cart_Success 
+                        inCart={true}
+                        quantity={quantity} item_name={item.name}/>}
 
                         {failure&&
-                        <Cart_Failure error={error}/>} 
+                        <Cart_Failure 
+                            inCart={true}
+                            error={error}/>} 
 
 
 

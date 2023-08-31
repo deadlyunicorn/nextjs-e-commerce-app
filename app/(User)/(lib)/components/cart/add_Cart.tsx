@@ -157,10 +157,14 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
 
         <div className="relative">
             {success&&
-            <Cart_Success quantity={totalQuantity} item_name={item.name}/>}
+            <Cart_Success 
+            inCart={false}
+            quantity={totalQuantity} item_name={item.name}/>}
 
             {failure&&
-            <Cart_Failure error={error}/>} 
+            <Cart_Failure 
+                inCart={false}
+                error={error}/>} 
             <div className="
         w-full
         pt-2 px-4
@@ -247,20 +251,23 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
 }  
 
 
-export const Cart_Success = ({quantity,item_name}:{quantity:number,item_name:string}) => {
+export const Cart_Success = ({quantity,item_name,inCart}:{quantity:number,item_name:string,inCart:boolean}) => {
 
     return (
         <CasualSpan>
-            <div className="
+            <div className={`
                 dark:bg-opacity-90
                 dark:bg-green-900
                 bg-green-600
                 text-slate-200
                 bg-opacity-90
-                z-40 absolute
-                w-[100vw] bottom-0
+                px-2
+
+                ${inCart&&`z-40 absolute
+                w-[100vw] bottom-0`}
+
                 py-5 
-                rounded-md md:rounded-none">
+                rounded-md md:rounded-none`}>
                 Successfully updated cart.
                 You now have {quantity} of {item_name}. 
             </div>
@@ -268,13 +275,16 @@ export const Cart_Success = ({quantity,item_name}:{quantity:number,item_name:str
     )
 }
 
-export const Cart_Failure = ({error}:{error:string}) => {
+export const Cart_Failure = ({error,inCart}:{error:string,inCart:boolean}) => {
 
     return (
         <CasualSpan>
-            <div className="
+            <div className={`
             bg-opacity-90
             dark:bg-opacity-90
+
+            ${inCart&&`z-40 absolute
+                w-[100vw] bottom-0`}
             z-40 absolute
             w-[100vw] bottom-0
 
@@ -283,7 +293,7 @@ export const Cart_Failure = ({error}:{error:string}) => {
             
             text-slate-200
             py-5 
-            rounded-md md:rounded-none ">
+            rounded-md md:rounded-none `}>
                 Failed: {error}
             </div>
         </CasualSpan>
