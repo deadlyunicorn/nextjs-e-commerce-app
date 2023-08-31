@@ -20,7 +20,9 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
     
     const router = useRouter();
     //used to refresh the page after adding to cart.
-    const [loading,setLoading] = useState(false);
+
+    const [isPending,startTransition] = useTransition();
+
     const [success,setSuccess] = useState(false);
     const [failure,setFailure] = useState(false);
     const [error,setError] = useState (' ');
@@ -29,8 +31,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
     
     useEffect(()=>{
 
-        if (loading){
-            setLoading(false);
+        if (isPending){
 
             setTimeout(()=>{
                 setFailure(false);
@@ -44,10 +45,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
 
     },[failure,success])
 
-    useEffect(()=>{
-        setLoading(false); //this will prevent weird numbers from success status 
-        //when router.refresh() happens, this runs..
-    },[cartItem?.quantity])
+  
 
 
 
@@ -69,9 +67,9 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
 
     const handle_AddToCart = async(item_id:string,quantity:string) => {
         
-            setLoading(true);
 
             const requestedCartItems = (cartItem ? cartItem.quantity : 0)+Number(quantity)
+
             try{
 
 
@@ -221,10 +219,12 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
             {/* peer should be before sibling */}
             <button
                 onClick={()=>{
-                    handle_AddToCart(item.id,JSON.stringify(quantity))
+                    startTransition(()=>{
+                        handle_AddToCart(item.id,JSON.stringify(quantity))
+                    })
                 }}
                 // form is not needed.
-                disabled={loading}
+                disabled={isPending}
                 type="submit"
                 className="
                 w-full min-h-[10mm] 
@@ -241,7 +241,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                 hover:bg-slate-200
                 bg-slate-300 rounded-b-md ">
 
-                {loading 
+                {isPending
                 ?"Updating cart..."
                 :<>ADD TO <b className="font-bold">CART</b></>
                 }
