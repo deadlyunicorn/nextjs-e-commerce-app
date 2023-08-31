@@ -39,7 +39,7 @@ export default async function Home() {
       <div className="flex w-full justify-center mt-4">
         <CoolButton>
           <Link
-            className="px-2 py-1 capitalize"
+            className="px-2 py-1 capitalize border rounded-md"
             href="/explore">
             Browse the store
           </Link>

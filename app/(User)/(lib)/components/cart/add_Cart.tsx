@@ -234,7 +234,7 @@ export const AddToCart = ({ price, item, cartItem }: { price: number,item : Prod
                 
                 dark:bg-black dark:bg-opacity-30
                 dark:hover:bg-slate-600
-                hover:bg-slate-100
+                hover:bg-slate-50
                 bg-slate-300 rounded-b-md ">
 
                 {isPending
