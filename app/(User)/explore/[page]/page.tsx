@@ -13,11 +13,14 @@ export default async function Explore(
         {params:{page},
         searchParams}
         :{params:{page:number},
-        searchParams:{sortBy:string,sortDirection:string}}
+        searchParams:{
+            sortBy:string,sortDirection:string,
+            min:string|undefined, max:string|undefined
+        }}
     
     ) {
 
-
+    const email = await getServerSession().then(res=>res?.user?.email);
 
     if (! (+page>0) ){
         redirect('/explore/1?sortBy=created_at&sortDirection=desc')
@@ -28,7 +31,7 @@ export default async function Explore(
     const sortDirectionOptions = ["asc","desc"];
 
     if (
-        Object.entries(searchParams).length != 2 
+        ( ! ( Object.entries(searchParams).length == 2 || Object.entries(searchParams).length == 4))
         || searchParams.sortBy == "" 
         || searchParams.sortDirection == ""
         || !sortByOptions.includes(searchParams.sortBy)
@@ -39,35 +42,65 @@ export default async function Explore(
     }
     const limit = 5;
 
+    const maxValuePromise = fetchItems({
+        "limit":`1`,
+        "sortBy":"price",
+        "sortDirection":"desc",
+        "active":"1",
+    }).then(res=>res[0].price.raw);
 
-    const items = await fetchItems({
+
+    const minValuePromise = fetchItems({
+        "limit":`1`,
+        "sortBy":"price",
+        "sortDirection":"asc",
+        "active":"1"
+    }).then(res=>res[0].price.raw);
+
+
+    const itemsPromise = fetchItems({
         "limit":`${limit}`,
+        "sortBy":searchParams.sortBy,
+        "sortDirection":searchParams.sortDirection,
+        "active":"1",
         "page":`${Number(page)}`,
-        "sortBy":searchParams.sortBy,
-        "sortDirection":searchParams.sortDirection,
-        "active":"1"
-
-
-    });
-
-    const nextPageExists = await fetchItems({
-        "limit":`${limit}`,
-        "page":`${Number(page)+1}`,
-        "sortBy":searchParams.sortBy,
-        "sortDirection":searchParams.sortDirection,
-        "active":"1"
-
-
-    })
-    .then(result=> result != undefined);
-
-    const email = await getServerSession().then(res=>res?.user?.email);
-    const favorites:[] = email?await getFavorites(email):[];
-
-
+    }).then(products=>products.filter( //sadly the API's price.below/above wasn't working for this, so I am doing it manually..
+        //pagination won't work correctly when using range.
+          product=>( 
+            product.price.raw > (searchParams.min?+searchParams.min:0) 
+            && product.price.raw < (searchParams.max? +searchParams.max:9999) )
+    ));
 
     
-    if (items){
+    const nextPageExistsPromise = fetchItems({
+        "limit":`${limit}`,
+        "sortBy":searchParams.sortBy,
+        "sortDirection":searchParams.sortDirection,
+        "active":"1",
+        "page":`${Number(page)+1}`,
+    })
+    .then(result=> (
+        result != undefined 
+        && result.length > 0 
+        && result.filter( //sadly the API's price.below/above wasn't working for this, so I am doing it manually..
+        //pagination won't work correctly when using range.
+            product=>( 
+                product.price.raw > (searchParams.min?+searchParams.min:0) 
+                && product.price.raw < (searchParams.max? +searchParams.max:9999) )
+        ).length>0
+    ));
+
+    const favoritesPromise = email?getFavorites(email):[];
+
+    const [items,nextPageExists] = await Promise.all([itemsPromise,nextPageExistsPromise])
+
+
+    const favorites:string[] = email?await favoritesPromise:[];
+
+    const [minimumProductPrice,priceLimit] = await Promise.all([minValuePromise,maxValuePromise]);
+
+    
+    if (items&&items.length>0){
 
         return (
             <>
@@ -94,8 +127,19 @@ export default async function Explore(
             </main>
 
 
-            <NextPageWithQuery currentPage={Number(page)} nextPageExists={nextPageExists} searchQuery={`?sortBy=${searchParams.sortBy}&sortDirection=${searchParams.sortDirection}`}/>
-            <SortByForm sortBy={searchParams.sortBy} sortDirection={searchParams.sortDirection}/>
+            <NextPageWithQuery 
+                currentPage={Number(page)} 
+                nextPageExists={nextPageExists}
+                
+                searchQuery={`?sortBy=${searchParams.sortBy}&sortDirection=${searchParams.sortDirection}&min=${searchParams.min||''}&max=${searchParams.max||''}`}/>
+            <SortByForm 
+
+                prevMax={ searchParams.max?+searchParams.max:priceLimit}
+                prevMin={ searchParams.min?+searchParams.min:minimumProductPrice}
+                minimumProductPrice={minimumProductPrice}
+                priceLimit={priceLimit}
+
+                sortBy={searchParams.sortBy} sortDirection={searchParams.sortDirection}/>
             </>
 
         )
