@@ -23,6 +23,10 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
     const [failure,setFailure] = useState(false);
     const [error,setError] = useState (' ');
 
+    useEffect(()=>{
+        setQuantity(item.quantity)
+    },[item.quantity])
+
     
     ////////////
 
@@ -91,6 +95,8 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
 
                     startTransition(async()=>{
                         try{
+
+
                             await updateCart(cart_id!,e.target.value,item.id);
                             //update <option> only if successful!
 
@@ -141,42 +147,38 @@ const QuantityBox = ({item,cart_id}:{item:LineItem,cart_id:string}) => {
     }
     else{
 
-        switch(isPending){
-            
-            case (false):
-                return (
-                    <div className="
-                        flex justify-evenly relative">
-                        
+        return (
+            <div className="
+                flex justify-evenly relative">
+                
 
-                        {success&&
-                        <Cart_Success 
-                        inCart={true}
-                        quantity={quantity} item_name={item.name}/>}
+                {success&&
+                <Cart_Success 
+                inCart={true}
+                quantity={quantity} item_name={item.name}/>}
 
-                        {failure&&
-                        <Cart_Failure 
-                            inCart={true}
-                            error={error}/>} 
+                {failure&&
+                <Cart_Failure 
+                    inCart={true}
+                    error={error}/>} 
 
 
 
-                        <RemoveItemButton/>
+                {isPending
+                ?<>Updating cart...</>
+                :<>
+                    <RemoveItemButton/>
+                    <SetQuantityField/>
+                    </>
+                }
 
-                        <SetQuantityField/>
 
-                        
+                
 
-                    </div>
-                )
-            case(true):
-                return (
-                    <>Updating cart...</>
-                )
-
-        }
-    }
+            </div>
+        )
     
+}
 }
 
 
