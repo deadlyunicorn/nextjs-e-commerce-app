@@ -20,7 +20,7 @@ export const FavoriteButton = (
     // @ts-ignore
     const handleClick = async (e) =>{
 
-        if (email){
+        if (email&&email.length>1){
 
             if (!fave){
 
