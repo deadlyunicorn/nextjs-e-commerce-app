@@ -24,6 +24,7 @@ export default async function Header() {
 
         <header
             className="
+
                 flex flex-col 
                 items-center
                 fixed top-0 left-0
@@ -33,7 +34,7 @@ export default async function Header() {
                 from-[#f1f5f9cc]
                 to-[#e2e8f0cc]
                 backdrop-blur-md 
-                z-10
+                z-50
                 h-[min(20vh,70px)] w-full
                 px-1
                 sm:px-10 py-2">
