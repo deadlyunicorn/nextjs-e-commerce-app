@@ -1,23 +1,32 @@
 ## E-store built with Next.JS 13
 ---
 ### About
-I built this for fun, in order to practise my Next.JS - React.JS. I might use this project as template for future projects - or if I turn into a freelancer heheh. 
+I built this for fun, in order to practice my Next.JS - React.JS. I might use this project as template for future projects - or if I turn into a freelancer heheh. 
 
 **Project so far**
 
- + Can show available products
- + Can add items to cart
+ + Explore & Categories pages with available Store Items
+ + Add Items to Cart and Cart Page
+ + User Logins and User Page with Orders and Favorite Items
+ + Admin Panel ( CRUD for Items & Categories and View Orders ) with a guest mode
+ + Order Confirmation emails ( via SendGrid )
+ ---
+ + Item Pages with Recommendations
  + Dark mode <3
  + Responsive design
- + 'Categories' and 'Explore' pages
- + Loaders (needs some CSS update tho)
+ + Sort products by price and by date added 
+ + Price range ( Double slider )
+ + Page loading animations
+ + Custom checkout page ( we use the Commerce.js API )
+ + Handling unauthorized admin requests
+ + Contact Developer Form ( works with SendGrid )
+ + Search Bar that updates automatically when query changes
+ + Has an automatic order making script with Cypress.
+ ---
 
 **To do list**
 
-- [x] Custom checkout page 
-- [x] /admin page. Admins can update the products from there. (Especially useful in this case, as I couldn't find any 'team' functionality in Commerce.js)
-- [ ] User Login -> View the same cart on multiple devices, store your creds for the next order, etc. *MIGHT NOT DO THIS*
-- [ ] Maybe Google Analytics, most likely not here.
+- [x] Project state is marked as complete as I don't want this to be anything bigger than it currently is.
 
 ### Technologies used
 + Next.JS 13 - App Router
@@ -26,8 +35,9 @@ I built this for fun, in order to practise my Next.JS - React.JS. I might use th
 + Commerce.js
 + Auth.js ( 0Auth user login )
 + SendGrid ( order confirmation mails )
++ Mongodb ( for favorite items ) and Mongodb Atlas ( cloud database provider )
 
-	(I was looking for something free. That one had 2% commission on orders. I didn't plan to actually sell things, so we are good. I didn't use the driver. I did it using their API with Next.JS 13 fetch().  
+    I was looking for something free. That one had 2% commission on orders. I didn't plan to actually sell things, so we are good. I didn't use the driver. I did it using their API with Next.JS 13 fetch().
 	
 	---
 	Alternatives I could use  
@@ -163,6 +173,17 @@ While typing and until we get some results there is a loading animation.
 
 To make the result field (which also includes the animation) visible, I use a ‘peer-focus-within:inline’ class by Tailwind. However! this isn’t enough to let us click on our results. The result field becomes ‘hidden’ again before our click triggers. To solve this, we can also add a ‘hover:inline’ class to our field.
 
+#### 7. Adding Favorites
+
+  Adding items as favorites uses the MongoDB Node.js driver. We have our backend logic in "Server files" ( ending in .ts ) and we communicate our requests using the route API provided by Next.js. 
+
+  The 'add to favorites' component is a Client Component and it sends a fetch PUT request to our Next.js API route. The request includes the email address and the product id. 
+  
+  Our MongoDB database has a unique index the 'email' field. We use an array for the favorite items for each email address. We add items to the array using the '$addToSet' operator, to make sure we don't have duplicate entries. We remove entries using the '$pull' operator. 
+
+  The database is hosted on the cloud, the service used is MongoDB Atlas.
+
+
 ---
 
 ### <u>Admin Panel</u>
@@ -240,3 +261,57 @@ Specifically what I'd like to have made from the beginning:
  + CSS color choosing and configuring TailWindCSS, e.g. instead of randomly guessing the exact bg-color that my other components have, I could create a custom class: bg-dark-[A,B,C], bg-[A,B,C]
  + More reusable components. I was creating \<main> elements for each page and a couple of divs, with the exact same stylings. I could have just made components for those. This would make it more efficient restyling the whole WEBSITE. This is something one should note if they use this project as a basis for theirs.   Generally I feel like I was avoiding creating custom components for this project
  + More consistent folder structure. Currently I realize it's more efficient having an api folder for each subdirectory, instead of having a central api folder. Especially for page-specific APIs.
+
+ ## Known Errors
+
+1. Cart doesn't work properly on weak connections.
+
+      Specifically: After you add an item to cart, the Cart Page doesn't update its values. It feels like 'getCartItems()' doesn't revalidate/refetch. 
+  
+      This specific problem is hard to debug, due to it being hard to reproduce.. I have only noticed it happening on my mobile phone browsers and I am not entirely sure if it is a connectivity error or a Next.JS error.
+
+      Basically after adding an item in cart, our 'getCartItems' function should revalidate (we use RevalidateTag). 
+      
+      At first I was thinking that the function might not be properly called, but some console.log() showed me that this is not the issue. 
+      
+      I was then trying to see if the issue was with RevalidateTag or caching in general. Of course I wouldn't completely disable caching as this would make every page load way slower. 
+
+      I have thought of some workarounds ( and tried different things on the client side ). One workaround that must work but I haven't tried is to use Redux for the cart, so that we have a global cart object. That cart object could be updated based on the response of each 'updateCart()' call as it also includes the cart state.
+
+      ( updateCart() updates the items in our current cart in the Commerce.js database )
+
+      I tried logging the results of the updateCart() on the devices that showed the problem to a MongoDB database, and noticed that we get our actual new cart state after using the said function -- So I am sure that the above workaround should work. However I will leave the project at its current state.
+
+
+2. After some commit we have started getting a random server side error, about some State. 
+
+    I am not sure what causes this. At the beginning I thought that it might be some useEffect(), but that could not be it, as it was logged on the server console. Then I tried removing the cypress package and it looked like the error wasn't being logged anymore? But this was temporary. This also started appearing when I was trying things for the problem #1 above, so I also thought that it might be something related to cache. Nevertheless, we can deploy normally and have the website working with no visible errors..
+
+3. Price Range Slider ( Double Slider ) doesn't work as I intended it to work.
+
+    Commerce.js docs say we can use the parameters 
+    + price.above	
+    + price.below
+
+      ---
+
+    However I wasn't getting results based on them, so I thought that they either need some special implementation not mentioned in the docs, or were just simply not a functional thing when I tried to use them.
+
+    This means I can't use pagination properly with my double slider. I filter my results after getting the paginated version of them. That can make each page to have a different amount of displayed items. This can also hide a, say page 3, if there is a page 2 with 0 items withing the price range.
+
+    The slider is there. In case someone finds the above parameters working, then they can use it.
+
+
+
+4. Commerce.js Servers might experience downtime and the store might unexpectedly stop working.
+
+5. Everyone COULD update the store.
+
+    This was happening as I was updating the store using SEARCH PARAMS and requiring authorization only TO REDIRECT to the needed page with the query on SEARCH PARAMS. 
+
+    Problems with this:
+      + Anyone knowing about this could edit the store, even if they were not authorized.
+      + Clicking on a link in your history where you had edited say an item, would edit this item again. 
+      ( Let's say you click on a link that was editing an item during a promotion event, you had updated the item after the promotion event, but after accidentally clicking on the history link, you change the item back to that promotional state. )  
+
+    The first problem is solved by using Auth.js getSession() and checking if the email of the logged in user is an admin before making a change. However the history thing is still an issue and should be updated. What I've learnt is that form method:'get' should only be used for getting results haha - not update queries..
