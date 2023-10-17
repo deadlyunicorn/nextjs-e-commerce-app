@@ -7,39 +7,47 @@ const DarkMode = () => {
 
 
 
-    const [darkMode,setDarkMode] = useState(localStorage.theme === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const [darkMode,setDarkMode] = useState<undefined | boolean>( undefined );
+    const [ hasMounted, setHasMounted ] = useState( false );
 
     useEffect(()=>{
         
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-        
-
-        if (
-            localStorage.theme === 'dark' 
-            || ( !('theme' in localStorage) && systemDark)
-
-        ) {
+        if ( hasMounted ){
             
-            setDarkMode(true)                
-            document.documentElement.classList.add('dark');
+            if ( darkMode === undefined ){
+                setDarkMode( localStorage.theme === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches )
+            }
+            else{
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
 
-            document.querySelector('#dark-mode-button')?.classList.remove('leftPosAnimation');
-            document.querySelector('#dark-mode-button')?.classList.add('rightPosAnimation');
+                if (
+                    localStorage.theme === 'dark' 
+                    || ( !('theme' in localStorage) && systemDark)
 
-                
-        } 
+                ) {
+                    
+                    setDarkMode(true)                
+                    document.documentElement.classList.add('dark');
 
-        else 
-        {
-            setDarkMode(false)                
-            document.documentElement.classList.remove('dark');
-            
+                    document.querySelector('#dark-mode-button')?.classList.remove('leftPosAnimation');
+                    document.querySelector('#dark-mode-button')?.classList.add('rightPosAnimation');
+                } 
 
-            document.querySelector('#dark-mode-button')?.classList.remove('rightPosAnimation');
-            document.querySelector('#dark-mode-button')?.classList.add('leftPosAnimation');
+                else {
+                    setDarkMode(false)                
+                    document.documentElement.classList.remove('dark');
 
+                    document.querySelector('#dark-mode-button')?.classList.remove('rightPosAnimation');
+                    document.querySelector('#dark-mode-button')?.classList.add('leftPosAnimation');
+
+                }
+
+            }
         }
+        else{
+            setHasMounted( true );
+        }
+        
 
     },[darkMode]);
 
